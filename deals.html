@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>So Sánh Deal Affiliate — DA NETWORK</title>
+  <!-- Fonts: Be Vietnam Pro (full Vietnamese support) + Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    /* ── Hero ── */
+    .deals-hero {
+      background: linear-gradient(135deg, #1a0a00 0%, #0d0d0d 50%, #0a1a0a 100%);
+      padding: 48px 0 36px;
+      border-bottom: 1px solid rgba(247,147,26,.2);
+    }
+    .deals-topbar {
+      display: flex; justify-content: space-between; align-items: center;
+      max-width: 1200px; margin: 0 auto; padding: 0 24px 20px;
+    }
+    .deals-hero-back {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--color-text-muted); font-size: 13px; text-decoration: none;
+      transition: color .2s;
+    }
+    .deals-hero-back:hover { color: var(--color-primary); }
+    .deals-hero-content { text-align: center; padding: 0 24px; }
+    .deals-hero-content h1 { font-size: clamp(1.5rem, 4vw, 2.4rem); font-weight: 800; color: #fff; margin: 12px 0 8px; }
+    .deals-hero-content p  { color: var(--color-text-muted); font-size: 15px; margin: 0; }
+
+    /* ── Stats bar ── */
+    .deals-stats {
+      display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;
+      padding: 20px 24px 0; margin-top: 20px;
+    }
+    .deals-stat { text-align: center; }
+    .deals-stat-num { font-size: 22px; font-weight: 900; color: var(--color-primary); }
+    .deals-stat-lbl { font-size: 11px; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: .5px; }
+
+    /* ── Container ── */
+    .deals-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── Filter tabs ── */
+    .deals-filter {
+      display: flex; gap: 10px; flex-wrap: wrap;
+      justify-content: center; padding: 28px 0 8px;
+    }
+    .filter-btn {
+      padding: 8px 20px; border-radius: 20px; border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05); color: var(--color-text-muted);
+      font-size: 13px; cursor: pointer; transition: all .2s; font-family: inherit;
+    }
+    .filter-btn:hover { border-color: rgba(247,147,26,.4); color: #fff; }
+    .filter-btn.active {
+      background: var(--color-primary); border-color: var(--color-primary);
+      color: #000; font-weight: 700;
+    }
+
+    /* ── Summary table ── */
+    .summary-section { padding: 32px 0 24px; }
+    .summary-section h2 {
+      font-size: 1.2rem; font-weight: 800; color: #fff;
+      margin: 0 0 16px; text-align: center;
+    }
+    .summary-wrap { overflow-x: auto; border-radius: 14px; border: 1px solid rgba(255,255,255,.07); }
+    .summary-table {
+      width: 100%; border-collapse: collapse; font-size: 13px;
+      background: rgba(255,255,255,.02);
+    }
+    .summary-table th {
+      background: rgba(247,147,26,.1); color: var(--color-primary);
+      padding: 12px 16px; text-align: left; font-weight: 700;
+      border-bottom: 1px solid rgba(247,147,26,.2); white-space: nowrap;
+    }
+    .summary-table td {
+      padding: 10px 16px; color: var(--color-text-muted);
+      border-bottom: 1px solid rgba(255,255,255,.04); vertical-align: middle;
+    }
+    .summary-table tr:last-child td { border-bottom: none; }
+    .summary-table tr:hover td { background: rgba(255,255,255,.025); }
+    .rate-cell { font-weight: 900; color: var(--color-primary) !important; font-size: 15px; }
+    .name-cell { color: #fff !important; font-weight: 700; }
+    .table-badge {
+      font-size: 10px; padding: 2px 7px; border-radius: 8px;
+      background: rgba(247,147,26,.15); color: var(--color-primary);
+      border: 1px solid rgba(247,147,26,.3); margin-left: 6px;
+      vertical-align: middle;
+    }
+    .type-pill {
+      display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 8px;
+      font-weight: 600; white-space: nowrap;
+    }
+    .type-pill.crypto { background: rgba(247,147,26,.1); color: #f7931a; }
+    .type-pill.forex  { background: rgba(59,130,246,.15); color: #60a5fa; }
+
+    /* ── Cards grid ── */
+    .deals-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px; padding: 8px 0 60px;
+    }
+    .deal-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px; padding: 22px 20px;
+      display: flex; flex-direction: column; gap: 14px;
+      transition: transform .2s, border-color .2s, box-shadow .2s;
+      position: relative; overflow: hidden;
+    }
+    .deal-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: rgba(255,255,255,.06);
+    }
+    .deal-card.forex::before   { background: #3b82f6; }
+    .deal-card.crypto::before  { background: var(--color-primary); }
+    .deal-card.featured::before { background: linear-gradient(90deg, #ffd966, #f7931a); }
+    .deal-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(247,147,26,.35);
+      box-shadow: 0 12px 40px rgba(247,147,26,.1);
+    }
+    .deal-card.featured {
+      border-color: rgba(247,147,26,.4);
+      background: rgba(247,147,26,.05);
+    }
+    .deal-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
+    .deal-name { font-size: 20px; font-weight: 800; color: #fff; line-height: 1.2; }
+    .deal-type-row { display: flex; align-items: center; gap: 8px; margin-top: 4px; flex-wrap: wrap; }
+    .deal-subtype { font-size: 11px; color: var(--color-text-muted); }
+    .deal-badge-pill {
+      font-size: 10px; font-weight: 700; padding: 3px 10px;
+      border-radius: 20px; background: rgba(247,147,26,.12);
+      color: var(--color-primary); border: 1px solid rgba(247,147,26,.25);
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .deal-rate-box {
+      background: rgba(247,147,26,.08); border: 1px solid rgba(247,147,26,.2);
+      border-radius: 12px; padding: 12px 16px;
+      display: flex; align-items: baseline; gap: 8px;
+    }
+    .deal-rate-num { font-size: 32px; font-weight: 900; color: var(--color-primary); line-height: 1; }
+    .deal-rate-label { font-size: 12px; color: var(--color-text-muted); }
+    .deal-procon { display: flex; flex-direction: column; gap: 4px; }
+    .deal-procon-title {
+      font-size: 11px; font-weight: 700; letter-spacing: .5px;
+      text-transform: uppercase; margin-bottom: 6px;
+    }
+    .deal-procon-title.pros { color: #4ade80; }
+    .deal-procon-title.cons { color: #f87171; }
+    .deal-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 5px; }
+    .deal-list li {
+      font-size: 12.5px; color: var(--color-text-muted);
+      padding-left: 20px; position: relative; line-height: 1.45;
+    }
+    .deal-list.pros li::before { content: '✅'; position: absolute; left: 0; font-size: 11px; }
+    .deal-list.cons li::before { content: '⚠️'; position: absolute; left: 0; font-size: 11px; }
+
+    .deal-best-for {
+      font-size: 12px; color: var(--color-text-muted);
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07);
+      border-radius: 8px; padding: 8px 12px;
+    }
+    .deal-best-for strong { color: #bbb; font-weight: 600; }
+
+    .deal-cta-btn {
+      margin-top: auto;
+      display: block; text-align: center; padding: 11px 0;
+      border-radius: 10px; font-size: 13px; font-weight: 700;
+      background: var(--color-primary); color: #000;
+      text-decoration: none; transition: background .2s, transform .15s;
+    }
+    .deal-cta-btn:hover { background: #e8820a; transform: scale(1.02); }
+
+    /* ── Section divider ── */
+    .section-divider {
+      display: flex; align-items: center; gap: 16px;
+      padding: 32px 0 16px; margin: 0;
+    }
+    .section-divider h2 {
+      font-size: 1.3rem; font-weight: 800; color: #fff; white-space: nowrap; margin: 0;
+    }
+    .section-divider-line {
+      flex: 1; height: 1px; background: rgba(255,255,255,.07);
+    }
+
+    /* ── Back footer ── */
+    .deals-footer {
+      text-align: center; padding: 16px 0 60px;
+    }
+    .back-home {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+      color: var(--color-text-muted); text-decoration: none;
+      padding: 11px 22px; border-radius: 12px; font-size: 14px;
+      transition: all .2s;
+    }
+    .back-home:hover { border-color: var(--color-primary); color: var(--color-primary); }
+
+    /* ── No results ── */
+    .no-results {
+      grid-column: 1/-1; text-align: center;
+      color: var(--color-text-muted); padding: 48px 0; font-size: 15px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .deals-stats { gap: 20px; }
+      .deals-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<div class="deals-hero">
+  <div class="deals-topbar">
+    <a href="index.html" class="deals-hero-back">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      <span id="txt-back">Về trang chính</span>
+    </a>
+    <div class="lang-select" id="langSelect">
+      <button class="lang-select-btn" onclick="toggleLangDropdown()" aria-label="Select language">
+        <span id="langCurrentLabel">VI</span>
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="lang-dropdown" id="langDropdown">
+        <button class="lang-opt active" data-lang-code="vi" onclick="selectLangDeals('vi')">🇻🇳 Tiếng Việt</button>
+        <button class="lang-opt" data-lang-code="en" onclick="selectLangDeals('en')">🇬🇧 English</button>
+        <button class="lang-opt" data-lang-code="th" onclick="selectLangDeals('th')">🇹🇭 ภาษาไทย</button>
+        <button class="lang-opt" data-lang-code="ko" onclick="selectLangDeals('ko')">🇰🇷 한국어</button>
+        <button class="lang-opt" data-lang-code="id" onclick="selectLangDeals('id')">🇮🇩 Indonesia</button>
+      </div>
+    </div>
+  </div>
+  <div class="deals-hero-content">
+    <div class="section-tag" id="txt-tag">🔥 AFFILIATE DEALS</div>
+    <h1 id="txt-title">So Sánh Deal Affiliate Tất Cả Sàn</h1>
+    <p id="txt-sub">Tỷ lệ hoa hồng, thế mạnh và điểm yếu của 12 sàn trong hệ sinh thái DA Network</p>
+    <div class="deals-stats">
+      <div class="deals-stat">
+        <div class="deals-stat-num">12</div>
+        <div class="deals-stat-lbl" id="txt-stat1">Sàn giao dịch</div>
+      </div>
+      <div class="deals-stat">
+        <div class="deals-stat-num">31.5–70%</div>
+        <div class="deals-stat-lbl" id="txt-stat2">Hoa hồng</div>
+      </div>
+      <div class="deals-stat">
+        <div class="deals-stat-num">3</div>
+        <div class="deals-stat-lbl" id="txt-stat3">Nền tảng</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ CONTENT ═══════════════════ -->
+<div class="deals-container">
+
+  <!-- Filter -->
+  <div class="deals-filter">
+    <button class="filter-btn active" data-filter="all"    onclick="applyFilter('all')"    id="fb-all">Tất cả (12)</button>
+    <button class="filter-btn"        data-filter="crypto" onclick="applyFilter('crypto')" id="fb-crypto">Crypto Exchange</button>
+    <button class="filter-btn"        data-filter="forex"  onclick="applyFilter('forex')"  id="fb-forex">Forex / CFD</button>
+    <button class="filter-btn"        data-filter="high"   onclick="applyFilter('high')"   id="fb-high">HH ≥ 42%</button>
+  </div>
+
+  <!-- Summary table -->
+  <div class="summary-section">
+    <h2 id="txt-table-title">Bảng Tổng Hợp Nhanh</h2>
+    <div class="summary-wrap">
+      <table class="summary-table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th id="th-name">Sàn</th>
+            <th id="th-type">Loại</th>
+            <th id="th-rate">Hoa Hồng</th>
+            <th id="th-best">Phù hợp nhất với</th>
+          </tr>
+        </thead>
+        <tbody id="summaryBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Section heading -->
+  <div class="section-divider">
+    <h2 id="txt-cards-title">Chi Tiết Từng Sàn</h2>
+    <div class="section-divider-line"></div>
+    <span style="font-size:13px;color:var(--color-text-muted)" id="txt-cards-count">12 sàn</span>
+  </div>
+
+  <!-- Cards -->
+  <div class="deals-grid" id="dealsGrid"></div>
+
+  <!-- Back -->
+  <div class="deals-footer">
+    <a href="index.html" class="back-home">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M12 5l7 7-7 7"/></svg>
+      <span id="txt-back2">Quay lại trang hướng dẫn</span>
+    </a>
+  </div>
+
+</div><!-- /deals-container -->
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// DATA — self-contained, no dependency on app.js
+// ═══════════════════════════════════════════════════════════
+var exchangesData = {
+  vi: [
+    {
+      name: 'Binance', cat: 'crypto',
+      type: 'Spot · Futures · Margin',
+      rate: '31.5%', rateNum: 31.5, rateNote: 'hoa hồng',
+      featured: false, badge: '🌍 Lớn nhất thế giới',
+      bestFor: 'Trader chuyên nghiệp, volume cao',
+      pros: ['Thanh khoản sâu nhất thị trường','Phí thấp, giảm thêm khi dùng BNB','Hơn 500 cặp giao dịch','Proof of Reserves minh bạch'],
+      cons: ['Hoa hồng affiliate thấp (31.5%)','Vấn đề pháp lý tại Mỹ 2023','KYC phức tạp, support chậm'],
+    },
+    {
+      name: 'Exness', cat: 'forex',
+      type: 'Forex · CFD · Crypto',
+      rate: '70%', rateNum: 70, rateNote: 'hoa hồng',
+      featured: false, badge: '💰 HH cao nhất',
+      bestFor: 'Forex trader, cần rút nhanh',
+      pros: ['Hoa hồng lên đến 70% — cao nhất nhóm','Rút tiền tức thì 24/7','Leverage không giới hạn (dưới $5,000)','Phí rút = 0, quản lý = 0'],
+      cons: ['Không nhận người dùng Mỹ/EU','Spread một số cặp rất rộng','Sản phẩm hạn chế (~200 mã)'],
+    },
+    {
+      name: 'Vantage', cat: 'forex',
+      type: 'Forex · CFD · Crypto',
+      rate: '70%', rateNum: 70, rateNote: 'hoa hồng',
+      featured: true, badge: '⭐ Được đề xuất',
+      bestFor: 'CFD trader, muốn bảo hiểm',
+      pros: ["Hoa hồng 70%, bảo hiểm Lloyd's đến $1M","Được quản lý bởi ASIC, FCA, CIMA","Spread từ 0.0 pip, spread thực tế","MT4/MT5/TradingView/App riêng"],
+      cons: ['Cơ cấu pháp lý nhiều entity gây nhầm lẫn','Support có thể chậm giờ cao điểm','Tài liệu giáo dục chưa sâu'],
+    },
+    {
+      name: 'XM', cat: 'forex',
+      type: 'Forex · CFD · Indices',
+      rate: '70%', rateNum: 70, rateNote: 'hoa hồng',
+      featured: false, badge: '📚 Giáo dục tốt',
+      bestFor: 'Forex beginner, cần đào tạo',
+      pros: ['Deposit tối thiểu chỉ $5','Webinar hàng ngày, đào tạo đa ngôn ngữ','Có giấy phép CySEC, ASIC','Bảo vệ số dư âm cho tất cả khách hàng'],
+      cons: ['Dealing desk — xung đột lợi ích','Spread Standard rộng (EUR/USD ~2 pips)','Phí inactive sau 90 ngày','Không có ECN/STP, không có TradingView'],
+    },
+    {
+      name: 'Bitunix', cat: 'crypto',
+      type: 'Spot · Futures · Copy',
+      rate: '45%', rateNum: 45, rateNote: 'hoa hồng',
+      featured: false, badge: '💸 Hoa Hồng Cao',
+      bestFor: 'Tỷ lệ hoa hồng cao — lý tưởng để tối đa thu nhập affiliate',
+      pros: ['Không cần KYC (rút đến $1M/ngày)','Leverage 125x, phí futures 0.02%/0.06%','Trustpilot 4.5/5 từ nghìn đánh giá','Khả dụng toàn cầu kể cả nhiều nước hạn chế'],
+      cons: ['Ít coin hơn Binance/MEXC','Chỉ cặp USDT, không có fiat rút','Không khả dụng tại Mỹ'],
+    },
+    {
+      name: 'Gate.io', cat: 'crypto',
+      type: 'Spot · Margin · NFT',
+      rate: '42%', rateNum: 42, rateNote: 'hoa hồng',
+      featured: false, badge: '🏛️ Lâu đời 2013',
+      bestFor: 'Cần coin hiếm, altcoin sớm',
+      pros: ['3,800+ coin — đa dạng nhất','Proof-of-reserves Merkle Tree minh bạch','Hệ sinh thái Web3, NFT, GameFi','Reserves $10.8B với buffer 128%'],
+      cons: ['Phí rút một số coin cao','KYC bắt buộc để rút tiền','Không khả dụng tại Mỹ'],
+    },
+    {
+      name: 'KuCoin', cat: 'crypto',
+      type: 'Spot · Futures · Bot',
+      rate: '42%', rateNum: 42, rateNote: 'hoa hồng',
+      featured: false, badge: '🤖 Trading Bots',
+      bestFor: 'Bot trader, altcoin đa dạng',
+      pros: ['1,000+ altcoin, phí thấp','Trading bots đa dạng, tokenized stocks','P2P hỗ trợ 70+ fiat on-ramp','SOC 2 Type II, PoR xác nhận'],
+      cons: ['Bị phạt $300M+ tại Mỹ, không nhận US user','Bị hack $275M năm 2020','Support kém trong sự cố lớn'],
+    },
+    {
+      name: 'OKX', cat: 'crypto',
+      type: 'Spot · Futures · Web3',
+      rate: '35%', rateNum: 35, rateNote: 'hoa hồng',
+      featured: false, badge: '🌏 ĐNA Support',
+      bestFor: 'Support mạnh vùng Đông Nam Á, phù hợp KOL khu vực',
+      pros: ['Ví Web3 tích hợp, hỗ trợ 100+ blockchain','Liquidity sâu, phí thấp với OKB','Copy trading & bots đa dạng','Proof-of-reserves zk-STARK minh bạch'],
+      cons: ['Không dành cho người mới — giao diện phức tạp','Không hỗ trợ người dùng Mỹ','Phí nạp fiat qua bên thứ ba'],
+    },
+    {
+      name: 'Bybit', cat: 'crypto',
+      type: 'Spot · Futures · Options',
+      rate: '35%', rateNum: 35, rateNote: 'hoa hồng',
+      featured: false, badge: '📈 Futures mạnh',
+      bestFor: 'Futures & derivatives trader',
+      pros: ['Thanh khoản derivatives hàng đầu','AI Aurora, copy trading, trading bots','Proof of Reserves minh bạch sau 2025','App mobile đầy đủ tính năng'],
+      cons: ['Không có bảo hiểm tiền gửi','Bị hack $1.5B tháng 2/2025 (đã xử lý)','KYC lâu, không hỗ trợ Mỹ/Anh'],
+    },
+    {
+      name: 'MEXC', cat: 'crypto',
+      type: 'Spot · Futures · Altcoin',
+      rate: '35%', rateNum: 35, rateNote: 'hoa hồng',
+      featured: false, badge: '🪙 Altcoin số 1',
+      bestFor: 'Altcoin hunter, newbie-friendly',
+      pros: ['3,000+ altcoin — nhiều nhất thị trường','Phí maker 0% spot & futures','Leverage tối đa 500x','KYC không bắt buộc cho giao dịch'],
+      cons: ['Pháp lý mờ hơn các sàn lớn','Không có ở Mỹ và một số nước','Thanh khoản mỏng trên altcoin nhỏ'],
+    },
+    {
+      name: 'Bingx', cat: 'crypto',
+      type: 'Spot · Futures · Copy',
+      rate: '35%', rateNum: 35, rateNote: 'hoa hồng',
+      featured: false, badge: '🇻🇳 Tốt nhất cho VN',
+      bestFor: 'Hỗ trợ Việt Nam tốt nhất, sàn top, minh bạch, an toàn',
+      pros: ['Copy trading AI hàng đầu thị trường','Giao diện thân thiện người mới','Chế độ demo trading miễn phí','Phí futures cạnh tranh'],
+      cons: ['Không có leverage trên spot','Không có token sàn giảm phí','Không khả dụng tại Mỹ'],
+    },
+    {
+      name: 'Bitget', cat: 'crypto',
+      type: 'Spot · Futures · Copy',
+      rate: '35%', rateNum: 35, rateNote: 'hoa hồng',
+      featured: false, badge: '🛡️ Proof of Reserves',
+      bestFor: 'Copy trading chuyên sâu',
+      pros: ['Copy trading chuyên sâu, top 2 liquidity BTC','Proof of Reserves 188%, quỹ bảo vệ $780M','Phí futures 0.02%/0.06% — rất cạnh tranh','App mobile được đánh giá 4.6/5'],
+      cons: ['Không thân thiện với người mới','Fiat access phụ thuộc vùng','Trustpilot mixed (~3.0/5)'],
+    },
+  ],
+  en: [
+    {
+      name: 'Binance', cat: 'crypto',
+      type: 'Spot · Futures · Margin',
+      rate: '31.5%', rateNum: 31.5, rateNote: 'commission',
+      featured: false, badge: "🌍 World's Largest",
+      bestFor: 'Pro traders with high volume',
+      pros: ['Deepest liquidity in the market','Low fees, extra discount with BNB','500+ trading pairs','Transparent Proof of Reserves'],
+      cons: ['Lower affiliate rate (31.5%)','US regulatory issues in 2023','Complex KYC, slow support'],
+    },
+    {
+      name: 'Exness', cat: 'forex',
+      type: 'Forex · CFD · Crypto',
+      rate: '70%', rateNum: 70, rateNote: 'commission',
+      featured: false, badge: '💰 Highest Commission',
+      bestFor: 'Forex traders needing fast withdrawal',
+      pros: ['Up to 70% commission — highest in group','Instant withdrawals 24/7','Unlimited leverage (under $5,000)','Zero withdrawal & management fees'],
+      cons: ['Restricted in US/EU','Very wide spreads on some pairs','Limited product range (~200 symbols)'],
+    },
+    {
+      name: 'Vantage', cat: 'forex',
+      type: 'Forex · CFD · Crypto',
+      rate: '70%', rateNum: 70, rateNote: 'commission',
+      featured: true, badge: '⭐ Recommended',
+      bestFor: 'CFD traders wanting insurance',
+      pros: ["70% commission, Lloyd's insurance up to $1M","Regulated by ASIC, FCA, CIMA","Spreads from 0.0 pip, live spread feed","MT4/MT5/TradingView/proprietary app"],
+      cons: ['Multi-entity structure can confuse beginners','Support may slow during peak hours','Educational content could be deeper'],
+    },
+    {
+      name: 'XM', cat: 'forex',
+      type: 'Forex · CFD · Indices',
+      rate: '70%', rateNum: 70, rateNote: 'commission',
+      featured: false, badge: '📚 Best Education',
+      bestFor: 'Forex beginners needing education',
+      pros: ['Only $5 minimum deposit','Daily webinars, multilingual education','CySEC & ASIC regulated','Negative balance protection globally'],
+      cons: ['Dealing desk — conflict of interest','Wide Standard spreads (~2 pips EUR/USD)','Inactivity fees after just 90 days','No ECN/STP, no TradingView'],
+    },
+    {
+      name: 'Bitunix', cat: 'crypto',
+      type: 'Spot · Futures · Copy',
+      rate: '45%', rateNum: 45, rateNote: 'commission',
+      featured: false, badge: '💸 High Commission',
+      bestFor: 'High commission rate — ideal for maximizing affiliate income',
+      pros: ['No mandatory KYC (up to $1M/day withdrawal)','125x leverage, 0.02%/0.06% futures fees','Trustpilot 4.5/5 from thousands of reviews','Available globally including restricted regions'],
+      cons: ['Fewer coins than Binance/MEXC','USDT-only pairs, no fiat withdrawal','Not available in US'],
+    },
+    {
+      name: 'Gate.io', cat: 'crypto',
+      type: 'Spot · Margin · NFT',
+      rate: '42%', rateNum: 42, rateNote: 'commission',
+      featured: false, badge: '🏛️ Est. 2013',
+      bestFor: 'Rare coins, early altcoin access',
+      pros: ['3,800+ coins — most diverse','Merkle Tree PoR, $10.8B reserves (128%)','Web3, NFT, GameFi ecosystem','Regular fee-free stablecoin promotions'],
+      cons: ['Higher withdrawal fees on some coins','KYC required to withdraw','Not available in US'],
+    },
+    {
+      name: 'KuCoin', cat: 'crypto',
+      type: 'Spot · Futures · Bot',
+      rate: '42%', rateNum: 42, rateNote: 'commission',
+      featured: false, badge: '🤖 Trading Bots',
+      bestFor: 'Bot traders, diverse altcoins',
+      pros: ['1,000+ altcoins, low fees','Diverse bots, tokenized stocks','P2P with 70+ fiat on-ramps','SOC 2 Type II, verified PoR'],
+      cons: ['$300M+ US penalty, no US users','Hacked for $275M in 2020','Poor support during major incidents'],
+    },
+    {
+      name: 'OKX', cat: 'crypto',
+      type: 'Spot · Futures · Web3',
+      rate: '35%', rateNum: 35, rateNote: 'commission',
+      featured: false, badge: '🌏 SEA Support',
+      bestFor: 'Strong Southeast Asia support — great fit for regional KOLs',
+      pros: ['Integrated Web3 wallet, 100+ blockchains','Deep liquidity, fee discounts with OKB','Diverse copy trading & bots','zk-STARK Proof of Reserves'],
+      cons: ['Complex UI — not for beginners','Not available for US users','Fiat deposits via third-party only'],
+    },
+    {
+      name: 'Bybit', cat: 'crypto',
+      type: 'Spot · Futures · Options',
+      rate: '35%', rateNum: 35, rateNote: 'commission',
+      featured: false, badge: '📈 Derivatives King',
+      bestFor: 'Futures & derivatives traders',
+      pros: ['Top-tier derivatives liquidity','AI Aurora, copy trading, bots','Transparent PoR since 2025','Full-featured mobile app'],
+      cons: ['No deposit insurance','$1.5B hack Feb 2025 (resolved)','Slow KYC, no US/UK support'],
+    },
+    {
+      name: 'MEXC', cat: 'crypto',
+      type: 'Spot · Futures · Altcoin',
+      rate: '35%', rateNum: 35, rateNote: 'commission',
+      featured: false, badge: '🪙 #1 Altcoin',
+      bestFor: 'Altcoin hunters, beginners',
+      pros: ['3,000+ altcoins — most in the market','0% maker fees on spot & futures','Up to 500x leverage','No mandatory KYC for trading'],
+      cons: ['Less regulatory clarity than top-tier','Not available in US and some countries','Thin liquidity on small-cap pairs'],
+    },
+    {
+      name: 'Bingx', cat: 'crypto',
+      type: 'Spot · Futures · Copy',
+      rate: '35%', rateNum: 35, rateNote: 'commission',
+      featured: false, badge: '🇻🇳 Best for VN',
+      bestFor: 'Best Vietnam support — top-tier, transparent, secure exchange',
+      pros: ['Industry-leading AI copy trading','Beginner-friendly interface','Free demo trading mode','Competitive futures fees'],
+      cons: ['No leverage on spot pairs','No native exchange token for fee reduction','Not available in US'],
+    },
+    {
+      name: 'Bitget', cat: 'crypto',
+      type: 'Spot · Futures · Copy',
+      rate: '35%', rateNum: 35, rateNote: 'commission',
+      featured: false, badge: '🛡️ Proof of Reserves',
+      bestFor: 'Advanced copy trading users',
+      pros: ['Top copy trading, #2 BTC liquidity','PoR 188%, protection fund $780M','0.02%/0.06% futures fees','Mobile app rated 4.6/5'],
+      cons: ['Not beginner-friendly','Fiat access varies by region','Mixed Trustpilot reviews (~3.0/5)'],
+    },
+  ],
+};
+
+// ═══════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════
+var lang = 'vi';
+var activeFilter = 'all';
+// Alias new languages to English exchange data
+exchangesData.th = exchangesData.en;
+exchangesData.ko = exchangesData.en;
+exchangesData.id = exchangesData.en;
+
+var txt = {
+  vi: {
+    back: 'Về trang chính', back2: 'Quay lại trang hướng dẫn',
+    tag: '🔥 AFFILIATE DEALS',
+    title: 'So Sánh Deal Affiliate Tất Cả Sàn',
+    sub: 'Tỷ lệ hoa hồng, thế mạnh và điểm yếu của 12 sàn trong hệ sinh thái DA Network',
+    stat1: 'Sàn giao dịch', stat2: 'Hoa hồng', stat3: 'Nền tảng',
+    fbAll: 'Tất cả (12)', fbCrypto: 'Crypto Exchange', fbForex: 'Forex / CFD', fbHigh: 'HH ≥ 42%',
+    tableTitle: 'Bảng Tổng Hợp Nhanh',
+    thName: 'Sàn', thType: 'Loại', thRate: 'Hoa Hồng', thBest: 'Phù hợp nhất với',
+    cardsTitle: 'Chi Tiết Từng Sàn',
+    pros: 'Thế mạnh', cons: 'Điểm yếu',
+    bestForLabel: 'Phù hợp với',
+    cta: '→ Tham gia ngay',
+    noResults: 'Không có sàn nào phù hợp với bộ lọc này.',
+  },
+  en: {
+    back: 'Back to main page', back2: 'Back to the guide page',
+    tag: '🔥 AFFILIATE DEALS',
+    title: 'Full Affiliate Deal Comparison',
+    sub: 'Commission rates, strengths and weaknesses of all 12 exchanges in the DA Network ecosystem',
+    stat1: 'Exchanges', stat2: 'Commission', stat3: 'Platforms',
+    fbAll: 'All (12)', fbCrypto: 'Crypto Exchange', fbForex: 'Forex / CFD', fbHigh: 'Commission ≥ 42%',
+    tableTitle: 'Quick Summary Table',
+    thName: 'Exchange', thType: 'Type', thRate: 'Commission', thBest: 'Best suited for',
+    cardsTitle: 'Exchange Details',
+    pros: 'Strengths', cons: 'Weaknesses',
+    bestForLabel: 'Best for',
+    cta: '→ Join now',
+    noResults: 'No exchanges match this filter.',
+  },
+  th: {
+    back: 'กลับหน้าหลัก', back2: 'กลับไปหน้าคู่มือ',
+    tag: '🔥 AFFILIATE DEALS',
+    title: 'เปรียบเทียบ Affiliate Deal ทุกตลาด',
+    sub: 'อัตราค่าคอมมิชชัน จุดแข็งและจุดอ่อนของ 12 ตลาดในระบบนิเวศ DA Network',
+    stat1: 'ตลาดแลกเปลี่ยน', stat2: 'ค่าคอมมิชชัน', stat3: 'แพลตฟอร์ม',
+    fbAll: 'ทั้งหมด (12)', fbCrypto: 'Crypto Exchange', fbForex: 'Forex / CFD', fbHigh: 'คอมมิชชัน ≥ 42%',
+    tableTitle: 'ตารางสรุปเร็ว',
+    thName: 'ตลาด', thType: 'ประเภท', thRate: 'ค่าคอมมิชชัน', thBest: 'เหมาะสมที่สุดสำหรับ',
+    cardsTitle: 'รายละเอียดแต่ละตลาด',
+    pros: 'จุดแข็ง', cons: 'จุดอ่อน',
+    bestForLabel: 'เหมาะสำหรับ',
+    cta: '→ เข้าร่วมเลย',
+    noResults: 'ไม่มีตลาดใดที่ตรงกับตัวกรองนี้',
+  },
+  ko: {
+    back: '메인 페이지로 돌아가기', back2: '가이드 페이지로 돌아가기',
+    tag: '🔥 AFFILIATE DEALS',
+    title: '전체 Affiliate Deal 비교',
+    sub: 'DA Network 생태계에 있는 12개 거래소의 커미션 비율, 장단점',
+    stat1: '거래소', stat2: '커미션', stat3: '플랫폼',
+    fbAll: '전체 (12)', fbCrypto: 'Crypto Exchange', fbForex: 'Forex / CFD', fbHigh: '커미션 ≥ 42%',
+    tableTitle: '빠른 요약 표',
+    thName: '거래소', thType: '유형', thRate: '커미션', thBest: '가장 적합한 대상',
+    cardsTitle: '거래소 상세 정보',
+    pros: '장점', cons: '단점',
+    bestForLabel: '최적 대상',
+    cta: '→ 지금 참여하기',
+    noResults: '이 필터와 일치하는 거래소가 없습니다.',
+  },
+  id: {
+    back: 'Kembali ke halaman utama', back2: 'Kembali ke halaman panduan',
+    tag: '🔥 AFFILIATE DEALS',
+    title: 'Perbandingan Lengkap Affiliate Deal',
+    sub: 'Tingkat komisi, kelebihan dan kekurangan 12 bursa dalam ekosistem DA Network',
+    stat1: 'Bursa', stat2: 'Komisi', stat3: 'Platform',
+    fbAll: 'Semua (12)', fbCrypto: 'Crypto Exchange', fbForex: 'Forex / CFD', fbHigh: 'Komisi ≥ 42%',
+    tableTitle: 'Tabel Ringkasan Cepat',
+    thName: 'Bursa', thType: 'Jenis', thRate: 'Komisi', thBest: 'Paling cocok untuk',
+    cardsTitle: 'Detail Setiap Bursa',
+    pros: 'Kelebihan', cons: 'Kekurangan',
+    bestForLabel: 'Cocok untuk',
+    cta: '→ Bergabung sekarang',
+    noResults: 'Tidak ada bursa yang cocok dengan filter ini.',
+  },
+};
+
+// ═══════════════════════════════════════════════════════════
+// RENDER HELPERS
+// ═══════════════════════════════════════════════════════════
+function filtered() {
+  var list = exchangesData[lang];
+  if (activeFilter === 'all')    return list;
+  if (activeFilter === 'crypto') return list.filter(function(e){ return e.cat === 'crypto'; });
+  if (activeFilter === 'forex')  return list.filter(function(e){ return e.cat === 'forex';  });
+  if (activeFilter === 'high')   return list.filter(function(e){ return e.rateNum >= 42;    });
+  return list;
+}
+
+function renderSummary() {
+  var tbody = document.getElementById('summaryBody');
+  if (!tbody) return;
+  var sorted = exchangesData[lang].slice().sort(function(a,b){ return b.rateNum - a.rateNum; });
+  tbody.innerHTML = sorted.map(function(e, i) {
+    var pill = '<span class="type-pill ' + e.cat + '">' + e.cat.toUpperCase() + '</span>';
+    var star = e.featured ? ' <span class="table-badge">★</span>' : '';
+    return '<tr>'
+      + '<td style="font-weight:700;color:#fff;">' + (i+1) + '</td>'
+      + '<td class="name-cell">' + e.name + star + '</td>'
+      + '<td>' + pill + '</td>'
+      + '<td class="rate-cell">' + e.rate + '</td>'
+      + '<td>' + e.bestFor + '</td>'
+      + '</tr>';
+  }).join('');
+}
+
+function renderCards() {
+  var grid = document.getElementById('dealsGrid');
+  if (!grid) return;
+  var list = filtered();
+  var t = txt[lang];
+
+  // Update count
+  var countEl = document.getElementById('txt-cards-count');
+  var countSuffix = {vi:' sàn',en:' exchanges',th:' ตลาด',ko:' 거래소',id:' bursa'}[lang]||' exchanges';
+  if (countEl) countEl.textContent = list.length + countSuffix;
+
+  if (list.length === 0) {
+    grid.innerHTML = '<div class="no-results">' + t.noResults + '</div>';
+    return;
+  }
+
+  grid.innerHTML = list.map(function(e) {
+    return '<div class="deal-card ' + e.cat + (e.featured ? ' featured' : '') + '">'
+      + '<div class="deal-card-header">'
+      +   '<div>'
+      +     '<div class="deal-name">' + e.name + '</div>'
+      +     '<div class="deal-type-row">'
+      +       '<span class="deal-subtype">' + e.type + '</span>'
+      +     '</div>'
+      +   '</div>'
+      +   (e.badge ? '<div class="deal-badge-pill">' + e.badge + '</div>' : '')
+      + '</div>'
+      + '<div class="deal-rate-box">'
+      +   '<span class="deal-rate-num">' + e.rate + '</span>'
+      +   '<span class="deal-rate-label">' + e.rateNote + '</span>'
+      + '</div>'
+      + '<div class="deal-procon">'
+      +   '<div class="deal-procon-title pros">✅ ' + t.pros + '</div>'
+      +   '<ul class="deal-list pros">' + e.pros.map(function(p){ return '<li>' + p + '</li>'; }).join('') + '</ul>'
+      + '</div>'
+      + '<div class="deal-procon">'
+      +   '<div class="deal-procon-title cons">⚠️ ' + t.cons + '</div>'
+      +   '<ul class="deal-list cons">' + e.cons.map(function(c){ return '<li>' + c + '</li>'; }).join('') + '</ul>'
+      + '</div>'
+      + '<div class="deal-best-for"><strong>' + t.bestForLabel + ':</strong> ' + e.bestFor + '</div>'
+      + '<a href="index.html#guide" class="deal-cta-btn">' + t.cta + '</a>'
+      + '</div>';
+  }).join('');
+}
+
+function renderAll() {
+  var t = txt[lang];
+  // Text nodes
+  document.getElementById('txt-back').textContent    = t.back;
+  document.getElementById('txt-back2').textContent   = t.back2;
+  document.getElementById('txt-tag').textContent     = t.tag;
+  document.getElementById('txt-title').textContent   = t.title;
+  document.getElementById('txt-sub').textContent     = t.sub;
+  document.getElementById('txt-stat1').textContent   = t.stat1;
+  document.getElementById('txt-stat2').textContent   = t.stat2;
+  document.getElementById('txt-stat3').textContent   = t.stat3;
+  document.getElementById('fb-all').textContent      = t.fbAll;
+  document.getElementById('fb-crypto').textContent   = t.fbCrypto;
+  document.getElementById('fb-forex').textContent    = t.fbForex;
+  document.getElementById('fb-high').textContent     = t.fbHigh;
+  document.getElementById('txt-table-title').textContent = t.tableTitle;
+  document.getElementById('th-name').textContent     = t.thName;
+  document.getElementById('th-type').textContent     = t.thType;
+  document.getElementById('th-rate').textContent     = t.thRate;
+  document.getElementById('th-best').textContent     = t.thBest;
+  document.getElementById('txt-cards-title').textContent = t.cardsTitle;
+  // Update dropdown label
+  var labelMap = {vi:'VI',en:'EN',th:'TH',ko:'KO',id:'ID'};
+  var lbl = document.getElementById('langCurrentLabel');
+  if (lbl) lbl.textContent = labelMap[lang] || lang.toUpperCase();
+  document.querySelectorAll('.lang-opt').forEach(function(btn){
+    btn.classList.toggle('active', btn.getAttribute('data-lang-code') === lang);
+  });
+
+  renderSummary();
+  renderCards();
+}
+
+// ═══════════════════════════════════════════════════════════
+// CONTROLS
+// ═══════════════════════════════════════════════════════════
+var langCycleDeals = ['vi','en','th','ko','id'];
+window.toggleLang = function() {
+  var idx = langCycleDeals.indexOf(lang);
+  lang = langCycleDeals[(idx + 1) % langCycleDeals.length];
+  renderAll();
+};
+
+window.selectLangDeals = function(l) {
+  if (txt[l]) { lang = l; renderAll(); }
+  var dd = document.getElementById('langDropdown');
+  if (dd) dd.classList.remove('open');
+};
+
+window.toggleLangDropdown = function() {
+  var dd = document.getElementById('langDropdown');
+  if (dd) dd.classList.toggle('open');
+};
+
+document.addEventListener('click', function(e) {
+  var sel = document.getElementById('langSelect');
+  if (sel && !sel.contains(e.target)) {
+    var dd = document.getElementById('langDropdown');
+    if (dd) dd.classList.remove('open');
+  }
+});
+
+window.applyFilter = function(filter) {
+  activeFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(function(btn){
+    btn.classList.toggle('active', btn.dataset.filter === filter);
+  });
+  renderCards();
+};
+
+// Init
+document.addEventListener('DOMContentLoaded', renderAll);
+</script>
+<script data-pplx-inline-edit>
+(function () {
+  if (window === window.top) return;
+
+  const allowedParentOrigins = ["https://www.perplexity.ai","https://perplexity.ai","https://testing.perplexity.ai","https://staging.perplexity.ai","https://*.preview.i.perplexity.ai","http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"];
+  const MAX_FONT_BYTES = 500 * 1024;
+  const MAX_TOTAL_FONT_BYTES = 2 * 1024 * 1024;
+  let scrollForwarding = false;
+  let scrollRaf = 0;
+  let trustedTopOrigin = null;
+
+  // Allow entries like "https://*.preview.i.perplexity.ai" — the wildcard
+  // matches a single DNS label (no dots), so "https://*.foo" cannot stretch
+  // across multiple labels.
+  function matchesAllowedOrigin(origin) {
+    if (!origin) return false;
+    for (const entry of allowedParentOrigins) {
+      if (!entry.includes("*")) {
+        if (entry === origin) return true;
+        continue;
+      }
+      const pattern = new RegExp(
+        "^" +
+          entry.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]+") +
+          "$",
+      );
+      if (pattern.test(origin)) return true;
+    }
+    return false;
+  }
+
+  // Trust decision: when the sender is same-origin-visible (event.origin is a
+  // real origin like https://www.perplexity.ai) we trust event.origin directly.
+  // When event.origin is "null" (opaque broker srcdoc), we fall back to the
+  // broker's stamped `parentOrigin` to identify the top window. The fallback
+  // is claim-only — we rely on the browser's native `targetOrigin` enforcement
+  // on the response path (see postToTrustedTop) to ensure replies can't be
+  // delivered to anyone but the actual top window of that claimed origin.
+  function getTrustedParentOrigin(event) {
+    const forwardedParentOrigin =
+      typeof event.data.parentOrigin === "string" ? event.data.parentOrigin : null;
+    const parentOrigin = event.origin === "null" ? forwardedParentOrigin : event.origin;
+    return matchesAllowedOrigin(parentOrigin) ? parentOrigin : null;
+  }
+
+  // All responses go to window.top with targetOrigin = the allowlisted origin.
+  // An attacker that iframes us inside their own null-origin broker can claim
+  // any parentOrigin they like, but the browser will drop the reply whenever
+  // the real top's origin doesn't match — so the screenshot never leaves.
+  function postToTrustedTop(message) {
+    if (!trustedTopOrigin) return;
+    try {
+      window.top.postMessage(message, trustedTopOrigin);
+    } catch (_error) {}
+  }
+
+  function inlineAll(original, clone) {
+    if (original.nodeType !== 1 || clone.nodeType !== 1) return;
+
+    try {
+      const computedStyle = getComputedStyle(original);
+      // cssText on a computed style is the serialized declaration in modern
+      // Chromium/Safari — a single read beats enumerating ~400 longhand
+      // properties. Firefox returns "" here, so we fall back on empty.
+      const serialized = computedStyle.cssText;
+      if (serialized) {
+        clone.style.cssText = serialized;
+      } else {
+        const parts = new Array(computedStyle.length);
+        for (let index = 0; index < computedStyle.length; index += 1) {
+          const property = computedStyle[index];
+          parts[index] = `${property}:${computedStyle.getPropertyValue(property)};`;
+        }
+        clone.style.cssText = parts.join("");
+      }
+    } catch (_error) {}
+
+    const originalChildren = original.children;
+    const clonedChildren = clone.children;
+    for (
+      let index = 0;
+      index < originalChildren.length && index < clonedChildren.length;
+      index += 1
+    ) {
+      inlineAll(originalChildren[index], clonedChildren[index]);
+    }
+  }
+
+  function extractFontUrl(srcValue) {
+    const matches = [
+      ...srcValue.matchAll(
+        /url\(["']?([^"')]+)["']?\)(?:\s*format\(["']?([^"')]+)["']?\))?/gi,
+      ),
+    ];
+    if (matches.length === 0) return null;
+    const woff2 = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff2"));
+    if (woff2) return woff2[1];
+    const woff = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff"));
+    if (woff) return woff[1];
+    return matches[0][1];
+  }
+
+  // Cache resolved font URL -> data URI across captures. Fonts on a page
+  // essentially never change, and a batch run emits multiple captures back to
+  // back — without this we'd refetch + re-base64 every time.
+  const fontDataUriCache = new Map();
+  const SRC_DECLARATION_RE = /src\s*:\s*[^;}]+/i;
+
+  async function fetchAsDataUri(url) {
+    if (fontDataUriCache.has(url)) return fontDataUriCache.get(url);
+    let dataUri = null;
+    try {
+      const response = await fetch(url, { mode: "cors", credentials: "omit" });
+      if (response.ok) {
+        const blob = await response.blob();
+        if (blob.size <= MAX_FONT_BYTES) {
+          dataUri = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () =>
+              resolve(typeof reader.result === "string" ? reader.result : null);
+            reader.onerror = () => resolve(null);
+            reader.readAsDataURL(blob);
+          });
+        }
+      }
+    } catch (_error) {
+      dataUri = null;
+    }
+    fontDataUriCache.set(url, dataUri);
+    return dataUri;
+  }
+
+  function collectFontFaceRuleTexts() {
+    const rules = [];
+    for (const sheet of document.styleSheets) {
+      let cssRules;
+      try {
+        cssRules = sheet.cssRules;
+      } catch (_error) {
+        continue;
+      }
+      if (!cssRules) continue;
+      for (const rule of cssRules) {
+        const cssText = rule.cssText || "";
+        if (cssText.startsWith("@font-face")) rules.push(cssText);
+      }
+    }
+    return rules;
+  }
+
+  async function buildInlinedFontCss() {
+    const ruleTexts = collectFontFaceRuleTexts();
+    if (ruleTexts.length === 0) return null;
+
+    const resolved = ruleTexts.map((cssText) => {
+      if (!SRC_DECLARATION_RE.test(cssText)) return null;
+      const srcMatch = cssText.match(/src\s*:\s*([^;}]+)[;}]/i);
+      if (!srcMatch) return null;
+      const url = extractFontUrl(srcMatch[1]);
+      if (!url) return null;
+      try {
+        return { cssText, url: new URL(url, document.baseURI).href };
+      } catch (_error) {
+        return null;
+      }
+    });
+
+    const dataUris = await Promise.all(
+      resolved.map((entry) => (entry ? fetchAsDataUri(entry.url) : Promise.resolve(null))),
+    );
+
+    const inlined = [];
+    let totalBytes = 0;
+    for (let index = 0; index < resolved.length; index += 1) {
+      const entry = resolved[index];
+      const dataUri = dataUris[index];
+      if (!entry || !dataUri) continue;
+      const approxBytes = dataUri.length * 0.75;
+      if (totalBytes + approxBytes > MAX_TOTAL_FONT_BYTES) break;
+      totalBytes += approxBytes;
+      inlined.push(entry.cssText.replace(SRC_DECLARATION_RE, `src: url("${dataUri}")`));
+    }
+    return inlined.length > 0 ? inlined.join("\n") : null;
+  }
+
+  function stripExternal(clone) {
+    const images = clone.querySelectorAll("img");
+    for (let index = 0; index < images.length; index += 1) {
+      const src = images[index].getAttribute("src");
+      if (src && !src.startsWith("data:")) images[index].removeAttribute("src");
+    }
+
+    const elements = clone.querySelectorAll("*");
+    for (let index = 0; index < elements.length; index += 1) {
+      const style = elements[index].style.cssText;
+      if (style && style.includes("url(")) {
+        elements[index].style.cssText = style.replace(
+          /url\(["']?(?!data:)[^)"']*["']?\)/gi,
+          "none",
+        );
+      }
+    }
+  }
+
+  function emitScroll() {
+    scrollRaf = 0;
+    if (!scrollForwarding) return;
+    postToTrustedTop({
+      type: "INLINE_EDIT_SCROLL",
+      scrollX: window.scrollX,
+      scrollY: window.scrollY,
+    });
+  }
+
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!scrollForwarding || scrollRaf) return;
+      scrollRaf = requestAnimationFrame(emitScroll);
+    },
+    { passive: true, capture: true },
+  );
+
+  async function handleCaptureRequest(event) {
+    const requestId = event.data.requestId;
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    function postResult(dataUrl) {
+      postToTrustedTop({
+        type: "INLINE_EDIT_SCREENSHOT_RESULT",
+        requestId,
+        dataUrl,
+        scrollX,
+        scrollY,
+      });
+    }
+
+    try {
+      // Wait for any pending web fonts to resolve so both inline metrics and
+      // the @font-face inlining below see the same loaded faces.
+      if (document.fonts && document.fonts.ready) {
+        try {
+          await document.fonts.ready;
+        } catch (_error) {}
+      }
+
+      const clone = document.documentElement.cloneNode(true);
+      inlineAll(document.documentElement, clone);
+
+      const removedNodes = clone.querySelectorAll("script,link[rel=\"stylesheet\"],style");
+      for (let index = 0; index < removedNodes.length; index += 1) {
+        removedNodes[index].remove();
+      }
+
+      stripExternal(clone);
+
+      // Re-embed web fonts as data-URI @font-face rules so the SVG rasterizer
+      // can resolve them — external font URLs aren't fetched during
+      // foreignObject rendering, which would otherwise force a fallback face
+      // and change text metrics.
+      const inlinedFontCss = await buildInlinedFontCss();
+      if (inlinedFontCss) {
+        const styleEl = document.createElement("style");
+        styleEl.textContent = inlinedFontCss;
+        const head = clone.querySelector("head");
+        if (head) head.appendChild(styleEl);
+        else clone.insertBefore(styleEl, clone.firstChild);
+      }
+
+      const html = new XMLSerializer().serializeToString(clone);
+      const svg =
+        `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
+        '<foreignObject width="100%" height="100%">' +
+        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
+        `<div style="transform:translate(-${scrollX}px,-${scrollY}px);transform-origin:top left">` +
+        html +
+        "</div></div></foreignObject></svg>";
+      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+      const image = new Image();
+      image.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        postResult(canvas.toDataURL("image/png"));
+      };
+      image.onerror = function () {
+        postResult(null);
+      };
+      image.src = svgUrl;
+    } catch (_error) {
+      postResult(null);
+    }
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!event.data) return;
+    // Only accept messages from the direct parent frame. Blocks sibling /
+    // unrelated-window postMessage senders that could otherwise reach us.
+    if (event.source !== window.parent) return;
+
+    const trustedParentOrigin = getTrustedParentOrigin(event);
+    if (!trustedParentOrigin) return;
+    trustedTopOrigin = trustedParentOrigin;
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
+      scrollForwarding = true;
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
+      scrollForwarding = false;
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      scrollRaf = 0;
+      return;
+    }
+
+    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
+
+    handleCaptureRequest(event);
+  });
+})();
+
+
+</script></body>
+</html>

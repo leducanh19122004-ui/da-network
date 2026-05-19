@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DA NETWORK — Hướng Dẫn Kiếm Tiền Crypto Cho Người Mới</title>
+  <meta name="description" content="DA NETWORK — Hướng dẫn affiliate crypto chi tiết, dễ hiểu cho người mới. Từ khái niệm cơ bản đến chiến lược thực chiến." />
+
+  <!-- Fonts: Be Vietnam Pro (full Vietnamese support) + Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- SVG Defs for patterns -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.08"/>
+    </pattern>
+  </defs>
+</svg>
+
+<!-- ═══════════════════════════════════════ HEADER ═══════════════════════════════════════ -->
+<header class="site-header">
+  <div class="container header-inner">
+    <!-- Logo -->
+    <a href="#" class="logo logo-redesign" aria-label="DA NETWORK Home">
+      <div class="logo-emblem">
+        <svg width="42" height="42" viewBox="0 0 42 42" fill="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="logoGrad" x1="0" y1="0" x2="42" y2="42" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#ffd966"/>
+              <stop offset="40%" stop-color="#f7931a"/>
+              <stop offset="100%" stop-color="#e8650a"/>
+            </linearGradient>
+            <linearGradient id="logoGradInner" x1="0" y1="0" x2="42" y2="42" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#fff4cc"/>
+              <stop offset="50%" stop-color="#ffd966"/>
+              <stop offset="100%" stop-color="#f7931a"/>
+            </linearGradient>
+            <filter id="logoGlow">
+              <feGaussianBlur stdDeviation="2.5" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <!-- outer ring glow -->
+          <circle cx="21" cy="21" r="19.5" stroke="url(#logoGrad)" stroke-width="1.5" opacity="0.35"/>
+          <!-- main ring -->
+          <circle cx="21" cy="21" r="18" stroke="url(#logoGrad)" stroke-width="2" filter="url(#logoGlow)"/>
+          <!-- inner fill -->
+          <circle cx="21" cy="21" r="15.5" fill="url(#logoGrad)" opacity="0.12"/>
+          <!-- DA text -->
+          <text x="21" y="26.5" text-anchor="middle" font-family="Be Vietnam Pro, Inter, sans-serif" font-weight="800" font-size="13" fill="url(#logoGradInner)" filter="url(#logoGlow)">DA</text>
+        </svg>
+      </div>
+      <div class="logo-wordmark">
+        <span class="logo-da">DA</span><span class="logo-crypto">NETWORK</span>
+      </div>
+    </a>
+
+    <!-- Nav -->
+    <nav class="main-nav" aria-label="Main Navigation">
+      <a href="#guide" class="nav-link"><span data-i18n="nav.guide">Hướng Dẫn</span></a>
+      <a href="#calculator" class="nav-link"><span data-i18n="nav.calc">Tính Thu Nhập</span></a>
+      <a href="#faq" class="nav-link"><span data-i18n="nav.faq">FAQ</span></a>
+      <a href="#da-network" class="nav-link"><span data-i18n="nav.network">DA Network</span></a>
+      <a href="#dac-quyen" class="nav-link nav-link-vip"><span data-i18n="nav.privilege">⭐ Đặc Quyền</span></a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="btn btn-primary" onclick="document.getElementById('guide').scrollIntoView({behavior:'smooth'})">
+        <span data-i18n="nav.cta">Bắt Đầu Ngay</span>
+      </button>
+      <div class="lang-select" id="langSelect">
+        <button class="lang-select-btn" onclick="toggleLangDropdown()" aria-label="Select language" aria-haspopup="listbox">
+          <span id="langCurrentLabel">VI</span>
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="lang-dropdown" id="langDropdown" role="listbox">
+          <button class="lang-opt active" data-lang-code="vi" onclick="selectLang('vi')">🇻🇳 Tiếng Việt</button>
+          <button class="lang-opt" data-lang-code="en" onclick="selectLang('en')">🇬🇧 English</button>
+          <button class="lang-opt" data-lang-code="th" onclick="selectLang('th')">🇹🇭 ภาษาไทย</button>
+          <button class="lang-opt" data-lang-code="ko" onclick="selectLang('ko')">🇰🇷 한국어</button>
+          <button class="lang-opt" data-lang-code="id" onclick="selectLang('id')">🇮🇩 Indonesia</button>
+        </div>
+      </div>
+      <button class="theme-toggle" data-theme-toggle aria-label="Chuyển chế độ sáng/tối">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Mở menu">
+        <i data-lucide="menu"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile nav -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#guide" class="mobile-nav-link" onclick="closeMobileNav()"><span data-i18n="nav.guide">Hướng Dẫn</span></a>
+    <a href="#calculator" class="mobile-nav-link" onclick="closeMobileNav()"><span data-i18n="nav.calc">Tính Thu Nhập</span></a>
+    <a href="#faq" class="mobile-nav-link" onclick="closeMobileNav()"><span data-i18n="nav.faq">FAQ</span></a>
+    <a href="#da-network" class="mobile-nav-link" onclick="closeMobileNav()"><span data-i18n="nav.network">DA Network</span></a>
+    <a href="#dac-quyen" class="mobile-nav-link mobile-nav-link-vip" onclick="closeMobileNav()"><span data-i18n="nav.privilege">⭐ Đặc Quyền</span></a>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════ HERO ═══════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-bg-img"></div>
+    <div class="hero-bg-tint"></div>
+    <svg width="100%" height="100%" style="position:absolute;top:0;left:0;opacity:0.18"><rect width="100%" height="100%" fill="url(#grid)"/></svg>
+    <div class="hero-glow"></div>
+  </div>
+  <div class="container hero-inner">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      <span data-i18n="hero.badge">Hướng Dẫn Từ A-Z • Miễn Phí 100%</span>
+    </div>
+    <h1 class="hero-title">
+      <span data-i18n="hero.title1">Kiếm Tiền Với</span><br/>
+      <span class="gradient-text" data-i18n="hero.title2">Crypto Affiliate</span><br/>
+      <span data-i18n="hero.title3">Từ Con Số 0</span>
+    </h1>
+    <p class="hero-sub" data-i18n="hero.sub">Hướng dẫn toàn diện, dễ hiểu cho người mới bắt đầu. Từ khái niệm cơ bản đến chiến lược thực chiến — kèm ví dụ thực tế từng bước.</p>
+    <div class="hero-ctas">
+      <a href="#guide" class="btn btn-primary btn-lg">
+        <i data-lucide="book-open" width="18" height="18"></i>
+        <span data-i18n="hero.cta1">Đọc Hướng Dẫn</span>
+      </a>
+      <a href="#calculator" class="btn btn-outline btn-lg">
+        <i data-lucide="calculator" width="18" height="18"></i>
+        <span data-i18n="hero.cta2">Tính Thu Nhập</span>
+      </a>
+    </div>
+    <div class="stats-particle-wrap">
+    <canvas id="statsParticleCanvas"></canvas>
+    <div class="hero-stats hero-stats-fomo hero-stats-vertical">
+
+      <!-- Network Snapshot — static, honest, verifiable -->
+      <div class="snapshot-header">
+        <span class="snapshot-tag" data-i18n="snap.tag">📊 CHỈ SỐ MẠNG LƯỚI</span>
+        <span class="snapshot-meta" data-i18n="snap.meta">Cập nhật ngày 1 hàng tháng · Dữ liệu đã chốt sổ</span>
+      </div>
+
+      <div class="snapshot-grid">
+        <div class="snapshot-item snapshot-clickable" onclick="openStatModal('partner')" role="button" tabindex="0" aria-label="Xem chi tiết Partner Network">
+          <span class="snapshot-value" id="goldStat237">237</span>
+          <span class="snapshot-label" data-i18n="snap.partners">Partners đang hoạt động</span>
+        </div>
+        <div class="snapshot-divider"></div>
+        <div class="snapshot-item snapshot-clickable snapshot-item-highlight" onclick="openStatModal('commission')" role="button" tabindex="0" aria-label="Xem chi tiết hoa hồng">
+          <span class="snapshot-value snapshot-value-accent" id="commissionCounter">$28,540</span>
+          <span class="snapshot-label" data-i18n="snap.paid">Đã chuyển cho partner tháng trước</span>
+        </div>
+        <div class="snapshot-divider"></div>
+        <div class="snapshot-item">
+          <span class="snapshot-value">3</span>
+          <span class="snapshot-label" data-i18n="snap.exchanges">Sàn đối tác chính</span>
+        </div>
+      </div>
+
+      <p class="snapshot-foot" data-i18n="snap.foot">
+        <span class="snapshot-foot-icon">✓</span>
+        Số “Đã chuyển” là tổng commission DA Network đã thanh toán cho partner trong tháng trước, xác minh qua hồ sơ rút tiền. <a href="#verify" class="snapshot-foot-link" data-i18n="snap.foot.link">Xem cách chúng tôi xác minh →</a>
+      </p>
+    </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════ GUIDE ═══════════════════════════════════════ -->
+<section class="section section-alt" id="guide" style="position:relative;overflow:hidden;">
+  <canvas id="guideParticleCanvas"></canvas>
+  <canvas id="guideCornerLeft"></canvas>
+  <canvas id="guideCornerRight"></canvas>
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag" data-i18n="guide.tag">Hướng Dẫn Toàn Diện</span>
+      <h2 class="section-title" data-i18n="guide.title">Affiliate Crypto Là Gì?</h2>
+      <p class="section-sub" data-i18n="guide.sub">Tìm hiểu từ A đến Z — từ khái niệm cơ bản đến cách tạo ra thu nhập thực sự.</p>
+    </div>
+
+    <!-- Intro explainer -->
+    <div class="explainer-grid">
+      <div class="explainer-card explainer-card-clickable ec-blue" onclick="openExplainerModal('affiliate')" role="button" tabindex="0">
+        <div class="explainer-icon ec-icon-wrap">🔗</div>
+        <h3><span data-i18n="ec.h1">Affiliate Là Gì?</span></h3>
+        <p><span data-i18n="ec.p1">Bạn giới thiệu người khác đăng ký sàn giao dịch crypto qua <strong>link riêng của bạn</strong>. Khi họ giao dịch, bạn nhận hoa hồng từ phí giao dịch của họ.</span></p>
+        <span class="explainer-hint ec-hint" data-i18n="ec.hint1">Nhấn để hiểu rõ hơn →</span>
+      </div>
+      <div class="explainer-card explainer-card-clickable ec-green" onclick="openExplainerModal('income')" role="button" tabindex="0">
+        <div class="explainer-icon ec-icon-wrap">💸</div>
+        <h3><span data-i18n="ec.h2">Kiếm Được Bao Nhiêu?</span></h3>
+        <p><span data-i18n="ec.p2">Hoa hồng thường từ <strong>20%–50% phí giao dịch</strong> của người được giới thiệu. Một số sàn trả hoa hồng suốt đời.</span></p>
+        <span class="explainer-hint ec-hint" data-i18n="ec.hint2">Nhấn để xem ví dụ thực tế →</span>
+      </div>
+      <div class="explainer-card explainer-card-clickable ec-gold" onclick="openExplainerModal('advantages')" role="button" tabindex="0">
+        <div class="explainer-icon ec-icon-wrap">⚡</div>
+        <h3><span data-i18n="ec.h3">Ưu Điểm Nổi Bật</span></h3>
+        <p><span data-i18n="ec.p3">Không cần vốn đầu tư, không cần kinh nghiệm giao dịch. Thu nhập thụ động — kiếm ngay cả khi bạn ngủ.</span></p>
+        <span class="explainer-hint ec-hint" data-i18n="ec.hint3">Nhấn để xem đầy đủ ưu điểm →</span>
+      </div>
+    </div>
+
+    <!-- Explainer Modal ── reuses stat-modal styles -->
+    <div class="stat-modal-overlay" id="explainerModalOverlay" onclick="closeExplainerModal()">
+      <div class="stat-modal explainer-modal" id="explainerModal" onclick="event.stopPropagation()">
+        <canvas id="explainerModalParticleCanvas"></canvas>
+        <button class="stat-modal-close" onclick="closeExplainerModal()" aria-label="Đóng">✕</button>
+        <div id="explainerModalContent"></div>
+      </div>
+    </div>
+
+    <!-- Step-by-Step Guide -->
+    <div class="steps-container">
+      <h3 class="steps-title" data-i18n="guide.stepsTitle">8 Bước Thực Chiến Bắt Đầu Kiếm Tiền</h3>
+
+      <!-- Step tabs -->
+      <div class="step-tabs" role="tablist">
+        <button class="step-tab active" data-step="1" role="tab">1</button>
+        <button class="step-tab" data-step="2" role="tab">2</button>
+        <button class="step-tab" data-step="3" role="tab">3</button>
+        <button class="step-tab" data-step="4" role="tab">4</button>
+        <button class="step-tab" data-step="5" role="tab">5</button>
+        <button class="step-tab" data-step="6" role="tab">6</button>
+        <button class="step-tab" data-step="7" role="tab">7</button>
+        <button class="step-tab" data-step="8" role="tab">8</button>
+      </div>
+
+      <!-- Step content -->
+      <div class="step-content-wrap" id="stepContent">
+        <!-- populated by JS -->
+      </div>
+
+      <!-- Navigation -->
+      <div class="step-nav">
+        <button class="btn btn-outline" id="prevStep" disabled>
+          <i data-lucide="arrow-left" width="16" height="16"></i>
+          <span data-i18n="guide.prev">Bước Trước</span>
+        </button>
+        <span class="step-progress" id="stepProgress">Bước 1 / 8</span>
+        <button class="btn btn-primary" id="nextStep">
+          <span data-i18n="guide.next">Bước Tiếp</span>
+          <i data-lucide="arrow-right" width="16" height="16"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Visual Comparison -->
+    <div class="comparison-section">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:24px;">
+        <h3 class="steps-title" style="margin-bottom:0" data-i18n="guide.compareTitle">So Sánh Các Sàn Affiliate Hàng Đầu</h3>
+        <a href="deals.html" style="display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:24px;background:linear-gradient(135deg,#f7931a,#e8650a);color:#000;font-weight:800;font-size:14px;text-decoration:none;transition:opacity .2s;white-space:nowrap;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+          <span data-i18n="guide.viewAllDeals">Xem tất cả 12 sàn</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+      <div class="comparison-grid" id="comparisonGrid">
+        <!-- populated by JS -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ CALCULATOR ═══════════════════════════════════════ -->
+<section class="section" id="calculator" style="position:relative;overflow:hidden;">
+  <canvas id="calcParticleCanvas"></canvas>
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag" data-i18n="calc.tag">Công Cụ Tính Toán</span>
+      <h2 class="section-title"><span data-i18n="calc.title">Tính Thu Nhập Affiliate</span></h2>
+      <p class="section-sub" data-i18n="calc.sub">Ước tính thu nhập hàng tháng dựa trên số lượng người giới thiệu và khối lượng giao dịch.</p>
+    </div>
+
+    <div class="calc-grid">
+      <div class="card calc-card">
+        <h3 class="card-title-sm" data-i18n="calc.inputTitle">Nhập Thông Số</h3>
+        <div class="form-group">
+          <label class="form-label" data-i18n="calc.lbl1">Số người được giới thiệu mỗi tháng</label>
+          <input type="range" class="slider" id="refCount" min="1" max="200" value="10" />
+          <div class="slider-display"><span id="refCountVal">10</span> <span data-i18n="calc.unit.people">người</span></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-i18n="calc.lbl2">Khối lượng giao dịch TB mỗi người (USD/tháng)</label>
+          <input type="range" class="slider" id="tradeVol" min="100" max="100000" step="100" value="5000" />
+          <div class="slider-display"><span id="tradeVolVal">$5,000</span></div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-i18n="calc.lbl3">Tỷ lệ hoa hồng (%)</label>
+          <input type="range" class="slider" id="commRate" min="10" max="50" value="30" />
+          <div class="slider-display"><span id="commRateVal">30</span>%</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" data-i18n="calc.lbl4">Phí giao dịch của sàn (%)</label>
+          <input type="range" class="slider" id="tradeFee" min="0.05" max="0.2" step="0.01" value="0.1" />
+          <div class="slider-display"><span id="tradeFeeVal">0.10</span>%</div>
+        </div>
+      </div>
+
+      <div class="card calc-result-card">
+        <h3 class="card-title-sm" data-i18n="calc.resultTitle">Kết Quả Ước Tính</h3>
+        <div class="result-items">
+          <div class="result-item">
+            <span class="result-label" data-i18n="calc.res1">Thu nhập tháng này</span>
+            <span class="result-value primary" id="monthlyEarn">$0</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label" data-i18n="calc.res2">Thu nhập hàng năm</span>
+            <span class="result-value" id="yearlyEarn">$0</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label" data-i18n="calc.res3">Tổng phí sàn thu</span>
+            <span class="result-label-val" id="totalFees">$0</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label" data-i18n="calc.res4">Hoa hồng / người</span>
+            <span class="result-label-val" id="perPerson">$0</span>
+          </div>
+        </div>
+        <div class="result-chart-wrap">
+          <canvas id="earningsChart"></canvas>
+        </div>
+        <p class="result-note" data-i18n="calc.note">* Ước tính giả định. Thu nhập thực tế phụ thuộc vào hoạt động của người dùng và điều khoản sàn.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ FAQ ═══════════════════════════════════════ -->
+<section class="section section-alt" id="faq" style="position:relative;overflow:hidden;">
+  <canvas id="faqParticleCanvas"></canvas>
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag" data-i18n="faq.tag">Câu Hỏi Thường Gặp</span>
+      <h2 class="section-title" data-i18n="faq.title">FAQ</h2>
+    </div>
+    <div class="faq-list" id="faqList">
+      <!-- populated by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ DA NETWORK ═══════════════════════════════════════ -->
+<section class="section" id="da-network" style="position:relative;overflow:hidden;">
+  <canvas id="daNetworkParticleCanvas"></canvas>
+  <div class="container">
+
+    <!-- ── Giới thiệu ── -->
+    <div class="section-header">
+      <span class="section-tag dan-tag"><span data-i18n="dan.tag">Mạng Lưới Affiliate</span>
+      <h2 class="section-title dan-title"><span data-i18n="dan.title">Giới Thiệu DA Network</span></h2>
+      <p class="section-sub" data-i18n="dan.sub">Hệ thống affiliate crypto chuyên nghiệp — kết nối hàng trăm partner trên khắp Đông Nam Á với các sàn giao dịch hàng đầu thế giới.</p>
+    </div>
+
+    <div class="dan-intro-grid">
+      <div class="dan-intro-card">
+        <div class="dan-intro-icon">🌐</div>
+        <h4 data-i18n="dan.c1.title">Phủ Sóng Rộng</h4>
+        <p data-i18n="dan.c1.body">Hoạt động tại Việt Nam, Indonesia, Philippines và đang mở rộng ra toàn Đông Nam Á với hơn 237 partner đang hoạt động.</p>
+      </div>
+      <div class="dan-intro-card">
+        <div class="dan-intro-icon">💎</div>
+        <h4 data-i18n="dan.c2.title">Hoa Hồng Cao Nhất</h4>
+        <p data-i18n="dan.c2.body">Tỷ lệ hoa hồng lên đến <strong class="gold-text">70%</strong> — cao hơn đăng ký trực tiếp, được DA Network đàm phán độc quyền với từng sàn.</p>
+      </div>
+      <div class="dan-intro-card">
+        <div class="dan-intro-icon">🛡️</div>
+        <h4 data-i18n="dan.c3.title">Hỗ Trợ Toàn Diện</h4>
+        <p data-i18n="dan.c3.body">Đội ngũ admin hỗ trợ 24/7, cung cấp tài liệu, công cụ và lộ trình phát triển cá nhân hóa cho từng partner.</p>
+      </div>
+      <div class="dan-intro-card">
+        <div class="dan-intro-icon">📈</div>
+        <h4 data-i18n="dan.c4.title">Tăng Trưởng Bền Vững</h4>
+        <p data-i18n="dan.c4.body">Thu nhập thụ động từ toàn bộ mạng lưới người dùng bên dưới — không giới hạn số lượng, không giới hạn thu nhập.</p>
+      </div>
+    </div>
+
+    <!-- ── Recent Partner Wins (replaces fake leaderboard) ── -->
+    <div class="partner-wins">
+      <div class="partner-wins-header">
+        <span class="partner-wins-badge" data-i18n="wins.badge">🎯 CÂU CHUYỆN THẬT</span>
+        <h3 class="partner-wins-title" data-i18n="wins.title">Partner Thật, Kết Quả Thật</h3>
+        <p class="partner-wins-sub" data-i18n="wins.sub">Không phải bảng xếp hạng thu nhập. Đây là một vài câu chuyện thực tế từ các partner đang xây traffic và nhận hoa hồng qua DA Network.</p>
+      </div>
+
+      <!-- Data-driven grid: cards rendered by renderPartnerWins() in app.js from PARTNERS_DATA array -->
+      <div class="partner-wins-grid" id="partnerWinsGrid" data-partner-count="5"></div>
+
+      <p class="partner-wins-note" data-i18n="wins.note">
+        Tất cả câu chuyện được chia sẻ với sự đồng ý của partner. Kết quả có thể khác nhau tùy vào kênh, traffic và mức độ triển khai. <a href="#verify" data-i18n="wins.note.link">Xem cách DA Network xác minh partner →</a>
+      </p>
+    </div>
+
+    <!-- ── Verification Block (How we verify) ── -->
+    <div class="verify-block" id="verify">
+      <div class="verify-header">
+        <span class="verify-badge" data-i18n="verify.badge">🔍 MINH BẠCH</span>
+        <h3 class="verify-title" data-i18n="verify.title">Cách DA Network Xác Minh Số Liệu</h3>
+        <p class="verify-sub" data-i18n="verify.sub">Trong một ngành mà fake screenshot và fake leaderboard là chuyện thường — đây là cách chúng tôi đảm bảo mọi con số bạn thấy là thật.</p>
+      </div>
+
+      <div class="verify-grid">
+        <div class="verify-step">
+          <div class="verify-step-num">1</div>
+          <h4 data-i18n="verify.s1.title">Dữ liệu từ dashboard sàn</h4>
+          <p data-i18n="verify.s1.body">Mỗi partner đăng ký dưới link ref của DA Network. Admin thấy hoa hồng pending/paid trực tiếp từ dashboard <strong>Binance, Ourbit, Bingx</strong> — không bị điều chỉnh bởi bên thứ ba.</p>
+        </div>
+        <div class="verify-step">
+          <div class="verify-step-num">2</div>
+          <h4 data-i18n="verify.s2.title">Hồ sơ rút tiền</h4>
+          <p data-i18n="verify.s2.body">Con số “đã chuyển” hiển thị trên trang chỉ tính commission <strong>đã thanh toán thành công</strong> đến ví/tài khoản partner — không tính phần pending hoặc bị hủy. Partner có thể đối chiếu với lịch sử rút tiền của mình.</p>
+        </div>
+        <div class="verify-step">
+          <div class="verify-step-num">3</div>
+          <h4 data-i18n="verify.s3.title">Partner consent</h4>
+          <p data-i18n="verify.s3.body">Mọi câu chuyện, quote, hay số liệu cá nhân hiển thị công khai đều <strong>có sự đồng ý</strong> của partner. Bạn có thể yêu cầu gỡ thông tin của mình bất cứ lúc nào — chúng tôi xử lý trong 48h.</p>
+        </div>
+      </div>
+
+      <div class="verify-cta">
+        <span class="verify-cta-text" data-i18n="verify.cta.text">Nghĩ rằng số liệu không khớp với rút tiền của bạn? Muốn xem chi tiết về case study của một partner cụ thể?</span>
+        <a href="#cta" class="btn btn-outline verify-cta-btn" data-i18n="verify.cta.btn">📩 Liên hệ admin</a>
+      </div>
+    </div>
+
+    <!-- ── Feedback / Proof ── -->
+    <div class="dan-feedback">
+      <div class="dan-fb-header">
+        <span class="dan-lb-badge" data-i18n="dan.fb.badge">📸 BẰNG CHỨNG THỰC TẾ</span>
+        <h3 class="dan-lb-title"><span data-i18n="dan.fb.title">Hoa Hồng Thực Tế Của Partner</span></h3>
+        <p class="dan-lb-sub" data-i18n="dan.fb.sub">Ảnh chụp màn hình xác nhận hoa hồng — cập nhật liên tục từ partner trong mạng lưới.</p>
+      </div>
+      <div class="proof-gallery" id="danFeedbackGrid">
+        <figure class="proof-item proof-ourbit" data-img="proof/proof-1.jpg" tabindex="0" role="button" aria-label="Xem ảnh Ourbit 12/2025">
+          <div class="proof-thumb">
+            <img src="proof/proof-1.jpg" alt="Ourbit commission 12/2025 - $3,358.35" loading="lazy">
+            <span class="proof-zoom" aria-hidden="true">⤢</span>
+          </div>
+          <figcaption class="proof-caption">
+            <span class="proof-exchange proof-exchange-ourbit">Ourbit</span>
+            <strong class="proof-amount">$3,358.35</strong>
+            <span class="proof-period" data-i18n="proof.period.dec25">Tháng 12/2025 · 100 users</span>
+          </figcaption>
+        </figure>
+
+        <figure class="proof-item proof-ourbit" data-img="proof/proof-2.jpg" tabindex="0" role="button" aria-label="Xem ảnh Ourbit 02/2026">
+          <div class="proof-thumb">
+            <img src="proof/proof-2.jpg" alt="Ourbit commission 02/2026 - $5,397.16" loading="lazy">
+            <span class="proof-zoom" aria-hidden="true">⤢</span>
+          </div>
+          <figcaption class="proof-caption">
+            <span class="proof-exchange proof-exchange-ourbit">Ourbit</span>
+            <strong class="proof-amount">$5,397.16</strong>
+            <span class="proof-period" data-i18n="proof.period.feb26">Tháng 02/2026 · 32 users mới</span>
+          </figcaption>
+        </figure>
+
+        <figure class="proof-item proof-bingx" data-img="proof/proof-3.jpg" tabindex="0" role="button" aria-label="Xem ảnh Bingx 11/2025">
+          <div class="proof-thumb">
+            <img src="proof/proof-3.jpg" alt="Bingx commission 11/2025 - $2,018.88" loading="lazy">
+            <span class="proof-zoom" aria-hidden="true">⤢</span>
+          </div>
+          <figcaption class="proof-caption">
+            <span class="proof-exchange proof-exchange-bingx">Bingx</span>
+            <strong class="proof-amount">$2,018.88</strong>
+            <span class="proof-period" data-i18n="proof.period.nov25">Tháng 11/2025 · Direct commission</span>
+          </figcaption>
+        </figure>
+
+        <figure class="proof-item proof-bingx" data-img="proof/proof-4.jpg" tabindex="0" role="button" aria-label="Xem ảnh Bingx 01/2026">
+          <div class="proof-thumb">
+            <img src="proof/proof-4.jpg" alt="Bingx metrics 01/2026 - $566.62" loading="lazy">
+            <span class="proof-zoom" aria-hidden="true">⤢</span>
+          </div>
+          <figcaption class="proof-caption">
+            <span class="proof-exchange proof-exchange-bingx">Bingx</span>
+            <strong class="proof-amount">$566.62</strong>
+            <span class="proof-period" data-i18n="proof.period.jan26b">01/2026 · Vol $5.3M · 23 traders</span>
+          </figcaption>
+        </figure>
+
+        <figure class="proof-item proof-bingx" data-img="proof/proof-5.jpg" tabindex="0" role="button" aria-label="Xem ảnh Bingx 02/2026">
+          <div class="proof-thumb">
+            <img src="proof/proof-5.jpg" alt="Bingx metrics 02/2026 - $936.83" loading="lazy">
+            <span class="proof-zoom" aria-hidden="true">⤢</span>
+          </div>
+          <figcaption class="proof-caption">
+            <span class="proof-exchange proof-exchange-bingx">Bingx</span>
+            <strong class="proof-amount">$936.83</strong>
+            <span class="proof-period" data-i18n="proof.period.feb26b">02/2026 · Vol $8.8M · 32 traders</span>
+          </figcaption>
+        </figure>
+
+        <figure class="proof-item proof-binance" data-img="proof/proof-6.jpg" tabindex="0" role="button" aria-label="Xem ảnh Binance 12/2025">
+          <div class="proof-thumb">
+            <img src="proof/proof-6.jpg" alt="Binance commission 12/2025 - $1,063.04" loading="lazy">
+            <span class="proof-zoom" aria-hidden="true">⤢</span>
+          </div>
+          <figcaption class="proof-caption">
+            <span class="proof-exchange proof-exchange-binance">Binance</span>
+            <strong class="proof-amount">$1,063.04</strong>
+            <span class="proof-period" data-i18n="proof.period.dec25b">12/2025 · USDT &amp; Inverse · Settled</span>
+          </figcaption>
+        </figure>
+
+        <figure class="proof-item proof-binance" data-img="proof/proof-7.jpg" tabindex="0" role="button" aria-label="Xem ảnh Binance 09-10/2025">
+          <div class="proof-thumb">
+            <img src="proof/proof-7.jpg" alt="Binance commission 09-10/2025 - $704.06" loading="lazy">
+            <span class="proof-zoom" aria-hidden="true">⤢</span>
+          </div>
+          <figcaption class="proof-caption">
+            <span class="proof-exchange proof-exchange-binance">Binance</span>
+            <strong class="proof-amount">$704.06</strong>
+            <span class="proof-period" data-i18n="proof.period.sep25">09-10/2025 · USDT &amp; Inverse</span>
+          </figcaption>
+        </figure>
+      </div>
+
+      <p class="proof-note" data-i18n="proof.note">
+        Tất cả screenshot trực tiếp từ dashboard sàn (Ourbit, Bingx, Binance) · Click vào ảnh để xem chi tiết · Một số thông tin nhạy cảm có thể bị che để bảo vệ partner.
+      </p>
+
+      <!-- Lightbox modal -->
+      <div class="proof-lightbox" id="proofLightbox" role="dialog" aria-hidden="true" aria-label="Xem ảnh phóng to">
+        <button class="proof-lightbox-close" type="button" aria-label="Đóng">✕</button>
+        <button class="proof-lightbox-nav proof-lightbox-prev" type="button" aria-label="Ảnh trước">‹</button>
+        <img class="proof-lightbox-img" src="" alt="">
+        <button class="proof-lightbox-nav proof-lightbox-next" type="button" aria-label="Ảnh sau">›</button>
+        <div class="proof-lightbox-counter"><span id="proofLbIdx">1</span> / <span id="proofLbTotal">7</span></div>
+      </div>
+      <div class="dan-cta-wrap">
+        <p class="dan-cta-text" data-i18n="dan.cta.text">Sẵn sàng tham gia DA Network và bắt đầu kiếm hoa hồng?</p>
+        <a href="#guide" class="btn btn-primary btn-lg dan-cta-btn">
+          <i data-lucide="zap" width="18" height="18"></i>
+          <span data-i18n="dan.cta.btn">Bắt Đầu Ngay</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ ĐọC QUYỆN ═══════════════════════════════════════ -->
+<section class="section dq-section" id="dac-quyen" style="position:relative;overflow:hidden;">
+  <canvas id="dqParticleCanvas"></canvas>
+
+  <!-- Decorative blurs -->
+  <div class="dq-blur dq-blur-1"></div>
+  <div class="dq-blur dq-blur-2"></div>
+
+  <div class="container" style="position:relative;z-index:1;">
+
+    <!-- Header -->
+    <div class="section-header">
+      <span class="section-tag dq-tag" data-i18n="dq.tag">🔒 Dành riêng cho Partner DA Network</span>
+      <h2 class="section-title dq-title"><span data-i18n="dq.title">Đặc Quyền Tại DA Network</span></h2>
+      <p class="section-sub dq-sub" data-i18n="dq.sub">Chỉ <strong style="color:#ffd966">237 partner</strong> đang hoạt động mới có quyền truy cập. Những điều bên ngoài không thể mua được.</p>
+    </div>
+
+    <!-- 3 Privilege Cards -->
+    <div class="dq-grid">
+
+      <!-- Card 1: Bot Trade -->
+      <div class="dq-card" onclick="openDqModal('bot')">
+        <div class="dq-card-glow dq-glow-gold"></div>
+        <div class="dq-badge-wrap">
+          <span class="dq-badge dq-badge-hot">🔥 HOT</span>
+          <span class="dq-badge dq-badge-quality" data-i18n="dq.badge.limited">✓ Tuyển chọn kỹ</span>
+        </div>
+        <div class="dq-card-icon">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ffd966" stroke-width="1.8" stroke-linecap="round">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <path d="M8 21h8M12 17v4"/>
+            <path d="M6 8l3 3 3-3 4 4" stroke="#4ade80" stroke-width="2"/>
+          </svg>
+        </div>
+        <div class="dq-card-content">
+          <h3><span data-i18n="dq.card1.title">Bot Trade AI — Hàn Quốc</span></h3>
+          <p data-i18n="dq.card1.body">Voucher thuê <strong>bot giao dịch tự động</strong> của team trading Hàn Quốc. Tỷ lệ thắng xác nhận trên <strong class="gold-text">80%</strong>.</p>
+          <div class="dq-card-stat">
+            <span class="dq-stat-item"><span class="dq-stat-dot green"></span>Win rate 80%+</span>
+            <span class="dq-stat-item"><span class="dq-stat-dot gold"></span>Auto 24/7</span>
+          </div>
+        </div>
+        <div class="dq-card-cta">
+          <span data-i18n="dq.card.details">Xem chi tiết</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+
+      <!-- Card 2: Market Plan -->
+      <div class="dq-card dq-card-blue" onclick="openDqModal('market')">
+        <div class="dq-card-glow dq-glow-blue"></div>
+        <div class="dq-badge-wrap">
+          <span class="dq-badge dq-badge-live">🟢 LIVE hàng ngày</span>
+        </div>
+        <div class="dq-card-icon">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.8" stroke-linecap="round">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+        </div>
+        <div class="dq-card-content">
+          <h3><span data-i18n="dq.card2.title">Kênh Update Plan Market</span></h3>
+          <p data-i18n="dq.card2.body">Cập nhật <strong>kế hoạch thị trường mỏi ngày</strong> từ các trader chuyên nghiệp. Biết trước thị trường sẽ đi đâu khi người khác còn đang dò xoét.</p>
+          <div class="dq-card-stat">
+            <span class="dq-stat-item"><span class="dq-stat-dot blue"></span>Update 7h sáng</span>
+            <span class="dq-stat-item"><span class="dq-stat-dot blue"></span>Phân tích sâu</span>
+          </div>
+        </div>
+        <div class="dq-card-cta">
+          <span data-i18n="dq.card.details">Xem chi tiết</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+
+      <!-- Card 3: Facts & Lifestyle -->
+      <div class="dq-card dq-card-purple" onclick="openDqModal('facts')">
+        <div class="dq-card-glow dq-glow-purple"></div>
+        <div class="dq-badge-wrap">
+          <span class="dq-badge dq-badge-exclusive">💎 Độc quyền</span>
+        </div>
+        <div class="dq-card-icon">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="1.8" stroke-linecap="round">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+        </div>
+        <div class="dq-card-content">
+          <h3><span data-i18n="dq.card3.title">Facts &amp; Quotes Độc Quyền</span></h3>
+          <p data-i18n="dq.card3.body">Kênh riêng chia sẻ <strong>sự thật tài chính</strong> và <strong>triết lý sống</strong> mà tệp wealthy không bạo giờ nói công khai.</p>
+          <div class="dq-card-stat">
+            <span class="dq-stat-item"><span class="dq-stat-dot purple"></span>Finance mindset</span>
+            <span class="dq-stat-item"><span class="dq-stat-dot purple"></span>Lifestyle elite</span>
+          </div>
+        </div>
+        <div class="dq-card-cta">
+          <span data-i18n="dq.card.details">Xem chi tiết</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+
+    </div><!-- /dq-grid -->
+
+    <!-- Bottom CTA strip -->
+    <div class="dq-cta-strip">
+      <div class="dq-cta-left">
+        <span class="dq-lock-icon">🔐</span>
+        <div>
+          <strong><span data-i18n="dq.cta.strong">Tất cả đặc quyền trên chỉ có khi bạn là partner DA Network.</span></strong>
+          <span data-i18n="dq.cta.sub">Tham gia — phản hồi trong 24–48h.</span>
+        </div>
+      </div>
+      <a href="#guide" class="btn btn-primary dq-cta-btn"><span data-i18n="dq.cta.btn">⚡ Tham Gia Để Mở Khóa</span></a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ POPUP: Bot Trade ══ -->
+<div class="dq-modal" id="dqModal-bot" onclick="closeDqModal(event,this)">
+  <div class="dq-modal-box dq-modal-gold">
+    <button class="dq-modal-close" onclick="closeDqModal(null,'dqModal-bot')">×</button>
+    <div class="dq-modal-header">
+      <div class="dq-modal-icon-wrap dq-micon-gold">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffd966" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M6 8l3 3 3-3 4 4" stroke="#4ade80" stroke-width="2"/></svg>
+      </div>
+      <div>
+        <div class="dq-modal-badge" data-i18n="popup.bot.badge">🔥 ĐỘC QUYỀN · CHỈ CHO PARTNER</div>
+        <h3 class="dq-modal-title" data-i18n="popup.bot.title">Bot Trade AI — Team Hàn Quốc</h3>
+      </div>
+    </div>
+    <div class="dq-modal-body">
+      <p class="dq-modal-lead" data-i18n="popup.bot.lead">Trong khi 95% trader thua lỗ vì giao dịch bằng cảm xúc — bạn có máy móc làm việc 24/7 không ngủ, không sợ, không FOMO.</p>
+      <div class="dq-modal-features">
+        <div class="dq-mf-item">
+          <span class="dq-mf-icon">🇰🇷</span>
+          <div>
+            <strong data-i18n="popup.bot.f1.title">Phát triển bởi Team Trading Hàn Quốc</strong>
+            <small data-i18n="popup.bot.f1.body">Nhóm trader chuyên nghiệp với hơn 5 năm kinh nghiệm thị trường Asia</small>
+          </div>
+        </div>
+        <div class="dq-mf-item">
+          <span class="dq-mf-icon">📊</span>
+          <div>
+            <strong data-i18n="popup.bot.f2.title">Win Rate xác nhận trên 80%</strong>
+            <small data-i18n="popup.bot.f2.body">Backtest 18 tháng trên BTC, ETH, BNB — lợi nhuận tích lũy trung bình +340%/năm</small>
+          </div>
+        </div>
+        <div class="dq-mf-item">
+          <span class="dq-mf-icon">⚡</span>
+          <div>
+            <strong data-i18n="popup.bot.f3.title">Tự động 100% — không cần theo dõi</strong>
+            <small data-i18n="popup.bot.f3.body">Chạy 24/7, tự vào lệnh, tự chốt lời, tự cắt lỗ. Bạn chỉ việc để vốn.</small>
+          </div>
+        </div>
+        <div class="dq-mf-item">
+          <span class="dq-mf-icon">🔒</span>
+          <div>
+            <strong data-i18n="popup.bot.f4.title">Voucher thuê riêng cho Partner DA Network</strong>
+            <small data-i18n="popup.bot.f4.body">Ngoài thị trường giá thuê gốc lên đến $200/tháng — bạn được sử dụng miễn phí qua voucher độc quyền.</small>
+          </div>
+        </div>
+      </div>
+      <div class="dq-modal-alert dq-modal-alert-quality" data-i18n="popup.bot.alert">
+        ✓ <strong>Voucher dành cho partner chất lượng.</strong> Chúng tôi review từng partner để đảm bảo nguồn lực đến đúng người cam kết build lâu dài — không tuyển ồ ạt.
+      </div>
+    </div>
+    <div class="dq-modal-footer">
+      <a href="#guide" class="btn btn-primary dq-modal-cta" onclick="closeDqModal(null,'dqModal-bot')" data-i18n="popup.bot.cta">🔓 Tham Gia Để Nhận Voucher</a>
+      <span class="dq-modal-note" data-i18n="popup.bot.note">Đăng ký miễn phí · Nhận ngay sau khi xác nhận</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ POPUP: Market Plan ══ -->
+<div class="dq-modal" id="dqModal-market" onclick="closeDqModal(event,this)">
+  <div class="dq-modal-box dq-modal-blue">
+    <button class="dq-modal-close" onclick="closeDqModal(null,'dqModal-market')">×</button>
+    <div class="dq-modal-header">
+      <div class="dq-modal-icon-wrap dq-micon-blue">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="1.8" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      </div>
+      <div>
+        <div class="dq-modal-badge dq-modal-badge-blue" data-i18n="popup.mkt.badge">🟢 CẬP NHẬT HẰNG NGÀY · ĐỘC QUYỀN</div>
+        <h3 class="dq-modal-title" data-i18n="popup.mkt.title">Kênh Update Plan Market</h3>
+      </div>
+    </div>
+    <div class="dq-modal-body">
+      <p class="dq-modal-lead" data-i18n="popup.mkt.lead">Trong khi hàng triệu người mở Twitter để bị bão thông tin — bạn nhận được kế hoạch gọn gàng, rõ ràng mỗi sáng lúc 7h.</p>
+      <div class="dq-modal-features">
+        <div class="dq-mf-item">
+          <span class="dq-mf-icon">📅</span>
+          <div>
+            <strong data-i18n="popup.mkt.f1.title">Plan market mỗi ngày lúc 7:00 sáng</strong>
+            <small data-i18n="popup.mkt.f1.body">Phân tích xu hướng, vùng hỗ trợ/kháng cự, các pair ưu tiên trong ngày</small>
+          </div>
+        </div>
+        <div class="dq-mf-item">
+          <span class="dq-mf-icon">🧠</span>
+          <div>
+            <strong data-i18n="popup.mkt.f2.title">Phân tích macro + on-chain</strong>
+            <small data-i18n="popup.mkt.f2.body">Dữ liệu on-chain, sentiment tổng hợp, tác động macro tài chính toàn cầu</small>
+          </div>
+        </div>
+        <div class="dq-mf-item">
+          <span class="dq-mf-icon">🎯</span>
+          <div>
+            <strong data-i18n="popup.mkt.f3.title">Setup giao dịch cụ thể</strong>
+            <small data-i18n="popup.mkt.f3.body">Entry, SL, TP rõ ràng — chỉ việc đọc và quyết định. Không cần tự phân tích</small>
+          </div>
+        </div>
+        <div class="dq-mf-item">
+          <span class="dq-mf-icon">🔔</span>
+          <div>
+            <strong data-i18n="popup.mkt.f4.title">Cảnh báo thị trường real-time</strong>
+            <small data-i18n="popup.mkt.f4.body">Thông báo ngay khi có biến động lớn — biết trước, đưa ra quyết định sớm hơn 90% còn lại</small>
+          </div>
+        </div>
+      </div>
+      <div class="dq-modal-alert dq-alert-blue" data-i18n="popup.mkt.alert">
+        📊 Người nắm thông tin sớm hơn <strong>kiếm nhiều hơn</strong>. Kênh này chỉ mở cho partner — không bán ra bên ngoài.
+      </div>
+    </div>
+    <div class="dq-modal-footer">
+      <a href="#guide" class="btn btn-primary dq-modal-cta dq-cta-blue" onclick="closeDqModal(null,'dqModal-market')" data-i18n="popup.mkt.cta">🔓 Tham Gia Để Vào Kênh</a>
+      <span class="dq-modal-note" data-i18n="popup.mkt.note">Miễn phí · Chỉ cần là partner DA Network</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ POPUP: Facts & Lifestyle ══ -->
+<div class="dq-modal" id="dqModal-facts" onclick="closeDqModal(event,this)">
+  <div class="dq-modal-box dq-modal-purple">
+    <button class="dq-modal-close" onclick="closeDqModal(null,'dqModal-facts')">×</button>
+    <div class="dq-modal-header">
+      <div class="dq-modal-icon-wrap dq-micon-purple">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="1.8" stroke-linecap="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <div>
+        <div class="dq-modal-badge dq-modal-badge-purple" data-i18n="popup.facts.badge">💎 ĐỘC QUYỀN · KHÔNG BÁN RA NGOÀI</div>
+        <h3 class="dq-modal-title" data-i18n="popup.facts.title">Kênh Facts &amp; Quotes Độc Quyền</h3>
+      </div>
+    </div>
+    <div class="dq-modal-body">
+      <p class="dq-modal-lead" data-i18n="popup.facts.lead">Những gì người giàu thực sự hiểu về tiền — nhưng không bao giờ nói ra ngoài. Bây giờ nó là của bạn.</p>
+      <div class="dq-modal-features">
+        <div class="dq-mf-item">
+          <span class="dq-mf-icon">💰</span>
+          <div>
+            <strong data-i18n="popup.facts.f1.title">Sự thật tài chính mà trường học không dạy</strong>
+            <small data-i18n="popup.facts.f1.body">Cách người giàu thực sự nghĩ về tiền, rủi ro, đầu tư và tự do tài chính</small>
+          </div>
+        </div>
+        <div class="dq-mf-item">
+          <span class="dq-mf-icon">🥊</span>
+          <div>
+            <strong data-i18n="popup.facts.f2.title">Quotes của các CEO, investor, billionaire</strong>
+            <small data-i18n="popup.facts.f2.body">Triết lý sống đúc chiết từ những người đã đạt được tự do tài chính thực sự</small>
+          </div>
+        </div>
+        <div class="dq-mf-item">
+          <span class="dq-mf-icon">🏙️</span>
+          <div>
+            <strong data-i18n="popup.facts.f3.title">Lifestyle elite — tư duy của tệp giàu</strong>
+            <small data-i18n="popup.facts.f3.body">Cách họ nhìn thời gian, quan hệ, sức khỏe, và cơ hội khác 99% dân số như thế nào</small>
+          </div>
+        </div>
+        <div class="dq-mf-item">
+          <span class="dq-mf-icon">🔄</span>
+          <div>
+            <strong data-i18n="popup.facts.f4.title">Cập nhật đều đặn — không spam</strong>
+            <small data-i18n="popup.facts.f4.body">Mỗi bài là một hạt nhân, chưng cất kĩ — đọc 2 phút thay đổi cách nghĩ cả ngày</small>
+          </div>
+        </div>
+      </div>
+      <div class="dq-modal-alert dq-alert-purple" data-i18n="popup.facts.alert">
+        ✨ Kênh này không có bản trả phí. <strong>Chỉ partner DA Network</strong> mới được vào — và hoàn toàn miễn phí.
+      </div>
+    </div>
+    <div class="dq-modal-footer">
+      <a href="#guide" class="btn btn-primary dq-modal-cta dq-cta-purple" onclick="closeDqModal(null,'dqModal-facts')" data-i18n="popup.facts.cta">🔓 Tham Gia Để Vào Kênh</a>
+      <span class="dq-modal-note" data-i18n="popup.facts.note">Miễn phí hoàn toàn · Chỉ cần là partner</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ LIÊN HỆ ═══════════════════════════════════════ -->
+<section class="section lh-section" id="lien-he">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag" data-i18n="lh.tag">Hỗ Trợ</span>
+      <h2 class="section-title"><span data-i18n="lh.title">Liên Hệ DA NETWORK</span></h2>
+      <p class="section-sub" data-i18n="lh.sub">Có thắc mắc hoặc muốn tham gia network? Đội ngũ sẵn sàng hỗ trợ 24/7.</p>
+    </div>
+    <div class="lh-cards">
+      <a href="https://t.me/jacksondz" target="_blank" rel="noopener" class="lh-card" style="border-color:rgba(247,147,26,.45);background:linear-gradient(135deg,rgba(247,147,26,.08),rgba(232,101,10,.04));">
+        <div class="lh-card-icon" style="background:linear-gradient(135deg,#f7931a33,#ffd96622);border-color:#f7931a66">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="#f7931a"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.02 9.52c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.08 14.408l-2.95-.924c-.64-.203-.654-.64.136-.948l11.527-4.445c.537-.194 1.006.131.769.157z"/></svg>
+        </div>
+        <div class="lh-card-body">
+          <strong data-i18n="lh.bd.title">Business Development</strong>
+          <span data-i18n="lh.bd.handle" style="color:#f7931a;font-weight:600;">@jacksondz</span>
+        </div>
+        <span style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;background:rgba(247,147,26,.15);color:#f7931a;border:1px solid rgba(247,147,26,.3);white-space:nowrap;">BD</span>
+      </a>
+
+      <div class="lh-card lh-card-email">
+        <div class="lh-card-icon" style="background:linear-gradient(135deg,#f7931a22,#f7931a11);border-color:#f7931a44">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#f7931a" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+        </div>
+        <div class="lh-card-body">
+          <strong data-i18n="lh.card3.title">Email Hỗ Trợ</strong>
+          <span data-i18n="lh.card3.handle">support@dacrypto.net</span>
+        </div>
+        <svg class="lh-card-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+    <div class="lh-note">
+      <span>⏰</span> <span data-i18n="lh.note">Thường phản hồi trong vòng <strong>1–2 giờ</strong> trong giờ hành chính.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ FOOTER ═══════════════════════════════════════ -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <a href="#" class="logo logo-redesign">
+        <div class="logo-emblem">
+          <svg width="34" height="34" viewBox="0 0 42 42" fill="none">
+            <defs>
+              <linearGradient id="logoGradF" x1="0" y1="0" x2="42" y2="42" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#ffd966"/>
+                <stop offset="40%" stop-color="#f7931a"/>
+                <stop offset="100%" stop-color="#e8650a"/>
+              </linearGradient>
+              <linearGradient id="logoGradFI" x1="0" y1="0" x2="42" y2="42" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#fff4cc"/>
+                <stop offset="50%" stop-color="#ffd966"/>
+                <stop offset="100%" stop-color="#f7931a"/>
+              </linearGradient>
+            </defs>
+            <circle cx="21" cy="21" r="19.5" stroke="url(#logoGradF)" stroke-width="1.5" opacity="0.35"/>
+            <circle cx="21" cy="21" r="18" stroke="url(#logoGradF)" stroke-width="2"/>
+            <circle cx="21" cy="21" r="15.5" fill="url(#logoGradF)" opacity="0.12"/>
+            <text x="21" y="26.5" text-anchor="middle" font-family="Be Vietnam Pro, Inter, sans-serif" font-weight="800" font-size="13" fill="url(#logoGradFI)">DA</text>
+          </svg>
+        </div>
+        <div class="logo-wordmark">
+          <span class="logo-da">DA</span><span class="logo-crypto">NETWORK</span>
+        </div>
+      </a>
+      <p data-i18n="footer.desc">Hướng dẫn toàn diện về affiliate crypto cho người Việt.</p>
+    </div>
+    <div class="footer-links">
+      <h4><span data-i18n="footer.col1">Hướng Dẫn</span></h4>
+      <a href="#guide" data-i18n="footer.link.start">Bắt Đầu</a>
+      <a href="#calculator" data-i18n="footer.link.calc">Tính Thu Nhập</a>
+      <a href="#faq">FAQ</a>
+      <a href="#da-network">DA Network</a>
+      <a href="#lien-he" data-i18n="footer.link.contact">Liên Hệ</a>
+    </div>
+    <div class="footer-links">
+      <h4><span data-i18n="footer.col2">Công Cụ</span></h4>
+      <a href="#calculator" data-i18n="footer.link.calc2">Tính Thu Nhập</a>
+    </div>
+    <div class="footer-disclaimer">
+      <p data-i18n="footer.disclaimer"><strong>Tuyên bố miễn trách nhiệm:</strong> Nội dung trên chỉ mang tính chất thông tin và giáo dục. Không phải lời khuyên tài chính. Đầu tư crypto có rủi ro cao.</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p data-i18n="footer.copy2">© 2026 DA NETWORK.</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+
+<!-- ── STAT MODALS ── -->
+<div class="stat-modal-overlay" id="statModalOverlay" onclick="closeStatModal()">
+  <div class="stat-modal" id="statModal" onclick="event.stopPropagation()">
+    <button class="stat-modal-close" onclick="closeStatModal()" aria-label="Đóng">✕</button>
+    <div id="statModalContent"></div>
+  </div>
+</div>
+<script data-pplx-inline-edit>
+(function(){
+  if(window===window.top)return;
+  function inlineAll(orig,clone){
+    if(orig.nodeType!==1)return;
+    try{
+      var cs=getComputedStyle(orig);
+      var t='';
+      for(var i=0;i<cs.length;i++){t+=cs[i]+':'+cs.getPropertyValue(cs[i])+';';}
+      clone.style.cssText=t;
+    }catch(e){}
+    var oc=orig.children,cc=clone.children;
+    for(var j=0;j<oc.length&&j<cc.length;j++){inlineAll(oc[j],cc[j]);}
+  }
+  function stripExternal(clone){
+    var imgs=clone.querySelectorAll('img');
+    for(var i=0;i<imgs.length;i++){
+      var s=imgs[i].getAttribute('src');
+      if(s&&!s.startsWith('data:'))imgs[i].removeAttribute('src');
+    }
+    var all=clone.querySelectorAll('*');
+    for(var i=0;i<all.length;i++){
+      var st=all[i].style.cssText;
+      if(st&&st.indexOf('url(')>=0){
+        all[i].style.cssText=st.replace(/url\(["']?(?!data:)[^)"']*["']?\)/gi,'none');
+      }
+    }
+  }
+  window.addEventListener('message',function(e){
+    if(!e.data||e.data.type!=='INLINE_EDIT_CAPTURE_REQUEST')return;
+    var scrollX=window.scrollX||window.pageXOffset||0;
+    var scrollY=window.scrollY||window.pageYOffset||0;
+    var w=window.innerWidth,h=window.innerHeight;
+    try{
+      var clone=document.documentElement.cloneNode(true);
+      var rm=clone.querySelectorAll('script,link[rel="stylesheet"],style');
+      for(var i=0;i<rm.length;i++){rm[i].remove();}
+      inlineAll(document.documentElement,clone);
+      stripExternal(clone);
+      var html=new XMLSerializer().serializeToString(clone);
+      var svg='<svg xmlns="http://www.w3.org/2000/svg" width="'+w+'" height="'+h+'">'
+        +'<foreignObject width="100%" height="100%">'
+        +'<div xmlns="http://www.w3.org/1999/xhtml" style="width:'+w+'px;height:'+h+'px;overflow:hidden">'
+        +'<div style="transform:translate(-'+scrollX+'px,-'+scrollY+'px);transform-origin:top left">'
+        +html+'</div></div></foreignObject></svg>';
+      var svgUrl='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+      var img=new Image();
+      img.onload=function(){
+        var c=document.createElement('canvas');c.width=w;c.height=h;
+        c.getContext('2d').drawImage(img,0,0);
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:c.toDataURL('image/png'),scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.onerror=function(){
+        window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+      };
+      img.src=svgUrl;
+    }catch(err){
+      window.parent.postMessage({type:'INLINE_EDIT_SCREENSHOT_RESULT',dataUrl:null,scrollX:scrollX,scrollY:scrollY},'*');
+    }
+  });
+})();
+</script></body>
+</html>
