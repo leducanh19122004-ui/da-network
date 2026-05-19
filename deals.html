@@ -358,6 +358,17 @@ var exchangesData = {
       bestFor: 'Tỷ lệ hoa hồng cao — lý tưởng để tối đa thu nhập affiliate',
       pros: ['Không cần KYC (rút đến $1M/ngày)','Leverage 125x, phí futures 0.02%/0.06%','Trustpilot 4.5/5 từ nghìn đánh giá','Khả dụng toàn cầu kể cả nhiều nước hạn chế'],
       cons: ['Ít coin hơn Binance/MEXC','Chỉ cặp USDT, không có fiat rút','Không khả dụng tại Mỹ'],
+      link: 'https://www.bitunix.com/register?vipCode=Gw77',
+    },
+    {
+      name: 'Ourbit', cat: 'crypto',
+      type: 'Spot · Futures · Copy',
+      rate: '55%', rateNum: 55, rateNote: 'hoa hồng',
+      featured: true, badge: '🔗 Đối Tác DA Network',
+      bestFor: 'Tối đa thu nhập + hỗ trợ chuyên sâu từ DA Network',
+      pros: ['Hoa hồng 55% — cao nhất Đông Nam Á','Đối tác chiến lược của DA Network','Hỗ trợ trực tiếp từ team Ourbit & DA Network','Tập trung vào thị trường SEA'],
+      cons: ['Sàn mới, ít tên tuổi hơn Binance','Thanh khoản thấp hơn sàn top','Ít coin hơn các sàn lớn'],
+      link: 'https://www.ourbit.com/register?inviteCode=SY7QT9',
     },
     {
       name: 'Gate.io', cat: 'crypto',
@@ -412,6 +423,7 @@ var exchangesData = {
       bestFor: 'Hỗ trợ Việt Nam tốt nhất, sàn top, minh bạch, an toàn',
       pros: ['Copy trading AI hàng đầu thị trường','Giao diện thân thiện người mới','Chế độ demo trading miễn phí','Phí futures cạnh tranh'],
       cons: ['Không có leverage trên spot','Không có token sàn giảm phí','Không khả dụng tại Mỹ'],
+      link: 'https://bingxdao.com/invite/JXQSZO/',
     },
     {
       name: 'Bitget', cat: 'crypto',
@@ -468,6 +480,17 @@ var exchangesData = {
       bestFor: 'High commission rate — ideal for maximizing affiliate income',
       pros: ['No mandatory KYC (up to $1M/day withdrawal)','125x leverage, 0.02%/0.06% futures fees','Trustpilot 4.5/5 from thousands of reviews','Available globally including restricted regions'],
       cons: ['Fewer coins than Binance/MEXC','USDT-only pairs, no fiat withdrawal','Not available in US'],
+      link: 'https://www.bitunix.com/register?vipCode=Gw77',
+    },
+    {
+      name: 'Ourbit', cat: 'crypto',
+      type: 'Spot · Futures · Copy',
+      rate: '55%', rateNum: 55, rateNote: 'commission',
+      featured: true, badge: '🔗 DA Network Partner',
+      bestFor: 'Maximum income + in-depth support from DA Network',
+      pros: ['55% commission — highest in Southeast Asia','Strategic partner of DA Network','Direct support from Ourbit & DA Network team','Focused on SEA market'],
+      cons: ['Newer exchange, less brand recognition than Binance','Lower liquidity than top exchanges','Fewer coins than major exchanges'],
+      link: 'https://www.ourbit.com/register?inviteCode=SY7QT9',
     },
     {
       name: 'Gate.io', cat: 'crypto',
@@ -522,6 +545,7 @@ var exchangesData = {
       bestFor: 'Best Vietnam support — top-tier, transparent, secure exchange',
       pros: ['Industry-leading AI copy trading','Beginner-friendly interface','Free demo trading mode','Competitive futures fees'],
       cons: ['No leverage on spot pairs','No native exchange token for fee reduction','Not available in US'],
+      link: 'https://bingxdao.com/invite/JXQSZO/',
     },
     {
       name: 'Bitget', cat: 'crypto',
@@ -541,6 +565,7 @@ var exchangesData = {
 var lang = 'vi';
 var activeFilter = 'all';
 // Alias new languages to English exchange data
+// Alias new langs to English exchange data (includes all links)
 exchangesData.th = exchangesData.en;
 exchangesData.ko = exchangesData.en;
 exchangesData.id = exchangesData.en;
@@ -692,7 +717,7 @@ function renderCards() {
       +   '<ul class="deal-list cons">' + e.cons.map(function(c){ return '<li>' + c + '</li>'; }).join('') + '</ul>'
       + '</div>'
       + '<div class="deal-best-for"><strong>' + t.bestForLabel + ':</strong> ' + e.bestFor + '</div>'
-      + '<a href="index.html#guide" class="deal-cta-btn">' + t.cta + '</a>'
+      + '<a href="' + (e.link || 'index.html#guide') + '" class="deal-cta-btn" ' + (e.link ? 'target="_blank" rel="noopener noreferrer"' : '') + '>' + t.cta + '</a>'
       + '</div>';
   }).join('');
 }
@@ -1046,57 +1071,4 @@ document.addEventListener('DOMContentLoaded', renderAll);
       const svg =
         `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
         '<foreignObject width="100%" height="100%">' +
-        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
-        `<div style="transform:translate(-${scrollX}px,-${scrollY}px);transform-origin:top left">` +
-        html +
-        "</div></div></foreignObject></svg>";
-      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
-      const image = new Image();
-      image.onload = function () {
-        const canvas = document.createElement("canvas");
-        canvas.width = width;
-        canvas.height = height;
-        canvas.getContext("2d").drawImage(image, 0, 0);
-        postResult(canvas.toDataURL("image/png"));
-      };
-      image.onerror = function () {
-        postResult(null);
-      };
-      image.src = svgUrl;
-    } catch (_error) {
-      postResult(null);
-    }
-  }
-
-  window.addEventListener("message", function (event) {
-    if (!event.data) return;
-    // Only accept messages from the direct parent frame. Blocks sibling /
-    // unrelated-window postMessage senders that could otherwise reach us.
-    if (event.source !== window.parent) return;
-
-    const trustedParentOrigin = getTrustedParentOrigin(event);
-    if (!trustedParentOrigin) return;
-    trustedTopOrigin = trustedParentOrigin;
-
-    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
-      scrollForwarding = true;
-      emitScroll();
-      return;
-    }
-
-    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
-      scrollForwarding = false;
-      if (scrollRaf) cancelAnimationFrame(scrollRaf);
-      scrollRaf = 0;
-      return;
-    }
-
-    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
-
-    handleCaptureRequest(event);
-  });
-})();
-
-
-</script></body>
-</html>
+ 
