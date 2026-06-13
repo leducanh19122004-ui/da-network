@@ -663,7 +663,7 @@ const exchangesData = {
       rateNote: 'hoa hồng',
       featured: false,
       badge: '💰 HH cao nhất',
-      pros: ['Hoa hồng lên đến 70% — cao nhất nhóm', 'Rút tiền tức thì 24/7', 'Leverage không giới hạn (dưới $5,000)', 'Phí rút = 0, quản lý = 0'],
+      pros: ['Hoa hồng lên đến 70% — cao nhất nhóm', 'Rút tiền tức thì 24/7', 'Leverage cao (dưới $5,000)', 'Phí rút = 0, quản lý = 0'],
       cons: ['Không nhận người dùng Mỹ/EU', 'Spread một số cặp rất rộng', 'Sản phẩm hạn chế (~200 mã)'],
     },
     {
@@ -1478,7 +1478,7 @@ const EXPLAINER_DATA = {
           { num: '1', text: 'Bạn đăng ký chương trình affiliate tại sàn (Binance, Bybit, OKX...) và nhận một <strong>link giới thiệu riêng</strong>.' },
           { num: '2', text: 'Chia sẻ link đó lên mạng xã hội, nhóm Telegram, YouTube, TikTok hoặc blog cá nhân.' },
           { num: '3', text: 'Mỗi người bấm vào link và đăng ký tài khoản sẽ được <strong>gắn vào hệ thống của bạn</strong>.' },
-          { num: '4', text: 'Khi họ giao dịch, bạn tự động nhận % hoa hồng — <strong>không giới hạn thời gian</strong>.' },
+          { num: '4', text: 'Khi họ giao dịch, bạn tự động nhận % hoa hồng — suốt thời gian họ còn giao dịch.' },
         ]
       },
       {
@@ -1522,7 +1522,7 @@ const EXPLAINER_DATA = {
         items: [
           { icon: '🚫', text: 'Không cần vốn đầu tư' },
           { icon: '📈', text: 'Thu nhập thụ động 24/7' },
-          { icon: '♾️', text: 'Hoa hồng không giới hạn' },
+          { icon: '🔄', text: 'Hoa hồng tự động' },
           { icon: '🌐', text: 'Làm việc từ bất cứ đâu' },
           { icon: '🔒', text: 'Không rủi ro mất vốn' },
           { icon: '⚡', text: 'Bắt đầu ngay hôm nay' },
@@ -2749,6 +2749,15 @@ window.closeDqModal = function(e, target) {
   }
 };
 
+// Dashboard CTA tracking — safe wrapper, no-op if no analytics installed
+window.trackDashboardCta = function() {
+  var evt = 'dashboard_cta_click';
+  var params = { source_site: 'danetwork', target_url: 'https://da-signal-tracking.vercel.app/', section: 'signal_teaser' };
+  if (typeof gtag === 'function') gtag('event', evt, params);
+  if (typeof fbq === 'function') fbq('trackCustom', evt, params);
+  if (typeof plausible === 'function') plausible(evt, { props: params });
+};
+
 // Close on Escape key
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
@@ -2946,7 +2955,7 @@ document.addEventListener('keydown', function(e) {
       'dan.c3.title': 'Hỗ Trợ Toàn Diện',
       'dan.c3.body': 'Đội ngũ admin hỗ trợ 24/7, cung cấp tài liệu, công cụ và lộ trình phát triển cá nhân hóa cho từng partner.',
       'dan.c4.title': 'Tăng Trưởng Bền Vững',
-      'dan.c4.body': 'Thu nhập thụ động từ toàn bộ mạng lưới người dùng bên dưới — không giới hạn số lượng, không giới hạn thu nhập.',
+      'dan.c4.body': 'Nhận chia sẻ hoa hồng từ trader giới thiệu trực tiếp và sub-affiliate cấp 1 — tối đa 2 tầng.',
       // Partner Wins (replaces fake leaderboard)
       'wins.badge': '🎯 CÂU CHUYỆN THẬT',
       'wins.title': 'Partner Thật, Kết Quả Thật',
@@ -2981,19 +2990,22 @@ document.addEventListener('keydown', function(e) {
       'dan.cta.btn': 'Bắt Đầu Ngay',
       // Đặc Quyền cards
       'dq.badge.limited': '✓ Tuyển chọn kỹ',
-      'dq.card1.body': 'Voucher thuê <strong>bot giao dịch tự động</strong> của team trading Hàn Quốc. Tỷ lệ thắng xác nhận trên <strong class="gold-text">80%</strong>.',
+      'dq.card1.body': 'Đừng thuyết phục cộng đồng của bạn. Gửi họ cái link này.',
       'dq.card2.body': 'Cập nhật <strong>kế hoạch thị trường mỗi ngày</strong> từ các trader chuyên nghiệp. Biết trước thị trường sẽ đi đâu khi người khác còn đang dò xét.',
       'dq.card3.body': 'Kênh riêng chia sẻ <strong>sự thật tài chính</strong> và <strong>triết lý sống</strong> mà tệp wealthy không bao giờ nói công khai.',
       'dq.card.details': 'Xem chi tiết',
       'dq.cta.sub': 'Tham gia — phản hồi trong 24–48h.',
+      'dash.headline': 'Đừng thuyết phục cộng đồng của bạn. Gửi họ cái link này.',
+      'dash.btn': 'Mở dashboard →',
+      'dash.disclaimer': 'Hiệu suất quá khứ không đảm bảo kết quả trong tương lai. Nội dung này không phải lời khuyên đầu tư.',
       // Popup Bot
       'popup.bot.badge': '🔥 ĐỘC QUYỀN · CHỈ CHO PARTNER',
       'popup.bot.title': 'Bot Trade AI — Team Hàn Quốc',
       'popup.bot.lead': 'Trong khi 95% trader thua lỗ vì giao dịch bằng cảm xúc — bạn có máy móc làm việc 24/7 không ngủ, không sợ, không FOMO.',
       'popup.bot.f1.title': 'Phát triển bởi Team Trading Hàn Quốc',
       'popup.bot.f1.body': 'Nhóm trader chuyên nghiệp với hơn 5 năm kinh nghiệm thị trường Asia',
-      'popup.bot.f2.title': 'Win Rate xác nhận trên 80%',
-      'popup.bot.f2.body': 'Backtest 18 tháng trên BTC, ETH, BNB — lợi nhuận tích lũy trung bình +340%/năm',
+      'popup.bot.f2.title': 'Xem hiệu suất trực tiếp',
+      'popup.bot.f2.body': 'Dữ liệu giao dịch cập nhật theo thời gian thực — xem tại dashboard tracking.',
       'popup.bot.f3.title': 'Tự động 100% — không cần theo dõi',
       'popup.bot.f3.body': 'Chạy 24/7, tự vào lệnh, tự chốt lời, tự cắt lỗ. Bạn chỉ việc để vốn.',
       'popup.bot.f4.title': 'Voucher thuê riêng cho Partner DA Network',
@@ -3158,7 +3170,7 @@ document.addEventListener('keydown', function(e) {
       'dan.c3.title': 'Full Support',
       'dan.c3.body': '24/7 admin support with resources, tools, and personalized growth roadmaps for every partner.',
       'dan.c4.title': 'Sustainable Growth',
-      'dan.c4.body': 'Passive income from your entire referral network — no cap on members, no cap on earnings.',
+      'dan.c4.body': 'Earn commission from direct referrals and tier-1 sub-affiliates — up to 2 levels.',
       // Partner Wins (replaces fake leaderboard)
       'wins.badge': '🎯 REAL STORIES',
       'wins.title': 'Real Partners, Real Results',
@@ -3193,19 +3205,22 @@ document.addEventListener('keydown', function(e) {
       'dan.cta.btn': 'Get Started Now',
       // Đặc Quyền cards
       'dq.badge.limited': '✓ Hand-picked partners',
-      'dq.card1.body': 'Rental voucher for an <strong>automated trading bot</strong> from a Korean trading team. Confirmed win rate above <strong class="gold-text">80%</strong>.',
+      'dq.card1.body': "Don't convince your community. Send them this link.",
       'dq.card2.body': 'Daily <strong>market plan updates</strong> from professional traders. Know where the market is heading before everyone else.',
       'dq.card3.body': 'A private channel sharing <strong>financial truths</strong> and <strong>life philosophy</strong> that the wealthy never say publicly.',
       'dq.card.details': 'View details',
       'dq.cta.sub': 'Join — we respond within 24–48h.',
+      'dash.headline': "Don't convince your community. Send them this link.",
+      'dash.btn': 'Open dashboard →',
+      'dash.disclaimer': 'Past performance does not guarantee future results. This is not investment advice.',
       // Popup Bot
       'popup.bot.badge': '🔥 EXCLUSIVE · PARTNERS ONLY',
       'popup.bot.title': 'AI Trading Bot — Korean Team',
       'popup.bot.lead': 'While 95% of traders lose money trading on emotion — you have a machine working 24/7, no sleep, no fear, no FOMO.',
       'popup.bot.f1.title': 'Developed by Korean Trading Team',
       'popup.bot.f1.body': 'Professional traders with 5+ years of experience in Asian markets',
-      'popup.bot.f2.title': 'Confirmed Win Rate Above 80%',
-      'popup.bot.f2.body': '18-month backtest on BTC, ETH, BNB — average cumulative profit +340%/year',
+      'popup.bot.f2.title': 'Live Performance Data',
+      'popup.bot.f2.body': 'Real-time trading data updated continuously — view on the tracking dashboard.',
       'popup.bot.f3.title': '100% Automated — No Monitoring Needed',
       'popup.bot.f3.body': 'Runs 24/7, auto-enters trades, auto-takes profit, auto-cuts loss. Just deposit capital.',
       'popup.bot.f4.title': 'Exclusive Voucher for DA Network Partners',
@@ -3288,7 +3303,7 @@ document.addEventListener('keydown', function(e) {
       'dan.c1.title':'ครอบคลุมกว้างขวาง','dan.c1.body':'ดำเนินการในเวียดนาม อินโดนีเซีย ฟิลิปปินส์ — และกำลังขยายทั่วเอเชียตะวันออกเฉียงใต้ด้วยพาร์ทเนอร์ที่ใช้งานอยู่ 237+ คน',
       'dan.c2.title':'ค่าคอมมิชชันสูงสุด','dan.c2.body':'อัตราค่าคอมมิชชันสูงถึง <strong class="gold-text">70%</strong> — สูงกว่าการสมัครโดยตรง เจรจาโดย DA Network กับแต่ละตลาดโดยเฉพาะ',
       'dan.c3.title':'การสนับสนุนเต็มรูปแบบ','dan.c3.body':'ทีม admin สนับสนุน 24/7 พร้อมทรัพยากร เครื่องมือ และแผนการเติบโตส่วนบุคคลสำหรับทุกพาร์ทเนอร์',
-      'dan.c4.title':'การเติบโตที่ยั่งยืน','dan.c4.body':'รายได้ passive จากเครือข่ายผู้แนะนำทั้งหมด — ไม่จำกัดจำนวนสมาชิก ไม่จำกัดรายได้',
+      'dan.c4.title':'การเติบโตที่ยั่งยืน','dan.c4.body':'รับค่าคอมมิชชันจากผู้แนะนำโดยตรงและ sub-affiliate ระดับ 1 — สูงสุด 2 ระดับ',
       'wins.badge':'🎯 เรื่องจริง','wins.title':'พาร์ทเนอร์จริง ผลลัพธ์จริง','wins.sub':'ไม่ใช่ตาราง ranking รายได้ แต่เป็นเรื่องจริงจากพาร์ทเนอร์ที่กำลังสร้าง traffic และรับค่าคอมมิชชันผ่าน DA Network','wins.note':'เรื่องราวทั้งหมดแบ่งปันด้วยความยินยอมของพาร์ทเนอร์ ผลลัพธ์อาจแตกต่างกัน','wins.note.link':'ดูวิธีที่ DA Network ตรวจสอบพาร์ทเนอร์ →',
       'verify.badge':'🔍 ความโปร่งใส','verify.title':'วิธีที่ DA Network ตรวจสอบตัวเลข','verify.sub':'ในอุตสาหกรรมที่ screenshot ปลอมและ leaderboard ปลอมเป็นเรื่องปกติ — นี่คือวิธีที่เราทำให้ทุกตัวเลขเป็นของจริง',
       'verify.s1.title':'ข้อมูลจาก dashboard ของตลาด','verify.s1.body':'พาร์ทเนอร์ทุกคนลงทะเบียนภายใต้ลิงก์ ref ของ DA Network Admin เห็นค่าคอมมิชชัน pending/paid โดยตรงจาก dashboard ของ <strong>Binance, Ourbit, Bingx</strong>',
@@ -3298,9 +3313,9 @@ document.addEventListener('keydown', function(e) {
       'dan.lb.badge':'🎯 เรื่องจริง','dan.lb.sub':'ข้อมูลรายเดือน · ข้อมูลจาก DA Network','dan.lb.h.channel':'ช่องทาง','dan.lb.h.earn':'ค่าคอมมิชชัน/เดือน','dan.lb.h.rate':'อัตรา','dan.lb.note':'* ความยินยอมของพาร์ทเนอร์และความโปร่งใสของข้อมูลคือพันธสัญญาของ DA Network',
       'dan.fb.badge':'📸 หลักฐานจริง','dan.fb.sub':'ภาพหน้าจอยืนยันค่าคอมมิชชัน — อัปเดตต่อเนื่องจากพาร์ทเนอร์ในเครือข่าย','dan.fb.ph1':'กำลังอัปเดตรูปภาพ','dan.fb.ph2':'พาร์ทเนอร์ส่งภาพ feedback ให้ admin เพื่อแสดงที่นี่',
       'dan.cta.text':'พร้อมเข้าร่วม DA Network และเริ่มรับค่าคอมมิชชันแล้วหรือยัง?','dan.cta.btn':'เริ่มต้นเลย',
-      'dq.badge.limited':'✓ คัดเลือกอย่างพิถีพิถัน','dq.card1.body':'บัตรเช่า <strong>บอทเทรดอัตโนมัติ</strong> จากทีมเทรดเกาหลี อัตราชนะยืนยันสูงกว่า <strong class="gold-text">80%</strong>','dq.card2.body':'อัปเดต<strong>แผนตลาดทุกวัน</strong>จากเทรดเดอร์มืออาชีพ รู้ทิศทางตลาดก่อนคนอื่น','dq.card3.body':'ช่องส่วนตัวแบ่งปัน<strong>ความจริงทางการเงิน</strong>และ<strong>ปรัชญาชีวิต</strong>ที่คนรวยไม่เคยพูดต่อสาธารณะ','dq.card.details':'ดูรายละเอียด','dq.cta.sub':'เข้าร่วม — ตอบกลับภายใน 24–48 ชั่วโมง',
+      'dq.badge.limited':'✓ คัดเลือกอย่างพิถีพิถัน','dq.card1.body':'อย่าโน้มน้าวชุมชนของคุณ ส่งลิงก์นี้ให้พวกเขา','dq.card2.body':'อัปเดต<strong>แผนตลาดทุกวัน</strong>จากเทรดเดอร์มืออาชีพ รู้ทิศทางตลาดก่อนคนอื่น','dq.card3.body':'ช่องส่วนตัวแบ่งปัน<strong>ความจริงทางการเงิน</strong>และ<strong>ปรัชญาชีวิต</strong>ที่คนรวยไม่เคยพูดต่อสาธารณะ','dq.card.details':'ดูรายละเอียด','dq.cta.sub':'เข้าร่วม — ตอบกลับภายใน 24–48 ชั่วโมง','dash.headline':'อย่าโน้มน้าวชุมชนของคุณ ส่งลิงก์นี้ให้พวกเขา','dash.btn':'เปิด dashboard →','dash.disclaimer':'ผลการดำเนินงานในอดีตไม่รับประกันผลลัพธ์ในอนาคต เนื้อหานี้ไม่ใช่คำแนะนำการลงทุน',
       'popup.bot.badge':'🔥 เอ็กซ์คลูซีฟ · เฉพาะพาร์ทเนอร์','popup.bot.title':'AI Trading Bot — ทีมเกาหลี','popup.bot.lead':'ขณะที่ 95% ของเทรดเดอร์ขาดทุนเพราะเทรดตามอารมณ์ — คุณมีเครื่องจักรทำงาน 24/7 ไม่นอน ไม่กลัว ไม่ FOMO',
-      'popup.bot.f1.title':'พัฒนาโดยทีมเทรดเกาหลี','popup.bot.f1.body':'เทรดเดอร์มืออาชีพที่มีประสบการณ์ตลาดเอเชียมากกว่า 5 ปี','popup.bot.f2.title':'อัตราชนะยืนยันสูงกว่า 80%','popup.bot.f2.body':'Backtest 18 เดือนบน BTC, ETH, BNB — กำไรสะสมเฉลี่ย +340%/ปี','popup.bot.f3.title':'อัตโนมัติ 100% — ไม่ต้องตรวจสอบ','popup.bot.f3.body':'ทำงาน 24/7 เข้าออเดอร์อัตโนมัติ ทำกำไรอัตโนมัติ ตัดขาดทุนอัตโนมัติ แค่ฝากทุน','popup.bot.f4.title':'บัตรเช่าสุดเอ็กซ์คลูซีฟสำหรับพาร์ทเนอร์ DA Network','popup.bot.f4.body':'ราคาเช่าตลาดสูงถึง $200/เดือน — คุณได้ฟรีผ่านบัตรพาร์ทเนอร์สุดเอ็กซ์คลูซีฟ',
+      'popup.bot.f1.title':'พัฒนาโดยทีมเทรดเกาหลี','popup.bot.f1.body':'เทรดเดอร์มืออาชีพที่มีประสบการณ์ตลาดเอเชียมากกว่า 5 ปี','popup.bot.f2.title':'ข้อมูลสดจาก dashboard','popup.bot.f2.body':'ข้อมูลการเทรดอัปเดตแบบ real-time — ดูได้ที่ tracking dashboard','popup.bot.f3.title':'อัตโนมัติ 100% — ไม่ต้องตรวจสอบ','popup.bot.f3.body':'ทำงาน 24/7 เข้าออเดอร์อัตโนมัติ ทำกำไรอัตโนมัติ ตัดขาดทุนอัตโนมัติ แค่ฝากทุน','popup.bot.f4.title':'บัตรเช่าสุดเอ็กซ์คลูซีฟสำหรับพาร์ทเนอร์ DA Network','popup.bot.f4.body':'ราคาเช่าตลาดสูงถึง $200/เดือน — คุณได้ฟรีผ่านบัตรพาร์ทเนอร์สุดเอ็กซ์คลูซีฟ',
       'popup.bot.alert':'✓ <strong>บัตรสำหรับพาร์ทเนอร์คุณภาพ</strong> เราตรวจสอบพาร์ทเนอร์แต่ละคนเพื่อให้แน่ใจว่าทรัพยากรถึงมือคนที่มุ่งมั่นสร้างระยะยาว','popup.bot.cta':'🔓 เข้าร่วมเพื่อรับบัตร','popup.bot.note':'สมัครฟรี · รับทันทีหลังยืนยัน',
       'popup.mkt.badge':'🟢 อัปเดตทุกวัน · เอ็กซ์คลูซีฟ','popup.mkt.title':'ช่องอัปเดตแผนตลาด','popup.mkt.lead':'ขณะที่ล้านคนเลื่อน Twitter ท่วมข้อมูล — คุณได้รับแผนที่สะอาด ชัดเจน ทุกเช้า 7 โมง',
       'popup.mkt.f1.title':'แผนตลาดทุกวันเวลา 7:00 น.','popup.mkt.f1.body':'วิเคราะห์แนวโน้ม โซนรองรับ/ต้านทาน คู่สกุลเงินสำคัญในวันนั้น','popup.mkt.f2.title':'การวิเคราะห์ Macro + On-chain','popup.mkt.f2.body':'ข้อมูล on-chain ความรู้สึกรวม ผลกระทบ macro ทางการเงินโลก','popup.mkt.f3.title':'การตั้งค่าเทรดเฉพาะ','popup.mkt.f3.body':'Entry, SL, TP ชัดเจน — แค่อ่านแล้วตัดสินใจ ไม่ต้องวิเคราะห์เอง','popup.mkt.f4.title':'การแจ้งเตือนตลาดแบบ real-time','popup.mkt.f4.body':'แจ้งเตือนทันทีเมื่อมีการเคลื่อนไหวครั้งใหญ่ — ลงมือก่อน 90% ของตลาด',
@@ -3339,7 +3354,7 @@ document.addEventListener('keydown', function(e) {
       'dan.c1.title':'광범위한 커버리지','dan.c1.body':'베트남, 인도네시아, 필리핀에서 운영 중 — 237명 이상의 활동 파트너와 함께 동남아시아 전역으로 확장 중',
       'dan.c2.title':'최고 커미션','dan.c2.body':'최대 <strong class="gold-text">70%</strong> 커미션 비율 — 직접 가입보다 높고, DA Network가 각 거래소와 독점 협상',
       'dan.c3.title':'전면 지원','dan.c3.body':'24/7 관리자 지원, 리소스, 도구 및 모든 파트너를 위한 개인화된 성장 로드맵',
-      'dan.c4.title':'지속 가능한 성장','dan.c4.body':'전체 추천 네트워크에서 패시브 인컴 — 멤버 수 제한 없음, 수익 제한 없음',
+      'dan.c4.title':'지속 가능한 성장','dan.c4.body':'직접 추천인과 1단계 서브 어필리에이트로부터 커미션 공유 — 최대 2단계.',
       'wins.badge':'🎯 실제 이야기','wins.title':'실제 파트너, 실제 결과','wins.sub':'수익 순위표가 아닙니다. DA Network를 통해 트래픽을 구축하고 커미션을 받는 파트너들의 실제 이야기들입니다.','wins.note':'모든 이야기는 파트너의 동의를 받아 공유되었습니다. 결과는 채널, 트래픽 및 실행에 따라 다를 수 있습니다.','wins.note.link':'DA Network의 파트너 검증 방법 보기 →',
       'verify.badge':'🔍 투명성','verify.title':'DA Network의 수치 검증 방법','verify.sub':'가짜 스크린샷과 가짜 리더보드가 일상인 업계에서 — 여기서는 모든 수치가 실제임을 보장하는 방법입니다.',
       'verify.s1.title':'거래소 대시보드 데이터','verify.s1.body':'모든 파트너는 DA Network의 ref 링크 아래 등록됩니다. 관리자는 <strong>Binance, Ourbit, Bingx</strong> 대시보드에서 직접 pending/paid 커미션을 확인합니다.',
@@ -3349,9 +3364,9 @@ document.addEventListener('keydown', function(e) {
       'dan.lb.badge':'🎯 실제 이야기','dan.lb.sub':'월간 스냅샷 · DA Network 데이터','dan.lb.h.channel':'채널','dan.lb.h.earn':'커미션/월','dan.lb.h.rate':'비율','dan.lb.note':'* 파트너 동의와 데이터 투명성은 DA Network의 약속입니다.',
       'dan.fb.badge':'📸 실제 증거','dan.fb.sub':'커미션 확인 스크린샷 — 네트워크 파트너로부터 지속적으로 업데이트됨','dan.fb.ph1':'이미지 준비 중','dan.fb.ph2':'파트너가 피드백 스크린샷을 관리자에게 제출하여 여기에 표시됩니다',
       'dan.cta.text':'DA Network에 가입하고 커미션을 받을 준비가 되셨나요?','dan.cta.btn':'지금 시작하기',
-      'dq.badge.limited':'✓ 엄선된 파트너','dq.card1.body':'한국 트레이딩팀의 <strong>자동 트레이딩 봇</strong> 대여 바우처. 확인된 승률 <strong class="gold-text">80%</strong> 이상.','dq.card2.body':'전문 트레이더들의 <strong>일일 마켓 플랜 업데이트</strong>. 다른 사람들보다 먼저 시장 방향을 파악하세요.','dq.card3.body':'부자들이 절대 공개적으로 말하지 않는 <strong>금융 진실</strong>과 <strong>삶의 철학</strong>을 공유하는 비공개 채널.','dq.card.details':'자세히 보기','dq.cta.sub':'가입 — 24–48시간 내 답변.',
+      'dq.badge.limited':'✓ 엄선된 파트너','dq.card1.body':'커뮤니티를 설득하지 마세요. 이 링크를 보내세요.','dq.card2.body':'전문 트레이더들의 <strong>일일 마켓 플랜 업데이트</strong>. 다른 사람들보다 먼저 시장 방향을 파악하세요.','dq.card3.body':'부자들이 절대 공개적으로 말하지 않는 <strong>금융 진실</strong>과 <strong>삶의 철학</strong>을 공유하는 비공개 채널.','dq.card.details':'자세히 보기','dq.cta.sub':'가입 — 24–48시간 내 답변.','dash.headline':'커뮤니티를 설득하지 마세요. 이 링크를 보내세요.','dash.btn':'대시보드 열기 →','dash.disclaimer':'과거 성과는 미래 결과를 보장하지 않습니다. 이 콘텐츠는 투자 조언이 아닙니다.',
       'popup.bot.badge':'🔥 독점 · 파트너 전용','popup.bot.title':'AI 트레이딩 봇 — 한국팀','popup.bot.lead':'95%의 트레이더가 감정 트레이딩으로 손실을 보는 동안 — 당신은 24/7 작동하는 기계를 갖게 됩니다. 잠도 안 자고, 두려움도 없고, FOMO도 없습니다.',
-      'popup.bot.f1.title':'한국 트레이딩팀 개발','popup.bot.f1.body':'아시아 시장에서 5년 이상의 경험을 가진 전문 트레이더팀','popup.bot.f2.title':'확인된 승률 80% 이상','popup.bot.f2.body':'BTC, ETH, BNB에 대한 18개월 백테스트 — 평균 누적 수익 +340%/년','popup.bot.f3.title':'100% 자동화 — 모니터링 불필요','popup.bot.f3.body':'24/7 운영, 자동 진입, 자동 익절, 자동 손절. 자본만 예치하면 됩니다.','popup.bot.f4.title':'DA Network 파트너 전용 바우처','popup.bot.f4.body':'시장 대여 가격은 월 최대 $200 — 독점 파트너 바우처를 통해 무료로 이용 가능.',
+      'popup.bot.f1.title':'한국 트레이딩팀 개발','popup.bot.f1.body':'아시아 시장에서 5년 이상의 경험을 가진 전문 트레이더팀','popup.bot.f2.title':'라이브 대시보드 데이터','popup.bot.f2.body':'실시간 거래 데이터 — tracking dashboard에서 확인하세요.','popup.bot.f3.title':'100% 자동화 — 모니터링 불필요','popup.bot.f3.body':'24/7 운영, 자동 진입, 자동 익절, 자동 손절. 자본만 예치하면 됩니다.','popup.bot.f4.title':'DA Network 파트너 전용 바우처','popup.bot.f4.body':'시장 대여 가격은 월 최대 $200 — 독점 파트너 바우처를 통해 무료로 이용 가능.',
       'popup.bot.alert':'✓ <strong>우수 파트너를 위한 바우처.</strong> 장기적으로 성장하겠다고 약속하는 파트너에게 리소스가 전달될 수 있도록 각 파트너를 검토합니다.','popup.bot.cta':'🔓 가입하여 바우처 받기','popup.bot.note':'무료 가입 · 확인 즉시 수령',
       'popup.mkt.badge':'🟢 매일 업데이트 · 독점','popup.mkt.title':'일일 마켓 플랜 채널','popup.mkt.lead':'수백만 명이 정보 과부하 속에서 Twitter를 스크롤하는 동안 — 당신은 매일 아침 7시에 깔끔하고 명확한 플랜을 받습니다.',
       'popup.mkt.f1.title':'매일 오전 7:00 마켓 플랜','popup.mkt.f1.body':'트렌드 분석, 지지/저항 구간, 당일 우선 거래 쌍','popup.mkt.f2.title':'매크로 + 온체인 분석','popup.mkt.f2.body':'온체인 데이터, 집계된 심리, 글로벌 거시 금융 영향','popup.mkt.f3.title':'구체적인 트레이딩 셋업','popup.mkt.f3.body':'명확한 진입, SL, TP — 읽고 결정만 하면 됩니다. 자체 분석 불필요','popup.mkt.f4.title':'실시간 시장 알림','popup.mkt.f4.body':'큰 움직임 발생 시 즉시 알림 — 시장의 90%보다 먼저 행동',
@@ -3390,7 +3405,7 @@ document.addEventListener('keydown', function(e) {
       'dan.c1.title':'Jangkauan Luas','dan.c1.body':'Beroperasi di Vietnam, Indonesia, Filipina — dan berkembang di seluruh Asia Tenggara dengan 237+ mitra aktif.',
       'dan.c2.title':'Komisi Tertinggi','dan.c2.body':'Tingkat komisi hingga <strong class="gold-text">70%</strong> — lebih tinggi dari pendaftaran langsung, dinegosiasikan secara eksklusif oleh DA Network dengan setiap bursa.',
       'dan.c3.title':'Dukungan Penuh','dan.c3.body':'Dukungan admin 24/7 dengan sumber daya, alat, dan peta jalan pertumbuhan personal untuk setiap mitra.',
-      'dan.c4.title':'Pertumbuhan Berkelanjutan','dan.c4.body':'Pendapatan pasif dari seluruh jaringan referral Anda — tidak ada batasan anggota, tidak ada batasan penghasilan.',
+      'dan.c4.title':'Pertumbuhan Berkelanjutan','dan.c4.body':'Terima bagi komisi dari referral langsung dan sub-affiliate tingkat 1 — maksimal 2 tingkat.',
       'wins.badge':'🎯 KISAH NYATA','wins.title':'Mitra Nyata, Hasil Nyata','wins.sub':'Bukan papan peringkat pendapatan. Hanya beberapa kisah nyata dari mitra yang membangun traffic dan menghasilkan komisi melalui DA Network.','wins.note':'Semua kisah dibagikan dengan persetujuan mitra. Hasil bisa berbeda tergantung saluran, traffic, dan pelaksanaan.','wins.note.link':'Lihat cara DA Network memverifikasi mitra →',
       'verify.badge':'🔍 TRANSPARANSI','verify.title':'Cara DA Network Memverifikasi Angka','verify.sub':'Di industri di mana screenshot palsu dan leaderboard palsu sudah biasa — inilah cara kami memastikan setiap angka yang Anda lihat adalah nyata.',
       'verify.s1.title':'Data dari dashboard bursa','verify.s1.body':'Setiap mitra mendaftar di bawah link ref DA Network. Admin melihat komisi pending/paid langsung dari dashboard <strong>Binance, Ourbit, Bingx</strong>.',
@@ -3400,9 +3415,9 @@ document.addEventListener('keydown', function(e) {
       'dan.lb.badge':'🎯 KISAH NYATA','dan.lb.sub':'Snapshot bulanan · Data dari DA Network','dan.lb.h.channel':'Saluran','dan.lb.h.earn':'Komisi/Bulan','dan.lb.h.rate':'Tingkat','dan.lb.note':'* Persetujuan mitra dan transparansi data adalah komitmen DA Network.',
       'dan.fb.badge':'📸 BUKTI NYATA','dan.fb.sub':'Screenshot konfirmasi komisi — diperbarui terus dari mitra dalam jaringan.','dan.fb.ph1':'Gambar segera hadir','dan.fb.ph2':'Mitra mengirimkan screenshot feedback ke admin untuk ditampilkan di sini',
       'dan.cta.text':'Siap bergabung dengan DA Network dan mulai menghasilkan komisi?','dan.cta.btn':'Mulai Sekarang',
-      'dq.badge.limited':'✓ Mitra terpilih','dq.card1.body':'Voucher sewa <strong>bot trading otomatis</strong> dari tim trading Korea. Win rate terkonfirmasi di atas <strong class="gold-text">80%</strong>.','dq.card2.body':'Update <strong>rencana pasar harian</strong> dari trader profesional. Ketahui arah pasar sebelum orang lain.','dq.card3.body':'Saluran pribadi berbagi <strong>kebenaran finansial</strong> dan <strong>filosofi hidup</strong> yang orang kaya tidak pernah katakan secara publik.','dq.card.details':'Lihat detail','dq.cta.sub':'Bergabung — kami merespons dalam 24–48 jam.',
+      'dq.badge.limited':'✓ Mitra terpilih','dq.card1.body':'Jangan meyakinkan komunitas Anda. Kirim mereka link ini.','dq.card2.body':'Update <strong>rencana pasar harian</strong> dari trader profesional. Ketahui arah pasar sebelum orang lain.','dq.card3.body':'Saluran pribadi berbagi <strong>kebenaran finansial</strong> dan <strong>filosofi hidup</strong> yang orang kaya tidak pernah katakan secara publik.','dq.card.details':'Lihat detail','dq.cta.sub':'Bergabung — kami merespons dalam 24–48 jam.','dash.headline':'Jangan meyakinkan komunitas Anda. Kirim mereka link ini.','dash.btn':'Buka dashboard →','dash.disclaimer':'Kinerja masa lalu tidak menjamin hasil di masa depan. Konten ini bukan saran investasi.',
       'popup.bot.badge':'🔥 EKSKLUSIF · KHUSUS MITRA','popup.bot.title':'AI Trading Bot — Tim Korea','popup.bot.lead':'Sementara 95% trader merugi karena trading dengan emosi — Anda memiliki mesin yang bekerja 24/7, tidak tidur, tidak takut, tidak FOMO.',
-      'popup.bot.f1.title':'Dikembangkan oleh Tim Trading Korea','popup.bot.f1.body':'Trader profesional dengan pengalaman 5+ tahun di pasar Asia','popup.bot.f2.title':'Win Rate Terkonfirmasi di Atas 80%','popup.bot.f2.body':'Backtest 18 bulan pada BTC, ETH, BNB — rata-rata keuntungan kumulatif +340%/tahun','popup.bot.f3.title':'100% Otomatis — Tidak Perlu Pemantauan','popup.bot.f3.body':'Berjalan 24/7, otomatis masuk perdagangan, otomatis ambil keuntungan, otomatis potong kerugian. Cukup setor modal.','popup.bot.f4.title':'Voucher Eksklusif untuk Mitra DA Network','popup.bot.f4.body':'Harga sewa pasar hingga $200/bulan — dapatkan gratis melalui voucher mitra eksklusif.',
+      'popup.bot.f1.title':'Dikembangkan oleh Tim Trading Korea','popup.bot.f1.body':'Trader profesional dengan pengalaman 5+ tahun di pasar Asia','popup.bot.f2.title':'Data Live dari Dashboard','popup.bot.f2.body':'Data trading diperbarui real-time — lihat di tracking dashboard.','popup.bot.f3.title':'100% Otomatis — Tidak Perlu Pemantauan','popup.bot.f3.body':'Berjalan 24/7, otomatis masuk perdagangan, otomatis ambil keuntungan, otomatis potong kerugian. Cukup setor modal.','popup.bot.f4.title':'Voucher Eksklusif untuk Mitra DA Network','popup.bot.f4.body':'Harga sewa pasar hingga $200/bulan — dapatkan gratis melalui voucher mitra eksklusif.',
       'popup.bot.alert':'✓ <strong>Voucher untuk mitra berkualitas.</strong> Kami meninjau setiap mitra untuk memastikan sumber daya sampai ke orang yang berkomitmen membangun jangka panjang.','popup.bot.cta':'🔓 Bergabung untuk Klaim Voucher','popup.bot.note':'Daftar gratis · Terima langsung setelah konfirmasi',
       'popup.mkt.badge':'🟢 DIPERBARUI HARIAN · EKSKLUSIF','popup.mkt.title':'Saluran Update Rencana Pasar Harian','popup.mkt.lead':'Sementara jutaan orang scroll Twitter dilanda info berlebih — Anda menerima rencana yang bersih dan jelas setiap pagi pukul 7.',
       'popup.mkt.f1.title':'Rencana pasar setiap hari pukul 7:00','popup.mkt.f1.body':'Analisis tren, zona support/resistance, pair prioritas hari itu','popup.mkt.f2.title':'Analisis Macro + On-chain','popup.mkt.f2.body':'Data on-chain, sentimen agregat, dampak makro keuangan global','popup.mkt.f3.title':'Setup Perdagangan Spesifik','popup.mkt.f3.body':'Entry, SL, TP yang jelas — cukup baca dan putuskan. Tidak perlu analisis sendiri','popup.mkt.f4.title':'Peringatan Pasar Real-time','popup.mkt.f4.body':'Peringatan instan untuk pergerakan besar — bertindak sebelum 90% pasar',

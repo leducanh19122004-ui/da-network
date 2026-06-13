@@ -27,6 +27,16 @@
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .dq-card-dashboard { cursor: default; }
+    .dq-dash-content { display:flex; flex-direction:column; align-items:center; text-align:center; padding:36px 28px; gap:20px; }
+    .dq-dash-icon { width:64px; height:64px; border-radius:16px; background:rgba(255,217,102,.12); border:1px solid rgba(255,217,102,.25); display:flex; align-items:center; justify-content:center; }
+    .dq-dash-headline { font-size:1.15rem; line-height:1.5; color:var(--text-primary,#f5f5f5); margin:0; }
+    .dq-dash-headline strong { color:#ffd966; display:block; margin-top:6px; }
+    .dq-dash-btn { display:inline-flex; align-items:center; gap:8px; padding:14px 32px; font-size:1rem; font-weight:700; border-radius:40px; text-decoration:none; transition:opacity .2s; }
+    .dq-dash-btn:hover { opacity:.85; }
+    .dq-dash-disclaimer { font-size:.72rem; color:rgba(255,255,255,.38); line-height:1.5; margin:0; max-width:260px; }
+  </style>
 </head>
 <body>
 
@@ -391,7 +401,7 @@
       <div class="dan-intro-card">
         <div class="dan-intro-icon">📈</div>
         <h4 data-i18n="dan.c4.title">Tăng Trưởng Bền Vững</h4>
-        <p data-i18n="dan.c4.body">Thu nhập thụ động từ toàn bộ mạng lưới người dùng bên dưới — không giới hạn số lượng, không giới hạn thu nhập.</p>
+        <p data-i18n="dan.c4.body">Nhận chia sẻ hoa hồng từ trader giới thiệu trực tiếp và sub-affiliate cấp 1 — tối đa 2 tầng.</p>
       </div>
     </div>
 
@@ -580,31 +590,26 @@
     <!-- 3 Privilege Cards -->
     <div class="dq-grid">
 
-      <!-- Card 1: Bot Trade -->
-      <div class="dq-card" onclick="openDqModal('bot')">
+      <!-- Card 1: Dashboard Teaser -->
+      <div class="dq-card dq-card-dashboard">
         <div class="dq-card-glow dq-glow-gold"></div>
-        <div class="dq-badge-wrap">
-          <span class="dq-badge dq-badge-hot">🔥 HOT</span>
-          <span class="dq-badge dq-badge-quality" data-i18n="dq.badge.limited">✓ Tuyển chọn kỹ</span>
-        </div>
-        <div class="dq-card-icon">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ffd966" stroke-width="1.8" stroke-linecap="round">
-            <rect x="2" y="3" width="20" height="14" rx="2"/>
-            <path d="M8 21h8M12 17v4"/>
-            <path d="M6 8l3 3 3-3 4 4" stroke="#4ade80" stroke-width="2"/>
-          </svg>
-        </div>
-        <div class="dq-card-content">
-          <h3><span data-i18n="dq.card1.title">Bot Trade AI — Hàn Quốc</span></h3>
-          <p data-i18n="dq.card1.body">Voucher thuê <strong>bot giao dịch tự động</strong> của team trading Hàn Quốc. Tỷ lệ thắng xác nhận trên <strong class="gold-text">80%</strong>.</p>
-          <div class="dq-card-stat">
-            <span class="dq-stat-item"><span class="dq-stat-dot green"></span>Win rate 80%+</span>
-            <span class="dq-stat-item"><span class="dq-stat-dot gold"></span>Auto 24/7</span>
+        <div class="dq-card-content dq-dash-content">
+          <div class="dq-dash-icon">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ffd966" stroke-width="1.8" stroke-linecap="round">
+              <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+              <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+            </svg>
           </div>
-        </div>
-        <div class="dq-card-cta">
-          <span data-i18n="dq.card.details">Xem chi tiết</span>
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <p class="dq-dash-headline" data-i18n="dash.headline">Đừng thuyết phục cộng đồng của bạn.<br><strong>Gửi họ cái link này.</strong></p>
+          <a
+            href="https://da-signal-tracking.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-primary dq-dash-btn"
+            onclick="trackDashboardCta()"
+            data-i18n="dash.btn"
+          >Mở dashboard →</a>
+          <p class="dq-dash-disclaimer" data-i18n="dash.disclaimer">Hiệu suất quá khứ không đảm bảo kết quả trong tương lai. Nội dung này không phải lời khuyên đầu tư.</p>
         </div>
       </div>
 
@@ -675,61 +680,6 @@
   </div>
 </section>
 
-<!-- ══ POPUP: Bot Trade ══ -->
-<div class="dq-modal" id="dqModal-bot" onclick="closeDqModal(event,this)">
-  <div class="dq-modal-box dq-modal-gold">
-    <button class="dq-modal-close" onclick="closeDqModal(null,'dqModal-bot')">×</button>
-    <div class="dq-modal-header">
-      <div class="dq-modal-icon-wrap dq-micon-gold">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffd966" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M6 8l3 3 3-3 4 4" stroke="#4ade80" stroke-width="2"/></svg>
-      </div>
-      <div>
-        <div class="dq-modal-badge" data-i18n="popup.bot.badge">🔥 ĐỘC QUYỀN · CHỈ CHO PARTNER</div>
-        <h3 class="dq-modal-title" data-i18n="popup.bot.title">Bot Trade AI — Team Hàn Quốc</h3>
-      </div>
-    </div>
-    <div class="dq-modal-body">
-      <p class="dq-modal-lead" data-i18n="popup.bot.lead">Trong khi 95% trader thua lỗ vì giao dịch bằng cảm xúc — bạn có máy móc làm việc 24/7 không ngủ, không sợ, không FOMO.</p>
-      <div class="dq-modal-features">
-        <div class="dq-mf-item">
-          <span class="dq-mf-icon">🇰🇷</span>
-          <div>
-            <strong data-i18n="popup.bot.f1.title">Phát triển bởi Team Trading Hàn Quốc</strong>
-            <small data-i18n="popup.bot.f1.body">Nhóm trader chuyên nghiệp với hơn 5 năm kinh nghiệm thị trường Asia</small>
-          </div>
-        </div>
-        <div class="dq-mf-item">
-          <span class="dq-mf-icon">📊</span>
-          <div>
-            <strong data-i18n="popup.bot.f2.title">Win Rate xác nhận trên 80%</strong>
-            <small data-i18n="popup.bot.f2.body">Backtest 18 tháng trên BTC, ETH, BNB — lợi nhuận tích lũy trung bình +340%/năm</small>
-          </div>
-        </div>
-        <div class="dq-mf-item">
-          <span class="dq-mf-icon">⚡</span>
-          <div>
-            <strong data-i18n="popup.bot.f3.title">Tự động 100% — không cần theo dõi</strong>
-            <small data-i18n="popup.bot.f3.body">Chạy 24/7, tự vào lệnh, tự chốt lời, tự cắt lỗ. Bạn chỉ việc để vốn.</small>
-          </div>
-        </div>
-        <div class="dq-mf-item">
-          <span class="dq-mf-icon">🔒</span>
-          <div>
-            <strong data-i18n="popup.bot.f4.title">Voucher thuê riêng cho Partner DA Network</strong>
-            <small data-i18n="popup.bot.f4.body">Ngoài thị trường giá thuê gốc lên đến $200/tháng — bạn được sử dụng miễn phí qua voucher độc quyền.</small>
-          </div>
-        </div>
-      </div>
-      <div class="dq-modal-alert dq-modal-alert-quality" data-i18n="popup.bot.alert">
-        ✓ <strong>Voucher dành cho partner chất lượng.</strong> Chúng tôi review từng partner để đảm bảo nguồn lực đến đúng người cam kết build lâu dài — không tuyển ồ ạt.
-      </div>
-    </div>
-    <div class="dq-modal-footer">
-      <a href="#guide" class="btn btn-primary dq-modal-cta" onclick="closeDqModal(null,'dqModal-bot')" data-i18n="popup.bot.cta">🔓 Tham Gia Để Nhận Voucher</a>
-      <span class="dq-modal-note" data-i18n="popup.bot.note">Đăng ký miễn phí · Nhận ngay sau khi xác nhận</span>
-    </div>
-  </div>
-</div>
 
 <!-- ══ POPUP: Market Plan ══ -->
 <div class="dq-modal" id="dqModal-market" onclick="closeDqModal(event,this)">
