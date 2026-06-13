@@ -29,13 +29,16 @@
   <link rel="stylesheet" href="style.css" />
   <style>
     .dq-card-dashboard { cursor: default; }
+    .dq-card-dashboard { cursor: default; }
     .dq-dash-content { display:flex; flex-direction:column; align-items:center; text-align:center; padding:36px 28px; gap:20px; }
     .dq-dash-icon { width:64px; height:64px; border-radius:16px; background:rgba(255,217,102,.12); border:1px solid rgba(255,217,102,.25); display:flex; align-items:center; justify-content:center; }
-    .dq-dash-headline { font-size:1.15rem; line-height:1.5; color:var(--text-primary,#f5f5f5); margin:0; }
-    .dq-dash-headline strong { color:#ffd966; display:block; margin-top:6px; }
+    .dq-dash-list { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px; width:100%; text-align:left; }
+    .dq-dash-list li { display:flex; align-items:flex-start; gap:10px; font-size:.95rem; line-height:1.5; color:var(--text-primary,#f5f5f5); }
+    .dq-dash-list strong { color:#ffd966; }
+    .dq-dash-check { color:#ffd966; font-size:1rem; flex-shrink:0; margin-top:2px; }
     .dq-dash-btn { display:inline-flex; align-items:center; gap:8px; padding:14px 32px; font-size:1rem; font-weight:700; border-radius:40px; text-decoration:none; transition:opacity .2s; }
     .dq-dash-btn:hover { opacity:.85; }
-    .dq-dash-disclaimer { font-size:.72rem; color:rgba(255,255,255,.38); line-height:1.5; margin:0; max-width:260px; }
+    .dq-dash-disclaimer { font-size:.72rem; color:rgba(255,255,255,.38); line-height:1.5; margin:0; max-width:280px; }
   </style>
 </head>
 <body>
@@ -590,17 +593,21 @@
     <!-- 3 Privilege Cards -->
     <div class="dq-grid">
 
-      <!-- Card 1: Dashboard Teaser -->
+      <!-- Card 1: Bot + Dashboard Teaser -->
       <div class="dq-card dq-card-dashboard">
         <div class="dq-card-glow dq-glow-gold"></div>
         <div class="dq-card-content dq-dash-content">
           <div class="dq-dash-icon">
             <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#ffd966" stroke-width="1.8" stroke-linecap="round">
-              <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
-              <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+              <rect x="2" y="3" width="20" height="14" rx="2"/>
+              <path d="M8 21h8M12 17v4"/>
+              <path d="M6 8l3 3 3-3 4 4" stroke="#4ade80" stroke-width="2"/>
             </svg>
           </div>
-          <p class="dq-dash-headline" data-i18n="dash.headline">Đừng thuyết phục cộng đồng của bạn.<br><strong>Gửi họ cái link này.</strong></p>
+          <ul class="dq-dash-list">
+            <li><span class="dq-dash-check">✦</span><span data-i18n="dash.point1">Có cơ hội sử dụng <strong>Bot giao dịch độc quyền</strong> của DA NETWORK</span></li>
+            <li><span class="dq-dash-check">✦</span><span data-i18n="dash.point2">Có trang web tracking signal <strong>minh bạch về hiệu suất</strong> của Bot</span></li>
+          </ul>
           <a
             href="https://da-signal-tracking.vercel.app/"
             target="_blank"
