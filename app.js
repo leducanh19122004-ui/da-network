@@ -124,14 +124,14 @@ const stepsData = {
             <h5 class="exchange-name">OURBIT</h5>
             <p class="exchange-tagline">Đối Tác Chiến Lược Của DA Network</p>
             <ul class="exchange-stats">
-              <li>Hoa hồng cao nhất Đông Nam Á: 55%</li>
+              <li>Hoa hồng cao nhất Đông Nam Á: 43%</li>
               <li>Tập trung vào thị trường SEA</li>
               <li>Hỗ trợ trực tiếp từ DA Network team</li>
             </ul>
-            <p class="exchange-why">Ourbit là lựa chọn chiến lược của DA Network. Mức hoa hồng 55% là cao nhất Đông Nam Á — giúp partner kiếm nhiều hơn từ cùng số lượng referral. Team Ourbit hỗ trợ direct, cộng thêm support từ DA Network, bạn không bao giờ cảm thấy cô đơn.</p>
+            <p class="exchange-why">Ourbit là lựa chọn chiến lược của DA Network. Mức hoa hồng 43% là cao nhất Đông Nam Á — giúp partner kiếm nhiều hơn từ cùng số lượng referral. Team Ourbit hỗ trợ direct, cộng thêm support từ DA Network, bạn không bao giờ cảm thấy cô đơn.</p>
             <div class="exchange-commission">
               <span class="exchange-commission-label">Hoa hồng</span>
-              <span class="exchange-commission-value">55% <span class="star">⭐</span></span>
+              <span class="exchange-commission-value">43% <span class="star">⭐</span></span>
             </div>
             <div class="exchange-bestfor"><strong>Best for:</strong> Tối đa thu nhập + hỗ trợ chuyên sâu</div>
           </div>
@@ -150,7 +150,7 @@ const stepsData = {
             <p class="exchange-why">Bingx nổi bật nhờ đội ngũ support partner chuyên biệt + chương trình khuyến mãi liên tục cho user. Điều này có nghĩa user của bạn sẽ giao dịch nhiều hơn, commission của bạn sẽ tăng theo. Hỗ trợ 24/7 cũng là điểm cộng lớn.</p>
             <div class="exchange-commission">
               <span class="exchange-commission-label">Hoa hồng</span>
-              <span class="exchange-commission-value">45%</span>
+              <span class="exchange-commission-value">28%</span>
             </div>
             <div class="exchange-bestfor"><strong>Best for:</strong> Giữ chân user + hoạt động ổn định</div>
           </div>
@@ -159,7 +159,7 @@ const stepsData = {
           <h5>💡 LỜI KHUYÊN: Đăng ký cả 3 sàn để tối đa hóa thu nhập</h5>
           <ul>
             <li>Chọn <strong>Binance</strong> làm "base" — volume lớn, người dùng đông</li>
-            <li>Chọn <strong>Ourbit</strong> làm "high-margin" — 55% commission cao nhất SEA</li>
+            <li>Chọn <strong>Ourbit</strong> làm "high-margin" — 43% commission cao nhất SEA</li>
             <li>Chọn <strong>Bingx</strong> làm "engagement" — chương trình hỗ trợ tốt</li>
           </ul>
           <p><strong>Cách tiếp cận:</strong> Chia user thành 3 nhóm, giới thiệu theo sàn phù hợp với nhu cầu của họ. Tổng cộng, bạn sẽ nhận hoa hồng từ cả 3 sàn mà không cần tăng effort nhiều.</p>
@@ -391,14 +391,14 @@ const stepsData = {
             <h5 class="exchange-name">OURBIT</h5>
             <p class="exchange-tagline">DA Network's Strategic Partner</p>
             <ul class="exchange-stats">
-              <li>Highest commission in SEA: 55%</li>
+              <li>Highest commission in SEA: 43%</li>
               <li>Focused on the Southeast Asia market</li>
               <li>Direct support from the DA Network team</li>
             </ul>
-            <p class="exchange-why">Ourbit is DA Network's strategic choice. The 55% commission is the highest in Southeast Asia — helping partners earn more from the same number of referrals. The Ourbit team supports you directly, plus extra backup from DA Network — you're never alone.</p>
+            <p class="exchange-why">Ourbit is DA Network's strategic choice. The 43% commission is the highest in Southeast Asia — helping partners earn more from the same number of referrals. The Ourbit team supports you directly, plus extra backup from DA Network — you're never alone.</p>
             <div class="exchange-commission">
               <span class="exchange-commission-label">Commission</span>
-              <span class="exchange-commission-value">55% <span class="star">⭐</span></span>
+              <span class="exchange-commission-value">43% <span class="star">⭐</span></span>
             </div>
             <div class="exchange-bestfor"><strong>Best for:</strong> Maximum earnings + dedicated support</div>
           </div>
@@ -417,7 +417,7 @@ const stepsData = {
             <p class="exchange-why">Bingx stands out thanks to its dedicated partner support team plus non-stop promotions for users. That means your users trade more — and your commissions grow with them. The 24/7 support is a major bonus.</p>
             <div class="exchange-commission">
               <span class="exchange-commission-label">Commission</span>
-              <span class="exchange-commission-value">45%</span>
+              <span class="exchange-commission-value">28%</span>
             </div>
             <div class="exchange-bestfor"><strong>Best for:</strong> User retention + consistent activity</div>
           </div>
@@ -426,7 +426,7 @@ const stepsData = {
           <h5>💡 TIP: Sign up for all 3 exchanges to maximize income</h5>
           <ul>
             <li>Use <strong>Binance</strong> as your "base" — huge volume, massive user base</li>
-            <li>Use <strong>Ourbit</strong> as your "high-margin" — 55% commission, highest in SEA</li>
+            <li>Use <strong>Ourbit</strong> as your "high-margin" — 43% commission, highest in SEA</li>
             <li>Use <strong>Bingx</strong> as your "engagement" — best partner support program</li>
           </ul>
           <p><strong>The approach:</strong> Split your users into 3 groups and recommend the exchange that fits their needs. In total, you'll collect commissions from all 3 exchanges without dramatically increasing your effort.</p>
@@ -709,7 +709,7 @@ const exchangesData = {
     {
       name: 'Bingx',
       type: 'Spot · Futures · Copy',
-      rate: '35%',
+      rate: '28%',
       rateNote: 'hoa hồng',
       featured: false,
       badge: '🇻🇳 Tốt nhất cho VN',
@@ -759,7 +759,7 @@ const exchangesData = {
     {
       name: 'Bitunix',
       type: 'Spot · Futures · Copy',
-      rate: '45%',
+      rate: '33%',
       rateNote: 'hoa hồng',
       featured: false,
       badge: '💸 Hoa Hồng Cao',
@@ -831,7 +831,7 @@ const exchangesData = {
     {
       name: 'Bingx',
       type: 'Spot · Futures · Copy',
-      rate: '35%',
+      rate: '28%',
       rateNote: 'commission',
       featured: false,
       badge: '🇻🇳 Best for VN',
@@ -881,7 +881,7 @@ const exchangesData = {
     {
       name: 'Bitunix',
       type: 'Spot · Futures · Copy',
-      rate: '45%',
+      rate: '33%',
       rateNote: 'commission',
       featured: false,
       badge: '💸 High Commission',
@@ -938,7 +938,7 @@ function renderComparison() {
       tag: 'Crypto',
       tagColor: gold3,
       exchanges: ['Gate.io', 'Bitunix', 'KuCoin'],
-      rate: '42\u201345%',
+      rate: '33\u201342%',
       rateNote: isEN ? 'Commission' : 'Hoa H\u1ed3ng',
       highlight: gold3,
       topBar: 'linear-gradient(90deg,' + gold3 + ',' + gold1 + ')',
@@ -1358,7 +1358,7 @@ const MODAL_DATA = {
       { label: '📤 Phương thức thanh toán', val: 'USDT (TRC20 / ERC20)' },
       { label: '⏰ Chu kỳ thanh toán partner', val: 'Hàng tuần hoặc hàng tháng' },
       { label: '🔍 Nguồn dữ liệu', val: 'Hồ sơ rút tiền + dashboard sàn' },
-      { label: '⚖️ Tỷ lệ hoa hồng theo sàn', val: '31.5% – 55%', note: 'Binance / Bingx / Ourbit' },
+      { label: '⚖️ Tỷ lệ hoa hồng theo sàn', val: '28% – 43%', note: 'Binance / Bingx / Ourbit' },
     ],
     note: '<strong>Con số này có ý nghĩa gì?</strong> Đây là tổng commission DA Network đã <em>thanh toán thành công</em> cho partner trong tháng đã chốt sổ — không tính phần pending hoặc bị hủy. Partner có thể đối chiếu với hồ sơ rút tiền của mình — liên hệ admin nếu thấy không khớp.'
   }
