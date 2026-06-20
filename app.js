@@ -4,23 +4,6 @@
 
 'use strict';
 
-// ─── THEME TOGGLE ───────────────────────────────────────────────
-(function () {
-  const t = document.querySelector('[data-theme-toggle]');
-  const r = document.documentElement;
-  let d = r.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
-  r.setAttribute('data-theme', d);
-  const sunSVG = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>`;
-  const moonSVG = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
-  if (t) {
-    t.innerHTML = d === 'dark' ? sunSVG : moonSVG;
-    t.addEventListener('click', () => {
-      d = d === 'dark' ? 'light' : 'dark';
-      r.setAttribute('data-theme', d);
-      t.innerHTML = d === 'dark' ? sunSVG : moonSVG;
-    });
-  }
-})();
 
 // ─── MOBILE NAV ─────────────────────────────────────────────────
 const menuToggle = document.getElementById('menuToggle');
@@ -1727,92 +1710,7 @@ document.addEventListener('keydown', e => {
     return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
   }
 
-  /* ── Web Audio context (lazy init sau user gesture hoặc scroll) ── */
-  let audioCtx = null;
-  function getCtx() {
-    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-    return audioCtx;
-  }
-
-  /* ── Một tiếng tick coin ──
-     freq    : tần số (Hz) — cao hơn = pitch cao hơn
-     vol     : âm lượng 0–1
-     when    : thời điểm phát (audioCtx.currentTime + offset)
-  ── */
-  function playTick(freq, vol, when) {
-    const ctx = getCtx();
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(freq, when);
-    // Pitch drop ngắn — giống tiếng chạm kim loại nhỏ
-    osc.frequency.exponentialRampToValueAtTime(freq * 0.6, when + 0.04);
-
-    gain.gain.setValueAtTime(0, when);
-    gain.gain.linearRampToValueAtTime(vol, when + 0.005);
-    gain.gain.exponentialRampToValueAtTime(0.0001, when + 0.08);
-
-    osc.start(when);
-    osc.stop(when + 0.1);
-  }
-
-  /* ── Tiếng ding kết thúc — hai overtone cộng hưởng ── */
-  function playDing() {
-    const ctx = getCtx();
-    const now = ctx.currentTime;
-
-    [[880, 0.18], [1320, 0.10], [1760, 0.06]].forEach(([freq, vol]) => {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(freq, now);
-      gain.gain.setValueAtTime(0, now);
-      gain.gain.linearRampToValueAtTime(vol, now + 0.01);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.2);
-      osc.start(now);
-      osc.stop(now + 1.3);
-    });
-  }
-
-  /* ── Lên lịch chuỗi tick trong suốt DURATION ms ──
-     Khoảng 30 tick, khoảng cách giảm dần (dồn dập ở đầu theo easeOutExpo)
-     Pitch tăng dần từ 400 Hz → 900 Hz
-  ── */
-  function scheduleTicks(duration) {
-    const ctx = getCtx();
-    const now = ctx.currentTime;
-    const TICK_COUNT = 28;
-
-    for (let i = 0; i < TICK_COUNT; i++) {
-      // Phân bố tick dày ở đầu (easeIn) để khớp với tốc độ đếm nhanh → chậm
-      const progress = i / (TICK_COUNT - 1); // 0 → 1
-      // Inverse easeOutExpo: tick nhiều ở đầu (lúc số thay đổi nhanh)
-      const tRaw = 1 - easeOutExpo(1 - progress); // 0→1, tăng nhanh rồi chậm
-      const when = now + (tRaw * duration) / 1000;
-
-      // Pitch leo từ 420 → 860 Hz
-      const freq = 420 + progress * 440;
-      // Volume nhẹ, tăng chút ở cuối để "build up"
-      const vol = 0.04 + progress * 0.07;
-
-      playTick(freq, vol, when);
-    }
-
-    // Ding sau khi đếm xong (~50ms sau tick cuối)
-    setTimeout(playDing, duration + 60);
-  }
-
-  /* ── countUp với âm thanh ── */
-  function countUpWithSound(el, from, to, format, duration, withSound) {
-    if (withSound) scheduleTicks(duration);
-
+  function countUp(el, from, to, format, duration) {
     const start = performance.now();
     function step(now) {
       const elapsed = now - start;
@@ -1823,10 +1721,6 @@ document.addEventListener('keydown', e => {
       else el.textContent = format(to);
     }
     requestAnimationFrame(step);
-  }
-
-  function countUp(el, from, to, format, duration) {
-    countUpWithSound(el, from, to, format, duration, false);
   }
 
   function formatUSDLocal(n) {
@@ -1851,7 +1745,7 @@ document.addEventListener('keydown', e => {
           observer.unobserve(statsBox);
 
           // Số 237 — có âm thanh tick
-          countUpWithSound(el237, 0, 237, n => String(n), DURATION, true);
+          countUp(el237, 0, 237, n => String(n), DURATION);
 
           // Số hoa hồng — không có âm thanh riêng (tránh chồng chéo)
           const commTarget = window.__commissionTarget ||
