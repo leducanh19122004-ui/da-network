@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="vi" data-theme="dark">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>So Sánh Deal Affiliate — DA NETWORK</title>
+  <title>Affiliate Deal Comparison — DA CRYPTO</title>
+  <style>html.i18n-pending body{visibility:hidden}</style>
+  <script>document.documentElement.classList.add('i18n-pending');setTimeout(function(){document.documentElement.classList.remove('i18n-pending')},1500);</script>
 
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2" />
@@ -240,8 +242,8 @@
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
       </button>
       <div class="lang-dropdown" id="langDropdown">
-        <button class="lang-opt active" data-lang-code="vi" onclick="selectLangDeals('vi')">🇻🇳 Tiếng Việt</button>
-        <button class="lang-opt" data-lang-code="en" onclick="selectLangDeals('en')">🇬🇧 English</button>
+        <button class="lang-opt" data-lang-code="vi" onclick="selectLangDeals('vi')">🇻🇳 Tiếng Việt</button>
+        <button class="lang-opt active" data-lang-code="en" onclick="selectLangDeals('en')">🇬🇧 English</button>
         <button class="lang-opt" data-lang-code="th" onclick="selectLangDeals('th')">🇹🇭 ภาษาไทย</button>
         <button class="lang-opt" data-lang-code="ko" onclick="selectLangDeals('ko')">🇰🇷 한국어</button>
         <button class="lang-opt" data-lang-code="id" onclick="selectLangDeals('id')">🇮🇩 Indonesia</button>
@@ -251,7 +253,7 @@
   <div class="deals-hero-content">
     <div class="section-tag" id="txt-tag">🔥 AFFILIATE DEALS</div>
     <h1 id="txt-title">So Sánh Deal Affiliate Tất Cả Sàn</h1>
-    <p id="txt-sub">Tỷ lệ hoa hồng, thế mạnh và điểm yếu của 12 sàn trong hệ sinh thái DA Network</p>
+    <p id="txt-sub">Tỷ lệ hoa hồng, thế mạnh và điểm yếu của 12 sàn trong hệ sinh thái DA Crypto</p>
     <div class="deals-stats">
       <div class="deals-stat">
         <div class="deals-stat-num">12</div>
@@ -375,9 +377,9 @@ var exchangesData = {
       name: 'Ourbit', cat: 'crypto',
       type: 'Spot · Futures · Copy',
       rate: '43%', rateNum: 43, rateNote: 'hoa hồng',
-      featured: true, badge: '🔗 Đối Tác DA Network',
-      bestFor: 'Tối đa thu nhập + hỗ trợ chuyên sâu từ DA Network',
-      pros: ['Hoa hồng 43% — cao nhất Đông Nam Á','Đối tác chiến lược của DA Network','Hỗ trợ trực tiếp từ team Ourbit & DA Network','Tập trung vào thị trường SEA'],
+      featured: true, badge: '🔗 Đối Tác DA Crypto',
+      bestFor: 'Tối đa thu nhập + hỗ trợ chuyên sâu từ DA Crypto',
+      pros: ['Hoa hồng 43% — cao nhất Đông Nam Á','Đối tác chiến lược của DA Crypto','Hỗ trợ trực tiếp từ team Ourbit & DA Crypto','Tập trung vào thị trường SEA'],
       cons: ['Sàn mới, ít tên tuổi hơn Binance','Thanh khoản thấp hơn sàn top','Ít coin hơn các sàn lớn'],
       link: 'https://www.ourbit.com/register?inviteCode=SY7QT9',
     },
@@ -497,9 +499,9 @@ var exchangesData = {
       name: 'Ourbit', cat: 'crypto',
       type: 'Spot · Futures · Copy',
       rate: '43%', rateNum: 43, rateNote: 'commission',
-      featured: true, badge: '🔗 DA Network Partner',
-      bestFor: 'Maximum income + in-depth support from DA Network',
-      pros: ['43% commission — highest in Southeast Asia','Strategic partner of DA Network','Direct support from Ourbit & DA Network team','Focused on SEA market'],
+      featured: true, badge: '🔗 DA Crypto Partner',
+      bestFor: 'Maximum income + in-depth support from DA Crypto',
+      pros: ['43% commission — highest in Southeast Asia','Strategic partner of DA Crypto','Direct support from Ourbit & DA Crypto team','Focused on SEA market'],
       cons: ['Newer exchange, less brand recognition than Binance','Lower liquidity than top exchanges','Fewer coins than major exchanges'],
       link: 'https://www.ourbit.com/register?inviteCode=SY7QT9',
     },
@@ -573,7 +575,9 @@ var exchangesData = {
 // ═══════════════════════════════════════════════════════════
 // STATE
 // ═══════════════════════════════════════════════════════════
-var lang = 'vi';
+// English is the default; shares the saved choice with the home page.
+var lang = 'en';
+try { var savedLang = localStorage.getItem('dacrypto-lang'); if (savedLang) lang = savedLang; } catch (e) {}
 var activeFilter = 'all';
 // Alias new languages to English exchange data
 // Alias new langs to English exchange data (includes all links)
@@ -586,7 +590,7 @@ var txt = {
     back: 'Về trang chính', back2: 'Quay lại trang hướng dẫn',
     tag: '🔥 AFFILIATE DEALS',
     title: 'So Sánh Deal Affiliate Tất Cả Sàn',
-    sub: 'Tỷ lệ hoa hồng, thế mạnh và điểm yếu của 12 sàn trong hệ sinh thái DA Network',
+    sub: 'Tỷ lệ hoa hồng, thế mạnh và điểm yếu của 12 sàn trong hệ sinh thái DA Crypto',
     stat1: 'Sàn giao dịch', stat2: 'Hoa hồng', stat3: 'Nền tảng',
     fbAll: 'Tất cả (12)', fbCrypto: 'Crypto Exchange', fbForex: 'Forex / CFD', fbHigh: 'HH ≥ 42%',
     tableTitle: 'Bảng Tổng Hợp Nhanh',
@@ -601,7 +605,7 @@ var txt = {
     back: 'Back to main page', back2: 'Back to the guide page',
     tag: '🔥 AFFILIATE DEALS',
     title: 'Full Affiliate Deal Comparison',
-    sub: 'Commission rates, strengths and weaknesses of all 12 exchanges in the DA Network ecosystem',
+    sub: 'Commission rates, strengths and weaknesses of all 12 exchanges in the DA Crypto ecosystem',
     stat1: 'Exchanges', stat2: 'Commission', stat3: 'Platforms',
     fbAll: 'All (12)', fbCrypto: 'Crypto Exchange', fbForex: 'Forex / CFD', fbHigh: 'Commission ≥ 42%',
     tableTitle: 'Quick Summary Table',
@@ -616,7 +620,7 @@ var txt = {
     back: 'กลับหน้าหลัก', back2: 'กลับไปหน้าคู่มือ',
     tag: '🔥 AFFILIATE DEALS',
     title: 'เปรียบเทียบ Affiliate Deal ทุกตลาด',
-    sub: 'อัตราค่าคอมมิชชัน จุดแข็งและจุดอ่อนของ 12 ตลาดในระบบนิเวศ DA Network',
+    sub: 'อัตราค่าคอมมิชชัน จุดแข็งและจุดอ่อนของ 12 ตลาดในระบบนิเวศ DA Crypto',
     stat1: 'ตลาดแลกเปลี่ยน', stat2: 'ค่าคอมมิชชัน', stat3: 'แพลตฟอร์ม',
     fbAll: 'ทั้งหมด (12)', fbCrypto: 'Crypto Exchange', fbForex: 'Forex / CFD', fbHigh: 'คอมมิชชัน ≥ 42%',
     tableTitle: 'ตารางสรุปเร็ว',
@@ -631,7 +635,7 @@ var txt = {
     back: '메인 페이지로 돌아가기', back2: '가이드 페이지로 돌아가기',
     tag: '🔥 AFFILIATE DEALS',
     title: '전체 Affiliate Deal 비교',
-    sub: 'DA Network 생태계에 있는 12개 거래소의 커미션 비율, 장단점',
+    sub: 'DA Crypto 생태계에 있는 12개 거래소의 커미션 비율, 장단점',
     stat1: '거래소', stat2: '커미션', stat3: '플랫폼',
     fbAll: '전체 (12)', fbCrypto: 'Crypto Exchange', fbForex: 'Forex / CFD', fbHigh: '커미션 ≥ 42%',
     tableTitle: '빠른 요약 표',
@@ -646,7 +650,7 @@ var txt = {
     back: 'Kembali ke halaman utama', back2: 'Kembali ke halaman panduan',
     tag: '🔥 AFFILIATE DEALS',
     title: 'Perbandingan Lengkap Affiliate Deal',
-    sub: 'Tingkat komisi, kelebihan dan kekurangan 12 bursa dalam ekosistem DA Network',
+    sub: 'Tingkat komisi, kelebihan dan kekurangan 12 bursa dalam ekosistem DA Crypto',
     stat1: 'Bursa', stat2: 'Komisi', stat3: 'Platform',
     fbAll: 'Semua (12)', fbCrypto: 'Crypto Exchange', fbForex: 'Forex / CFD', fbHigh: 'Komisi ≥ 42%',
     tableTitle: 'Tabel Ringkasan Cepat',
@@ -777,7 +781,7 @@ window.toggleLang = function() {
 };
 
 window.selectLangDeals = function(l) {
-  if (txt[l]) { lang = l; renderAll(); }
+  if (txt[l]) { lang = l; try { localStorage.setItem('dacrypto-lang', l); } catch (e) {} renderAll(); }
   var dd = document.getElementById('langDropdown');
   if (dd) dd.classList.remove('open');
 };
@@ -804,7 +808,11 @@ window.applyFilter = function(filter) {
 };
 
 // Init
-document.addEventListener('DOMContentLoaded', renderAll);
+document.addEventListener('DOMContentLoaded', function() {
+  if (!txt[lang]) lang = 'en';
+  renderAll();
+  document.documentElement.classList.remove('i18n-pending');
+});
 </script>
 <script data-pplx-inline-edit>
 (function () {

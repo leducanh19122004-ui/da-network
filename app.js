@@ -72,12 +72,12 @@ const stepsData = {
         </div>
         <div class="step-example">
           <div class="step-example-title">📌 Top 3 Sàn Được Khuyến Nghị</div>
-          <p>3 sàn tốt nhất để bắt đầu với DA Network — đã được kiểm chứng bởi <strong>237+ partner</strong>. Chi tiết bên dưới ↓</p>
+          <p>3 sàn tốt nhất để bắt đầu với DA Crypto — đã được kiểm chứng bởi <strong>237+ partner</strong>. Chi tiết bên dưới ↓</p>
         </div>
       </div>
       <div class="exchange-cards-wrap">
         <div class="exchange-cards-header">
-          <h4>🚀 TOP 3 SÀN ĐƯỢC KHUYẾN NGHỊ CHO PARTNER DA NETWORK</h4>
+          <h4>🚀 TOP 3 SÀN ĐƯỢC KHUYẾN NGHỊ CHO PARTNER DA CRYPTO</h4>
           <p>3 sàn tốt nhất để bắt đầu — đã được kiểm chứng bởi 237+ partner</p>
         </div>
         <div class="exchange-cards">
@@ -105,13 +105,13 @@ const stepsData = {
               <span class="exchange-badge">🔗 Close Partnership</span>
             </div>
             <h5 class="exchange-name">OURBIT</h5>
-            <p class="exchange-tagline">Đối Tác Chiến Lược Của DA Network</p>
+            <p class="exchange-tagline">Đối Tác Chiến Lược Của DA Crypto</p>
             <ul class="exchange-stats">
               <li>Hoa hồng cao nhất Đông Nam Á: 43%</li>
               <li>Tập trung vào thị trường SEA</li>
-              <li>Hỗ trợ trực tiếp từ DA Network team</li>
+              <li>Hỗ trợ trực tiếp từ DA Crypto team</li>
             </ul>
-            <p class="exchange-why">Ourbit là lựa chọn chiến lược của DA Network. Mức hoa hồng 43% là cao nhất Đông Nam Á — giúp partner kiếm nhiều hơn từ cùng số lượng referral. Team Ourbit hỗ trợ direct, cộng thêm support từ DA Network, bạn không bao giờ cảm thấy cô đơn.</p>
+            <p class="exchange-why">Ourbit là lựa chọn chiến lược của DA Crypto. Mức hoa hồng 43% là cao nhất Đông Nam Á — giúp partner kiếm nhiều hơn từ cùng số lượng referral. Team Ourbit hỗ trợ direct, cộng thêm support từ DA Crypto, bạn không bao giờ cảm thấy cô đơn.</p>
             <div class="exchange-commission">
               <span class="exchange-commission-label">Hoa hồng</span>
               <span class="exchange-commission-value">43% <span class="star">⭐</span></span>
@@ -150,27 +150,27 @@ const stepsData = {
       </div>`,
     },
     {
-      title: 'Tạo Tài Khoản Dưới Ref DA Network',
-      subtitle: 'Đăng ký dưới ref của DA Network — liên hệ admin để được hỗ trợ hoa hồng & lộ trình phát triển',
+      title: 'Tạo Tài Khoản Dưới Ref DA Crypto',
+      subtitle: 'Đăng ký dưới ref của DA Crypto — liên hệ admin để được hỗ trợ hoa hồng & lộ trình phát triển',
       content: `<div class="step-body">
         <div class="step-main">
-          <h4>Cách Bắt Đầu Với DA Network</h4>
+          <h4>Cách Bắt Đầu Với DA Crypto</h4>
           <ul class="step-list">
-            <li>Tạo tài khoản sàn giao dịch <strong>dưới link ref của DA Network</strong></li>
-            <li>Nhắn tin cho admin DA Network sau khi đăng ký xong</li>
+            <li>Tạo tài khoản sàn giao dịch <strong>dưới link ref của DA Crypto</strong></li>
+            <li>Nhắn tin cho admin DA Crypto sau khi đăng ký xong</li>
             <li>Admin sẽ xác nhận tài khoản và <strong>cấp hoa hồng theo lộ trình</strong></li>
             <li>Nhận hỗ trợ cá nhân hoá: chiến lược, tài liệu, và theo dõi hiệu suất</li>
             <li>Phát triển theo từng cấp độ — mở khóa hoa hồng cao hơn khi đạt mốc</li>
           </ul>
-          <div class="step-tip"><strong>🎯 Tại sao nên đăng ký qua DA Network?</strong> Bạn được hưởng mức hoa hồng <strong>cao hơn mặc định</strong> của sàn, có admin hỗ trợ trực tiếp và lộ trình nâng cấp rõ ràng theo doanh số.</div>
+          <div class="step-tip"><strong>🎯 Tại sao nên đăng ký qua DA Crypto?</strong> Bạn được hưởng mức hoa hồng <strong>cao hơn mặc định</strong> của sàn, có admin hỗ trợ trực tiếp và lộ trình nâng cấp rõ ràng theo doanh số.</div>
         </div>
         <div class="step-example">
-          <div class="step-example-title">📊 Lộ Trình Partner DA Network</div>
+          <div class="step-example-title">📊 Lộ Trình Partner DA Crypto</div>
           <div class="partner-roadmap">
             <div class="roadmap-exchange"><div class="roadmap-exchange-name">Bingx</div><div class="roadmap-tiers"><div class="roadmap-tier tier-base"><span class="tier-label">Base</span><span class="tier-val">25%</span><span class="tier-req">0 – 10M vol</span></div><div class="roadmap-tier tier-mid"><span class="tier-label">Middle</span><span class="tier-val">30%</span><span class="tier-req">10M vol</span></div><div class="roadmap-tier tier-max"><span class="tier-label">Max</span><span class="tier-val">39%</span><span class="tier-req">50M vol</span></div></div></div>
             <div class="roadmap-exchange"><div class="roadmap-exchange-name">Bitunix</div><div class="roadmap-tiers"><div class="roadmap-tier tier-base"><span class="tier-label">Base</span><span class="tier-val">33%</span><span class="tier-req">0 – 10M vol</span></div><div class="roadmap-tier tier-mid"><span class="tier-label">Middle</span><span class="tier-val">37%</span><span class="tier-req">10M vol</span></div><div class="roadmap-tier tier-max"><span class="tier-label">Max</span><span class="tier-val">45%</span><span class="tier-req">50M vol</span></div></div></div>
           </div>
-          <div class="step-tip" style="margin-top:14px"><strong>📩 Liên hệ admin:</strong> Sau khi tạo tài khoản, nhắn UID hoặc email đăng ký cho admin DA Network để được kích hoạt hoa hồng và theo dõi lộ trình.</div>
+          <div class="step-tip" style="margin-top:14px"><strong>📩 Liên hệ admin:</strong> Sau khi tạo tài khoản, nhắn UID hoặc email đăng ký cho admin DA Crypto để được kích hoạt hoa hồng và theo dõi lộ trình.</div>
         </div>
       </div>`,
     },
@@ -339,12 +339,12 @@ const stepsData = {
         </div>
         <div class="step-example">
           <div class="step-example-title">📌 Top 3 Recommended Exchanges</div>
-          <p>The 3 best exchanges to start with DA Network — validated by <strong>237+ partners</strong>. Details below ↓</p>
+          <p>The 3 best exchanges to start with DA Crypto — validated by <strong>237+ partners</strong>. Details below ↓</p>
         </div>
       </div>
       <div class="exchange-cards-wrap">
         <div class="exchange-cards-header">
-          <h4>🚀 TOP 3 RECOMMENDED EXCHANGES FOR DA NETWORK PARTNERS</h4>
+          <h4>🚀 TOP 3 RECOMMENDED EXCHANGES FOR DA CRYPTO PARTNERS</h4>
           <p>The 3 best exchanges to start with — validated by 237+ partners</p>
         </div>
         <div class="exchange-cards">
@@ -372,13 +372,13 @@ const stepsData = {
               <span class="exchange-badge">🔗 Close Partnership</span>
             </div>
             <h5 class="exchange-name">OURBIT</h5>
-            <p class="exchange-tagline">DA Network's Strategic Partner</p>
+            <p class="exchange-tagline">DA Crypto's Strategic Partner</p>
             <ul class="exchange-stats">
               <li>Highest commission in SEA: 43%</li>
               <li>Focused on the Southeast Asia market</li>
-              <li>Direct support from the DA Network team</li>
+              <li>Direct support from the DA Crypto team</li>
             </ul>
-            <p class="exchange-why">Ourbit is DA Network's strategic choice. The 43% commission is the highest in Southeast Asia — helping partners earn more from the same number of referrals. The Ourbit team supports you directly, plus extra backup from DA Network — you're never alone.</p>
+            <p class="exchange-why">Ourbit is DA Crypto's strategic choice. The 43% commission is the highest in Southeast Asia — helping partners earn more from the same number of referrals. The Ourbit team supports you directly, plus extra backup from DA Crypto — you're never alone.</p>
             <div class="exchange-commission">
               <span class="exchange-commission-label">Commission</span>
               <span class="exchange-commission-value">43% <span class="star">⭐</span></span>
@@ -417,27 +417,27 @@ const stepsData = {
       </div>`,
     },
     {
-      title: 'Register Under DA Network',
-      subtitle: 'Sign up under DA Network\'s ref — contact admin for commission support & growth roadmap',
+      title: 'Register Under DA Crypto',
+      subtitle: 'Sign up under DA Crypto\'s ref — contact admin for commission support & growth roadmap',
       content: `<div class="step-body">
         <div class="step-main">
-          <h4>How to Start With DA Network</h4>
+          <h4>How to Start With DA Crypto</h4>
           <ul class="step-list">
-            <li>Create your exchange account <strong>under DA Network's referral link</strong></li>
-            <li>Message the DA Network admin after completing sign-up</li>
+            <li>Create your exchange account <strong>under DA Crypto's referral link</strong></li>
+            <li>Message the DA Crypto admin after completing sign-up</li>
             <li>Admin confirms your account and <strong>unlocks your commission roadmap</strong></li>
             <li>Receive personalized support: strategy, materials, and performance tracking</li>
             <li>Level up progressively — unlock higher commissions as you hit milestones</li>
           </ul>
-          <div class="step-tip"><strong>🎯 Why register through DA Network?</strong> You get <strong>above-default commission rates</strong>, direct admin support, and a clear upgrade roadmap tied to your volume.</div>
+          <div class="step-tip"><strong>🎯 Why register through DA Crypto?</strong> You get <strong>above-default commission rates</strong>, direct admin support, and a clear upgrade roadmap tied to your volume.</div>
         </div>
         <div class="step-example">
-          <div class="step-example-title">📊 DA Network Partner Roadmap</div>
+          <div class="step-example-title">📊 DA Crypto Partner Roadmap</div>
           <div class="partner-roadmap">
             <div class="roadmap-exchange"><div class="roadmap-exchange-name">Bingx</div><div class="roadmap-tiers"><div class="roadmap-tier tier-base"><span class="tier-label">Base</span><span class="tier-val">25%</span><span class="tier-req">0 – 10M vol</span></div><div class="roadmap-tier tier-mid"><span class="tier-label">Middle</span><span class="tier-val">30%</span><span class="tier-req">10M vol</span></div><div class="roadmap-tier tier-max"><span class="tier-label">Max</span><span class="tier-val">39%</span><span class="tier-req">50M vol</span></div></div></div>
             <div class="roadmap-exchange"><div class="roadmap-exchange-name">Bitunix</div><div class="roadmap-tiers"><div class="roadmap-tier tier-base"><span class="tier-label">Base</span><span class="tier-val">33%</span><span class="tier-req">0 – 10M vol</span></div><div class="roadmap-tier tier-mid"><span class="tier-label">Middle</span><span class="tier-val">37%</span><span class="tier-req">10M vol</span></div><div class="roadmap-tier tier-max"><span class="tier-label">Max</span><span class="tier-val">45%</span><span class="tier-req">50M vol</span></div></div></div>
           </div>
-          <div class="step-tip" style="margin-top:14px"><strong>📩 Contact admin:</strong> After creating your account, send your UID or registration email to the DA Network admin to activate your commissions and track your roadmap.</div>
+          <div class="step-tip" style="margin-top:14px"><strong>📩 Contact admin:</strong> After creating your account, send your UID or registration email to the DA Crypto admin to activate your commissions and track your roadmap.</div>
         </div>
       </div>`,
     },
@@ -1317,7 +1317,7 @@ const MODAL_DATA = {
     tagClass: 'modal-tag-green',
     bigNum: '237',
     bigNumClass: 'stat-value-gold',
-    title: 'Partner đang hoạt động cùng DA Network',
+    title: 'Partner đang hoạt động cùng DA Crypto',
     subtitle: 'Số liệu chốt cuối tháng — cập nhật ngày 1 hàng tháng',
     rows: [
       { label: '👥 Tổng partner trong mạng lưới', val: '237', cls: 'gold' },
@@ -1326,14 +1326,14 @@ const MODAL_DATA = {
       { label: '⏱️ Thời gian trung bình đến income đầu tiên', val: '4–8 tuần', note: 'Tùy kênh content' },
       { label: '✅ Tiêu chí xét duyệt', val: 'Review từng hồ sơ' },
     ],
-    note: '<strong>Làm thế nào để trở thành partner?</strong> Đăng ký tài khoản sàn qua link ref của DA Network, sau đó liên hệ admin để được xét duyệt. Chúng tôi review từng partner — không tuyển ồ ạt. Phản hồi thông thường trong 24–48 giờ.'
+    note: '<strong>Làm thế nào để trở thành partner?</strong> Đăng ký tài khoản sàn qua link ref của DA Crypto, sau đó liên hệ admin để được xét duyệt. Chúng tôi review từng partner — không tuyển ồ ạt. Phản hồi thông thường trong 24–48 giờ.'
   },
   commission: {
     tag: '✓ ĐÃ CHỐT SỔ',
     tagClass: 'modal-tag-green',
     bigNum: null, // rendered from #commissionCounter
     bigNumClass: 'commission-value',
-    title: 'Hoa hồng DA Network đã thanh toán cho partner',
+    title: 'Hoa hồng DA Crypto đã thanh toán cho partner',
     subtitle: 'Tổng commission chuyển thành công trong tháng trước — đã xác minh qua hồ sơ rút tiền',
     rows: [
       { label: '📆 Chu kỳ chốt sổ', val: 'Hàng tháng · Ngày 1', note: 'Dữ liệu đã finalize' },
@@ -1343,7 +1343,7 @@ const MODAL_DATA = {
       { label: '🔍 Nguồn dữ liệu', val: 'Hồ sơ rút tiền + dashboard sàn' },
       { label: '⚖️ Tỷ lệ hoa hồng theo sàn', val: '28% – 43%', note: 'Binance / Bingx / Ourbit' },
     ],
-    note: '<strong>Con số này có ý nghĩa gì?</strong> Đây là tổng commission DA Network đã <em>thanh toán thành công</em> cho partner trong tháng đã chốt sổ — không tính phần pending hoặc bị hủy. Partner có thể đối chiếu với hồ sơ rút tiền của mình — liên hệ admin nếu thấy không khớp.'
+    note: '<strong>Con số này có ý nghĩa gì?</strong> Đây là tổng commission DA Crypto đã <em>thanh toán thành công</em> cho partner trong tháng đã chốt sổ — không tính phần pending hoặc bị hủy. Partner có thể đối chiếu với hồ sơ rút tiền của mình — liên hệ admin nếu thấy không khớp.'
   }
 };
 
@@ -1794,8 +1794,8 @@ const PARTNERS_DATA = [
     commission: 4210,
     accent: { from: '#7c5cff', to: '#a78bfa' }, // purple (BingX)
     quote: {
-      vi: '“Mình tập trung xây cộng đồng Telegram bằng nội dung thị trường mỗi ngày. DA Network giúp mình tracking referral và tối ưu commission dễ hơn.”',
-      en: '“I focus on building a Telegram community with daily market content. DA Network makes it easier to track referrals and optimize commission.”'
+      vi: '“Mình tập trung xây cộng đồng Telegram bằng nội dung thị trường mỗi ngày. DA Crypto giúp mình tracking referral và tối ưu commission dễ hơn.”',
+      en: '“I focus on building a Telegram community with daily market content. DA Crypto makes it easier to track referrals and optimize commission.”'
     }
   },
   {
@@ -1867,7 +1867,7 @@ const PARTNERS_DATA = [
     if (!grid) return;
     const lang = currentLang();
     const L = {
-      verifiedBadge: t(lang, 'Đã xác minh bởi DA Network', 'Verified by DA Network'),
+      verifiedBadge: t(lang, 'Đã xác minh bởi DA Crypto', 'Verified by DA Crypto'),
       verifyTip: t(lang, 'Partner đã đồng ý chia sẻ câu chuyện', 'Partner consented to share this story'),
       lblChannel: t(lang, 'Kênh', 'Channel'),
       lblExchange: t(lang, 'Sàn chính', 'Main exchange'),
@@ -2458,7 +2458,7 @@ const PARTNERS_DATA = [
 })();
 
 /* ══════════════════════════════════════════════════════════
-   DA NETWORK — Particle Canvas
+   DA CRYPTO — Particle Canvas
 ══════════════════════════════════════════════════════════ */
 (function() {
   const COLORS = [
@@ -2740,12 +2740,15 @@ document.addEventListener('keydown', function(e) {
 (function() {
   var translations = {
     vi: {
+      'proof.period.dec25':'Tháng 12/2025 · 100 users','proof.period.feb26':'Tháng 02/2026 · 32 users mới','proof.period.nov25':'Tháng 11/2025 · Direct commission',
+      'proof.period.jan26b':'01/2026 · Vol $5.3M · 23 traders','proof.period.feb26b':'02/2026 · Vol $8.8M · 32 traders','proof.period.dec25b':'12/2025 · USDT &amp; Inverse · Settled','proof.period.sep25':'09-10/2025 · USDT &amp; Inverse',
+      'proof.note':'Tất cả screenshot trực tiếp từ dashboard sàn (Ourbit, Bingx, Binance) · Click vào ảnh để xem chi tiết · Một số thông tin nhạy cảm có thể bị che để bảo vệ partner.',
       // Nav
       'nav.cta':       'Bắt Đầu Ngay',
       'nav.guide':     'Hướng Dẫn',
       'nav.calc':      'Tính Thu Nhập',
       'nav.faq':       'FAQ',
-      'nav.network':   'DA Network',
+      'nav.network':   'DA Crypto',
       'nav.privilege': '⭐ Đặc Quyền',
       // Hero
       'hero.badge':  'Hướng Dẫn Từ A-Z • Miễn Phí 100%',
@@ -2762,7 +2765,7 @@ document.addEventListener('keydown', function(e) {
       'snap.partners':   'Partners đang hoạt động',
       'snap.paid':       'Đã chuyển cho partner tháng trước',
       'snap.exchanges':  'Sàn đối tác chính',
-      'snap.foot':       'Số “Đã chuyển” là tổng commission DA Network đã thanh toán cho partner trong tháng trước, xác minh qua hồ sơ rút tiền.',
+      'snap.foot':       'Số “Đã chuyển” là tổng commission DA Crypto đã thanh toán cho partner trong tháng trước, xác minh qua hồ sơ rút tiền.',
       'snap.foot.link':  'Xem cách chúng tôi xác minh →',
       // Legacy keys kept for backwards compat in modal/aria-labels
       'stats.active':     '✓ ĐÃ XÁC MINH',
@@ -2779,7 +2782,7 @@ document.addEventListener('keydown', function(e) {
       // Explainer cards
       'ec.title1': 'Affiliate Marketing Crypto Là Gì?',
       'ec.title2': 'Thu Nhập Từ Affiliate Crypto',
-      'ec.title3': 'Tại Sao Chọn DA Network?',
+      'ec.title3': 'Tại Sao Chọn DA Crypto?',
       // Calculator
       'calc.tag':   'Công Cụ Tính Toán',
       'calc.title': 'Tính Thu Nhập Affiliate',
@@ -2787,31 +2790,31 @@ document.addEventListener('keydown', function(e) {
       // FAQ
       'faq.tag':   'Câu Hỏi Thường Gặp',
       'faq.title': 'FAQ',
-      // DA Network
+      // DA Crypto
       'dan.tag':     'Mạng Lưới Affiliate',
-      'dan.title':   'Giới Thiệu DA Network',
+      'dan.title':   'Giới Thiệu DA Crypto',
       'dan.sub':     'Hệ thống affiliate crypto chuyên nghiệp — kết nối hàng trăm partner trên khắp Đông Nam Á với các sàn giao dịch hàng đầu thế giới.',
       'dan.lb.title':'Partner Đang Làm Tốt', // legacy fallback
       'dan.fb.title':'Hoa Hồng Thực Tế Của Partner',
       // Đặc Quyền
-      'dq.tag':   '🔒 Dành riêng cho Partner DA Network',
-      'dq.title': 'Đặc Quyền Tại DA Network',
+      'dq.tag':   '🔒 Dành riêng cho Partner DA Crypto',
+      'dq.title': 'Đặc Quyền Tại DA Crypto',
       'dq.sub':   'Chỉ <strong style="color:#ffd966">237 partner</strong> đang hoạt động mới có quyền truy cập. Những điều bên ngoài không thể mua được.',
       'dq.card1.title': 'Bot Trade AI — Hàn Quốc',
       'dq.card2.title': 'Kênh Update Plan Market',
       'dq.card3.title': 'Facts & Quotes Độc Quyền',
-      'dq.cta.strong': 'Tất cả đặc quyền trên chỉ có khi bạn là partner DA Network.',
+      'dq.cta.strong': 'Tất cả đặc quyền trên chỉ có khi bạn là partner DA Crypto.',
       'dq.cta.btn':    '⚡ Tham Gia Để Mở Khóa',
       // Liên Hệ
       'lh.tag':   'Hỗ Trợ',
-      'lh.title': 'Liên Hệ DA NETWORK',
+      'lh.title': 'Liên Hệ DA CRYPTO',
       'lh.sub':   'Có thắc mắc hoặc muốn tham gia network? Đội ngũ sẵn sàng hỗ trợ 24/7.',
       // Footer
       'footer.desc':  'Hướng dẫn toàn diện về affiliate crypto cho người Việt.',
       'footer.col1':  'Hướng Dẫn',
       'footer.col2':  'Công Cụ',
-      'footer.col3':  'Về DA NETWORK',
-      'footer.copy':  '© 2026 DA NETWORK. Tất cả quyền được bảo lưu.',
+      'footer.col3':  'Về DA CRYPTO',
+      'footer.copy':  '© 2026 DA CRYPTO. Tất cả quyền được bảo lưu.',
 
       // Explainer cards
       'ec.h1': 'Affiliate Là Gì?',
@@ -2841,11 +2844,11 @@ document.addEventListener('keydown', function(e) {
       'calc.res3': 'Tổng phí sàn thu',
       'calc.res4': 'Hoa hồng / người',
       'calc.note': '* Ước tính giả định. Thu nhập thực tế phụ thuộc vào hoạt động của người dùng và điều khoản sàn.',
-      // DA Network intro cards
+      // DA Crypto intro cards
       'dan.c1.title': 'Phủ Sóng Rộng',
       'dan.c1.body': 'Hoạt động tại Việt Nam, Indonesia, Philippines và đang mở rộng ra toàn Đông Nam Á với hơn 237 partner đang hoạt động.',
       'dan.c2.title': 'Hoa Hồng Cao Nhất',
-      'dan.c2.body': 'Tỷ lệ hoa hồng lên đến <strong class="gold-text">70%</strong> — cao hơn đăng ký trực tiếp, được DA Network đàm phán độc quyền với từng sàn.',
+      'dan.c2.body': 'Tỷ lệ hoa hồng lên đến <strong class="gold-text">70%</strong> — cao hơn đăng ký trực tiếp, được DA Crypto đàm phán độc quyền với từng sàn.',
       'dan.c3.title': 'Hỗ Trợ Toàn Diện',
       'dan.c3.body': 'Đội ngũ admin hỗ trợ 24/7, cung cấp tài liệu, công cụ và lộ trình phát triển cá nhân hóa cho từng partner.',
       'dan.c4.title': 'Tăng Trưởng Bền Vững',
@@ -2853,15 +2856,15 @@ document.addEventListener('keydown', function(e) {
       // Partner Wins (replaces fake leaderboard)
       'wins.badge': '🎯 CÂU CHUYỆN THẬT',
       'wins.title': 'Partner Thật, Kết Quả Thật',
-      'wins.sub': 'Không phải bảng xếp hạng thu nhập. Đây là một vài câu chuyện thực tế từ các partner đang xây traffic và nhận hoa hồng qua DA Network.',
+      'wins.sub': 'Không phải bảng xếp hạng thu nhập. Đây là một vài câu chuyện thực tế từ các partner đang xây traffic và nhận hoa hồng qua DA Crypto.',
       'wins.note': 'Tất cả câu chuyện được chia sẻ với sự đồng ý của partner. Kết quả có thể khác nhau tùy vào kênh, traffic và mức độ triển khai.',
-      'wins.note.link': 'Xem cách DA Network xác minh partner →',
+      'wins.note.link': 'Xem cách DA Crypto xác minh partner →',
       // Verification block
       'verify.badge': '🔍 MINH BẠCH',
-      'verify.title': 'Cách DA Network Xác Minh Số Liệu',
+      'verify.title': 'Cách DA Crypto Xác Minh Số Liệu',
       'verify.sub': 'Trong một ngành mà fake screenshot và fake leaderboard là chuyện thường — đây là cách chúng tôi đảm bảo mọi con số bạn thấy là thật.',
       'verify.s1.title': 'Dữ liệu từ dashboard sàn',
-      'verify.s1.body': 'Mỗi partner đăng ký dưới link ref của DA Network. Admin thấy hoa hồng pending/paid trực tiếp từ dashboard <strong>Binance, Ourbit, Bingx</strong> — không bị điều chỉnh bởi bên thứ ba.',
+      'verify.s1.body': 'Mỗi partner đăng ký dưới link ref của DA Crypto. Admin thấy hoa hồng pending/paid trực tiếp từ dashboard <strong>Binance, Ourbit, Bingx</strong> — không bị điều chỉnh bởi bên thứ ba.',
       'verify.s2.title': 'Hồ sơ rút tiền',
       'verify.s2.body': 'Con số “đã chuyển” hiển thị trên trang chỉ tính commission <strong>đã thanh toán thành công</strong> đến ví/tài khoản partner — không tính phần pending hoặc bị hủy. Partner có thể đối chiếu với lịch sử rút tiền của mình.',
       'verify.s3.title': 'Partner consent',
@@ -2870,17 +2873,17 @@ document.addEventListener('keydown', function(e) {
       'verify.cta.btn': '📩 Liên hệ admin',
       // Legacy leaderboard keys (kept for safety)
       'dan.lb.badge': '🎯 CÂU CHUYỆN THẬT',
-      'dan.lb.sub': 'Network cập nhật tháng · Dữ liệu từ DA Network',
+      'dan.lb.sub': 'Network cập nhật tháng · Dữ liệu từ DA Crypto',
       'dan.lb.h.channel': 'Kênh',
       'dan.lb.h.earn': 'Hoa Hồng/Tháng',
       'dan.lb.h.rate': 'Tỷ Lệ',
-      'dan.lb.note': '* Partner consent và minh bạch dữ liệu là cam kết của DA Network.',
+      'dan.lb.note': '* Partner consent và minh bạch dữ liệu là cam kết của DA Crypto.',
       // Feedback
       'dan.fb.badge': '📸 BẰNG CHỨNG THỰC TẾ',
       'dan.fb.sub': 'Ảnh chụp màn hình xác nhận hoa hồng — cập nhật liên tục từ partner trong mạng lưới.',
       'dan.fb.ph1': 'Hình ảnh đang được cập nhật',
       'dan.fb.ph2': 'Partner gửi ảnh feedback về admin để được hiển thị tại đây',
-      'dan.cta.text': 'Sẵn sàng tham gia DA Network và bắt đầu kiếm hoa hồng?',
+      'dan.cta.text': 'Sẵn sàng tham gia DA Crypto và bắt đầu kiếm hoa hồng?',
       'dan.cta.btn': 'Bắt Đầu Ngay',
       // Đặc Quyền cards
       'dq.badge.limited': '✓ Tuyển chọn kỹ',
@@ -2889,7 +2892,7 @@ document.addEventListener('keydown', function(e) {
       'dq.card3.body': 'Kênh riêng chia sẻ <strong>sự thật tài chính</strong> và <strong>triết lý sống</strong> mà tệp wealthy không bao giờ nói công khai.',
       'dq.card.details': 'Xem chi tiết',
       'dq.cta.sub': 'Tham gia — phản hồi trong 24–48h.',
-      'dash.point1': 'Có cơ hội sử dụng <strong>Bot giao dịch độc quyền</strong> của DA NETWORK',
+      'dash.point1': 'Có cơ hội sử dụng <strong>Bot giao dịch độc quyền</strong> của DA CRYPTO',
       'dash.point2': 'Có trang web tracking signal <strong>minh bạch về hiệu suất</strong> của Bot',
       'dash.btn': 'Mở dashboard →',
       'dash.disclaimer': 'Hiệu suất quá khứ không đảm bảo kết quả trong tương lai. Nội dung này không phải lời khuyên đầu tư.',
@@ -2903,7 +2906,7 @@ document.addEventListener('keydown', function(e) {
       'popup.bot.f2.body': 'Dữ liệu giao dịch cập nhật theo thời gian thực — xem tại dashboard tracking.',
       'popup.bot.f3.title': 'Tự động 100% — không cần theo dõi',
       'popup.bot.f3.body': 'Chạy 24/7, tự vào lệnh, tự chốt lời, tự cắt lỗ. Bạn chỉ việc để vốn.',
-      'popup.bot.f4.title': 'Voucher thuê riêng cho Partner DA Network',
+      'popup.bot.f4.title': 'Voucher thuê riêng cho Partner DA Crypto',
       'popup.bot.f4.body': 'Ngoài thị trường giá thuê gốc lên đến $200/tháng — bạn được sử dụng miễn phí qua voucher độc quyền.',
       'popup.bot.alert': '✓ <strong>Voucher dành cho partner chất lượng.</strong> Chúng tôi review từng partner để đảm bảo nguồn lực đến đúng người cam kết build lâu dài — không tuyển ồ ạt.',
       'popup.bot.cta': '🔓 Tham Gia Để Nhận Voucher',
@@ -2922,9 +2925,9 @@ document.addEventListener('keydown', function(e) {
       'popup.mkt.f4.body': 'Thông báo ngay khi có biến động lớn — biết trước, đưa ra quyết định sớm hơn 90% còn lại',
       'popup.mkt.alert': '📊 Người nắm thông tin sớm hơn <strong>kiếm nhiều hơn</strong>. Kênh này chỉ mở cho partner — không bán ra bên ngoài.',
       'popup.mkt.cta': '🔓 Tham Gia Để Vào Kênh',
-      'popup.mkt.note': 'Miễn phí · Chỉ cần là partner DA Network',
+      'popup.mkt.note': 'Miễn phí · Chỉ cần là partner DA Crypto',
       // Popup Facts
-      'popup.facts.badge': '💎 ĐỘC QUYỀN · KHÔNG BÁN RA NGOÀI',
+      'dq.badge.exclusive':'💎 Độc quyền', 'popup.facts.badge': '💎 ĐỘC QUYỀN · KHÔNG BÁN RA NGOÀI',
       'popup.facts.title': 'Kênh Facts &amp; Quotes Độc Quyền',
       'popup.facts.lead': 'Những gì người giàu thực sự hiểu về tiền — nhưng không bao giờ nói ra ngoài. Bây giờ nó là của bạn.',
       'popup.facts.f1.title': 'Sự thật tài chính mà trường học không dạy',
@@ -2935,7 +2938,7 @@ document.addEventListener('keydown', function(e) {
       'popup.facts.f3.body': 'Cách họ nhìn thời gian, quan hệ, sức khỏe, và cơ hội khác 99% dân số như thế nào',
       'popup.facts.f4.title': 'Cập nhật đều đặn — không spam',
       'popup.facts.f4.body': 'Mỗi bài là một hạt nhân, chưng cất kĩ — đọc 2 phút thay đổi cách nghĩ cả ngày',
-      'popup.facts.alert': '✨ Kênh này không có bản trả phí. <strong>Chỉ partner DA Network</strong> mới được vào — và hoàn toàn miễn phí.',
+      'popup.facts.alert': '✨ Kênh này không có bản trả phí. <strong>Chỉ partner DA Crypto</strong> mới được vào — và hoàn toàn miễn phí.',
       'popup.facts.cta': '🔓 Tham Gia Để Vào Kênh',
       'popup.facts.note': 'Miễn phí hoàn toàn · Chỉ cần là partner',
       // Liên Hệ
@@ -2954,15 +2957,18 @@ document.addEventListener('keydown', function(e) {
       'footer.link.contact': 'Liên Hệ',
       'footer.link.calc2': 'Tính Thu Nhập',
       'footer.disclaimer': '<strong>Tuyên bố miễn trách nhiệm:</strong> Nội dung trên chỉ mang tính chất thông tin và giáo dục. Không phải lời khuyên tài chính. Đầu tư crypto có rủi ro cao.',
-      'footer.copy2': '© 2026 DA NETWORK.',
+      'footer.copy2': '© 2026 DA CRYPTO.',
     },
     en: {
+      'proof.period.dec25':'Dec 2025 · 100 users','proof.period.feb26':'Feb 2026 · 32 new users','proof.period.nov25':'Nov 2025 · Direct commission',
+      'proof.period.jan26b':'01/2026 · Vol $5.3M · 23 traders','proof.period.feb26b':'02/2026 · Vol $8.8M · 32 traders','proof.period.dec25b':'12/2025 · USDT &amp; Inverse · Settled','proof.period.sep25':'09-10/2025 · USDT &amp; Inverse',
+      'proof.note':'All screenshots come directly from exchange dashboards (Ourbit, Bingx, Binance) · Click an image to see details · Some sensitive information may be hidden to protect partners.',
       // Nav
       'nav.cta':       'Get Started',
       'nav.guide':     'Guide',
       'nav.calc':      'Calculator',
       'nav.faq':       'FAQ',
-      'nav.network':   'DA Network',
+      'nav.network':   'DA Crypto',
       'nav.privilege': '⭐ Privileges',
       // Hero
       'hero.badge':  'Full A–Z Guide • 100% Free',
@@ -2978,7 +2984,7 @@ document.addEventListener('keydown', function(e) {
       'snap.partners':   'Active partners',
       'snap.paid':       'Paid to partners last month',
       'snap.exchanges':  'Core partner exchanges',
-      'snap.foot':       '“Paid” shows total commission DA Network has actually transferred to partners last month, verified via withdrawal records.',
+      'snap.foot':       '“Paid” shows total commission DA Crypto has actually transferred to partners last month, verified via withdrawal records.',
       'snap.foot.link':  'See how we verify →',
       // Legacy keys kept for backwards compat in modal/aria-labels
       'stats.active':     '✓ VERIFIED',
@@ -2995,7 +3001,7 @@ document.addEventListener('keydown', function(e) {
       // Explainer cards
       'ec.title1': 'What Is Crypto Affiliate Marketing?',
       'ec.title2': 'Income From Crypto Affiliate',
-      'ec.title3': 'Why Choose DA Network?',
+      'ec.title3': 'Why Choose DA Crypto?',
       // Calculator
       'calc.tag':   'Calculation Tool',
       'calc.title': 'Affiliate Income Calculator',
@@ -3003,31 +3009,31 @@ document.addEventListener('keydown', function(e) {
       // FAQ
       'faq.tag':   'Frequently Asked Questions',
       'faq.title': 'FAQ',
-      // DA Network
+      // DA Crypto
       'dan.tag':     'Affiliate Network',
-      'dan.title':   'About DA Network',
+      'dan.title':   'About DA Crypto',
       'dan.sub':     'A professional crypto affiliate system — connecting hundreds of partners across Southeast Asia with top global exchanges.',
       'dan.lb.title':'Partners Doing Well', // legacy fallback
       'dan.fb.title':'Real Partner Commissions',
       // Đặc Quyền
-      'dq.tag':   '🔒 Exclusive to DA Network Partners',
-      'dq.title': 'DA Network Member Privileges',
+      'dq.tag':   '🔒 Exclusive to DA Crypto Partners',
+      'dq.title': 'DA Crypto Member Privileges',
       'dq.sub':   'Only <strong style="color:#ffd966">237 active partners</strong> have access. These are things money can\'t buy outside.',
       'dq.card1.title': 'AI Trading Bot — Korean Team',
       'dq.card2.title': 'Daily Market Plan Channel',
       'dq.card3.title': 'Exclusive Finance Facts & Quotes',
-      'dq.cta.strong': 'All privileges above are reserved for DA Network partners only.',
+      'dq.cta.strong': 'All privileges above are reserved for DA Crypto partners only.',
       'dq.cta.btn':    '⚡ Join to Unlock',
       // Liên Hệ
       'lh.tag':   'Support',
-      'lh.title': 'Contact DA NETWORK',
+      'lh.title': 'Contact DA CRYPTO',
       'lh.sub':   'Have questions or want to join the network? Our team is available 24/7.',
       // Footer
       'footer.desc':  'A comprehensive crypto affiliate guide for Vietnamese speakers.',
       'footer.col1':  'Guide',
       'footer.col2':  'Tools',
-      'footer.col3':  'About DA NETWORK',
-      'footer.copy':  '© 2026 DA NETWORK. All rights reserved.',
+      'footer.col3':  'About DA CRYPTO',
+      'footer.copy':  '© 2026 DA CRYPTO. All rights reserved.',
 
       // Explainer cards
       'ec.h1': 'What Is Affiliate?',
@@ -3057,11 +3063,11 @@ document.addEventListener('keydown', function(e) {
       'calc.res3': 'Total exchange fees',
       'calc.res4': 'Commission per person',
       'calc.note': '* Estimated projection. Actual income depends on user activity and exchange terms.',
-      // DA Network intro cards
+      // DA Crypto intro cards
       'dan.c1.title': 'Wide Coverage',
       'dan.c1.body': 'Operating in Vietnam, Indonesia, Philippines — and expanding across Southeast Asia with 237+ active partners.',
       'dan.c2.title': 'Highest Commissions',
-      'dan.c2.body': 'Commission rates up to <strong class="gold-text">70%</strong> — higher than direct sign-ups, negotiated exclusively by DA Network with each exchange.',
+      'dan.c2.body': 'Commission rates up to <strong class="gold-text">70%</strong> — higher than direct sign-ups, negotiated exclusively by DA Crypto with each exchange.',
       'dan.c3.title': 'Full Support',
       'dan.c3.body': '24/7 admin support with resources, tools, and personalized growth roadmaps for every partner.',
       'dan.c4.title': 'Sustainable Growth',
@@ -3069,15 +3075,15 @@ document.addEventListener('keydown', function(e) {
       // Partner Wins (replaces fake leaderboard)
       'wins.badge': '🎯 REAL STORIES',
       'wins.title': 'Real Partners, Real Results',
-      'wins.sub': 'Not an income leaderboard. Just a few real stories from partners building traffic and earning commission through DA Network.',
+      'wins.sub': 'Not an income leaderboard. Just a few real stories from partners building traffic and earning commission through DA Crypto.',
       'wins.note': 'All stories are shared with partner consent. Results may vary depending on channel, traffic, and execution.',
-      'wins.note.link': 'See how DA Network verifies partners →',
+      'wins.note.link': 'See how DA Crypto verifies partners →',
       // Verification block
       'verify.badge': '🔍 TRANSPARENCY',
-      'verify.title': 'How DA Network Verifies Numbers',
+      'verify.title': 'How DA Crypto Verifies Numbers',
       'verify.sub': 'In an industry where fake screenshots and fake leaderboards are routine — here\'s how we make sure every number you see is real.',
       'verify.s1.title': 'Exchange dashboard data',
-      'verify.s1.body': 'Every partner registers under DA Network\'s ref link. Admin sees pending/paid commissions directly from <strong>Binance, Ourbit, Bingx</strong> dashboards — untouched by third parties.',
+      'verify.s1.body': 'Every partner registers under DA Crypto\'s ref link. Admin sees pending/paid commissions directly from <strong>Binance, Ourbit, Bingx</strong> dashboards — untouched by third parties.',
       'verify.s2.title': 'Withdrawal records',
       'verify.s2.body': 'The “paid” number on this site counts only commissions <strong>successfully transferred</strong> to partner wallets/accounts — excluding pending or canceled. Partners can cross-check against their own withdrawal history.',
       'verify.s3.title': 'Partner consent',
@@ -3086,17 +3092,17 @@ document.addEventListener('keydown', function(e) {
       'verify.cta.btn': '📩 Contact admin',
       // Legacy leaderboard keys (kept for safety)
       'dan.lb.badge': '🎯 REAL STORIES',
-      'dan.lb.sub': 'Monthly snapshot · Data from DA Network',
+      'dan.lb.sub': 'Monthly snapshot · Data from DA Crypto',
       'dan.lb.h.channel': 'Channel',
       'dan.lb.h.earn': 'Commission/Month',
       'dan.lb.h.rate': 'Rate',
-      'dan.lb.note': '* Partner consent and data transparency are DA Network\'s commitment.',
+      'dan.lb.note': '* Partner consent and data transparency are DA Crypto\'s commitment.',
       // Feedback
       'dan.fb.badge': '📸 REAL PROOF',
       'dan.fb.sub': 'Commission confirmation screenshots — continuously updated from partners in the network.',
       'dan.fb.ph1': 'Images coming soon',
       'dan.fb.ph2': 'Partners submit feedback screenshots to admin for display here',
-      'dan.cta.text': 'Ready to join DA Network and start earning commissions?',
+      'dan.cta.text': 'Ready to join DA Crypto and start earning commissions?',
       'dan.cta.btn': 'Get Started Now',
       // Đặc Quyền cards
       'dq.badge.limited': '✓ Hand-picked partners',
@@ -3105,7 +3111,7 @@ document.addEventListener('keydown', function(e) {
       'dq.card3.body': 'A private channel sharing <strong>financial truths</strong> and <strong>life philosophy</strong> that the wealthy never say publicly.',
       'dq.card.details': 'View details',
       'dq.cta.sub': 'Join — we respond within 24–48h.',
-      'dash.point1': 'Opportunity to use DA NETWORK\'s <strong>exclusive trading bot</strong>',
+      'dash.point1': 'Opportunity to use DA CRYPTO\'s <strong>exclusive trading bot</strong>',
       'dash.point2': 'Signal tracking website with <strong>transparent bot performance</strong>',
       'dash.btn': 'Open dashboard →',
       'dash.disclaimer': 'Past performance does not guarantee future results. This is not investment advice.',
@@ -3119,7 +3125,7 @@ document.addEventListener('keydown', function(e) {
       'popup.bot.f2.body': 'Real-time trading data updated continuously — view on the tracking dashboard.',
       'popup.bot.f3.title': '100% Automated — No Monitoring Needed',
       'popup.bot.f3.body': 'Runs 24/7, auto-enters trades, auto-takes profit, auto-cuts loss. Just deposit capital.',
-      'popup.bot.f4.title': 'Exclusive Voucher for DA Network Partners',
+      'popup.bot.f4.title': 'Exclusive Voucher for DA Crypto Partners',
       'popup.bot.f4.body': 'Market rental price is up to $200/month — you get it free through the exclusive partner voucher.',
       'popup.bot.alert': '⚠️ <strong>Only 12 vouchers left</strong> this month. Slots close when full.',
       'popup.bot.cta': '🔓 Join to Claim Your Voucher',
@@ -3138,9 +3144,9 @@ document.addEventListener('keydown', function(e) {
       'popup.mkt.f4.body': 'Instant alerts on major moves — act before 90% of the market',
       'popup.mkt.alert': '📊 Those who get information first <strong>earn more</strong>. This channel is partner-only — not available outside.',
       'popup.mkt.cta': '🔓 Join to Access the Channel',
-      'popup.mkt.note': 'Free · DA Network partners only',
+      'popup.mkt.note': 'Free · DA Crypto partners only',
       // Popup Facts
-      'popup.facts.badge': '💎 EXCLUSIVE · NOT FOR SALE',
+      'dq.badge.exclusive':'💎 Exclusive', 'popup.facts.badge': '💎 EXCLUSIVE · NOT FOR SALE',
       'popup.facts.title': 'Exclusive Facts &amp; Quotes Channel',
       'popup.facts.lead': 'What the truly wealthy understand about money — but never say out loud. Now it\'s yours.',
       'popup.facts.f1.title': 'Financial truths schools never teach',
@@ -3151,7 +3157,7 @@ document.addEventListener('keydown', function(e) {
       'popup.facts.f3.body': 'How they see time, relationships, health, and opportunity — different from 99% of people',
       'popup.facts.f4.title': 'Regular updates — no spam',
       'popup.facts.f4.body': 'Every post is a concentrated insight — 2 minutes of reading changes your thinking for the whole day',
-      'popup.facts.alert': '✨ This channel has no paid version. <strong>Only DA Network partners</strong> get in — completely free.',
+      'popup.facts.alert': '✨ This channel has no paid version. <strong>Only DA Crypto partners</strong> get in — completely free.',
       'popup.facts.cta': '🔓 Join to Access the Channel',
       'popup.facts.note': 'Completely free · Just be a partner',
       // Contact
@@ -3170,173 +3176,177 @@ document.addEventListener('keydown', function(e) {
       'footer.link.contact': 'Contact',
       'footer.link.calc2': 'Calculator',
       'footer.disclaimer': '<strong>Disclaimer:</strong> Content is for informational and educational purposes only. Not financial advice. Crypto investments carry high risk.',
-      'footer.copy2': '© 2026 DA NETWORK.',
+      'footer.copy2': '© 2026 DA CRYPTO.',
     },
     th: {
-      'nav.cta':'เริ่มต้นเลย','nav.guide':'คู่มือ','nav.calc':'คำนวณรายได้','nav.faq':'คำถาม','nav.network':'DA Network','nav.privilege':'⭐ สิทธิพิเศษ',
+      'nav.cta':'เริ่มต้นเลย','nav.guide':'คู่มือ','nav.calc':'คำนวณรายได้','nav.faq':'คำถาม','nav.network':'DA Crypto','nav.privilege':'⭐ สิทธิพิเศษ',
       'hero.badge':'คู่มือ A–Z ครบถ้วน • ฟรี 100%','hero.title1':'หาเงินกับ','hero.title2':'Crypto Affiliate','hero.title3':'เริ่มจากศูนย์',
       'hero.sub':'คู่มือที่ครอบคลุมและเข้าใจง่ายสำหรับมือใหม่ ตั้งแต่พื้นฐานจนถึงกลยุทธ์จริง — พร้อมตัวอย่างทีละขั้นตอน',
       'hero.cta1':'อ่านคู่มือ','hero.cta2':'คำนวณรายได้',
       'snap.tag':'📊 ข้อมูลเครือข่าย','snap.meta':'อัปเดตทุกวันที่ 1 ของเดือน · ข้อมูลยืนยันแล้ว','snap.partners':'พาร์ทเนอร์ที่ใช้งานอยู่','snap.paid':'จ่ายให้พาร์ทเนอร์เดือนที่แล้ว','snap.exchanges':'ตลาดหลักที่เป็นพาร์ทเนอร์',
-      'snap.foot':'ตัวเลข "จ่ายแล้ว" คือคอมมิชชันทั้งหมดที่ DA Network โอนให้พาร์ทเนอร์ในเดือนที่แล้ว ยืนยันผ่านประวัติการถอน','snap.foot.link':'ดูวิธีการตรวจสอบ →',
+      'snap.foot':'ตัวเลข "จ่ายแล้ว" คือคอมมิชชันทั้งหมดที่ DA Crypto โอนให้พาร์ทเนอร์ในเดือนที่แล้ว ยืนยันผ่านประวัติการถอน','snap.foot.link':'ดูวิธีการตรวจสอบ →',
       'stats.active':'✓ ยืนยันแล้ว','stats.partners':'พาร์ทเนอร์','stats.partnerSub':'อัปเดตทุกวันที่ 1 ของเดือน','stats.hint':'แตะเพื่อดูรายละเอียด →','stats.live':'✓ ยืนยันแล้ว','stats.commLabel':'คอมมิชชันที่จ่ายในเดือนที่แล้ว',
       'guide.tag':'คู่มือครบถ้วน','guide.title':'Crypto Affiliate คืออะไร?','guide.sub':'เรียนรู้ตั้งแต่ A ถึง Z — ตั้งแต่พื้นฐานจนถึงการสร้างรายได้จริง','guide.stepsTitle':'8 ขั้นตอนเริ่มต้นหาเงิน',
-      'ec.title1':'Crypto Affiliate Marketing คืออะไร?','ec.title2':'รายได้จาก Crypto Affiliate','ec.title3':'ทำไมถึงเลือก DA Network?',
+      'ec.title1':'Crypto Affiliate Marketing คืออะไร?','ec.title2':'รายได้จาก Crypto Affiliate','ec.title3':'ทำไมถึงเลือก DA Crypto?',
       'calc.tag':'เครื่องมือคำนวณ','calc.title':'คำนวณรายได้ Affiliate','calc.sub':'ประมาณรายได้ต่อเดือนตามจำนวนผู้แนะนำและปริมาณการเทรด',
       'faq.tag':'คำถามที่พบบ่อย','faq.title':'FAQ',
-      'dan.tag':'เครือข่าย Affiliate','dan.title':'เกี่ยวกับ DA Network','dan.sub':'ระบบ crypto affiliate ระดับมืออาชีพ — เชื่อมต่อพาร์ทเนอร์หลายร้อยคนทั่วเอเชียตะวันออกเฉียงใต้กับตลาดแลกเปลี่ยนชั้นนำของโลก',
+      'dan.tag':'เครือข่าย Affiliate','dan.title':'เกี่ยวกับ DA Crypto','dan.sub':'ระบบ crypto affiliate ระดับมืออาชีพ — เชื่อมต่อพาร์ทเนอร์หลายร้อยคนทั่วเอเชียตะวันออกเฉียงใต้กับตลาดแลกเปลี่ยนชั้นนำของโลก',
       'dan.lb.title':'พาร์ทเนอร์ที่ทำได้ดี','dan.fb.title':'ค่าคอมมิชชันจริงของพาร์ทเนอร์',
-      'dq.tag':'🔒 เฉพาะพาร์ทเนอร์ DA Network','dq.title':'สิทธิพิเศษของ DA Network','dq.sub':'เฉพาะ <strong style="color:#ffd966">237 พาร์ทเนอร์</strong>ที่ใช้งานอยู่เท่านั้นที่มีสิทธิ์เข้าถึง สิ่งที่ไม่สามารถซื้อได้ข้างนอก',
+      'dq.tag':'🔒 เฉพาะพาร์ทเนอร์ DA Crypto','dq.title':'สิทธิพิเศษของ DA Crypto','dq.sub':'เฉพาะ <strong style="color:#ffd966">237 พาร์ทเนอร์</strong>ที่ใช้งานอยู่เท่านั้นที่มีสิทธิ์เข้าถึง สิ่งที่ไม่สามารถซื้อได้ข้างนอก',
       'dq.card1.title':'AI Trading Bot — ทีมเกาหลี','dq.card2.title':'ช่องอัปเดตแผนตลาด','dq.card3.title':'ช่อง Facts &amp; Quotes สุดเอ็กซ์คลูซีฟ',
-      'dq.cta.strong':'สิทธิพิเศษทั้งหมดข้างต้นสงวนไว้เฉพาะพาร์ทเนอร์ DA Network เท่านั้น','dq.cta.btn':'⚡ เข้าร่วมเพื่อปลดล็อก',
-      'lh.tag':'การสนับสนุน','lh.title':'ติดต่อ DA NETWORK','lh.sub':'มีคำถามหรืออยากเข้าร่วมเครือข่าย? ทีมพร้อมให้บริการ 24/7',
-      'footer.desc':'คู่มือ crypto affiliate ที่ครอบคลุมสำหรับผู้ใช้ภาษาไทย','footer.col1':'คู่มือ','footer.col2':'เครื่องมือ','footer.col3':'เกี่ยวกับ DA NETWORK','footer.copy':'© 2026 DA NETWORK. สงวนลิขสิทธิ์ทั้งหมด',
+      'dq.cta.strong':'สิทธิพิเศษทั้งหมดข้างต้นสงวนไว้เฉพาะพาร์ทเนอร์ DA Crypto เท่านั้น','dq.cta.btn':'⚡ เข้าร่วมเพื่อปลดล็อก',
+      'lh.tag':'การสนับสนุน','lh.title':'ติดต่อ DA CRYPTO','lh.sub':'มีคำถามหรืออยากเข้าร่วมเครือข่าย? ทีมพร้อมให้บริการ 24/7',
+      'footer.desc':'คู่มือ crypto affiliate ที่ครอบคลุมสำหรับผู้ใช้ภาษาไทย','footer.col1':'คู่มือ','footer.col2':'เครื่องมือ','footer.col3':'เกี่ยวกับ DA CRYPTO','footer.copy':'© 2026 DA CRYPTO. สงวนลิขสิทธิ์ทั้งหมด',
       'ec.h1':'Affiliate คืออะไร?','ec.p1':'คุณแนะนำผู้อื่นให้สมัครตลาดแลกเปลี่ยน crypto ผ่าน<strong>ลิงก์พิเศษของคุณ</strong> เมื่อพวกเขาเทรด คุณได้รับค่าคอมมิชชันจากค่าธรรมเนียมการเทรด','ec.hint1':'แตะเพื่อเรียนรู้เพิ่มเติม →',
       'ec.h2':'หาเงินได้เท่าไร?','ec.p2':'ค่าคอมมิชชันโดยทั่วไปอยู่ที่ <strong>20%–50% ของค่าธรรมเนียมการเทรด</strong> บางตลาดจ่ายค่าคอมมิชชันตลอดชีพ','ec.hint2':'แตะเพื่อดูตัวอย่างจริง →',
       'ec.h3':'ข้อได้เปรียบหลัก','ec.p3':'ไม่ต้องใช้ทุน ไม่ต้องมีประสบการณ์การเทรด รายได้ passive — หาเงินแม้ตอนนอนหลับ','ec.hint3':'แตะเพื่อดูข้อได้เปรียบทั้งหมด →',
       'guide.prev':'ก่อนหน้า','guide.next':'ถัดไป','guide.compareTitle':'เปรียบเทียบตลาด Affiliate ชั้นนำ','guide.viewAllDeals':'ดูทั้งหมด 12 ตลาด',
       'calc.inputTitle':'กรอกข้อมูล','calc.lbl1':'จำนวนผู้แนะนำต่อเดือน','calc.unit.people':'คน','calc.lbl2':'ปริมาณการเทรดเฉลี่ยต่อคน (USD/เดือน)','calc.lbl3':'อัตราค่าคอมมิชชัน (%)','calc.lbl4':'ค่าธรรมเนียมการเทรดของตลาด (%)','calc.resultTitle':'ผลลัพธ์โดยประมาณ','calc.res1':'รายได้เดือนนี้','calc.res2':'รายได้ต่อปี','calc.res3':'ค่าธรรมเนียมตลาดทั้งหมด','calc.res4':'ค่าคอมมิชชันต่อคน','calc.note':'* ตัวเลขโดยประมาณ รายได้จริงขึ้นอยู่กับกิจกรรมของผู้ใช้และเงื่อนไขของตลาด',
       'dan.c1.title':'ครอบคลุมกว้างขวาง','dan.c1.body':'ดำเนินการในเวียดนาม อินโดนีเซีย ฟิลิปปินส์ — และกำลังขยายทั่วเอเชียตะวันออกเฉียงใต้ด้วยพาร์ทเนอร์ที่ใช้งานอยู่ 237+ คน',
-      'dan.c2.title':'ค่าคอมมิชชันสูงสุด','dan.c2.body':'อัตราค่าคอมมิชชันสูงถึง <strong class="gold-text">70%</strong> — สูงกว่าการสมัครโดยตรง เจรจาโดย DA Network กับแต่ละตลาดโดยเฉพาะ',
+      'dan.c2.title':'ค่าคอมมิชชันสูงสุด','dan.c2.body':'อัตราค่าคอมมิชชันสูงถึง <strong class="gold-text">70%</strong> — สูงกว่าการสมัครโดยตรง เจรจาโดย DA Crypto กับแต่ละตลาดโดยเฉพาะ',
       'dan.c3.title':'การสนับสนุนเต็มรูปแบบ','dan.c3.body':'ทีม admin สนับสนุน 24/7 พร้อมทรัพยากร เครื่องมือ และแผนการเติบโตส่วนบุคคลสำหรับทุกพาร์ทเนอร์',
       'dan.c4.title':'การเติบโตที่ยั่งยืน','dan.c4.body':'รับค่าคอมมิชชันจากผู้แนะนำโดยตรงและ sub-affiliate ระดับ 1 — สูงสุด 2 ระดับ',
-      'wins.badge':'🎯 เรื่องจริง','wins.title':'พาร์ทเนอร์จริง ผลลัพธ์จริง','wins.sub':'ไม่ใช่ตาราง ranking รายได้ แต่เป็นเรื่องจริงจากพาร์ทเนอร์ที่กำลังสร้าง traffic และรับค่าคอมมิชชันผ่าน DA Network','wins.note':'เรื่องราวทั้งหมดแบ่งปันด้วยความยินยอมของพาร์ทเนอร์ ผลลัพธ์อาจแตกต่างกัน','wins.note.link':'ดูวิธีที่ DA Network ตรวจสอบพาร์ทเนอร์ →',
-      'verify.badge':'🔍 ความโปร่งใส','verify.title':'วิธีที่ DA Network ตรวจสอบตัวเลข','verify.sub':'ในอุตสาหกรรมที่ screenshot ปลอมและ leaderboard ปลอมเป็นเรื่องปกติ — นี่คือวิธีที่เราทำให้ทุกตัวเลขเป็นของจริง',
-      'verify.s1.title':'ข้อมูลจาก dashboard ของตลาด','verify.s1.body':'พาร์ทเนอร์ทุกคนลงทะเบียนภายใต้ลิงก์ ref ของ DA Network Admin เห็นค่าคอมมิชชัน pending/paid โดยตรงจาก dashboard ของ <strong>Binance, Ourbit, Bingx</strong>',
+      'wins.badge':'🎯 เรื่องจริง','wins.title':'พาร์ทเนอร์จริง ผลลัพธ์จริง','wins.sub':'ไม่ใช่ตาราง ranking รายได้ แต่เป็นเรื่องจริงจากพาร์ทเนอร์ที่กำลังสร้าง traffic และรับค่าคอมมิชชันผ่าน DA Crypto','wins.note':'เรื่องราวทั้งหมดแบ่งปันด้วยความยินยอมของพาร์ทเนอร์ ผลลัพธ์อาจแตกต่างกัน','wins.note.link':'ดูวิธีที่ DA Crypto ตรวจสอบพาร์ทเนอร์ →',
+      'verify.badge':'🔍 ความโปร่งใส','verify.title':'วิธีที่ DA Crypto ตรวจสอบตัวเลข','verify.sub':'ในอุตสาหกรรมที่ screenshot ปลอมและ leaderboard ปลอมเป็นเรื่องปกติ — นี่คือวิธีที่เราทำให้ทุกตัวเลขเป็นของจริง',
+      'verify.s1.title':'ข้อมูลจาก dashboard ของตลาด','verify.s1.body':'พาร์ทเนอร์ทุกคนลงทะเบียนภายใต้ลิงก์ ref ของ DA Crypto Admin เห็นค่าคอมมิชชัน pending/paid โดยตรงจาก dashboard ของ <strong>Binance, Ourbit, Bingx</strong>',
       'verify.s2.title':'บันทึกการถอน','verify.s2.body':'ตัวเลข "จ่ายแล้ว" นับเฉพาะค่าคอมมิชชันที่<strong>โอนสำเร็จ</strong>ไปยังกระเป๋า/บัญชีของพาร์ทเนอร์ — ไม่รวม pending หรือที่ถูกยกเลิก',
       'verify.s3.title':'ความยินยอมของพาร์ทเนอร์','verify.s3.body':'ทุกเรื่อง quote และสถิติส่วนบุคคลที่แสดงต่อสาธารณะ<strong>ได้รับความยินยอม</strong> คุณสามารถขอลบข้อมูลของคุณได้ทุกเมื่อ — เราดำเนินการภายใน 48 ชั่วโมง',
       'verify.cta.text':'คิดว่าตัวเลขไม่ตรงกับการถอนของคุณ? ต้องการรายละเอียดเกี่ยวกับ case study ของพาร์ทเนอร์คนใดคนหนึ่ง?','verify.cta.btn':'📩 ติดต่อ admin',
-      'dan.lb.badge':'🎯 เรื่องจริง','dan.lb.sub':'ข้อมูลรายเดือน · ข้อมูลจาก DA Network','dan.lb.h.channel':'ช่องทาง','dan.lb.h.earn':'ค่าคอมมิชชัน/เดือน','dan.lb.h.rate':'อัตรา','dan.lb.note':'* ความยินยอมของพาร์ทเนอร์และความโปร่งใสของข้อมูลคือพันธสัญญาของ DA Network',
+      'dan.lb.badge':'🎯 เรื่องจริง','dan.lb.sub':'ข้อมูลรายเดือน · ข้อมูลจาก DA Crypto','dan.lb.h.channel':'ช่องทาง','dan.lb.h.earn':'ค่าคอมมิชชัน/เดือน','dan.lb.h.rate':'อัตรา','dan.lb.note':'* ความยินยอมของพาร์ทเนอร์และความโปร่งใสของข้อมูลคือพันธสัญญาของ DA Crypto',
       'dan.fb.badge':'📸 หลักฐานจริง','dan.fb.sub':'ภาพหน้าจอยืนยันค่าคอมมิชชัน — อัปเดตต่อเนื่องจากพาร์ทเนอร์ในเครือข่าย','dan.fb.ph1':'กำลังอัปเดตรูปภาพ','dan.fb.ph2':'พาร์ทเนอร์ส่งภาพ feedback ให้ admin เพื่อแสดงที่นี่',
-      'dan.cta.text':'พร้อมเข้าร่วม DA Network และเริ่มรับค่าคอมมิชชันแล้วหรือยัง?','dan.cta.btn':'เริ่มต้นเลย',
-      'dq.badge.limited':'✓ คัดเลือกอย่างพิถีพิถัน','dq.card1.body':'อย่าโน้มน้าวชุมชนของคุณ ส่งลิงก์นี้ให้พวกเขา','dq.card2.body':'อัปเดต<strong>แผนตลาดทุกวัน</strong>จากเทรดเดอร์มืออาชีพ รู้ทิศทางตลาดก่อนคนอื่น','dq.card3.body':'ช่องส่วนตัวแบ่งปัน<strong>ความจริงทางการเงิน</strong>และ<strong>ปรัชญาชีวิต</strong>ที่คนรวยไม่เคยพูดต่อสาธารณะ','dq.card.details':'ดูรายละเอียด','dq.cta.sub':'เข้าร่วม — ตอบกลับภายใน 24–48 ชั่วโมง','dash.point1':'มีโอกาสใช้ <strong>บอทเทรดสุดเอ็กซ์คลูซีฟ</strong> ของ DA NETWORK','dash.point2':'มีเว็บไซต์ tracking signal <strong>โปร่งใสด้านประสิทธิภาพ</strong>ของบอท','dash.btn':'เปิด dashboard →','dash.disclaimer':'ผลการดำเนินงานในอดีตไม่รับประกันผลลัพธ์ในอนาคต เนื้อหานี้ไม่ใช่คำแนะนำการลงทุน',
+      'dan.cta.text':'พร้อมเข้าร่วม DA Crypto และเริ่มรับค่าคอมมิชชันแล้วหรือยัง?','dan.cta.btn':'เริ่มต้นเลย',
+      'dq.badge.limited':'✓ คัดเลือกอย่างพิถีพิถัน','dq.card1.body':'อย่าโน้มน้าวชุมชนของคุณ ส่งลิงก์นี้ให้พวกเขา','dq.card2.body':'อัปเดต<strong>แผนตลาดทุกวัน</strong>จากเทรดเดอร์มืออาชีพ รู้ทิศทางตลาดก่อนคนอื่น','dq.card3.body':'ช่องส่วนตัวแบ่งปัน<strong>ความจริงทางการเงิน</strong>และ<strong>ปรัชญาชีวิต</strong>ที่คนรวยไม่เคยพูดต่อสาธารณะ','dq.card.details':'ดูรายละเอียด','dq.cta.sub':'เข้าร่วม — ตอบกลับภายใน 24–48 ชั่วโมง','dash.point1':'มีโอกาสใช้ <strong>บอทเทรดสุดเอ็กซ์คลูซีฟ</strong> ของ DA CRYPTO','dash.point2':'มีเว็บไซต์ tracking signal <strong>โปร่งใสด้านประสิทธิภาพ</strong>ของบอท','dash.btn':'เปิด dashboard →','dash.disclaimer':'ผลการดำเนินงานในอดีตไม่รับประกันผลลัพธ์ในอนาคต เนื้อหานี้ไม่ใช่คำแนะนำการลงทุน',
       'popup.bot.badge':'🔥 เอ็กซ์คลูซีฟ · เฉพาะพาร์ทเนอร์','popup.bot.title':'AI Trading Bot — ทีมเกาหลี','popup.bot.lead':'ขณะที่ 95% ของเทรดเดอร์ขาดทุนเพราะเทรดตามอารมณ์ — คุณมีเครื่องจักรทำงาน 24/7 ไม่นอน ไม่กลัว ไม่ FOMO',
-      'popup.bot.f1.title':'พัฒนาโดยทีมเทรดเกาหลี','popup.bot.f1.body':'เทรดเดอร์มืออาชีพที่มีประสบการณ์ตลาดเอเชียมากกว่า 5 ปี','popup.bot.f2.title':'ข้อมูลสดจาก dashboard','popup.bot.f2.body':'ข้อมูลการเทรดอัปเดตแบบ real-time — ดูได้ที่ tracking dashboard','popup.bot.f3.title':'อัตโนมัติ 100% — ไม่ต้องตรวจสอบ','popup.bot.f3.body':'ทำงาน 24/7 เข้าออเดอร์อัตโนมัติ ทำกำไรอัตโนมัติ ตัดขาดทุนอัตโนมัติ แค่ฝากทุน','popup.bot.f4.title':'บัตรเช่าสุดเอ็กซ์คลูซีฟสำหรับพาร์ทเนอร์ DA Network','popup.bot.f4.body':'ราคาเช่าตลาดสูงถึง $200/เดือน — คุณได้ฟรีผ่านบัตรพาร์ทเนอร์สุดเอ็กซ์คลูซีฟ',
+      'popup.bot.f1.title':'พัฒนาโดยทีมเทรดเกาหลี','popup.bot.f1.body':'เทรดเดอร์มืออาชีพที่มีประสบการณ์ตลาดเอเชียมากกว่า 5 ปี','popup.bot.f2.title':'ข้อมูลสดจาก dashboard','popup.bot.f2.body':'ข้อมูลการเทรดอัปเดตแบบ real-time — ดูได้ที่ tracking dashboard','popup.bot.f3.title':'อัตโนมัติ 100% — ไม่ต้องตรวจสอบ','popup.bot.f3.body':'ทำงาน 24/7 เข้าออเดอร์อัตโนมัติ ทำกำไรอัตโนมัติ ตัดขาดทุนอัตโนมัติ แค่ฝากทุน','popup.bot.f4.title':'บัตรเช่าสุดเอ็กซ์คลูซีฟสำหรับพาร์ทเนอร์ DA Crypto','popup.bot.f4.body':'ราคาเช่าตลาดสูงถึง $200/เดือน — คุณได้ฟรีผ่านบัตรพาร์ทเนอร์สุดเอ็กซ์คลูซีฟ',
       'popup.bot.alert':'✓ <strong>บัตรสำหรับพาร์ทเนอร์คุณภาพ</strong> เราตรวจสอบพาร์ทเนอร์แต่ละคนเพื่อให้แน่ใจว่าทรัพยากรถึงมือคนที่มุ่งมั่นสร้างระยะยาว','popup.bot.cta':'🔓 เข้าร่วมเพื่อรับบัตร','popup.bot.note':'สมัครฟรี · รับทันทีหลังยืนยัน',
       'popup.mkt.badge':'🟢 อัปเดตทุกวัน · เอ็กซ์คลูซีฟ','popup.mkt.title':'ช่องอัปเดตแผนตลาด','popup.mkt.lead':'ขณะที่ล้านคนเลื่อน Twitter ท่วมข้อมูล — คุณได้รับแผนที่สะอาด ชัดเจน ทุกเช้า 7 โมง',
       'popup.mkt.f1.title':'แผนตลาดทุกวันเวลา 7:00 น.','popup.mkt.f1.body':'วิเคราะห์แนวโน้ม โซนรองรับ/ต้านทาน คู่สกุลเงินสำคัญในวันนั้น','popup.mkt.f2.title':'การวิเคราะห์ Macro + On-chain','popup.mkt.f2.body':'ข้อมูล on-chain ความรู้สึกรวม ผลกระทบ macro ทางการเงินโลก','popup.mkt.f3.title':'การตั้งค่าเทรดเฉพาะ','popup.mkt.f3.body':'Entry, SL, TP ชัดเจน — แค่อ่านแล้วตัดสินใจ ไม่ต้องวิเคราะห์เอง','popup.mkt.f4.title':'การแจ้งเตือนตลาดแบบ real-time','popup.mkt.f4.body':'แจ้งเตือนทันทีเมื่อมีการเคลื่อนไหวครั้งใหญ่ — ลงมือก่อน 90% ของตลาด',
-      'popup.mkt.alert':'📊 คนที่ได้ข้อมูลก่อน<strong>หาเงินได้มากกว่า</strong> ช่องนี้เฉพาะพาร์ทเนอร์ — ไม่มีขายภายนอก','popup.mkt.cta':'🔓 เข้าร่วมเพื่อเข้าถึงช่อง','popup.mkt.note':'ฟรี · เฉพาะพาร์ทเนอร์ DA Network',
-      'popup.facts.badge':'💎 เอ็กซ์คลูซีฟ · ไม่ขาย','popup.facts.title':'ช่อง Facts &amp; Quotes สุดเอ็กซ์คลูซีฟ','popup.facts.lead':'สิ่งที่คนรวยจริงๆ เข้าใจเกี่ยวกับเงิน — แต่ไม่เคยพูดออกมา ตอนนี้มันเป็นของคุณแล้ว',
+      'popup.mkt.alert':'📊 คนที่ได้ข้อมูลก่อน<strong>หาเงินได้มากกว่า</strong> ช่องนี้เฉพาะพาร์ทเนอร์ — ไม่มีขายภายนอก','popup.mkt.cta':'🔓 เข้าร่วมเพื่อเข้าถึงช่อง','popup.mkt.note':'ฟรี · เฉพาะพาร์ทเนอร์ DA Crypto',
+      'dq.badge.exclusive':'💎 เอ็กซ์คลูซีฟ', 'popup.facts.badge':'💎 เอ็กซ์คลูซีฟ · ไม่ขาย','popup.facts.title':'ช่อง Facts &amp; Quotes สุดเอ็กซ์คลูซีฟ','popup.facts.lead':'สิ่งที่คนรวยจริงๆ เข้าใจเกี่ยวกับเงิน — แต่ไม่เคยพูดออกมา ตอนนี้มันเป็นของคุณแล้ว',
       'popup.facts.f1.title':'ความจริงทางการเงินที่โรงเรียนไม่สอน','popup.facts.f1.body':'คนรวยคิดเกี่ยวกับเงิน ความเสี่ยง การลงทุน และอิสรภาพทางการเงินอย่างไร','popup.facts.f2.title':'คำพูดจาก CEO, นักลงทุน, มหาเศรษฐี','popup.facts.f2.body':'ปรัชญาชีวิตที่กลั่นออกมาจากผู้ที่บรรลุอิสรภาพทางการเงินที่แท้จริง','popup.facts.f3.title':'ไลฟ์สไตล์ elite — ความคิดของคนรวย','popup.facts.f3.body':'พวกเขามองเวลา ความสัมพันธ์ สุขภาพ และโอกาสอย่างไร — ต่างจาก 99% ของผู้คน','popup.facts.f4.title':'อัปเดตสม่ำเสมอ — ไม่สแปม','popup.facts.f4.body':'ทุกโพสต์คือความเข้าใจที่กลั่น — อ่าน 2 นาทีเปลี่ยนความคิดตลอดวัน',
-      'popup.facts.alert':'✨ ช่องนี้ไม่มีเวอร์ชันชำระเงิน <strong>เฉพาะพาร์ทเนอร์ DA Network</strong>เท่านั้นที่เข้าได้ — ฟรีโดยสมบูรณ์','popup.facts.cta':'🔓 เข้าร่วมเพื่อเข้าถึงช่อง','popup.facts.note':'ฟรีโดยสมบูรณ์ · แค่เป็นพาร์ทเนอร์',
+      'popup.facts.alert':'✨ ช่องนี้ไม่มีเวอร์ชันชำระเงิน <strong>เฉพาะพาร์ทเนอร์ DA Crypto</strong>เท่านั้นที่เข้าได้ — ฟรีโดยสมบูรณ์','popup.facts.cta':'🔓 เข้าร่วมเพื่อเข้าถึงช่อง','popup.facts.note':'ฟรีโดยสมบูรณ์ · แค่เป็นพาร์ทเนอร์',
       'lh.bd.title':'Business Development','lh.bd.handle':'@jacksondz','lh.card1.title':'Telegram Admin','lh.card1.handle':'@dacrypto_admin','lh.card2.title':'กลุ่มชุมชน','lh.card2.handle':'Telegram Group DA NETWORK','lh.card3.title':'อีเมลสนับสนุน','lh.card3.handle':'support@dacrypto.net','lh.note':'โดยทั่วไปตอบกลับภายใน <strong>1–2 ชั่วโมง</strong> ในเวลาทำการ',
       'footer.link.start':'เริ่มต้น','footer.link.calc':'คำนวณ','footer.link.contact':'ติดต่อ','footer.link.calc2':'คำนวณ',
-      'footer.disclaimer':'<strong>ข้อจำกัดความรับผิดชอบ:</strong> เนื้อหานี้มีไว้เพื่อให้ข้อมูลและการศึกษาเท่านั้น ไม่ใช่คำแนะนำทางการเงิน การลงทุน crypto มีความเสี่ยงสูง','footer.copy2':'© 2026 DA NETWORK.',
+      'footer.disclaimer':'<strong>ข้อจำกัดความรับผิดชอบ:</strong> เนื้อหานี้มีไว้เพื่อให้ข้อมูลและการศึกษาเท่านั้น ไม่ใช่คำแนะนำทางการเงิน การลงทุน crypto มีความเสี่ยงสูง','footer.copy2':'© 2026 DA CRYPTO.',
     },
     ko: {
-      'nav.cta':'지금 시작하기','nav.guide':'가이드','nav.calc':'수익 계산','nav.faq':'FAQ','nav.network':'DA Network','nav.privilege':'⭐ 특별 혜택',
+      'nav.cta':'지금 시작하기','nav.guide':'가이드','nav.calc':'수익 계산','nav.faq':'FAQ','nav.network':'DA Crypto','nav.privilege':'⭐ 특별 혜택',
       'hero.badge':'A–Z 완전 가이드 • 100% 무료','hero.title1':'수익 창출','hero.title2':'Crypto Affiliate','hero.title3':'처음부터 시작',
       'hero.sub':'초보자를 위한 종합적이고 이해하기 쉬운 가이드. 기초부터 실전 전략까지 — 단계별 예시와 함께.',
       'hero.cta1':'가이드 읽기','hero.cta2':'수익 계산',
       'snap.tag':'📊 네트워크 현황','snap.meta':'매월 1일 업데이트 · 확정 데이터','snap.partners':'활동 중인 파트너','snap.paid':'지난달 파트너에게 지급','snap.exchanges':'핵심 파트너 거래소',
-      'snap.foot':'지급 수치는 DA Network가 지난달 파트너에게 실제 이체한 총 커미션으로, 출금 기록으로 검증됩니다.','snap.foot.link':'검증 방법 보기 →',
+      'snap.foot':'지급 수치는 DA Crypto가 지난달 파트너에게 실제 이체한 총 커미션으로, 출금 기록으로 검증됩니다.','snap.foot.link':'검증 방법 보기 →',
       'stats.active':'✓ 검증됨','stats.partners':'파트너','stats.partnerSub':'매월 1일 업데이트','stats.hint':'자세히 보기 →','stats.live':'✓ 확정됨','stats.commLabel':'지난달 지급된 커미션',
       'guide.tag':'완전 가이드','guide.title':'Crypto Affiliate란?','guide.sub':'A부터 Z까지 — 기초부터 실제 수익 창출까지 모두 배우기','guide.stepsTitle':'수익 창출을 위한 8단계 실전',
-      'ec.title1':'Crypto Affiliate 마케팅이란?','ec.title2':'Crypto Affiliate 수익','ec.title3':'왜 DA Network를 선택해야 하나?',
+      'ec.title1':'Crypto Affiliate 마케팅이란?','ec.title2':'Crypto Affiliate 수익','ec.title3':'왜 DA Crypto를 선택해야 하나?',
       'calc.tag':'계산 도구','calc.title':'Affiliate 수익 계산기','calc.sub':'추천 수와 거래량을 기반으로 월 수익을 추산합니다.',
       'faq.tag':'자주 묻는 질문','faq.title':'FAQ',
-      'dan.tag':'Affiliate 네트워크','dan.title':'DA Network 소개','dan.sub':'전문 암호화폐 affiliate 시스템 — 동남아시아 전역의 수백 명의 파트너와 세계 최고의 거래소를 연결합니다.',
+      'dan.tag':'Affiliate 네트워크','dan.title':'DA Crypto 소개','dan.sub':'전문 암호화폐 affiliate 시스템 — 동남아시아 전역의 수백 명의 파트너와 세계 최고의 거래소를 연결합니다.',
       'dan.lb.title':'잘하고 있는 파트너','dan.fb.title':'실제 파트너 커미션',
-      'dq.tag':'🔒 DA Network 파트너 전용','dq.title':'DA Network 멤버 특별 혜택','dq.sub':'<strong style="color:#ffd966">237명의 활동 파트너</strong>만 접근 가능합니다. 외부에서는 돈으로도 살 수 없는 것들입니다.',
+      'dq.tag':'🔒 DA Crypto 파트너 전용','dq.title':'DA Crypto 멤버 특별 혜택','dq.sub':'<strong style="color:#ffd966">237명의 활동 파트너</strong>만 접근 가능합니다. 외부에서는 돈으로도 살 수 없는 것들입니다.',
       'dq.card1.title':'AI 트레이딩 봇 — 한국팀','dq.card2.title':'일일 마켓 플랜 채널','dq.card3.title':'독점 Finance Facts &amp; Quotes 채널',
-      'dq.cta.strong':'위의 모든 혜택은 DA Network 파트너에게만 제공됩니다.','dq.cta.btn':'⚡ 가입하여 잠금 해제',
-      'lh.tag':'지원','lh.title':'DA NETWORK 문의','lh.sub':'질문이 있거나 네트워크에 참여하고 싶으신가요? 팀이 24/7 대기 중입니다.',
-      'footer.desc':'한국어 사용자를 위한 종합 암호화폐 affiliate 가이드.','footer.col1':'가이드','footer.col2':'도구','footer.col3':'DA NETWORK 소개','footer.copy':'© 2026 DA NETWORK. 모든 권리 보유.',
+      'dq.cta.strong':'위의 모든 혜택은 DA Crypto 파트너에게만 제공됩니다.','dq.cta.btn':'⚡ 가입하여 잠금 해제',
+      'lh.tag':'지원','lh.title':'DA CRYPTO 문의','lh.sub':'질문이 있거나 네트워크에 참여하고 싶으신가요? 팀이 24/7 대기 중입니다.',
+      'footer.desc':'한국어 사용자를 위한 종합 암호화폐 affiliate 가이드.','footer.col1':'가이드','footer.col2':'도구','footer.col3':'DA CRYPTO 소개','footer.copy':'© 2026 DA CRYPTO. 모든 권리 보유.',
       'ec.h1':'Affiliate란?','ec.p1':'<strong>고유 링크</strong>를 통해 다른 사람들을 암호화폐 거래소에 추천합니다. 그들이 거래할 때 거래 수수료에서 커미션을 받습니다.','ec.hint1':'자세히 알아보기 →',
       'ec.h2':'얼마나 벌 수 있나요?','ec.p2':'커미션은 일반적으로 추천인의 <strong>거래 수수료의 20%–50%</strong>입니다. 일부 거래소는 평생 커미션을 지급합니다.','ec.hint2':'실제 예시 보기 →',
       'ec.h3':'주요 장점','ec.p3':'자본 불필요, 거래 경험 불필요. 패시브 인컴 — 잠자는 동안에도 수익.','ec.hint3':'모든 장점 보기 →',
       'guide.prev':'이전','guide.next':'다음','guide.compareTitle':'주요 Crypto Affiliate 거래소 비교','guide.viewAllDeals':'12개 거래소 모두 보기',
       'calc.inputTitle':'파라미터 입력','calc.lbl1':'월 추천 수','calc.unit.people':'명','calc.lbl2':'인당 평균 거래량 (USD/월)','calc.lbl3':'커미션 비율 (%)','calc.lbl4':'거래소 거래 수수료 (%)','calc.resultTitle':'예상 결과','calc.res1':'이번 달 수익','calc.res2':'연간 수익','calc.res3':'거래소 총 수수료','calc.res4':'인당 커미션','calc.note':'* 예상 수치. 실제 수익은 사용자 활동과 거래소 조건에 따라 다릅니다.',
       'dan.c1.title':'광범위한 커버리지','dan.c1.body':'베트남, 인도네시아, 필리핀에서 운영 중 — 237명 이상의 활동 파트너와 함께 동남아시아 전역으로 확장 중',
-      'dan.c2.title':'최고 커미션','dan.c2.body':'최대 <strong class="gold-text">70%</strong> 커미션 비율 — 직접 가입보다 높고, DA Network가 각 거래소와 독점 협상',
+      'dan.c2.title':'최고 커미션','dan.c2.body':'최대 <strong class="gold-text">70%</strong> 커미션 비율 — 직접 가입보다 높고, DA Crypto가 각 거래소와 독점 협상',
       'dan.c3.title':'전면 지원','dan.c3.body':'24/7 관리자 지원, 리소스, 도구 및 모든 파트너를 위한 개인화된 성장 로드맵',
       'dan.c4.title':'지속 가능한 성장','dan.c4.body':'직접 추천인과 1단계 서브 어필리에이트로부터 커미션 공유 — 최대 2단계.',
-      'wins.badge':'🎯 실제 이야기','wins.title':'실제 파트너, 실제 결과','wins.sub':'수익 순위표가 아닙니다. DA Network를 통해 트래픽을 구축하고 커미션을 받는 파트너들의 실제 이야기들입니다.','wins.note':'모든 이야기는 파트너의 동의를 받아 공유되었습니다. 결과는 채널, 트래픽 및 실행에 따라 다를 수 있습니다.','wins.note.link':'DA Network의 파트너 검증 방법 보기 →',
-      'verify.badge':'🔍 투명성','verify.title':'DA Network의 수치 검증 방법','verify.sub':'가짜 스크린샷과 가짜 리더보드가 일상인 업계에서 — 여기서는 모든 수치가 실제임을 보장하는 방법입니다.',
-      'verify.s1.title':'거래소 대시보드 데이터','verify.s1.body':'모든 파트너는 DA Network의 ref 링크 아래 등록됩니다. 관리자는 <strong>Binance, Ourbit, Bingx</strong> 대시보드에서 직접 pending/paid 커미션을 확인합니다.',
+      'wins.badge':'🎯 실제 이야기','wins.title':'실제 파트너, 실제 결과','wins.sub':'수익 순위표가 아닙니다. DA Crypto를 통해 트래픽을 구축하고 커미션을 받는 파트너들의 실제 이야기들입니다.','wins.note':'모든 이야기는 파트너의 동의를 받아 공유되었습니다. 결과는 채널, 트래픽 및 실행에 따라 다를 수 있습니다.','wins.note.link':'DA Crypto의 파트너 검증 방법 보기 →',
+      'verify.badge':'🔍 투명성','verify.title':'DA Crypto의 수치 검증 방법','verify.sub':'가짜 스크린샷과 가짜 리더보드가 일상인 업계에서 — 여기서는 모든 수치가 실제임을 보장하는 방법입니다.',
+      'verify.s1.title':'거래소 대시보드 데이터','verify.s1.body':'모든 파트너는 DA Crypto의 ref 링크 아래 등록됩니다. 관리자는 <strong>Binance, Ourbit, Bingx</strong> 대시보드에서 직접 pending/paid 커미션을 확인합니다.',
       'verify.s2.title':'출금 기록','verify.s2.body':'이 사이트의 "지급됨" 수치는 파트너 지갑/계정으로 <strong>성공적으로 이체된</strong> 커미션만 계산합니다.',
       'verify.s3.title':'파트너 동의','verify.s3.body':'공개적으로 표시된 모든 이야기, 인용문, 개인 통계는 <strong>동의를 받아</strong> 공유됩니다. 언제든지 정보 삭제를 요청할 수 있습니다 — 48시간 내 처리.',
       'verify.cta.text':'수치가 출금 내역과 맞지 않는다고 생각하시나요? 특정 파트너 케이스 스터디에 대한 자세한 내용이 필요하신가요?','verify.cta.btn':'📩 관리자에게 문의',
-      'dan.lb.badge':'🎯 실제 이야기','dan.lb.sub':'월간 스냅샷 · DA Network 데이터','dan.lb.h.channel':'채널','dan.lb.h.earn':'커미션/월','dan.lb.h.rate':'비율','dan.lb.note':'* 파트너 동의와 데이터 투명성은 DA Network의 약속입니다.',
+      'dan.lb.badge':'🎯 실제 이야기','dan.lb.sub':'월간 스냅샷 · DA Crypto 데이터','dan.lb.h.channel':'채널','dan.lb.h.earn':'커미션/월','dan.lb.h.rate':'비율','dan.lb.note':'* 파트너 동의와 데이터 투명성은 DA Crypto의 약속입니다.',
       'dan.fb.badge':'📸 실제 증거','dan.fb.sub':'커미션 확인 스크린샷 — 네트워크 파트너로부터 지속적으로 업데이트됨','dan.fb.ph1':'이미지 준비 중','dan.fb.ph2':'파트너가 피드백 스크린샷을 관리자에게 제출하여 여기에 표시됩니다',
-      'dan.cta.text':'DA Network에 가입하고 커미션을 받을 준비가 되셨나요?','dan.cta.btn':'지금 시작하기',
-      'dq.badge.limited':'✓ 엄선된 파트너','dq.card1.body':'커뮤니티를 설득하지 마세요. 이 링크를 보내세요.','dq.card2.body':'전문 트레이더들의 <strong>일일 마켓 플랜 업데이트</strong>. 다른 사람들보다 먼저 시장 방향을 파악하세요.','dq.card3.body':'부자들이 절대 공개적으로 말하지 않는 <strong>금융 진실</strong>과 <strong>삶의 철학</strong>을 공유하는 비공개 채널.','dq.card.details':'자세히 보기','dq.cta.sub':'가입 — 24–48시간 내 답변.','dash.point1':'DA NETWORK의 <strong>독점 트레이딩 봇</strong> 사용 기회','dash.point2':'봇의 <strong>투명한 성과</strong>를 보여주는 signal tracking 웹사이트','dash.btn':'대시보드 열기 →','dash.disclaimer':'과거 성과는 미래 결과를 보장하지 않습니다. 이 콘텐츠는 투자 조언이 아닙니다.',
+      'dan.cta.text':'DA Crypto에 가입하고 커미션을 받을 준비가 되셨나요?','dan.cta.btn':'지금 시작하기',
+      'dq.badge.limited':'✓ 엄선된 파트너','dq.card1.body':'커뮤니티를 설득하지 마세요. 이 링크를 보내세요.','dq.card2.body':'전문 트레이더들의 <strong>일일 마켓 플랜 업데이트</strong>. 다른 사람들보다 먼저 시장 방향을 파악하세요.','dq.card3.body':'부자들이 절대 공개적으로 말하지 않는 <strong>금융 진실</strong>과 <strong>삶의 철학</strong>을 공유하는 비공개 채널.','dq.card.details':'자세히 보기','dq.cta.sub':'가입 — 24–48시간 내 답변.','dash.point1':'DA CRYPTO의 <strong>독점 트레이딩 봇</strong> 사용 기회','dash.point2':'봇의 <strong>투명한 성과</strong>를 보여주는 signal tracking 웹사이트','dash.btn':'대시보드 열기 →','dash.disclaimer':'과거 성과는 미래 결과를 보장하지 않습니다. 이 콘텐츠는 투자 조언이 아닙니다.',
       'popup.bot.badge':'🔥 독점 · 파트너 전용','popup.bot.title':'AI 트레이딩 봇 — 한국팀','popup.bot.lead':'95%의 트레이더가 감정 트레이딩으로 손실을 보는 동안 — 당신은 24/7 작동하는 기계를 갖게 됩니다. 잠도 안 자고, 두려움도 없고, FOMO도 없습니다.',
-      'popup.bot.f1.title':'한국 트레이딩팀 개발','popup.bot.f1.body':'아시아 시장에서 5년 이상의 경험을 가진 전문 트레이더팀','popup.bot.f2.title':'라이브 대시보드 데이터','popup.bot.f2.body':'실시간 거래 데이터 — tracking dashboard에서 확인하세요.','popup.bot.f3.title':'100% 자동화 — 모니터링 불필요','popup.bot.f3.body':'24/7 운영, 자동 진입, 자동 익절, 자동 손절. 자본만 예치하면 됩니다.','popup.bot.f4.title':'DA Network 파트너 전용 바우처','popup.bot.f4.body':'시장 대여 가격은 월 최대 $200 — 독점 파트너 바우처를 통해 무료로 이용 가능.',
+      'popup.bot.f1.title':'한국 트레이딩팀 개발','popup.bot.f1.body':'아시아 시장에서 5년 이상의 경험을 가진 전문 트레이더팀','popup.bot.f2.title':'라이브 대시보드 데이터','popup.bot.f2.body':'실시간 거래 데이터 — tracking dashboard에서 확인하세요.','popup.bot.f3.title':'100% 자동화 — 모니터링 불필요','popup.bot.f3.body':'24/7 운영, 자동 진입, 자동 익절, 자동 손절. 자본만 예치하면 됩니다.','popup.bot.f4.title':'DA Crypto 파트너 전용 바우처','popup.bot.f4.body':'시장 대여 가격은 월 최대 $200 — 독점 파트너 바우처를 통해 무료로 이용 가능.',
       'popup.bot.alert':'✓ <strong>우수 파트너를 위한 바우처.</strong> 장기적으로 성장하겠다고 약속하는 파트너에게 리소스가 전달될 수 있도록 각 파트너를 검토합니다.','popup.bot.cta':'🔓 가입하여 바우처 받기','popup.bot.note':'무료 가입 · 확인 즉시 수령',
       'popup.mkt.badge':'🟢 매일 업데이트 · 독점','popup.mkt.title':'일일 마켓 플랜 채널','popup.mkt.lead':'수백만 명이 정보 과부하 속에서 Twitter를 스크롤하는 동안 — 당신은 매일 아침 7시에 깔끔하고 명확한 플랜을 받습니다.',
       'popup.mkt.f1.title':'매일 오전 7:00 마켓 플랜','popup.mkt.f1.body':'트렌드 분석, 지지/저항 구간, 당일 우선 거래 쌍','popup.mkt.f2.title':'매크로 + 온체인 분석','popup.mkt.f2.body':'온체인 데이터, 집계된 심리, 글로벌 거시 금융 영향','popup.mkt.f3.title':'구체적인 트레이딩 셋업','popup.mkt.f3.body':'명확한 진입, SL, TP — 읽고 결정만 하면 됩니다. 자체 분석 불필요','popup.mkt.f4.title':'실시간 시장 알림','popup.mkt.f4.body':'큰 움직임 발생 시 즉시 알림 — 시장의 90%보다 먼저 행동',
-      'popup.mkt.alert':'📊 정보를 먼저 얻는 사람이 <strong>더 많이 법니다</strong>. 이 채널은 파트너 전용입니다.','popup.mkt.cta':'🔓 가입하여 채널 접근','popup.mkt.note':'무료 · DA Network 파트너 전용',
-      'popup.facts.badge':'💎 독점 · 판매 없음','popup.facts.title':'독점 Facts &amp; Quotes 채널','popup.facts.lead':'진짜 부자들이 돈에 대해 이해하는 것 — 하지만 절대 공개적으로 말하지 않는 것. 이제 그것이 당신의 것입니다.',
+      'popup.mkt.alert':'📊 정보를 먼저 얻는 사람이 <strong>더 많이 법니다</strong>. 이 채널은 파트너 전용입니다.','popup.mkt.cta':'🔓 가입하여 채널 접근','popup.mkt.note':'무료 · DA Crypto 파트너 전용',
+      'dq.badge.exclusive':'💎 독점', 'popup.facts.badge':'💎 독점 · 판매 없음','popup.facts.title':'독점 Facts &amp; Quotes 채널','popup.facts.lead':'진짜 부자들이 돈에 대해 이해하는 것 — 하지만 절대 공개적으로 말하지 않는 것. 이제 그것이 당신의 것입니다.',
       'popup.facts.f1.title':'학교에서 가르치지 않는 금융 진실','popup.facts.f1.body':'부자들이 돈, 위험, 투자, 재정적 자유에 대해 어떻게 생각하는지','popup.facts.f2.title':'CEO, 투자자, 억만장자들의 명언','popup.facts.f2.body':'진정한 재정적 자유를 달성한 사람들로부터 증류된 삶의 철학','popup.facts.f3.title':'엘리트 라이프스타일 — 부자들의 마인드셋','popup.facts.f3.body':'그들이 시간, 관계, 건강, 기회를 어떻게 보는지 — 99%와 다른 점','popup.facts.f4.title':'정기 업데이트 — 스팸 없음','popup.facts.f4.body':'모든 포스트는 집중된 인사이트 — 2분 읽기로 하루의 사고방식이 바뀜',
-      'popup.facts.alert':'✨ 이 채널에는 유료 버전이 없습니다. <strong>DA Network 파트너</strong>만 입장 가능 — 완전 무료.','popup.facts.cta':'🔓 가입하여 채널 접근','popup.facts.note':'완전 무료 · 파트너이기만 하면 됩니다',
+      'popup.facts.alert':'✨ 이 채널에는 유료 버전이 없습니다. <strong>DA Crypto 파트너</strong>만 입장 가능 — 완전 무료.','popup.facts.cta':'🔓 가입하여 채널 접근','popup.facts.note':'완전 무료 · 파트너이기만 하면 됩니다',
       'lh.bd.title':'Business Development','lh.bd.handle':'@jacksondz','lh.card1.title':'Telegram Admin','lh.card1.handle':'@dacrypto_admin','lh.card2.title':'커뮤니티 그룹','lh.card2.handle':'DA NETWORK Telegram Group','lh.card3.title':'지원 이메일','lh.card3.handle':'support@dacrypto.net','lh.note':'일반적으로 업무 시간 내 <strong>1–2시간</strong> 내 답변.',
       'footer.link.start':'시작하기','footer.link.calc':'계산기','footer.link.contact':'문의','footer.link.calc2':'계산기',
-      'footer.disclaimer':'<strong>면책조항:</strong> 콘텐츠는 정보 및 교육 목적으로만 제공됩니다. 재무 조언이 아닙니다. 암호화폐 투자에는 높은 위험이 따릅니다.','footer.copy2':'© 2026 DA NETWORK.',
+      'footer.disclaimer':'<strong>면책조항:</strong> 콘텐츠는 정보 및 교육 목적으로만 제공됩니다. 재무 조언이 아닙니다. 암호화폐 투자에는 높은 위험이 따릅니다.','footer.copy2':'© 2026 DA CRYPTO.',
     },
     id: {
-      'nav.cta':'Mulai Sekarang','nav.guide':'Panduan','nav.calc':'Kalkulator','nav.faq':'FAQ','nav.network':'DA Network','nav.privilege':'⭐ Keistimewaan',
+      'nav.cta':'Mulai Sekarang','nav.guide':'Panduan','nav.calc':'Kalkulator','nav.faq':'FAQ','nav.network':'DA Crypto','nav.privilege':'⭐ Keistimewaan',
       'hero.badge':'Panduan A–Z Lengkap • 100% Gratis','hero.title1':'Hasilkan Uang Dengan','hero.title2':'Crypto Affiliate','hero.title3':'Dari Nol',
       'hero.sub':'Panduan komprehensif dan mudah dipahami untuk pemula. Dari dasar hingga strategi nyata — dengan contoh langkah demi langkah.',
       'hero.cta1':'Baca Panduan','hero.cta2':'Hitung Penghasilan',
       'snap.tag':'📊 SNAPSHOT JARINGAN','snap.meta':'Diperbarui setiap tanggal 1 · Data yang sudah dikonfirmasi','snap.partners':'Mitra aktif','snap.paid':'Dibayarkan ke mitra bulan lalu','snap.exchanges':'Bursa mitra utama',
-      'snap.foot':'Angka "Dibayar" menunjukkan total komisi yang benar-benar ditransfer DA Network ke mitra bulan lalu, diverifikasi melalui catatan penarikan.','snap.foot.link':'Lihat cara kami memverifikasi →',
+      'snap.foot':'Angka "Dibayar" menunjukkan total komisi yang benar-benar ditransfer DA Crypto ke mitra bulan lalu, diverifikasi melalui catatan penarikan.','snap.foot.link':'Lihat cara kami memverifikasi →',
       'stats.active':'✓ TERVERIFIKASI','stats.partners':'MITRA','stats.partnerSub':'Diperbarui setiap tanggal 1','stats.hint':'Ketuk untuk detail →','stats.live':'✓ DIKONFIRMASI','stats.commLabel':'KOMISI YANG DIBAYARKAN BULAN LALU',
       'guide.tag':'Panduan Lengkap','guide.title':'Apa itu Crypto Affiliate?','guide.sub':'Pelajari dari A sampai Z — dari dasar hingga menghasilkan pendapatan nyata.','guide.stepsTitle':'8 Langkah Praktis untuk Mulai Menghasilkan',
-      'ec.title1':'Apa itu Crypto Affiliate Marketing?','ec.title2':'Pendapatan dari Crypto Affiliate','ec.title3':'Mengapa Memilih DA Network?',
+      'ec.title1':'Apa itu Crypto Affiliate Marketing?','ec.title2':'Pendapatan dari Crypto Affiliate','ec.title3':'Mengapa Memilih DA Crypto?',
       'calc.tag':'Alat Perhitungan','calc.title':'Kalkulator Pendapatan Affiliate','calc.sub':'Perkirakan penghasilan bulanan berdasarkan jumlah referral dan volume perdagangan.',
       'faq.tag':'Pertanyaan yang Sering Diajukan','faq.title':'FAQ',
-      'dan.tag':'Jaringan Affiliate','dan.title':'Tentang DA Network','dan.sub':'Sistem crypto affiliate profesional — menghubungkan ratusan mitra di seluruh Asia Tenggara dengan bursa global terkemuka.',
+      'dan.tag':'Jaringan Affiliate','dan.title':'Tentang DA Crypto','dan.sub':'Sistem crypto affiliate profesional — menghubungkan ratusan mitra di seluruh Asia Tenggara dengan bursa global terkemuka.',
       'dan.lb.title':'Mitra yang Berprestasi','dan.fb.title':'Komisi Mitra Nyata',
-      'dq.tag':'🔒 Eksklusif untuk Mitra DA Network','dq.title':'Keistimewaan Anggota DA Network','dq.sub':'Hanya <strong style="color:#ffd966">237 mitra aktif</strong> yang memiliki akses. Hal-hal yang tidak bisa dibeli di luar.',
+      'dq.tag':'🔒 Eksklusif untuk Mitra DA Crypto','dq.title':'Keistimewaan Anggota DA Crypto','dq.sub':'Hanya <strong style="color:#ffd966">237 mitra aktif</strong> yang memiliki akses. Hal-hal yang tidak bisa dibeli di luar.',
       'dq.card1.title':'AI Trading Bot — Tim Korea','dq.card2.title':'Saluran Update Rencana Pasar Harian','dq.card3.title':'Saluran Eksklusif Finance Facts &amp; Quotes',
-      'dq.cta.strong':'Semua keistimewaan di atas hanya untuk mitra DA Network.','dq.cta.btn':'⚡ Bergabung untuk Membuka',
-      'lh.tag':'Dukungan','lh.title':'Hubungi DA NETWORK','lh.sub':'Ada pertanyaan atau ingin bergabung dengan jaringan? Tim kami tersedia 24/7.',
-      'footer.desc':'Panduan crypto affiliate komprehensif untuk pengguna Bahasa Indonesia.','footer.col1':'Panduan','footer.col2':'Alat','footer.col3':'Tentang DA NETWORK','footer.copy':'© 2026 DA NETWORK. Semua hak dilindungi.',
+      'dq.cta.strong':'Semua keistimewaan di atas hanya untuk mitra DA Crypto.','dq.cta.btn':'⚡ Bergabung untuk Membuka',
+      'lh.tag':'Dukungan','lh.title':'Hubungi DA CRYPTO','lh.sub':'Ada pertanyaan atau ingin bergabung dengan jaringan? Tim kami tersedia 24/7.',
+      'footer.desc':'Panduan crypto affiliate komprehensif untuk pengguna Bahasa Indonesia.','footer.col1':'Panduan','footer.col2':'Alat','footer.col3':'Tentang DA CRYPTO','footer.copy':'© 2026 DA CRYPTO. Semua hak dilindungi.',
       'ec.h1':'Apa itu Affiliate?','ec.p1':'Anda mereferensikan orang lain untuk mendaftar ke bursa crypto melalui <strong>link unik Anda</strong>. Ketika mereka berdagang, Anda mendapatkan komisi dari biaya perdagangan mereka.','ec.hint1':'Ketuk untuk pelajari lebih lanjut →',
       'ec.h2':'Berapa Banyak yang Bisa Anda Hasilkan?','ec.p2':'Komisi biasanya berkisar dari <strong>20%–50% dari biaya perdagangan</strong>. Beberapa bursa membayar komisi seumur hidup.','ec.hint2':'Ketuk untuk melihat contoh nyata →',
       'ec.h3':'Keunggulan Utama','ec.p3':'Tidak perlu modal, tidak perlu pengalaman trading. Pendapatan pasif — hasilkan bahkan saat tidur.','ec.hint3':'Ketuk untuk melihat semua keunggulan →',
       'guide.prev':'Sebelumnya','guide.next':'Berikutnya','guide.compareTitle':'Perbandingan Bursa Crypto Affiliate Terbaik','guide.viewAllDeals':'Lihat Semua 12 Bursa',
       'calc.inputTitle':'Masukkan Parameter','calc.lbl1':'Referral per bulan','calc.unit.people':'orang','calc.lbl2':'Volume trading rata-rata per orang (USD/bulan)','calc.lbl3':'Tingkat komisi (%)','calc.lbl4':'Biaya trading bursa (%)','calc.resultTitle':'Perkiraan Hasil','calc.res1':'Pendapatan bulan ini','calc.res2':'Pendapatan tahunan','calc.res3':'Total biaya bursa','calc.res4':'Komisi per orang','calc.note':'* Perkiraan proyeksi. Pendapatan aktual tergantung pada aktivitas pengguna dan ketentuan bursa.',
       'dan.c1.title':'Jangkauan Luas','dan.c1.body':'Beroperasi di Vietnam, Indonesia, Filipina — dan berkembang di seluruh Asia Tenggara dengan 237+ mitra aktif.',
-      'dan.c2.title':'Komisi Tertinggi','dan.c2.body':'Tingkat komisi hingga <strong class="gold-text">70%</strong> — lebih tinggi dari pendaftaran langsung, dinegosiasikan secara eksklusif oleh DA Network dengan setiap bursa.',
+      'dan.c2.title':'Komisi Tertinggi','dan.c2.body':'Tingkat komisi hingga <strong class="gold-text">70%</strong> — lebih tinggi dari pendaftaran langsung, dinegosiasikan secara eksklusif oleh DA Crypto dengan setiap bursa.',
       'dan.c3.title':'Dukungan Penuh','dan.c3.body':'Dukungan admin 24/7 dengan sumber daya, alat, dan peta jalan pertumbuhan personal untuk setiap mitra.',
       'dan.c4.title':'Pertumbuhan Berkelanjutan','dan.c4.body':'Terima bagi komisi dari referral langsung dan sub-affiliate tingkat 1 — maksimal 2 tingkat.',
-      'wins.badge':'🎯 KISAH NYATA','wins.title':'Mitra Nyata, Hasil Nyata','wins.sub':'Bukan papan peringkat pendapatan. Hanya beberapa kisah nyata dari mitra yang membangun traffic dan menghasilkan komisi melalui DA Network.','wins.note':'Semua kisah dibagikan dengan persetujuan mitra. Hasil bisa berbeda tergantung saluran, traffic, dan pelaksanaan.','wins.note.link':'Lihat cara DA Network memverifikasi mitra →',
-      'verify.badge':'🔍 TRANSPARANSI','verify.title':'Cara DA Network Memverifikasi Angka','verify.sub':'Di industri di mana screenshot palsu dan leaderboard palsu sudah biasa — inilah cara kami memastikan setiap angka yang Anda lihat adalah nyata.',
-      'verify.s1.title':'Data dari dashboard bursa','verify.s1.body':'Setiap mitra mendaftar di bawah link ref DA Network. Admin melihat komisi pending/paid langsung dari dashboard <strong>Binance, Ourbit, Bingx</strong>.',
+      'wins.badge':'🎯 KISAH NYATA','wins.title':'Mitra Nyata, Hasil Nyata','wins.sub':'Bukan papan peringkat pendapatan. Hanya beberapa kisah nyata dari mitra yang membangun traffic dan menghasilkan komisi melalui DA Crypto.','wins.note':'Semua kisah dibagikan dengan persetujuan mitra. Hasil bisa berbeda tergantung saluran, traffic, dan pelaksanaan.','wins.note.link':'Lihat cara DA Crypto memverifikasi mitra →',
+      'verify.badge':'🔍 TRANSPARANSI','verify.title':'Cara DA Crypto Memverifikasi Angka','verify.sub':'Di industri di mana screenshot palsu dan leaderboard palsu sudah biasa — inilah cara kami memastikan setiap angka yang Anda lihat adalah nyata.',
+      'verify.s1.title':'Data dari dashboard bursa','verify.s1.body':'Setiap mitra mendaftar di bawah link ref DA Crypto. Admin melihat komisi pending/paid langsung dari dashboard <strong>Binance, Ourbit, Bingx</strong>.',
       'verify.s2.title':'Catatan penarikan','verify.s2.body':'Angka "dibayar" di situs ini hanya menghitung komisi yang <strong>berhasil ditransfer</strong> ke dompet/akun mitra.',
       'verify.s3.title':'Persetujuan mitra','verify.s3.body':'Setiap kisah, kutipan, dan statistik pribadi yang ditampilkan secara publik <strong>dibagikan dengan persetujuan</strong>. Anda dapat meminta penghapusan informasi kapan saja — diproses dalam 48 jam.',
       'verify.cta.text':'Merasa angkanya tidak cocok dengan penarikan Anda? Ingin detail tentang studi kasus mitra tertentu?','verify.cta.btn':'📩 Hubungi admin',
-      'dan.lb.badge':'🎯 KISAH NYATA','dan.lb.sub':'Snapshot bulanan · Data dari DA Network','dan.lb.h.channel':'Saluran','dan.lb.h.earn':'Komisi/Bulan','dan.lb.h.rate':'Tingkat','dan.lb.note':'* Persetujuan mitra dan transparansi data adalah komitmen DA Network.',
+      'dan.lb.badge':'🎯 KISAH NYATA','dan.lb.sub':'Snapshot bulanan · Data dari DA Crypto','dan.lb.h.channel':'Saluran','dan.lb.h.earn':'Komisi/Bulan','dan.lb.h.rate':'Tingkat','dan.lb.note':'* Persetujuan mitra dan transparansi data adalah komitmen DA Crypto.',
       'dan.fb.badge':'📸 BUKTI NYATA','dan.fb.sub':'Screenshot konfirmasi komisi — diperbarui terus dari mitra dalam jaringan.','dan.fb.ph1':'Gambar segera hadir','dan.fb.ph2':'Mitra mengirimkan screenshot feedback ke admin untuk ditampilkan di sini',
-      'dan.cta.text':'Siap bergabung dengan DA Network dan mulai menghasilkan komisi?','dan.cta.btn':'Mulai Sekarang',
-      'dq.badge.limited':'✓ Mitra terpilih','dq.card1.body':'Jangan meyakinkan komunitas Anda. Kirim mereka link ini.','dq.card2.body':'Update <strong>rencana pasar harian</strong> dari trader profesional. Ketahui arah pasar sebelum orang lain.','dq.card3.body':'Saluran pribadi berbagi <strong>kebenaran finansial</strong> dan <strong>filosofi hidup</strong> yang orang kaya tidak pernah katakan secara publik.','dq.card.details':'Lihat detail','dq.cta.sub':'Bergabung — kami merespons dalam 24–48 jam.','dash.point1':'Kesempatan menggunakan <strong>bot trading eksklusif</strong> DA NETWORK','dash.point2':'Website tracking signal dengan <strong>kinerja bot yang transparan</strong>','dash.btn':'Buka dashboard →','dash.disclaimer':'Kinerja masa lalu tidak menjamin hasil di masa depan. Konten ini bukan saran investasi.',
+      'dan.cta.text':'Siap bergabung dengan DA Crypto dan mulai menghasilkan komisi?','dan.cta.btn':'Mulai Sekarang',
+      'dq.badge.limited':'✓ Mitra terpilih','dq.card1.body':'Jangan meyakinkan komunitas Anda. Kirim mereka link ini.','dq.card2.body':'Update <strong>rencana pasar harian</strong> dari trader profesional. Ketahui arah pasar sebelum orang lain.','dq.card3.body':'Saluran pribadi berbagi <strong>kebenaran finansial</strong> dan <strong>filosofi hidup</strong> yang orang kaya tidak pernah katakan secara publik.','dq.card.details':'Lihat detail','dq.cta.sub':'Bergabung — kami merespons dalam 24–48 jam.','dash.point1':'Kesempatan menggunakan <strong>bot trading eksklusif</strong> DA CRYPTO','dash.point2':'Website tracking signal dengan <strong>kinerja bot yang transparan</strong>','dash.btn':'Buka dashboard →','dash.disclaimer':'Kinerja masa lalu tidak menjamin hasil di masa depan. Konten ini bukan saran investasi.',
       'popup.bot.badge':'🔥 EKSKLUSIF · KHUSUS MITRA','popup.bot.title':'AI Trading Bot — Tim Korea','popup.bot.lead':'Sementara 95% trader merugi karena trading dengan emosi — Anda memiliki mesin yang bekerja 24/7, tidak tidur, tidak takut, tidak FOMO.',
-      'popup.bot.f1.title':'Dikembangkan oleh Tim Trading Korea','popup.bot.f1.body':'Trader profesional dengan pengalaman 5+ tahun di pasar Asia','popup.bot.f2.title':'Data Live dari Dashboard','popup.bot.f2.body':'Data trading diperbarui real-time — lihat di tracking dashboard.','popup.bot.f3.title':'100% Otomatis — Tidak Perlu Pemantauan','popup.bot.f3.body':'Berjalan 24/7, otomatis masuk perdagangan, otomatis ambil keuntungan, otomatis potong kerugian. Cukup setor modal.','popup.bot.f4.title':'Voucher Eksklusif untuk Mitra DA Network','popup.bot.f4.body':'Harga sewa pasar hingga $200/bulan — dapatkan gratis melalui voucher mitra eksklusif.',
+      'popup.bot.f1.title':'Dikembangkan oleh Tim Trading Korea','popup.bot.f1.body':'Trader profesional dengan pengalaman 5+ tahun di pasar Asia','popup.bot.f2.title':'Data Live dari Dashboard','popup.bot.f2.body':'Data trading diperbarui real-time — lihat di tracking dashboard.','popup.bot.f3.title':'100% Otomatis — Tidak Perlu Pemantauan','popup.bot.f3.body':'Berjalan 24/7, otomatis masuk perdagangan, otomatis ambil keuntungan, otomatis potong kerugian. Cukup setor modal.','popup.bot.f4.title':'Voucher Eksklusif untuk Mitra DA Crypto','popup.bot.f4.body':'Harga sewa pasar hingga $200/bulan — dapatkan gratis melalui voucher mitra eksklusif.',
       'popup.bot.alert':'✓ <strong>Voucher untuk mitra berkualitas.</strong> Kami meninjau setiap mitra untuk memastikan sumber daya sampai ke orang yang berkomitmen membangun jangka panjang.','popup.bot.cta':'🔓 Bergabung untuk Klaim Voucher','popup.bot.note':'Daftar gratis · Terima langsung setelah konfirmasi',
       'popup.mkt.badge':'🟢 DIPERBARUI HARIAN · EKSKLUSIF','popup.mkt.title':'Saluran Update Rencana Pasar Harian','popup.mkt.lead':'Sementara jutaan orang scroll Twitter dilanda info berlebih — Anda menerima rencana yang bersih dan jelas setiap pagi pukul 7.',
       'popup.mkt.f1.title':'Rencana pasar setiap hari pukul 7:00','popup.mkt.f1.body':'Analisis tren, zona support/resistance, pair prioritas hari itu','popup.mkt.f2.title':'Analisis Macro + On-chain','popup.mkt.f2.body':'Data on-chain, sentimen agregat, dampak makro keuangan global','popup.mkt.f3.title':'Setup Perdagangan Spesifik','popup.mkt.f3.body':'Entry, SL, TP yang jelas — cukup baca dan putuskan. Tidak perlu analisis sendiri','popup.mkt.f4.title':'Peringatan Pasar Real-time','popup.mkt.f4.body':'Peringatan instan untuk pergerakan besar — bertindak sebelum 90% pasar',
-      'popup.mkt.alert':'📊 Mereka yang mendapat informasi lebih awal <strong>menghasilkan lebih banyak</strong>. Saluran ini hanya untuk mitra.','popup.mkt.cta':'🔓 Bergabung untuk Akses Saluran','popup.mkt.note':'Gratis · Hanya mitra DA Network',
-      'popup.facts.badge':'💎 EKSKLUSIF · TIDAK DIJUAL','popup.facts.title':'Saluran Eksklusif Facts &amp; Quotes','popup.facts.lead':'Apa yang benar-benar dipahami orang kaya tentang uang — tetapi tidak pernah diucapkan. Sekarang ini milik Anda.',
+      'popup.mkt.alert':'📊 Mereka yang mendapat informasi lebih awal <strong>menghasilkan lebih banyak</strong>. Saluran ini hanya untuk mitra.','popup.mkt.cta':'🔓 Bergabung untuk Akses Saluran','popup.mkt.note':'Gratis · Hanya mitra DA Crypto',
+      'dq.badge.exclusive':'💎 Eksklusif', 'popup.facts.badge':'💎 EKSKLUSIF · TIDAK DIJUAL','popup.facts.title':'Saluran Eksklusif Facts &amp; Quotes','popup.facts.lead':'Apa yang benar-benar dipahami orang kaya tentang uang — tetapi tidak pernah diucapkan. Sekarang ini milik Anda.',
       'popup.facts.f1.title':'Kebenaran finansial yang tidak diajarkan sekolah','popup.facts.f1.body':'Bagaimana orang kaya benar-benar berpikir tentang uang, risiko, investasi, dan kebebasan finansial','popup.facts.f2.title':'Kutipan dari CEO, investor, miliarder','popup.facts.f2.body':'Filosofi hidup yang disarikan dari mereka yang telah mencapai kebebasan finansial sejati','popup.facts.f3.title':'Gaya hidup elite — mindset orang kaya','popup.facts.f3.body':'Bagaimana mereka melihat waktu, hubungan, kesehatan, dan peluang — berbeda dari 99% orang','popup.facts.f4.title':'Update rutin — tidak spam','popup.facts.f4.body':'Setiap postingan adalah wawasan terkonsentrasi — 2 menit membaca mengubah cara berpikir sepanjang hari',
-      'popup.facts.alert':'✨ Saluran ini tidak memiliki versi berbayar. <strong>Hanya mitra DA Network</strong> yang masuk — sepenuhnya gratis.','popup.facts.cta':'🔓 Bergabung untuk Akses Saluran','popup.facts.note':'Sepenuhnya gratis · Cukup menjadi mitra',
+      'popup.facts.alert':'✨ Saluran ini tidak memiliki versi berbayar. <strong>Hanya mitra DA Crypto</strong> yang masuk — sepenuhnya gratis.','popup.facts.cta':'🔓 Bergabung untuk Akses Saluran','popup.facts.note':'Sepenuhnya gratis · Cukup menjadi mitra',
       'lh.bd.title':'Business Development','lh.bd.handle':'@jacksondz','lh.card1.title':'Telegram Admin','lh.card1.handle':'@dacrypto_admin','lh.card2.title':'Grup Komunitas','lh.card2.handle':'DA NETWORK Telegram Group','lh.card3.title':'Email Dukungan','lh.card3.handle':'support@dacrypto.net','lh.note':'Biasanya merespons dalam <strong>1–2 jam</strong> selama jam kerja.',
       'footer.link.start':'Mulai','footer.link.calc':'Kalkulator','footer.link.contact':'Hubungi','footer.link.calc2':'Kalkulator',
-      'footer.disclaimer':'<strong>Penafian:</strong> Konten hanya untuk tujuan informasi dan pendidikan. Bukan saran keuangan. Investasi crypto memiliki risiko tinggi.','footer.copy2':'© 2026 DA NETWORK.',
+      'footer.disclaimer':'<strong>Penafian:</strong> Konten hanya untuk tujuan informasi dan pendidikan. Bukan saran keuangan. Investasi crypto memiliki risiko tinggi.','footer.copy2':'© 2026 DA CRYPTO.',
     },
   };
 
-  var currentLang = 'vi';
+  // English is the default; a visitor's choice is remembered across pages.
+  var LANG_KEY = 'dacrypto-lang';
+  var currentLang = 'en';
+  try { var savedLang = localStorage.getItem(LANG_KEY); if (savedLang) currentLang = savedLang; } catch (e) {}
 
-  function applyLang(lang) {
+  function applyLang(lang, instant) {
     var t = translations[lang];
     if (!t) return;
+    try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
 
-    // Fade out
-    document.body.classList.add('lang-switching');
+    // Fade out (skipped on first paint)
+    if (!instant) document.body.classList.add('lang-switching');
 
-    setTimeout(function() {
+    var apply = function() {
       document.querySelectorAll('[data-i18n]').forEach(function(el) {
         var key = el.getAttribute('data-i18n');
         if (t[key] !== undefined) {
@@ -3364,7 +3374,8 @@ document.addEventListener('keydown', function(e) {
       renderStep(currentStep);
       renderComparison();
       renderFaqs();
-    }, 180);
+    };
+    if (instant) apply(); else setTimeout(apply, 180);
   }
 
   var langCycle = ['vi','en','th','ko','id'];
@@ -3401,9 +3412,9 @@ document.addEventListener('keydown', function(e) {
 
   // Init on load
   document.addEventListener('DOMContentLoaded', function() {
-    document.body.setAttribute('data-lang', currentLang);
-    var lbl = document.getElementById('langCurrentLabel');
-    if (lbl) lbl.textContent = 'VI';
+    if (!translations[currentLang]) currentLang = 'en';
+    applyLang(currentLang, true);
+    document.documentElement.classList.remove('i18n-pending');
   });
 
 })();

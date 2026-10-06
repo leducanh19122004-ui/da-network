@@ -1,4 +1,4 @@
-/* ─── GLOBAL ANIMATED BACKGROUND — DA NETWORK ───────────────────
+/* ─── GLOBAL ANIMATED BACKGROUND — DA CRYPTO ───────────────────
    Ported from DA CASHBACK GlobalAnimatedBackground.tsx
    Orange (#f7931a) on deep-dark, canvas fixed behind all content
 ─────────────────────────────────────────────────────────────────── */
