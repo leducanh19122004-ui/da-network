@@ -2673,7 +2673,7 @@ window.closeDqModal = function(e, target) {
 // Dashboard CTA tracking — safe wrapper, no-op if no analytics installed
 window.trackDashboardCta = function() {
   var evt = 'dashboard_cta_click';
-  var params = { source_site: 'danetwork', target_url: 'https://da-signal-tracking.vercel.app/', section: 'signal_teaser' };
+  var params = { source_site: 'danetwork', target_url: 'https://signal.danetwork.asia/', section: 'signal_teaser' };
   if (typeof gtag === 'function') gtag('event', evt, params);
   if (typeof fbq === 'function') fbq('trackCustom', evt, params);
   if (typeof plausible === 'function') plausible(evt, { props: params });
