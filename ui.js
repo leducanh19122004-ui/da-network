@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   DA CRYPTO — UI layer (DA Network design system)
+   DA Affiliate — UI layer (DA Network design system)
    Motion, accessibility and the few UI strings introduced by the
    redesign. Business logic, content and i18n data stay in app.js.
    ═══════════════════════════════════════════════════════════════ */
