@@ -978,6 +978,23 @@ html.ui-ready .snapshot {
 }
 .slider-display span:not(:first-child) { font-size: 0.875rem; font-weight: 400; color: var(--color-muted); }
 .slider { grid-column: 1 / -1; }
+/* Slider with a marked "typical" band (--from/--to as % of the track) */
+.slider-wrap { grid-column: 1 / -1; position: relative; }
+.slider-band {
+  position: absolute; top: 50%; height: 8px; transform: translateY(-50%);
+  /* thumb is 16px wide: map 0–100% onto the thumb-centre travel */
+  left: calc(8px + (100% - 16px) * var(--from) / 100);
+  width: calc((100% - 16px) * (var(--to) - var(--from)) / 100);
+  border-radius: 1px;
+  background: rgb(215 173 82 / 0.28);
+  pointer-events: none;
+}
+.slider-note {
+  grid-column: 1 / -1; display: flex; align-items: center; gap: 0.5rem;
+  margin-top: -0.25rem;
+  font-size: 0.8125rem; line-height: 1.4; color: var(--color-faint);
+}
+.slider-note-mark { width: 0.75rem; height: 0.375rem; border-radius: 1px; background: rgb(215 173 82 / 0.5); flex-shrink: 0; }
 
 /* Range input */
 .slider {

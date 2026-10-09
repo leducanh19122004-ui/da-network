@@ -280,8 +280,13 @@
         </div>
         <div class="form-group">
           <label class="form-label" for="tradeVol" data-i18n="calc.lbl2">Khối lượng giao dịch TB mỗi người (USD/tháng)</label>
-          <div class="slider-display"><span id="tradeVolVal">$5,000</span></div>
-          <input type="range" class="slider" id="tradeVol" min="100" max="100000" step="100" value="5000" />
+          <div class="slider-display"><span id="tradeVolVal">$300,000</span></div>
+          <div class="slider-wrap">
+            <!-- Typical-user band: $200K–$700K on a $100K–$5M scale -->
+            <span class="slider-band" style="--from:2.04;--to:12.24" aria-hidden="true"></span>
+            <input type="range" class="slider" id="tradeVol" min="100000" max="5000000" step="10000" value="300000" aria-describedby="tradeVolNote" />
+          </div>
+          <p class="slider-note" id="tradeVolNote"><span class="slider-note-mark" aria-hidden="true"></span><span data-ui="calc.volNote">Typical user: $200K–$700K / month</span></p>
         </div>
         <div class="form-group">
           <label class="form-label" for="commRate" data-i18n="calc.lbl3">Tỷ lệ hoa hồng (%)</label>

@@ -20,7 +20,8 @@
       'ec.s1': 'Share your link — earn from every trade your referrals make.',
       'ec.s2': "Of referred users' trading fees. Some exchanges pay for life.",
       'ec.s3': 'No capital. No trading experience. Passive income.',
-      'steps.swipe': 'Swipe or drag ← →'
+      'steps.swipe': 'Swipe or drag ← →',
+      'calc.volNote': 'Typical user: $200K–$700K / month'
     },
     vi: {
       skip: 'Chuyển đến nội dung', newTab: '(mở trong tab mới)',
@@ -32,7 +33,8 @@
       'ec.s1': 'Chia sẻ link — nhận hoa hồng từ mọi giao dịch của người bạn giới thiệu.',
       'ec.s2': 'Phí giao dịch của người được giới thiệu. Một số sàn trả trọn đời.',
       'ec.s3': 'Không cần vốn. Không cần kinh nghiệm. Thu nhập thụ động.',
-      'steps.swipe': 'Vuốt hoặc kéo ← →'
+      'steps.swipe': 'Vuốt hoặc kéo ← →',
+      'calc.volNote': 'Người dùng phổ thông trung bình: $200K–$700K / tháng'
     },
     th: {
       skip: 'ข้ามไปยังเนื้อหา', newTab: '(เปิดในแท็บใหม่)',
@@ -44,7 +46,8 @@
       'ec.s1': 'แชร์ลิงก์ของคุณ รับค่าคอมมิชชันจากทุกการเทรดของผู้ที่คุณแนะนำ',
       'ec.s2': 'ของค่าธรรมเนียมการเทรดจากผู้ที่คุณแนะนำ บางแพลตฟอร์มจ่ายตลอดชีพ',
       'ec.s3': 'ไม่ต้องใช้ทุน ไม่ต้องมีประสบการณ์เทรด รายได้แบบพาสซีฟ',
-      'steps.swipe': 'ปัดหรือลาก ← →'
+      'steps.swipe': 'ปัดหรือลาก ← →',
+      'calc.volNote': 'ผู้ใช้ทั่วไปโดยเฉลี่ย: $200K–$700K / เดือน'
     },
     ko: {
       skip: '본문으로 건너뛰기', newTab: '(새 탭에서 열림)',
@@ -56,7 +59,8 @@
       'ec.s1': '링크를 공유하고, 추천한 사용자의 모든 거래에서 커미션을 받으세요.',
       'ec.s2': '추천 사용자 거래 수수료 기준. 일부 거래소는 평생 지급합니다.',
       'ec.s3': '자본도, 트레이딩 경험도 필요 없는 패시브 인컴.',
-      'steps.swipe': '스와이프 또는 드래그 ← →'
+      'steps.swipe': '스와이프 또는 드래그 ← →',
+      'calc.volNote': '일반 사용자 평균: 월 $200K–$700K'
     },
     id: {
       skip: 'Langsung ke konten', newTab: '(terbuka di tab baru)',
@@ -68,7 +72,8 @@
       'ec.s1': 'Bagikan link Anda — dapatkan komisi dari setiap trade referral Anda.',
       'ec.s2': 'Dari biaya trading pengguna referral. Beberapa bursa membayar seumur hidup.',
       'ec.s3': 'Tanpa modal. Tanpa pengalaman trading. Penghasilan pasif.',
-      'steps.swipe': 'Geser atau seret ← →'
+      'steps.swipe': 'Geser atau seret ← →',
+      'calc.volNote': 'Rata-rata pengguna biasa: $200K–$700K / bulan'
     }
   };
 
