@@ -8,12 +8,19 @@
 // ─── MOBILE NAV ─────────────────────────────────────────────────
 const menuToggle = document.getElementById('menuToggle');
 const mobileNav = document.getElementById('mobileNav');
+function setMobileNav(open) {
+  if (!mobileNav) return;
+  mobileNav.classList.toggle('open', open);
+  document.body.classList.toggle('nav-open', open);
+  if (menuToggle) menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
 if (menuToggle && mobileNav) {
-  menuToggle.addEventListener('click', () => mobileNav.classList.toggle('open'));
+  menuToggle.addEventListener('click', () => setMobileNav(!mobileNav.classList.contains('open')));
 }
 function closeMobileNav() {
-  if (mobileNav) mobileNav.classList.remove('open');
+  setMobileNav(false);
 }
+window.setMobileNav = setMobileNav;
 window.closeMobileNav = closeMobileNav;
 
 // ─── LUCIDE ICONS ────────────────────────────────────────────────
@@ -25,6 +32,18 @@ document.addEventListener('DOMContentLoaded', () => {
 function getCSSVar(name) {
   return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
 }
+
+// DA Network design language: no emoji used as UI decoration. Content strings
+// keep their original text; pictographs are dropped at render time only.
+// (©, ®, ™ and arrows are kept.)
+var EMOJI_RE = /(?:(?![©®™↔-↙↩↪])\p{Extended_Pictographic}|[\u{1F1E6}-\u{1F1FF}])[️‍]*\s?/gu;
+function stripEmoji(s) {
+  return typeof s === 'string' ? s.replace(EMOJI_RE, '') : s;
+}
+window.stripEmoji = stripEmoji;
+
+var ICON_ARROW_RIGHT = '<svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+var ICON_CHECK = '<svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
 
 
 // ─── AFFILIATE GUIDE STEPS ───────────────────────────────────────
@@ -574,21 +593,41 @@ function renderStep(n) {
   const s = steps[n - 1];
   const el = document.getElementById('stepContent');
   if (!el || !s) return;
-  el.innerHTML = `<div class="step-panel">
+  var pad = function (k) { return String(k).padStart(2, '0'); };
+  var html = stripEmoji(`<div class="step-panel">
     <div class="step-panel-header">
-      <div class="step-number-big">${n}</div>
+      <div class="step-number-big" aria-hidden="true">${pad(n)}</div>
       <div>
-        <div class="step-panel-title">${s.title}</div>
-        <div class="step-panel-subtitle">${s.subtitle}</div>
+        <h4 class="step-panel-title">${s.title}</h4>
+        <p class="step-panel-subtitle">${s.subtitle}</p>
       </div>
     </div>
     ${s.content}
-  </div>`;
-  // Update tabs
+  </div>`);
+  // Animate only real step changes (not first paint or a language re-render)
+  var dir = n > currentStep ? 1 : -1;
+  var animate = el.childElementCount > 0 && n !== currentStep;
+  swapStepContent(el, html, dir, animate, function () { collapseStepDetails(el, lang); });
+  // One continuous progress track + "01 / 08" counter, in sync with the tabs
+  var fill = document.getElementById('stepTrackFill');
+  if (fill) fill.style.transform = 'scaleX(' + (n / steps.length) + ')';
+  var countNow = document.getElementById('stepCountNow');
+  var countTotal = document.getElementById('stepCountTotal');
+  if (countNow) countNow.textContent = pad(n);
+  if (countTotal) countTotal.textContent = pad(steps.length);
+  // Update tabs (number + step title, active / completed state)
   document.querySelectorAll('.step-tab').forEach((t, i) => {
+    var st = steps[i];
     t.classList.remove('active', 'done');
     if (i + 1 === n) t.classList.add('active');
     else if (i + 1 < n) t.classList.add('done');
+    t.setAttribute('aria-selected', i + 1 === n ? 'true' : 'false');
+    t.setAttribute('aria-controls', 'stepContent');
+    t.tabIndex = i + 1 === n ? 0 : -1;
+    if (st) {
+      t.innerHTML = '<span class="step-tab-num">' + pad(i + 1) + '</span>'
+        + '<span class="step-tab-title">' + stripEmoji(st.title) + '</span>';
+    }
   });
   // Update progress
   const prog = document.getElementById('stepProgress');
@@ -602,25 +641,215 @@ function renderStep(n) {
   if (prev) prev.disabled = n === 1;
   if (next) {
     if (n === steps.length) {
-      next.innerHTML = btnComplete + ' <i data-lucide="check" width="16" height="16"></i>';
+      next.innerHTML = '<span>' + btnComplete + '</span>' + ICON_CHECK;
     } else {
-      next.innerHTML = btnNext + ' <i data-lucide="arrow-right" width="16" height="16"></i>';
+      next.innerHTML = '<span>' + btnNext + '</span>' + ICON_ARROW_RIGHT;
     }
   }
   currentStep = n;
   if (typeof lucide !== 'undefined') lucide.createIcons();
 }
 
+// Step transition: old panel fades/slides out, the frame eases to the new
+// height (no layout jump for the nav below), new panel slides in from the
+// direction of travel. Instant under prefers-reduced-motion.
+var STEP_OUT_MS = 170, STEP_HEIGHT_MS = 420;
+function swapStepContent(el, html, dir, animate, after) {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  clearTimeout(el._stepOut); clearTimeout(el._stepDone);
+  if (!animate || reduce) {
+    el.innerHTML = html;
+    el.style.height = '';
+    el.classList.remove('is-animating');
+    after();
+    return;
+  }
+  var h0 = el.offsetHeight;
+  el.style.height = h0 + 'px';
+  el.classList.add('is-animating');
+  el.style.setProperty('--dir', dir);
+  var old = el.querySelector('.step-panel');
+  if (old) old.classList.add('is-leaving');
+  el._stepOut = setTimeout(function () {
+    el.innerHTML = html;
+    after();
+    var panel = el.querySelector('.step-panel');
+    panel.classList.add('is-entering');
+    el.style.height = 'auto';
+    var h1 = el.offsetHeight;
+    el.style.height = h0 + 'px';
+    void el.offsetHeight; // commit start height
+    el.style.height = h1 + 'px';
+    requestAnimationFrame(function () { panel.classList.remove('is-entering'); });
+    el._stepDone = setTimeout(function () {
+      el.style.height = '';
+      el.classList.remove('is-animating');
+    }, STEP_HEIGHT_MS + 40);
+  }, STEP_OUT_MS);
+}
+
+// After a step change, bring the top of the new step back into view — just
+// below the sticky header + sticky step rail — if the reader had scrolled past it.
+function scrollStepsIntoView() {
+  var content = document.getElementById('stepContent');
+  if (!content) return;
+  var headerH = (document.querySelector('.site-header') || {}).offsetHeight || 0;
+  var railH = (document.getElementById('stepRail') || {}).offsetHeight || 0;
+  var top = content.getBoundingClientRect().top;
+  var offset = headerH + railH + 16;
+  if (top < offset) {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: window.scrollY + top - offset, behavior: reduce ? 'auto' : 'smooth' });
+  }
+}
+
+function stepCount() {
+  var lang = (document.body.getAttribute('data-lang') || 'vi');
+  return (stepsData[lang] || stepsData['en'] || stepsData['vi']).length;
+}
+function goToStep(n) {
+  if (n < 1 || n > stepCount() || n === currentStep) return;
+  renderStep(n);
+  scrollStepsIntoView();
+}
+
+// Swipe / drag sideways on the step content: left → next, right → previous.
+// Vertical scrolling stays native (touch-action: pan-y); the panel follows
+// the pointer, resists past the first/last step, and springs back if the
+// gesture is too short.
+(function initStepSwipe() {
+  var area = document.getElementById('stepContent');
+  if (!area || !window.PointerEvent) return;
+  var THRESHOLD = 60, sx = 0, sy = 0, st = 0, dx = 0, pid = null, axis = null, dragged = false;
+
+  function panel() { return area.querySelector('.step-panel'); }
+  function reset(p) {
+    if (!p) return;
+    p.style.transition = 'transform 320ms cubic-bezier(0.25, 1, 0.5, 1), opacity 320ms';
+    p.style.transform = '';
+    p.style.opacity = '';
+    setTimeout(function () { p.style.transition = ''; }, 340);
+  }
+
+  area.addEventListener('pointerdown', function (e) {
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    if (e.target.closest('a, button, summary, input, select, textarea, label')) return;
+    if (area.classList.contains('is-animating')) return;
+    sx = e.clientX; sy = e.clientY; st = performance.now(); dx = 0; pid = e.pointerId; axis = null; dragged = false;
+  });
+
+  area.addEventListener('pointermove', function (e) {
+    if (pid === null || e.pointerId !== pid) return;
+    var mx = e.clientX - sx, my = e.clientY - sy;
+    if (axis === null) {
+      if (Math.abs(mx) < 8 && Math.abs(my) < 8) return;
+      axis = Math.abs(mx) > Math.abs(my) * 1.2 ? 'x' : 'y';
+      if (axis === 'y') { pid = null; return; }
+      dragged = true;
+      try { area.setPointerCapture(pid); } catch (err) {}
+      area.classList.add('is-dragging');
+      if (window.getSelection) window.getSelection().removeAllRanges();
+    }
+    var atEdge = (mx > 0 && currentStep === 1) || (mx < 0 && currentStep === stepCount());
+    dx = atEdge ? mx * 0.25 : mx;
+    var p = panel();
+    if (p) {
+      p.style.transition = 'none';
+      p.style.transform = 'translateX(' + (dx * 0.6) + 'px)';
+      p.style.opacity = String(1 - Math.min(Math.abs(dx) / 700, 0.35));
+    }
+  });
+
+  function end(e) {
+    if (pid === null || (e && e.pointerId !== pid)) return;
+    pid = null;
+    if (axis !== 'x') return;
+    area.classList.remove('is-dragging');
+    var fast = Math.abs(dx) > 30 && (performance.now() - st) < 250; // quick flick
+    var target = currentStep + (dx < 0 ? 1 : -1);
+    if ((Math.abs(dx) > THRESHOLD || fast) && target >= 1 && target <= stepCount()) {
+      goToStep(target); // the dragged panel fades out from where it was released
+    } else {
+      reset(panel());
+    }
+  }
+  area.addEventListener('pointerup', end);
+  area.addEventListener('pointercancel', function (e) { end(e); reset(panel()); });
+
+  // A drag is not a click (e.g. on an exchange card).
+  area.addEventListener('click', function (e) {
+    if (dragged) { e.preventDefault(); e.stopPropagation(); dragged = false; }
+  }, true);
+})();
+
+// ←/→ anywhere while the guide is on screen (tabs keep their own handling).
+document.addEventListener('keydown', function (e) {
+  if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+  if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+  var t = e.target;
+  if (t && (t.closest('input, textarea, select, [contenteditable="true"], .step-tab') )) return;
+  if (document.querySelector('.stat-modal-overlay.open, .dq-modal.is-open, .proof-lightbox.is-open, .mobile-nav.open')) return;
+  var box = document.querySelector('.steps-container');
+  if (!box) return;
+  var r = box.getBoundingClientRect();
+  if (r.top > window.innerHeight * 0.6 || r.bottom < window.innerHeight * 0.4) return;
+  e.preventDefault();
+  goToStep(currentStep + (e.key === 'ArrowRight' ? 1 : -1));
+});
+
+// Progressive disclosure (DA Network pattern): the core of each step stays
+// visible; long secondary paragraphs fold into a native <details> "Details".
+var DETAILS_LABEL = { vi: 'Chi tiết', en: 'Details', th: 'รายละเอียด', ko: '상세', id: 'Detail' };
+function makeDisclosure(nodes, label) {
+  if (!nodes.length) return;
+  var d = document.createElement('details');
+  d.className = 'disclosure';
+  d.innerHTML = '<summary><svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg><span>' + label + '</span></summary><div class="disclosure-body"></div>';
+  nodes[0].parentNode.insertBefore(d, nodes[0]);
+  var body = d.querySelector('.disclosure-body');
+  nodes.forEach(function (n) { body.appendChild(n); });
+}
+function collapseStepDetails(root, lang) {
+  var label = DETAILS_LABEL[lang] || DETAILS_LABEL.en;
+  // Exchange cards (step 2): keep name, tagline, rate; fold the long "why".
+  root.querySelectorAll('.exchange-card').forEach(function (card) {
+    makeDisclosure(Array.prototype.slice.call(card.querySelectorAll('.exchange-stats, .exchange-why')), label);
+  });
+  // Strategy tip: keep its heading, fold the list + explanation.
+  root.querySelectorAll('.exchange-strategy-tip').forEach(function (tip) {
+    makeDisclosure(Array.prototype.slice.call(tip.querySelectorAll(':scope > ul, :scope > p')), label);
+  });
+  // Main column: after the first heading block, fold any further sections.
+  var main = root.querySelector('.step-main');
+  if (main) {
+    var h = main.querySelectorAll(':scope > h4');
+    if (h.length > 1) {
+      var rest = [], node = h[1];
+      while (node) { rest.push(node); node = node.nextElementSibling; }
+      makeDisclosure(rest, label);
+    }
+  }
+}
+
 document.querySelectorAll('.step-tab').forEach((btn) => {
-  btn.addEventListener('click', () => renderStep(parseInt(btn.dataset.step)));
+  btn.addEventListener('click', () => goToStep(parseInt(btn.dataset.step)));
+  // Tablist keyboard pattern: ←/→ move between steps
+  btn.addEventListener('keydown', (e) => {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+    e.preventDefault();
+    var tabs = document.querySelectorAll('.step-tab');
+    var next = currentStep + (e.key === 'ArrowRight' ? 1 : -1);
+    if (next < 1) next = tabs.length;
+    if (next > tabs.length) next = 1;
+    renderStep(next);
+    tabs[next - 1].focus();
+  });
 });
 document.getElementById('prevStep')?.addEventListener('click', () => {
-  if (currentStep > 1) renderStep(currentStep - 1);
+  goToStep(currentStep - 1);
 });
 document.getElementById('nextStep')?.addEventListener('click', () => {
-  var lang = (document.body.getAttribute('data-lang') || 'vi');
-  var totalSteps = (stepsData[lang] || stepsData['en'] || stepsData['vi']).length;
-  if (currentStep < totalSteps) renderStep(currentStep + 1);
+  if (currentStep < stepCount()) goToStep(currentStep + 1);
   else document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth' });
 });
 
@@ -931,26 +1160,22 @@ function renderComparison() {
     }
   ];
 
-  grid.innerHTML = clusters.map(function(c) {
-    return '<div class="compare-card featured" style="border-color:rgba(247,147,26,.35);background:linear-gradient(160deg,rgba(20,12,0,.85),rgba(10,8,0,.75));position:relative;overflow:hidden;box-shadow:0 4px 24px rgba(247,147,26,.08);">'
-      + '<div style="position:absolute;top:0;left:0;right:0;height:3px;background:' + c.topBar + ';"></div>'
-      + '<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">'
-      + '<span style="font-size:28px;">' + c.icon + '</span>'
-      + '<div>'
-      + '<div style="font-size:15px;font-weight:800;color:#fff;">' + c.label + '</div>'
-      + '<span style="display:inline-block;padding:2px 10px;border-radius:12px;font-size:11px;font-weight:700;background:rgba(247,147,26,.15);color:' + c.tagColor + ';border:1px solid rgba(247,147,26,.3);margin-top:3px;">' + c.tag + '</span>'
-      + '</div></div>'
-      + '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;">'
-      + c.exchanges.map(function(ex) {
-          return '<span style="padding:4px 12px;border-radius:16px;font-size:12px;font-weight:600;background:rgba(247,147,26,.08);color:#d4a843;border:1px solid rgba(247,147,26,.2);">' + ex + '</span>';
-        }).join('')
+  // DA Network ledger layout: index · market · category, then the rate, the
+  // exchanges in the cluster and a one-line description. No inline styling.
+  grid.innerHTML = clusters.map(function(c, i) {
+    return '<article class="compare-card">'
+      + '<div class="compare-card-top">'
+      +   '<span class="label">' + String(i + 1).padStart(2, '0') + '</span>'
+      +   '<span class="compare-tag">' + c.tag + '</span>'
       + '</div>'
-      + '<div style="margin-bottom:12px;">'
-      + '<span style="font-size:32px;font-weight:900;color:' + c.highlight + ';text-shadow:0 0 20px ' + c.highlight + '55;">' + c.rate + '</span>'
-      + '<span style="font-size:12px;color:var(--color-text-muted);margin-left:8px;">' + c.rateNote + '</span>'
-      + '</div>'
-      + '<p style="font-size:13px;color:rgba(200,180,140,.75);line-height:1.6;margin:0;">' + c.desc + '</p>'
-      + '</div>';
+      + '<h4 class="compare-label">' + c.label + '</h4>'
+      + '<p class="compare-rate"><span class="compare-rate-num">' + c.rate + '</span>'
+      +   '<span class="compare-rate-note">' + c.rateNote + '</span></p>'
+      + '<ul class="compare-exchanges">'
+      +   c.exchanges.map(function(ex) { return '<li>' + ex + '</li>'; }).join('')
+      + '</ul>'
+      + '<p class="compare-desc">' + c.desc + '</p>'
+      + '</article>';
   }).join('');
 }
 renderComparison();
@@ -996,32 +1221,44 @@ function calcEarnings() {
         datasets: [{
           label: 'Thu nhập (USD)',
           data: growthData,
-          borderColor: '#f7931a',
-          backgroundColor: 'rgba(247,147,26,0.1)',
+          // DA Network tokens: --color-gold, --color-faint, --color-line
+          borderColor: '#d7ad52',
+          backgroundColor: 'rgba(215,173,82,0.06)',
           fill: true,
-          tension: 0.4,
-          pointRadius: 3,
-          pointBackgroundColor: '#f7931a',
-          borderWidth: 2,
+          tension: 0.35,
+          pointRadius: 0,
+          pointHoverRadius: 4,
+          pointBackgroundColor: '#d7ad52',
+          borderWidth: 1.5,
         }]
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
         plugins: {
           legend: { display: false },
           tooltip: {
+            backgroundColor: '#171717',
+            borderColor: 'rgba(255,255,255,0.16)',
+            borderWidth: 1,
+            titleColor: '#989898',
+            bodyColor: '#f5f5f3',
+            cornerRadius: 4,
+            displayColors: false,
             callbacks: { label: ctx => ' $' + ctx.parsed.y.toFixed(2) }
           }
         },
         scales: {
           x: {
-            ticks: { color: '#7a7875', font: { size: 10 } },
-            grid: { display: false }
+            ticks: { color: '#707070', font: { size: 10, family: 'Geist Mono, ui-monospace, monospace' } },
+            grid: { display: false },
+            border: { color: 'rgba(255,255,255,0.08)' }
           },
           y: {
-            ticks: { color: '#7a7875', font: { size: 10 }, callback: v => '$' + v },
-            grid: { color: 'rgba(255,255,255,0.05)' }
+            ticks: { color: '#707070', font: { size: 10, family: 'Geist Mono, ui-monospace, monospace' }, callback: v => '$' + v },
+            grid: { color: 'rgba(255,255,255,0.06)' },
+            border: { display: false }
           }
         },
         animation: { duration: 400 }
@@ -1142,17 +1379,20 @@ function renderFaqs() {
   if (!faqList) return;
   var lang = (document.body.getAttribute('data-lang') || 'vi');
   var faqs = faqsData[lang] || faqsData['en'] || faqsData['vi'];
-  faqList.innerHTML = faqs.map((f, i) => `
+  faqList.innerHTML = stripEmoji(faqs.map((f, i) => `
     <div class="faq-item" data-faq="${i}">
-      <button class="faq-question" onclick="toggleFaq(${i})">
-        <span>${f.q}</span>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-      </button>
-      <div class="faq-answer">
-        <div class="faq-answer-inner">${f.a}</div>
+      <h3 class="faq-heading">
+        <button class="faq-question" id="faq-q-${i}" aria-expanded="false" aria-controls="faq-a-${i}" onclick="toggleFaq(${i})">
+          <span class="faq-num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>
+          <span class="faq-q-text">${f.q}</span>
+          <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+      </h3>
+      <div class="faq-answer" id="faq-a-${i}" role="region" aria-labelledby="faq-q-${i}">
+        <div class="faq-answer-inner"><div class="faq-answer-body">${f.a}</div></div>
       </div>
     </div>
-  `).join('');
+  `).join(''));
 }
 renderFaqs();
 
@@ -1161,6 +1401,8 @@ function toggleFaq(i) {
   items.forEach((item, idx) => {
     if (idx === i) item.classList.toggle('open');
     else item.classList.remove('open');
+    const q = item.querySelector('.faq-question');
+    if (q) q.setAttribute('aria-expanded', item.classList.contains('open') ? 'true' : 'false');
   });
 }
 window.toggleFaq = toggleFaq;
@@ -1168,7 +1410,13 @@ window.toggleFaq = toggleFaq;
 // ─── SMOOTH SCROLL FOR NAV ───────────────────────────────────────
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
-    const target = document.querySelector(a.getAttribute('href'));
+    const href = a.getAttribute('href');
+    if (href === '#') { // logo: back to top
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    const target = document.querySelector(href);
     if (target) {
       e.preventDefault();
       target.scrollIntoView({ behavior: 'smooth' });
@@ -1179,7 +1427,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 // ─── HEADER SCROLL EFFECT ───────────────────────────────────────
 const header = document.querySelector('.site-header');
 window.addEventListener('scroll', () => {
-  if (header) header.style.borderBottomColor = window.scrollY > 10 ? 'var(--color-divider)' : 'transparent';
+  if (header) header.classList.toggle('is-scrolled', window.scrollY > 12);
 }, { passive: true });
 
 // ─── COMMISSION COUNTER (DISABLED — replaced with honest monthly snapshot) ───
@@ -1347,92 +1595,41 @@ const MODAL_DATA = {
   }
 };
 
-/* ── Counter animation helper ── */
-function animateCount(el, targetStr, duration = 900) {
-  // Parse target — handles formats like "237", "$75,412", "~320", "+12", "~50,400"
-  const prefix = targetStr.match(/^[^\d]*/)?.[0] || '';
-  const suffix = targetStr.match(/[^\d,\.]+$/)?.[0] || '';
-  const raw = targetStr.replace(/[^\d]/g, '');
-  const target = parseInt(raw, 10);
-  if (isNaN(target) || target === 0) return; // skip non-numeric
-
-  const startTime = performance.now();
-  const formatNum = n => n.toLocaleString('en-US');
-
-  function easeOutExpo(t) {
-    return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
-  }
-
-  function tick(now) {
-    const elapsed = now - startTime;
-    const progress = Math.min(elapsed / duration, 1);
-    const eased = easeOutExpo(progress);
-    const current = Math.floor(eased * target);
-    el.textContent = prefix + formatNum(current) + suffix;
-    if (progress < 1) requestAnimationFrame(tick);
-    else el.textContent = prefix + formatNum(target) + suffix;
-  }
-  requestAnimationFrame(tick);
-}
-
+// Reported figures are rendered as-is — no counting animation
+// (DA Network: "No animated counters"). Rows enter with the shared
+// `.seq` stagger defined in style.css.
 function openStatModal(type) {
   const data = MODAL_DATA[type];
   if (!data) return;
 
-  const bigNumRaw = data.bigNum || document.getElementById('commissionCounter')?.textContent || '$43,872';
+  const bigNumRaw = data.bigNum || document.getElementById('commissionCounter')?.textContent || '';
 
-  // Rows: mark numeric values with data attribute for animation
   const rowsHTML = data.rows.map((r, i) => `
-    <div class="modal-row" style="opacity:0;transform:translateY(8px);transition:opacity 0.3s ${0.12 + i * 0.07}s ease,transform 0.3s ${0.12 + i * 0.07}s ease">
+    <div class="modal-row seq" style="--i:${i}">
       <span class="modal-row-label">${r.label}</span>
       <span class="modal-row-val-wrap">
-        <span class="modal-row-val ${r.cls || ''}" data-count-val="${r.val}">${r.val}</span>
+        <span class="modal-row-val ${r.cls || ''}">${r.val}</span>
         ${r.note ? `<span class="modal-row-note">${r.note}</span>` : ''}
       </span>
     </div>
   `).join('');
 
-  document.getElementById('statModalContent').innerHTML = `
+  const content = document.getElementById('statModalContent');
+  content.setAttribute('data-inview', 'false');
+  content.innerHTML = stripEmoji(`
     <span class="modal-tag ${data.tagClass}">${data.tag}</span>
-    <div class="modal-big-num ${data.bigNumClass}" id="modalBigNum" style="opacity:0;transform:scale(0.8);transition:opacity 0.35s 0.05s ease,transform 0.35s 0.05s cubic-bezier(0.34,1.56,0.64,1)"></div>
-    <p class="modal-subtitle" style="opacity:0;transition:opacity 0.3s 0.18s ease">${data.title}</p>
-    <p style="font-size:0.75rem;color:rgba(255,255,255,0.35);margin-top:-20px;margin-bottom:16px;opacity:0;transition:opacity 0.3s 0.22s ease">${data.subtitle}</p>
-    <div class="modal-divider"></div>
+    <div class="modal-big-num ${data.bigNumClass}" id="modalBigNum">${bigNumRaw}</div>
+    <p class="modal-subtitle">${data.title}</p>
+    <p class="modal-period">${data.subtitle}</p>
     <div class="modal-rows">${rowsHTML}</div>
-    <div class="modal-divider"></div>
-    <div class="modal-note" style="opacity:0;transition:opacity 0.3s 0.7s ease">${data.note}</div>
-  `;
+    <div class="modal-note">${data.note}</div>
+  `);
 
   const overlay = document.getElementById('statModalOverlay');
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
-
-  // Trigger CSS transitions
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      const content = document.getElementById('statModalContent');
-
-      // Animate big number
-      const bigEl = document.getElementById('modalBigNum');
-      bigEl.style.opacity = '1';
-      bigEl.style.transform = 'scale(1)';
-      bigEl.textContent = bigNumRaw; // set placeholder first
-      animateCount(bigEl, bigNumRaw, 1000);
-
-      // Fade in subtitle + note
-      content.querySelectorAll('p, .modal-note').forEach(el => { el.style.opacity = '1'; });
-
-      // Stagger rows in + count animate numeric values
-      content.querySelectorAll('.modal-row').forEach((row, i) => {
-        setTimeout(() => {
-          row.style.opacity = '1';
-          row.style.transform = 'translateY(0)';
-          const valEl = row.querySelector('[data-count-val]');
-          if (valEl) animateCount(valEl, valEl.dataset.countVal, 700);
-        }, i * 60);
-      });
-    });
-  });
+  requestAnimationFrame(() => requestAnimationFrame(() => content.setAttribute('data-inview', 'true')));
+  overlay.querySelector('.stat-modal-close')?.focus({ preventScroll: true });
 }
 
 function closeStatModal() {
@@ -1556,10 +1753,23 @@ function openExplainerModal(type) {
     <div class="modal-divider"></div>
     ${sectionsHTML}
   `;
+  const emContent = document.getElementById('explainerModalContent');
+  emContent.innerHTML = stripEmoji(emContent.innerHTML);
+  // The card shows only a key figure + one line; its full (translated)
+  // paragraph opens the dialog instead.
+  const full = document.querySelector('.explainer-card[data-explainer="' + type + '"] .explainer-full');
+  const sub = emContent.querySelector('.em-sub');
+  if (full && sub) {
+    const lead = document.createElement('p');
+    lead.className = 'em-lead';
+    lead.innerHTML = full.innerHTML;
+    sub.after(lead);
+  }
 
   const overlay = document.getElementById('explainerModalOverlay');
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
+  overlay.querySelector('.stat-modal-close')?.focus({ preventScroll: true });
 
   // Animate staggered elements
   requestAnimationFrame(() => requestAnimationFrame(() => {
@@ -1582,188 +1792,6 @@ document.addEventListener('keydown', e => {
   }
 });
 
-/* ══════════════════════════════════════════
-   SCROLL STAGGER — Explainer Cards
-══════════════════════════════════════════ */
-(function () {
-  const STAGGER_DELAY = 140; // ms between each card
-
-  function initCardStagger() {
-    const cards = document.querySelectorAll('.explainer-card');
-    if (!cards.length) return;
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const card = entry.target;
-          const index = parseInt(card.dataset.cardIndex || 0);
-          setTimeout(() => card.classList.add('card-visible'), index * STAGGER_DELAY);
-          observer.unobserve(card); // fire once
-        }
-      });
-    }, { threshold: 0.15 });
-
-    cards.forEach((card, i) => {
-      card.dataset.cardIndex = i;
-      observer.observe(card);
-    });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCardStagger);
-  } else {
-    initCardStagger();
-  }
-})();
-
-/* ══════════════════════════════════════════
-   3D TILT — Explainer Cards
-══════════════════════════════════════════ */
-(function () {
-  const MAX_TILT   = 12;   // max degrees
-  const SCALE      = 1.03;
-  const SPEED      = 0.12; // lerp factor (lower = smoother)
-
-  function initTilt() {
-    document.querySelectorAll('.explainer-card').forEach(card => {
-      let targetRX = 0, targetRY = 0;
-      let currentRX = 0, currentRY = 0;
-      let rafId = null;
-      let isHovered = false;
-
-      function lerp(a, b, t) { return a + (b - a) * t; }
-
-      function tick() {
-        currentRX = lerp(currentRX, targetRX, SPEED + 0.08);
-        currentRY = lerp(currentRY, targetRY, SPEED + 0.08);
-
-        const shadowX = -currentRY * 1.2;
-        const shadowY =  currentRX * 1.2;
-        const shadowBlur = 20 + Math.abs(currentRX) + Math.abs(currentRY);
-        const shadowOpacity = 0.18 + (Math.abs(currentRX) + Math.abs(currentRY)) * 0.008;
-
-        card.style.transform =
-          `rotateX(${currentRX}deg) rotateY(${currentRY}deg) scale(${SCALE})`;
-        card.style.boxShadow =
-          `${shadowX}px ${shadowY}px ${shadowBlur}px rgba(0,0,0,${shadowOpacity}),
-           0 0 30px rgba(247,147,26,${(Math.abs(currentRX) + Math.abs(currentRY)) * 0.005})`;
-
-        const stillMoving =
-          Math.abs(currentRX - targetRX) > 0.05 ||
-          Math.abs(currentRY - targetRY) > 0.05;
-
-        if (isHovered || stillMoving) {
-          rafId = requestAnimationFrame(tick);
-        } else {
-          rafId = null;
-          if (!isHovered) {
-            card.style.transform = '';
-            card.style.boxShadow = '';
-            card.classList.remove('tilt-active');
-          }
-        }
-      }
-
-      card.addEventListener('mouseenter', () => {
-        isHovered = true;
-        card.classList.add('tilt-active');
-        if (!rafId) rafId = requestAnimationFrame(tick);
-      });
-
-      card.addEventListener('mousemove', e => {
-        const rect = card.getBoundingClientRect();
-        const cx = rect.left + rect.width  / 2;
-        const cy = rect.top  + rect.height / 2;
-        const dx = (e.clientX - cx) / (rect.width  / 2); // -1 to 1
-        const dy = (e.clientY - cy) / (rect.height / 2); // -1 to 1
-
-        targetRY =  dx * MAX_TILT;
-        targetRX = -dy * MAX_TILT;
-      });
-
-      card.addEventListener('mouseleave', () => {
-        isHovered = false;
-        targetRX = 0;
-        targetRY = 0;
-        if (!rafId) rafId = requestAnimationFrame(tick);
-      });
-    });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initTilt);
-  } else {
-    initTilt();
-  }
-})();
-
-/* ══════════════════════════════════════════
-   SCROLL-INTO-VIEW COUNT-UP — Stats Box
-   Số 237 và hoa hồng đếm từ 0 khi scroll đến
-   + Âm thanh tick coin tăng dần + tiếng ding kết thúc
-══════════════════════════════════════════ */
-(function () {
-  const DURATION = 1800; // ms tổng thời gian đếm số 237
-
-  /* ── Easing ── */
-  function easeOutExpo(t) {
-    return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
-  }
-
-  function countUp(el, from, to, format, duration) {
-    const start = performance.now();
-    function step(now) {
-      const elapsed = now - start;
-      const t = Math.min(elapsed / duration, 1);
-      const value = from + (to - from) * easeOutExpo(t);
-      el.textContent = format(Math.round(value));
-      if (t < 1) requestAnimationFrame(step);
-      else el.textContent = format(to);
-    }
-    requestAnimationFrame(step);
-  }
-
-  function formatUSDLocal(n) {
-    return '$' + n.toLocaleString('en-US');
-  }
-
-  /* ── Observer ── */
-  function initScrollCount() {
-    const statsBox = document.querySelector('.hero-stats-vertical');
-    if (!statsBox) return;
-
-    const el237  = document.getElementById('goldStat237');
-    const elComm = document.getElementById('commissionCounter');
-    if (!el237 || !elComm) return;
-
-    let fired = false;
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !fired) {
-          fired = true;
-          observer.unobserve(statsBox);
-
-          // Số 237 — có âm thanh tick
-          countUp(el237, 0, 237, n => String(n), DURATION);
-
-          // Số hoa hồng — không có âm thanh riêng (tránh chồng chéo)
-          const commTarget = window.__commissionTarget ||
-            parseInt((elComm.textContent || '').replace(/[^0-9]/g, ''), 10) || 0;
-          countUp(elComm, 0, commTarget, formatUSDLocal, DURATION + 200);
-        }
-      });
-    }, { threshold: 0.35 });
-
-    observer.observe(statsBox);
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initScrollCount);
-  } else {
-    initScrollCount();
-  }
-})();
 
 /* ══════════════════════════════════════════
    PARTNER WINS — DATA-DRIVEN RENDER
@@ -1875,28 +1903,27 @@ const PARTNERS_DATA = [
     };
 
     grid.innerHTML = PARTNERS_DATA.map(function (p) {
-      const grad = 'linear-gradient(135deg,' + p.accent.from + ',' + p.accent.to + ')';
+      // Avatars use the neutral DA Network surface; `p.accent` is no longer rendered.
       const quote = (p.quote && p.quote[lang]) ? p.quote[lang] : (p.quote && p.quote.vi) || '';
       return ''
         + '<article class="win-card">'
         +   '<header class="win-card-head">'
-        +     '<span class="win-avatar" style="background:' + grad + '" aria-hidden="true">' + escapeHtml(p.initials) + '</span>'
+        +     '<span class="win-avatar" aria-hidden="true">' + escapeHtml(p.initials) + '</span>'
         +     '<div class="win-identity">'
         +       '<strong>' + escapeHtml(p.name) + '</strong>'
         +       '<small>' + escapeHtml(p.city) + ' · ' + escapeHtml(p.channel) + '</small>'
         +     '</div>'
-        +     '<span class="win-verify" title="' + escapeHtml(L.verifyTip) + '" aria-label="' + escapeHtml(L.verifiedBadge) + '">✓</span>'
+        +     '<span class="win-verify" title="' + escapeHtml(L.verifyTip) + '">'
+        +       '<svg class="win-verified-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'
+        +       '<span class="sr-only">' + escapeHtml(L.verifiedBadge) + '</span>'
+        +     '</span>'
         +   '</header>'
         +   '<blockquote class="win-quote">' + escapeHtml(quote) + '</blockquote>'
+        // Calm footer: one line instead of a 3-row table (channel is already under the name)
         +   '<dl class="win-meta">'
-        +     '<div><dt>' + escapeHtml(L.lblChannel) + '</dt><dd>' + escapeHtml(p.channel) + '</dd></div>'
-        +     '<div><dt>' + escapeHtml(L.lblExchange) + '</dt><dd>' + escapeHtml(p.exchange) + '</dd></div>'
-        +     '<div><dt>' + escapeHtml(L.lblCommission) + '</dt><dd class="win-commission">' + escapeHtml(formatUSDT(p.commission)) + '</dd></div>'
+        +     '<div><dt class="sr-only">' + escapeHtml(L.lblExchange) + '</dt><dd class="win-exchange">' + escapeHtml(p.exchange) + '</dd></div>'
+        +     '<div><dt class="sr-only">' + escapeHtml(L.lblCommission) + '</dt><dd class="win-commission">' + escapeHtml(formatUSDT(p.commission)) + '</dd></div>'
         +   '</dl>'
-        +   '<div class="win-verified-tag">'
-        +     '<svg class="win-verified-icon" width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 0L9.8 1.5 12 1.2 13 3.3 15 4.5 14.5 6.8 16 8.5 14.8 10.5 15.3 12.8 13.2 13.5 12.5 15.6 10.2 15.3 8 16 5.8 15.3 3.5 15.6 2.8 13.5 0.7 12.8 1.2 10.5 0 8.5 1.5 6.8 1 4.5 3 3.3 4 1.2 6.2 1.5 8 0z" fill="#4ade80"/><path d="M5 8L7 10L11 6" stroke="#0d0c0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
-        +     '<span>' + escapeHtml(L.verifiedBadge) + '</span>'
-        +   '</div>'
         + '</article>';
     }).join('');
   }
@@ -2586,7 +2613,7 @@ const PARTNERS_DATA = [
   });
 
   // ── Active section tracking via IntersectionObserver ──
-  const sectionIds = ['guide', 'calculator', 'faq', 'da-network'];
+  const sectionIds = ['guide', 'calculator', 'faq', 'da-network', 'dac-quyen', 'lien-he'];
   const navLinks = document.querySelectorAll('.nav-link[data-section], .nav-link-dd[data-section]');
 
   function setActive(sectionId) {
@@ -2799,7 +2826,7 @@ document.addEventListener('keydown', function(e) {
       // Đặc Quyền
       'dq.tag':   '🔒 Dành riêng cho Partner DA Crypto',
       'dq.title': 'Đặc Quyền Tại DA Crypto',
-      'dq.sub':   'Chỉ <strong style="color:#ffd966">237 partner</strong> đang hoạt động mới có quyền truy cập. Những điều bên ngoài không thể mua được.',
+      'dq.sub':   'Chỉ <strong style="color:var(--color-gold)">237 partner</strong> đang hoạt động mới có quyền truy cập. Những điều bên ngoài không thể mua được.',
       'dq.card1.title': 'Bot Trade AI — Hàn Quốc',
       'dq.card2.title': 'Kênh Update Plan Market',
       'dq.card3.title': 'Facts & Quotes Độc Quyền',
@@ -3018,7 +3045,7 @@ document.addEventListener('keydown', function(e) {
       // Đặc Quyền
       'dq.tag':   '🔒 Exclusive to DA Crypto Partners',
       'dq.title': 'DA Crypto Member Privileges',
-      'dq.sub':   'Only <strong style="color:#ffd966">237 active partners</strong> have access. These are things money can\'t buy outside.',
+      'dq.sub':   'Only <strong style="color:var(--color-gold)">237 active partners</strong> have access. These are things money can\'t buy outside.',
       'dq.card1.title': 'AI Trading Bot — Korean Team',
       'dq.card2.title': 'Daily Market Plan Channel',
       'dq.card3.title': 'Exclusive Finance Facts & Quotes',
@@ -3192,7 +3219,7 @@ document.addEventListener('keydown', function(e) {
       'faq.tag':'คำถามที่พบบ่อย','faq.title':'FAQ',
       'dan.tag':'เครือข่าย Affiliate','dan.title':'เกี่ยวกับ DA Crypto','dan.sub':'ระบบ crypto affiliate ระดับมืออาชีพ — เชื่อมต่อพาร์ทเนอร์หลายร้อยคนทั่วเอเชียตะวันออกเฉียงใต้กับตลาดแลกเปลี่ยนชั้นนำของโลก',
       'dan.lb.title':'พาร์ทเนอร์ที่ทำได้ดี','dan.fb.title':'ค่าคอมมิชชันจริงของพาร์ทเนอร์',
-      'dq.tag':'🔒 เฉพาะพาร์ทเนอร์ DA Crypto','dq.title':'สิทธิพิเศษของ DA Crypto','dq.sub':'เฉพาะ <strong style="color:#ffd966">237 พาร์ทเนอร์</strong>ที่ใช้งานอยู่เท่านั้นที่มีสิทธิ์เข้าถึง สิ่งที่ไม่สามารถซื้อได้ข้างนอก',
+      'dq.tag':'🔒 เฉพาะพาร์ทเนอร์ DA Crypto','dq.title':'สิทธิพิเศษของ DA Crypto','dq.sub':'เฉพาะ <strong style="color:var(--color-gold)">237 พาร์ทเนอร์</strong>ที่ใช้งานอยู่เท่านั้นที่มีสิทธิ์เข้าถึง สิ่งที่ไม่สามารถซื้อได้ข้างนอก',
       'dq.card1.title':'AI Trading Bot — ทีมเกาหลี','dq.card2.title':'ช่องอัปเดตแผนตลาด','dq.card3.title':'ช่อง Facts &amp; Quotes สุดเอ็กซ์คลูซีฟ',
       'dq.cta.strong':'สิทธิพิเศษทั้งหมดข้างต้นสงวนไว้เฉพาะพาร์ทเนอร์ DA Crypto เท่านั้น','dq.cta.btn':'⚡ เข้าร่วมเพื่อปลดล็อก',
       'lh.tag':'การสนับสนุน','lh.title':'ติดต่อ DA CRYPTO','lh.sub':'มีคำถามหรืออยากเข้าร่วมเครือข่าย? ทีมพร้อมให้บริการ 24/7',
@@ -3243,7 +3270,7 @@ document.addEventListener('keydown', function(e) {
       'faq.tag':'자주 묻는 질문','faq.title':'FAQ',
       'dan.tag':'Affiliate 네트워크','dan.title':'DA Crypto 소개','dan.sub':'전문 암호화폐 affiliate 시스템 — 동남아시아 전역의 수백 명의 파트너와 세계 최고의 거래소를 연결합니다.',
       'dan.lb.title':'잘하고 있는 파트너','dan.fb.title':'실제 파트너 커미션',
-      'dq.tag':'🔒 DA Crypto 파트너 전용','dq.title':'DA Crypto 멤버 특별 혜택','dq.sub':'<strong style="color:#ffd966">237명의 활동 파트너</strong>만 접근 가능합니다. 외부에서는 돈으로도 살 수 없는 것들입니다.',
+      'dq.tag':'🔒 DA Crypto 파트너 전용','dq.title':'DA Crypto 멤버 특별 혜택','dq.sub':'<strong style="color:var(--color-gold)">237명의 활동 파트너</strong>만 접근 가능합니다. 외부에서는 돈으로도 살 수 없는 것들입니다.',
       'dq.card1.title':'AI 트레이딩 봇 — 한국팀','dq.card2.title':'일일 마켓 플랜 채널','dq.card3.title':'독점 Finance Facts &amp; Quotes 채널',
       'dq.cta.strong':'위의 모든 혜택은 DA Crypto 파트너에게만 제공됩니다.','dq.cta.btn':'⚡ 가입하여 잠금 해제',
       'lh.tag':'지원','lh.title':'DA CRYPTO 문의','lh.sub':'질문이 있거나 네트워크에 참여하고 싶으신가요? 팀이 24/7 대기 중입니다.',
@@ -3294,7 +3321,7 @@ document.addEventListener('keydown', function(e) {
       'faq.tag':'Pertanyaan yang Sering Diajukan','faq.title':'FAQ',
       'dan.tag':'Jaringan Affiliate','dan.title':'Tentang DA Crypto','dan.sub':'Sistem crypto affiliate profesional — menghubungkan ratusan mitra di seluruh Asia Tenggara dengan bursa global terkemuka.',
       'dan.lb.title':'Mitra yang Berprestasi','dan.fb.title':'Komisi Mitra Nyata',
-      'dq.tag':'🔒 Eksklusif untuk Mitra DA Crypto','dq.title':'Keistimewaan Anggota DA Crypto','dq.sub':'Hanya <strong style="color:#ffd966">237 mitra aktif</strong> yang memiliki akses. Hal-hal yang tidak bisa dibeli di luar.',
+      'dq.tag':'🔒 Eksklusif untuk Mitra DA Crypto','dq.title':'Keistimewaan Anggota DA Crypto','dq.sub':'Hanya <strong style="color:var(--color-gold)">237 mitra aktif</strong> yang memiliki akses. Hal-hal yang tidak bisa dibeli di luar.',
       'dq.card1.title':'AI Trading Bot — Tim Korea','dq.card2.title':'Saluran Update Rencana Pasar Harian','dq.card3.title':'Saluran Eksklusif Finance Facts &amp; Quotes',
       'dq.cta.strong':'Semua keistimewaan di atas hanya untuk mitra DA Crypto.','dq.cta.btn':'⚡ Bergabung untuk Membuka',
       'lh.tag':'Dukungan','lh.title':'Hubungi DA CRYPTO','lh.sub':'Ada pertanyaan atau ingin bergabung dengan jaringan? Tim kami tersedia 24/7.',
@@ -3350,7 +3377,7 @@ document.addEventListener('keydown', function(e) {
       document.querySelectorAll('[data-i18n]').forEach(function(el) {
         var key = el.getAttribute('data-i18n');
         if (t[key] !== undefined) {
-          el.innerHTML = t[key];
+          el.innerHTML = stripEmoji(t[key]);
         }
       });
 

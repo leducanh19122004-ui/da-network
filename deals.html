@@ -15,244 +15,230 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2" />
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192x192.png?v=2" />
   <link rel="icon" type="image/png" sizes="512x512" href="/icon-512x512.png?v=2" />
-  <!-- Fonts: Be Vietnam Pro (full Vietnamese support) + Inter -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- Fonts: self-hosted Geist, identical to danetwork.asia (see style.css) -->
+  <link rel="preload" href="/fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <meta name="theme-color" content="#080808" />
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* ── Reset & base ── */
-    *, *::before, *::after { box-sizing: border-box; }
+    /* Deal comparison page — built only from the DA Network tokens in style.css */
+
+    /* ── Top bar ── */
+    .deals-topbar-wrap {
+      position: sticky; top: 0; z-index: 50;
+      border-bottom: 1px solid var(--color-line);
+      background: rgb(8 8 8 / 0.85);
+      -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+    }
+    .deals-topbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; height: var(--header-h); }
+    .deals-topbar-left { display: flex; align-items: center; gap: 1.5rem; min-width: 0; }
+    .deals-hero-back {
+      display: inline-flex; align-items: center; gap: 0.5rem; min-height: 2.5rem;
+      font-size: 0.875rem; color: var(--color-muted); white-space: nowrap;
+      transition: color var(--dur-fast);
+    }
+    .deals-hero-back:hover { color: var(--color-fg); }
+    @media (max-width: 639px) { .deals-topbar .deals-hero-back { display: none; } }
 
     /* ── Hero ── */
-    .deals-hero {
-      background: linear-gradient(135deg, #1a0a00 0%, #0d0d0d 50%, #0a1a0a 100%);
-      padding: 48px 0 36px;
-      border-bottom: 1px solid rgba(247,147,26,.2);
-    }
-    .deals-topbar {
-      display: flex; justify-content: space-between; align-items: center;
-      max-width: 1200px; margin: 0 auto; padding: 0 24px 20px;
-    }
-    .deals-hero-back {
-      display: inline-flex; align-items: center; gap: 6px;
-      color: var(--color-text-muted); font-size: 13px; text-decoration: none;
-      transition: color .2s;
-    }
-    .deals-hero-back:hover { color: var(--color-primary); }
-    .deals-hero-content { text-align: center; padding: 0 24px; }
-    .deals-hero-content h1 { font-size: clamp(1.5rem, 4vw, 2.4rem); font-weight: 800; color: #fff; margin: 12px 0 8px; }
-    .deals-hero-content p  { color: var(--color-text-muted); font-size: 15px; margin: 0; }
+    .deals-hero { position: relative; overflow: hidden; }
+    .deals-hero-content { position: relative; padding-top: 4.5rem; padding-bottom: 3.5rem; }
+    .deals-hero-content h1 { margin-top: 1.25rem; max-width: 48rem; }
+    .deals-hero-content p:not(.eyebrow) { max-width: var(--measure); margin-top: 1.25rem; font-size: 1.125rem; line-height: 1.65; color: var(--color-muted); }
 
-    /* ── Stats bar ── */
+    /* ── Stats ledger ── */
     .deals-stats {
-      display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;
-      padding: 20px 24px 0; margin-top: 20px;
+      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-top: 3rem; border-top: 1px solid var(--color-line);
     }
-    .deals-stat { text-align: center; }
-    .deals-stat-num { font-size: 22px; font-weight: 900; color: var(--color-primary); }
-    .deals-stat-lbl { font-size: 11px; color: var(--color-text-muted); text-transform: uppercase; letter-spacing: .5px; }
+    .deals-stat { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 0.75rem; padding: 1.5rem 1.25rem 0 0; }
+    .deals-stat + .deals-stat { padding-left: 1.25rem; border-left: 1px solid var(--color-line); }
+    @media (min-width: 768px) { .deals-stat { padding-right: 2rem; } .deals-stat + .deals-stat { padding-left: 2rem; } }
+    .deals-stat-num {
+      font-size: clamp(1.6rem, 4vw, 2.75rem); font-weight: 600; letter-spacing: -0.04em; line-height: 1;
+      font-variant-numeric: tabular-nums; color: var(--color-fg);
+    }
+    .deals-stat:nth-child(2) .deals-stat-num { color: var(--color-gold); }
+    .deals-stat-lbl { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-faint); }
 
     /* ── Container ── */
-    .deals-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .deals-container { padding-bottom: var(--section-quiet); }
 
-    /* ── Filter tabs ── */
+    /* ── Filter (segmented) ── */
     .deals-filter {
-      display: flex; gap: 10px; flex-wrap: wrap;
-      justify-content: center; padding: 28px 0 8px;
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      padding-block: 2rem; border-top: 1px solid var(--color-line);
     }
     .filter-btn {
-      padding: 8px 20px; border-radius: 20px; border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05); color: var(--color-text-muted);
-      font-size: 13px; cursor: pointer; transition: all .2s; font-family: inherit;
+      min-height: 2.5rem; padding-inline: 1rem;
+      border: 1px solid var(--color-line-strong); border-radius: var(--radius-sm);
+      font-size: 0.875rem; color: var(--color-muted);
+      transition: color var(--dur-fast), border-color var(--dur-fast), background-color var(--dur-fast);
     }
-    .filter-btn:hover { border-color: rgba(247,147,26,.4); color: #fff; }
-    .filter-btn.active {
-      background: var(--color-primary); border-color: var(--color-primary);
-      color: #000; font-weight: 700;
-    }
+    .filter-btn:hover { color: var(--color-fg); border-color: rgb(245 245 243 / 0.5); }
+    .filter-btn.active { background: var(--color-fg); border-color: var(--color-fg); color: var(--color-ink-0); }
 
     /* ── Summary table ── */
-    .summary-section { padding: 32px 0 24px; }
-    .summary-section h2 {
-      font-size: 1.2rem; font-weight: 800; color: #fff;
-      margin: 0 0 16px; text-align: center;
+    .summary-section { padding-bottom: 3.5rem; }
+    .summary-section h2,
+    .section-divider h2 {
+      font-weight: 600; line-height: 1.1; letter-spacing: -0.03em;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      text-wrap: balance;
     }
-    .summary-wrap { overflow-x: auto; border-radius: 14px; border: 1px solid rgba(255,255,255,.07); }
-    .summary-table {
-      width: 100%; border-collapse: collapse; font-size: 13px;
-      background: rgba(255,255,255,.02);
+    .summary-section h2 { margin-bottom: 1.75rem; }
+    .summary-wrap {
+      overflow-x: auto; -webkit-overflow-scrolling: touch;
+      border-top: 1px solid var(--color-line);
     }
+    .summary-table { width: 100%; min-width: 40rem; border-collapse: collapse; font-size: 0.9375rem; }
     .summary-table th {
-      background: rgba(247,147,26,.1); color: var(--color-primary);
-      padding: 12px 16px; text-align: left; font-weight: 700;
-      border-bottom: 1px solid rgba(247,147,26,.2); white-space: nowrap;
+      padding: 0.875rem 1rem 0.875rem 0; text-align: left; white-space: nowrap;
+      font-family: var(--font-mono); font-size: 0.625rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--color-faint);
+      border-bottom: 1px solid var(--color-line);
     }
     .summary-table td {
-      padding: 10px 16px; color: var(--color-text-muted);
-      border-bottom: 1px solid rgba(255,255,255,.04); vertical-align: middle;
+      padding: 1rem 1rem 1rem 0; vertical-align: baseline;
+      color: var(--color-muted);
+      border-bottom: 1px solid var(--color-line);
     }
-    .summary-table tr:last-child td { border-bottom: none; }
-    .summary-table tr:hover td { background: rgba(255,255,255,.025); }
-    .rate-cell { font-weight: 900; color: var(--color-primary) !important; font-size: 15px; }
-    .name-cell { color: #fff !important; font-weight: 700; }
+    .summary-table tbody tr { transition: background-color var(--dur-fast); }
+    .summary-table tbody tr:hover { background: rgb(255 255 255 / 0.02); }
+    .summary-table .idx-cell { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-faint); font-variant-numeric: tabular-nums; width: 3rem; }
+    .rate-cell { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; color: var(--color-fg) !important; white-space: nowrap; }
+    .name-cell { color: var(--color-fg) !important; font-weight: 600; white-space: nowrap; }
     .table-badge {
-      font-size: 10px; padding: 2px 7px; border-radius: 8px;
-      background: rgba(247,147,26,.15); color: var(--color-primary);
-      border: 1px solid rgba(247,147,26,.3); margin-left: 6px;
-      vertical-align: middle;
+      display: inline-block; margin-left: 0.5rem; vertical-align: 0.1em;
+      width: 0.375rem; height: 0.375rem; border-radius: 50%; background: var(--color-gold);
+      font-size: 0; overflow: hidden;
     }
     .type-pill {
-      display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 8px;
-      font-weight: 600; white-space: nowrap;
+      display: inline-block; padding: 0.125rem 0.375rem;
+      border: 1px solid var(--color-line-strong); border-radius: var(--radius-sm);
+      font-family: var(--font-mono); font-size: 0.625rem; letter-spacing: 0.1em; white-space: nowrap;
+      color: var(--color-muted);
     }
-    .type-pill.crypto { background: rgba(247,147,26,.1); color: #f7931a; }
-    .type-pill.forex  { background: rgba(59,130,246,.15); color: #60a5fa; }
-
-    /* ── Cards grid ── */
-    .deals-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 20px; padding: 8px 0 60px;
-    }
-    .deal-card {
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 16px; padding: 22px 20px;
-      display: flex; flex-direction: column; gap: 14px;
-      transition: transform .2s, border-color .2s, box-shadow .2s;
-      position: relative; overflow: hidden;
-    }
-    .deal-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: rgba(255,255,255,.06);
-    }
-    .deal-card.forex::before   { background: #3b82f6; }
-    .deal-card.crypto::before  { background: var(--color-primary); }
-    .deal-card.featured::before { background: linear-gradient(90deg, #ffd966, #f7931a); }
-    .deal-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(247,147,26,.35);
-      box-shadow: 0 12px 40px rgba(247,147,26,.1);
-    }
-    .deal-card.featured {
-      border-color: rgba(247,147,26,.4);
-      background: rgba(247,147,26,.05);
-    }
-    .deal-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
-    .deal-name { font-size: 20px; font-weight: 800; color: #fff; line-height: 1.2; }
-    .deal-type-row { display: flex; align-items: center; gap: 8px; margin-top: 4px; flex-wrap: wrap; }
-    .deal-subtype { font-size: 11px; color: var(--color-text-muted); }
-    .deal-badge-pill {
-      font-size: 10px; font-weight: 700; padding: 3px 10px;
-      border-radius: 20px; background: rgba(247,147,26,.12);
-      color: var(--color-primary); border: 1px solid rgba(247,147,26,.25);
-      white-space: nowrap; flex-shrink: 0;
-    }
-    .deal-rate-box {
-      background: rgba(247,147,26,.08); border: 1px solid rgba(247,147,26,.2);
-      border-radius: 12px; padding: 12px 16px;
-      display: flex; align-items: baseline; gap: 8px;
-    }
-    .deal-rate-num { font-size: 32px; font-weight: 900; color: var(--color-primary); line-height: 1; }
-    .deal-rate-label { font-size: 12px; color: var(--color-text-muted); }
-    .deal-procon { display: flex; flex-direction: column; gap: 4px; }
-    .deal-procon-title {
-      font-size: 11px; font-weight: 700; letter-spacing: .5px;
-      text-transform: uppercase; margin-bottom: 6px;
-    }
-    .deal-procon-title.pros { color: #4ade80; }
-    .deal-procon-title.cons { color: #f87171; }
-    .deal-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 5px; }
-    .deal-list li {
-      font-size: 12.5px; color: var(--color-text-muted);
-      padding-left: 20px; position: relative; line-height: 1.45;
-    }
-    .deal-list.pros li::before { content: '✅'; position: absolute; left: 0; font-size: 11px; }
-    .deal-list.cons li::before { content: '⚠️'; position: absolute; left: 0; font-size: 11px; }
-
-    .deal-best-for {
-      font-size: 12px; color: var(--color-text-muted);
-      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07);
-      border-radius: 8px; padding: 8px 12px;
-    }
-    .deal-best-for strong { color: #bbb; font-weight: 600; }
-
-    .deal-cta-btn {
-      margin-top: auto;
-      display: block; text-align: center; padding: 11px 0;
-      border-radius: 10px; font-size: 13px; font-weight: 700;
-      background: var(--color-primary); color: #000;
-      text-decoration: none; transition: background .2s, transform .15s;
-    }
-    .deal-cta-btn:hover { background: #e8820a; transform: scale(1.02); }
+    .type-pill.crypto { border-color: var(--color-gold-line); color: var(--color-gold); }
 
     /* ── Section divider ── */
     .section-divider {
-      display: flex; align-items: center; gap: 16px;
-      padding: 32px 0 16px; margin: 0;
+      display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.75rem 2rem;
+      padding-top: 3.5rem; padding-bottom: 1.75rem;
+      border-top: 1px solid var(--color-line);
     }
-    .section-divider h2 {
-      font-size: 1.3rem; font-weight: 800; color: #fff; white-space: nowrap; margin: 0;
+    .section-divider-line { display: none; }
+    .cards-count { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-faint); }
+
+    /* ── Cards grid ── */
+    .deals-grid { display: grid; gap: 1.25rem; }
+    @media (min-width: 768px) { .deals-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (min-width: 1280px) { .deals-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .deal-card {
+      display: flex; flex-direction: column; gap: 1.25rem;
+      padding: 1.75rem;
+      background: var(--color-ink-1);
+      border: 1px solid var(--color-line);
+      border-radius: var(--radius-lg);
+      transition: border-color var(--dur-fast);
     }
-    .section-divider-line {
-      flex: 1; height: 1px; background: rgba(255,255,255,.07);
+    .deal-card:hover { border-color: var(--color-line-strong); }
+    .deal-card.featured { border-color: var(--color-gold-line); }
+    .deal-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+    .deal-name { font-size: 1.375rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; }
+    .deal-type-row { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.375rem; flex-wrap: wrap; }
+    .deal-subtype { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.06em; color: var(--color-faint); }
+    .deal-badge-pill {
+      flex-shrink: 0; max-width: 50%;
+      padding: 0.25rem 0.5rem;
+      border: 1px solid var(--color-line-strong); border-radius: var(--radius-sm);
+      font-family: var(--font-mono); font-size: 0.625rem; letter-spacing: 0.06em; text-transform: uppercase; text-align: right;
+      color: var(--color-muted);
     }
+    .deal-card.featured .deal-badge-pill { border-color: var(--color-gold-line); color: var(--color-gold); }
+    .deal-rate-box {
+      display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.25rem 0.75rem;
+      padding-block: 1.25rem; border-block: 1px solid var(--color-line);
+    }
+    .deal-rate-num { font-size: 2.75rem; font-weight: 600; letter-spacing: -0.04em; line-height: 1; font-variant-numeric: tabular-nums; }
+    .deal-card.featured .deal-rate-num { color: var(--color-gold); }
+    .deal-rate-label { font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-faint); }
+    .deal-more { margin-top: -0.5rem; }
+    .deal-more .disclosure-body { display: grid; gap: 1.25rem; padding-top: 0.75rem; }
+    .deal-procon { display: flex; flex-direction: column; }
+    .deal-procon-title {
+      margin-bottom: 0.625rem;
+      font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: uppercase;
+    }
+    .deal-procon-title.pros { color: var(--color-gold); }
+    .deal-procon-title.cons { color: var(--color-faint); }
+    .deal-list { display: grid; gap: 0.4rem; }
+    .deal-list li { position: relative; padding-left: 1rem; font-size: 0.875rem; line-height: 1.5; color: var(--color-muted); }
+    .deal-list.pros li::before { content: ''; position: absolute; left: 0; top: 0.62em; width: 0.3rem; height: 0.3rem; border-radius: 50%; background: var(--color-gold); }
+    .deal-list.cons li::before { content: ''; position: absolute; left: 0; top: 0.72em; width: 0.4rem; height: 1px; background: var(--color-faint); }
+    .deal-best-for { font-size: 0.875rem; line-height: 1.55; color: var(--color-muted); }
+    .deal-best-for strong { color: var(--color-fg); font-weight: 500; }
+    .deal-cta-btn {
+      margin-top: auto;
+      display: flex; align-items: center; justify-content: center; min-height: 2.75rem;
+      border: 1px solid rgb(215 173 82 / 0.6); border-radius: var(--radius-sm);
+      font-size: 0.9375rem; font-weight: 500; color: var(--color-gold);
+      transition: background-color var(--dur-fast), color var(--dur-fast);
+    }
+    .deal-cta-btn:hover { background: var(--color-gold); color: var(--color-ink-0); }
+    .deal-card.featured .deal-cta-btn { background: var(--color-fg); border-color: var(--color-fg); color: var(--color-ink-0); }
+    .deal-card.featured .deal-cta-btn:hover { background: #fff; }
 
     /* ── Back footer ── */
-    .deals-footer {
-      text-align: center; padding: 16px 0 60px;
-    }
-    .back-home {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
-      color: var(--color-text-muted); text-decoration: none;
-      padding: 11px 22px; border-radius: 12px; font-size: 14px;
-      transition: all .2s;
-    }
-    .back-home:hover { border-color: var(--color-primary); color: var(--color-primary); }
+    .deals-footer { padding-top: 3.5rem; margin-top: 3.5rem; border-top: 1px solid var(--color-line); }
 
     /* ── No results ── */
-    .no-results {
-      grid-column: 1/-1; text-align: center;
-      color: var(--color-text-muted); padding: 48px 0; font-size: 15px;
-    }
+    .no-results { grid-column: 1 / -1; padding: 3rem 0; font-size: 1rem; color: var(--color-muted); }
 
-    /* ── Responsive ── */
-    @media (max-width: 600px) {
-      .deals-stats { gap: 20px; }
-      .deals-grid { grid-template-columns: 1fr; }
+    @media (max-width: 639px) {
+      .deal-card { padding: 1.25rem; }
+      .deals-hero-content { padding-top: 3rem; }
     }
   </style>
 </head>
 <body>
 
-<canvas id="globalBg" aria-hidden="true"></canvas>
-
-<!-- ═══════════════════ HERO ═══════════════════ -->
-<div class="deals-hero">
-  <div class="deals-topbar">
-    <a href="index.html" class="deals-hero-back">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-      <span id="txt-back">Về trang chính</span>
-    </a>
+<!-- ═══════════════════ TOP BAR ═══════════════════ -->
+<header class="deals-topbar-wrap">
+  <div class="container deals-topbar">
+    <div class="deals-topbar-left">
+      <a href="index.html" class="logo" aria-label="DA CRYPTO Home">
+        <img class="logo-mark" src="/icon-192x192.png?v=2" alt="" width="28" height="28" />
+        <span class="logo-wordmark">DA CRYPTO</span>
+      </a>
+      <a href="index.html" class="deals-hero-back">
+        <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+        <span id="txt-back">Về trang chính</span>
+      </a>
+    </div>
     <div class="lang-select" id="langSelect">
-      <button class="lang-select-btn" onclick="toggleLangDropdown()" aria-label="Select language">
-        <span id="langCurrentLabel">VI</span>
-        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      <button class="lang-select-btn" type="button" onclick="toggleLangDropdown()" aria-label="Select language" aria-haspopup="listbox">
+        <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+        <span id="langCurrentLabel">EN</span>
+        <svg class="icon lang-chevron" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
       </button>
-      <div class="lang-dropdown" id="langDropdown">
-        <button class="lang-opt" data-lang-code="vi" onclick="selectLangDeals('vi')">🇻🇳 Tiếng Việt</button>
-        <button class="lang-opt active" data-lang-code="en" onclick="selectLangDeals('en')">🇬🇧 English</button>
-        <button class="lang-opt" data-lang-code="th" onclick="selectLangDeals('th')">🇹🇭 ภาษาไทย</button>
-        <button class="lang-opt" data-lang-code="ko" onclick="selectLangDeals('ko')">🇰🇷 한국어</button>
-        <button class="lang-opt" data-lang-code="id" onclick="selectLangDeals('id')">🇮🇩 Indonesia</button>
+      <div class="lang-dropdown" id="langDropdown" role="listbox">
+        <button class="lang-opt" type="button" role="option" lang="vi" data-lang-code="vi" onclick="selectLangDeals('vi')"><span class="lang-code">VI</span><span>Tiếng Việt</span></button>
+        <button class="lang-opt active" type="button" role="option" lang="en" data-lang-code="en" onclick="selectLangDeals('en')"><span class="lang-code">EN</span><span>English</span></button>
+        <button class="lang-opt" type="button" role="option" lang="th" data-lang-code="th" onclick="selectLangDeals('th')"><span class="lang-code">TH</span><span>ภาษาไทย</span></button>
+        <button class="lang-opt" type="button" role="option" lang="ko" data-lang-code="ko" onclick="selectLangDeals('ko')"><span class="lang-code">KO</span><span>한국어</span></button>
+        <button class="lang-opt" type="button" role="option" lang="id" data-lang-code="id" onclick="selectLangDeals('id')"><span class="lang-code">ID</span><span>Indonesia</span></button>
       </div>
     </div>
   </div>
-  <div class="deals-hero-content">
-    <div class="section-tag" id="txt-tag">🔥 AFFILIATE DEALS</div>
-    <h1 id="txt-title">So Sánh Deal Affiliate Tất Cả Sàn</h1>
+</header>
+
+<!-- ═══════════════════ HERO ═══════════════════ -->
+<main>
+<div class="deals-hero">
+  <div class="hero-grid-bg" aria-hidden="true"></div>
+  <div class="container deals-hero-content">
+    <p class="eyebrow" id="txt-tag">AFFILIATE DEALS</p>
+    <h1 class="h-section" id="txt-title">So Sánh Deal Affiliate Tất Cả Sàn</h1>
     <p id="txt-sub">Tỷ lệ hoa hồng, thế mạnh và điểm yếu của 12 sàn trong hệ sinh thái DA Crypto</p>
     <div class="deals-stats">
       <div class="deals-stat">
@@ -272,7 +258,7 @@
 </div>
 
 <!-- ═══════════════════ CONTENT ═══════════════════ -->
-<div class="deals-container">
+<div class="container deals-container">
 
   <!-- Filter -->
   <div class="deals-filter">
@@ -305,7 +291,7 @@
   <div class="section-divider">
     <h2 id="txt-cards-title">Chi Tiết Từng Sàn</h2>
     <div class="section-divider-line"></div>
-    <span style="font-size:13px;color:var(--color-text-muted)" id="txt-cards-count">12 sàn</span>
+    <span class="cards-count" id="txt-cards-count">12 sàn</span>
   </div>
 
   <!-- Cards -->
@@ -313,13 +299,14 @@
 
   <!-- Back -->
   <div class="deals-footer">
-    <a href="index.html" class="back-home">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M12 5l7 7-7 7"/></svg>
+    <a href="index.html" class="btn btn-outline back-home">
+      <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
       <span id="txt-back2">Quay lại trang hướng dẫn</span>
     </a>
   </div>
 
 </div><!-- /deals-container -->
+</main>
 
 <script>
 // ═══════════════════════════════════════════════════════════
@@ -666,6 +653,10 @@ var txt = {
 // ═══════════════════════════════════════════════════════════
 // RENDER HELPERS
 // ═══════════════════════════════════════════════════════════
+// DA Network design language: no emoji as UI decoration (same rule as app.js).
+var EMOJI_RE = /(?:(?![©®™↔-↙↩↪])\p{Extended_Pictographic}|[\u{1F1E6}-\u{1F1FF}])[️‍]*\s?/gu;
+function stripEmoji(s) { return typeof s === 'string' ? s.replace(EMOJI_RE, '') : s; }
+
 function filtered() {
   var list = exchangesData[lang];
   if (activeFilter === 'all')    return list;
@@ -683,7 +674,7 @@ function renderSummary() {
     var pill = '<span class="type-pill ' + e.cat + '">' + e.cat.toUpperCase() + '</span>';
     var star = e.featured ? ' <span class="table-badge">★</span>' : '';
     return '<tr>'
-      + '<td style="font-weight:700;color:#fff;">' + (i+1) + '</td>'
+      + '<td class="idx-cell">' + String(i+1).padStart(2, '0') + '</td>'
       + '<td class="name-cell">' + e.name + star + '</td>'
       + '<td>' + pill + '</td>'
       + '<td class="rate-cell">' + e.rate + '</td>'
@@ -717,21 +708,26 @@ function renderCards() {
       +       '<span class="deal-subtype">' + e.type + '</span>'
       +     '</div>'
       +   '</div>'
-      +   (e.badge ? '<div class="deal-badge-pill">' + e.badge + '</div>' : '')
+      +   (e.badge ? '<div class="deal-badge-pill">' + stripEmoji(e.badge) + '</div>' : '')
       + '</div>'
       + '<div class="deal-rate-box">'
       +   '<span class="deal-rate-num">' + e.rate + '</span>'
       +   '<span class="deal-rate-label">' + e.rateNote + '</span>'
       + '</div>'
+      + '<div class="deal-best-for"><strong>' + t.bestForLabel + ':</strong> ' + e.bestFor + '</div>'
+      // Pros/cons fold away (DA Network progressive disclosure)
+      + '<details class="disclosure deal-more"><summary>'
+      +   '<svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>'
+      +   '<span>' + t.pros + ' · ' + t.cons + '</span></summary><div class="disclosure-body">'
       + '<div class="deal-procon">'
-      +   '<div class="deal-procon-title pros">✅ ' + t.pros + '</div>'
+      +   '<div class="deal-procon-title pros">' + t.pros + '</div>'
       +   '<ul class="deal-list pros">' + e.pros.map(function(p){ return '<li>' + p + '</li>'; }).join('') + '</ul>'
       + '</div>'
       + '<div class="deal-procon">'
-      +   '<div class="deal-procon-title cons">⚠️ ' + t.cons + '</div>'
+      +   '<div class="deal-procon-title cons">' + t.cons + '</div>'
       +   '<ul class="deal-list cons">' + e.cons.map(function(c){ return '<li>' + c + '</li>'; }).join('') + '</ul>'
       + '</div>'
-      + '<div class="deal-best-for"><strong>' + t.bestForLabel + ':</strong> ' + e.bestFor + '</div>'
+      + '</div></details>'
       + '<a href="' + (e.link || 'index.html#guide') + '" class="deal-cta-btn" ' + (e.link ? 'target="_blank" rel="noopener noreferrer"' : '') + '>' + t.cta + '</a>'
       + '</div>';
   }).join('');
@@ -742,7 +738,8 @@ function renderAll() {
   // Text nodes
   document.getElementById('txt-back').textContent    = t.back;
   document.getElementById('txt-back2').textContent   = t.back2;
-  document.getElementById('txt-tag').textContent     = t.tag;
+  document.documentElement.setAttribute('lang', lang);
+  document.getElementById('txt-tag').textContent     = stripEmoji(t.tag);
   document.getElementById('txt-title').textContent   = t.title;
   document.getElementById('txt-sub').textContent     = t.sub;
   document.getElementById('txt-stat1').textContent   = t.stat1;
@@ -814,7 +811,10 @@ document.addEventListener('DOMContentLoaded', function() {
   document.documentElement.classList.remove('i18n-pending');
 });
 </script>
-<script data-pplx-inline-edit>
+<!-- NOTE: this Perplexity inline-edit helper was truncated in an earlier commit
+     (it ends mid-statement), so it is kept as inert text instead of throwing a
+     syntax error on every load. Safe to delete. -->
+<script type="text/plain" data-pplx-inline-edit>
 (function () {
   if (window === window.top) return;
 
@@ -1090,5 +1090,6 @@ document.addEventListener('DOMContentLoaded', function() {
       const svg =
         `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
         '<foreignObject width="100%" height="100%">' +
- 
-<script src="bg.js"></script>
+</script>
+</body>
+</html>
