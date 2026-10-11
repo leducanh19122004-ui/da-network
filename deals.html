@@ -423,7 +423,8 @@ var exchangesData = {
       bestFor: 'Hỗ trợ Việt Nam tốt nhất, sàn top, minh bạch, an toàn',
       pros: ['Copy trading AI hàng đầu thị trường','Giao diện thân thiện người mới','Chế độ demo trading miễn phí','Phí futures cạnh tranh'],
       cons: ['Không có leverage trên spot','Không có token sàn giảm phí','Không khả dụng tại Mỹ'],
-      link: 'https://bingxdao.com/invite/JXQSZO/',
+      // Old referral link removed (owner request, 2026-10-11). BingX stays a partner; set the new URL here and drop linkStatus.
+      link: null, linkStatus: 'awaiting_update',
     },
     {
       name: 'Bitget', cat: 'crypto',
@@ -545,7 +546,8 @@ var exchangesData = {
       bestFor: 'Best Vietnam support — top-tier, transparent, secure exchange',
       pros: ['Industry-leading AI copy trading','Beginner-friendly interface','Free demo trading mode','Competitive futures fees'],
       cons: ['No leverage on spot pairs','No native exchange token for fee reduction','Not available in US'],
-      link: 'https://bingxdao.com/invite/JXQSZO/',
+      // Old referral link removed (owner request, 2026-10-11). BingX stays a partner; set the new URL here and drop linkStatus.
+      link: null, linkStatus: 'awaiting_update',
     },
     {
       name: 'Bitget', cat: 'crypto',
@@ -566,6 +568,14 @@ var exchangesData = {
 var lang = 'en';
 try { var savedLang = localStorage.getItem('dacrypto-lang'); if (savedLang) lang = savedLang; } catch (e) {}
 var activeFilter = 'all';
+// Label shown instead of "Join now" while an active partner's referral link is being replaced.
+var LINK_UPDATING = {
+  en: 'Registration link updating',
+  vi: 'Đang cập nhật link đăng ký',
+  ko: '가입 링크 업데이트 중',
+  th: 'กำลังอัปเดตลิงก์สมัคร',
+  id: 'Tautan pendaftaran sedang diperbarui'
+};
 // Alias new languages to English exchange data
 // Alias new langs to English exchange data (includes all links)
 exchangesData.th = exchangesData.en;
@@ -728,7 +738,10 @@ function renderCards() {
       +   '<ul class="deal-list cons">' + e.cons.map(function(c){ return '<li>' + c + '</li>'; }).join('') + '</ul>'
       + '</div>'
       + '</div></details>'
-      + '<a href="' + (e.link || 'index.html#guide') + '" class="deal-cta-btn" ' + (e.link ? 'target="_blank" rel="noopener noreferrer"' : '') + '>' + t.cta + '</a>'
+      + (e.linkStatus === 'awaiting_update'
+          // Active partner whose referral link is being replaced: no CTA until the new URL is set.
+          ? '<span class="deal-cta-btn" aria-disabled="true" style="opacity:.6;cursor:default">' + (LINK_UPDATING[lang] || LINK_UPDATING.en) + '</span>'
+          : '<a href="' + (e.link || 'index.html#guide') + '" class="deal-cta-btn" ' + (e.link ? 'target="_blank" rel="noopener noreferrer"' : '') + '>' + t.cta + '</a>')
       + '</div>';
   }).join('');
 }
