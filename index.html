@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DA Affiliate — Crypto Affiliate Guide for Beginners</title>
+  <title>DA Affiliate — the affiliate programme of DA Network</title>
+  <meta name="description" content="DA Affiliate is the affiliate programme of DA Network: a fixed commission arrangement for experienced, higher-volume traders, and partner development for people building trading communities." />
   <style>html.i18n-pending body{visibility:hidden}</style>
   <script>document.documentElement.classList.add('i18n-pending');setTimeout(function(){document.documentElement.classList.remove('i18n-pending')},1500);</script>
 
@@ -15,7 +16,6 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2" />
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192x192.png?v=2" />
   <link rel="icon" type="image/png" sizes="512x512" href="/icon-512x512.png?v=2" />
-  <meta name="description" content="DA Affiliate — A clear, step-by-step crypto affiliate guide for beginners, from the basics to practical strategies." />
   <meta name="theme-color" content="#080808" />
 
   <!-- Fonts: self-hosted Geist, identical to danetwork.asia (see style.css) -->
@@ -33,21 +33,22 @@
 <!-- ═══════════════════════════════════════ HEADER ═══════════════════════════════════════ -->
 <header class="site-header">
   <div class="container header-inner">
-    <a href="#" class="logo" aria-label="DA Affiliate Home">
+    <a href="#" class="logo" aria-label="DA Affiliate home">
       <img class="logo-mark" src="/icon-192x192.png?v=2" alt="" width="28" height="28" />
       <span class="logo-wordmark">DA Affiliate</span>
     </a>
 
-    <nav class="main-nav" aria-label="Main Navigation">
-      <a href="#guide" class="nav-link" data-section="guide"><span data-i18n="nav.guide">Hướng Dẫn</span></a>
-      <a href="#calculator" class="nav-link" data-section="calculator"><span data-i18n="nav.calc">Tính Thu Nhập</span></a>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="#traders" class="nav-link" data-section="traders"><span data-i18n="nav.traders">For traders</span></a>
+      <a href="#partners" class="nav-link" data-section="partners"><span data-i18n="nav.partners">For partners</span></a>
+      <a href="#how-it-works" class="nav-link" data-section="how-it-works"><span data-i18n="nav.how">How it works</span></a>
+      <a href="#calculator" class="nav-link" data-section="calculator"><span data-i18n="nav.calc">Calculator</span></a>
+      <a href="deals.html" class="nav-link"><span data-i18n="nav.exchanges">Exchanges</span></a>
       <a href="#faq" class="nav-link" data-section="faq"><span data-i18n="nav.faq">FAQ</span></a>
-      <a href="#da-network" class="nav-link" data-section="da-network"><span data-i18n="nav.network">DA Affiliate</span></a>
-      <a href="#dac-quyen" class="nav-link nav-link-vip" data-section="dac-quyen"><span data-i18n="nav.privilege">Đặc Quyền</span></a>
     </nav>
 
     <div class="header-actions">
-      <a href="https://danetwork.asia/en" class="header-parent" target="_blank" rel="noopener noreferrer">
+      <a href="https://danetwork.asia/en" data-link="network" class="header-parent" target="_blank" rel="noopener noreferrer">
         <span>DA NETWORK</span>
         <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
         <span class="sr-only" data-ui="newTab">(opens in a new tab)</span>
@@ -66,7 +67,7 @@
           <button class="lang-opt" type="button" role="option" lang="id" data-lang-code="id" onclick="selectLang('id')"><span class="lang-code">ID</span><span>Indonesia</span></button>
         </div>
       </div>
-      <a href="#guide" class="btn btn-gold header-cta"><span data-i18n="nav.cta">Bắt Đầu Ngay</span></a>
+      <a href="https://t.me/jacksondz" data-link="telegramContact" target="_blank" rel="noopener noreferrer" class="btn btn-gold header-cta"><span data-i18n="nav.join">Join DA Affiliate</span></a>
       <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav" data-ui-label="menu">
         <span class="menu-icon" aria-hidden="true"><span></span><span></span></span>
       </button>
@@ -75,14 +76,18 @@
 
   <!-- Mobile nav -->
   <div class="mobile-nav" id="mobileNav">
-    <nav class="container" aria-label="Mobile Navigation">
-      <a href="#guide" class="mobile-nav-link" onclick="closeMobileNav()"><span data-i18n="nav.guide">Hướng Dẫn</span><span class="mobile-nav-num">01</span></a>
-      <a href="#calculator" class="mobile-nav-link" onclick="closeMobileNav()"><span data-i18n="nav.calc">Tính Thu Nhập</span><span class="mobile-nav-num">02</span></a>
-      <a href="#faq" class="mobile-nav-link" onclick="closeMobileNav()"><span data-i18n="nav.faq">FAQ</span><span class="mobile-nav-num">03</span></a>
-      <a href="#da-network" class="mobile-nav-link" onclick="closeMobileNav()"><span data-i18n="nav.network">DA Affiliate</span><span class="mobile-nav-num">04</span></a>
-      <a href="#dac-quyen" class="mobile-nav-link mobile-nav-link-vip" onclick="closeMobileNav()"><span data-i18n="nav.privilege">Đặc Quyền</span><span class="mobile-nav-num">05</span></a>
-      <a href="#guide" class="btn btn-gold btn-block mobile-nav-cta" onclick="closeMobileNav()"><span data-i18n="nav.cta">Bắt Đầu Ngay</span></a>
-      <a href="https://danetwork.asia/en" class="mobile-nav-parent" target="_blank" rel="noopener noreferrer">
+    <nav class="container" aria-label="Mobile navigation">
+      <a href="#traders" class="mobile-nav-link" onclick="closeMobileNav()"><span data-i18n="nav.traders">For traders</span><span class="mobile-nav-num">01</span></a>
+      <a href="#partners" class="mobile-nav-link" onclick="closeMobileNav()"><span data-i18n="nav.partners">For partners</span><span class="mobile-nav-num">02</span></a>
+      <a href="#how-it-works" class="mobile-nav-link" onclick="closeMobileNav()"><span data-i18n="nav.how">How it works</span><span class="mobile-nav-num">03</span></a>
+      <a href="#calculator" class="mobile-nav-link" onclick="closeMobileNav()"><span data-i18n="nav.calc">Calculator</span><span class="mobile-nav-num">04</span></a>
+      <a href="#benefits" class="mobile-nav-link" onclick="closeMobileNav()"><span data-i18n="nav.access">Access by group</span><span class="mobile-nav-num">05</span></a>
+      <a href="#stats" class="mobile-nav-link" onclick="closeMobileNav()"><span data-i18n="nav.stats">Partner statistics</span><span class="mobile-nav-num">06</span></a>
+      <a href="deals.html" class="mobile-nav-link"><span data-i18n="nav.exchanges">Exchanges</span><span class="mobile-nav-num">07</span></a>
+      <a href="#faq" class="mobile-nav-link" onclick="closeMobileNav()"><span data-i18n="nav.faq">FAQ</span><span class="mobile-nav-num">08</span></a>
+      <a href="#contact" class="mobile-nav-link" onclick="closeMobileNav()"><span data-i18n="nav.contact">Contact</span><span class="mobile-nav-num">09</span></a>
+      <a href="https://t.me/jacksondz" data-link="telegramContact" target="_blank" rel="noopener noreferrer" class="btn btn-gold btn-block mobile-nav-cta"><span data-i18n="nav.join">Join DA Affiliate</span></a>
+      <a href="https://danetwork.asia/en" data-link="network" class="mobile-nav-parent" target="_blank" rel="noopener noreferrer">
         DA NETWORK
         <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
       </a>
@@ -93,169 +98,235 @@
 <main id="main">
 
 <!-- ═══════════════════════════════════════ HERO ═══════════════════════════════════════ -->
-<section class="hero" aria-labelledby="heroTitle">
+<section class="hero" id="top" aria-labelledby="heroTitle">
   <div class="hero-grid-bg" aria-hidden="true"></div>
   <div class="container hero-inner">
     <div class="hero-copy hero-seq">
-      <p class="eyebrow hero-badge" style="--i:0"><span data-i18n="hero.badge">Hướng Dẫn Từ A-Z • Miễn Phí 100%</span></p>
+      <p class="eyebrow hero-badge" style="--i:0"><span data-i18n="hero.eyebrow">The affiliate programme of DA Network</span></p>
       <h1 class="hero-title h-display" id="heroTitle" style="--i:1">
-        <span class="hero-line" data-i18n="hero.title1">Kiếm Tiền Với</span>
-        <span class="hero-line" data-i18n="hero.title2">Crypto Affiliate</span>
-        <span class="hero-line hero-line-dim" data-i18n="hero.title3">Từ Con Số 0</span>
+        <span class="hero-line" data-i18n="hero.h1">DA Affiliate</span>
+        <span class="hero-line hero-line-dim" data-i18n="hero.h2">for experienced traders and community builders.</span>
       </h1>
-      <p class="hero-sub" style="--i:2" data-i18n="hero.sub">Hướng dẫn toàn diện, dễ hiểu cho người mới bắt đầu. Từ khái niệm cơ bản đến chiến lược thực chiến — kèm ví dụ thực tế từng bước.</p>
+      <p class="hero-sub" style="--i:2" data-i18n="hero.lead">Two groups, two offers. Experienced, higher-volume traders can take a simple, direct arrangement: a fixed commission on their own eligible trading fees. People building trading communities get a partner team, support resources and commission reconciliation behind them.</p>
       <div class="hero-ctas" style="--i:3">
-        <a href="#guide" class="btn btn-primary btn-lg">
-          <span data-i18n="hero.cta1">Đọc Hướng Dẫn</span>
+        <a href="https://t.me/jacksondz" data-link="telegramContact" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
+          <span data-i18n="hero.join">Join DA Affiliate</span>
+          <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+          <span class="sr-only" data-ui="newTab">(opens in a new tab)</span>
+        </a>
+        <a href="#traders" class="btn btn-outline btn-lg">
+          <span data-i18n="hero.toTraders">For traders</span>
           <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
-        <a href="#calculator" class="btn btn-outline btn-lg">
-          <span data-i18n="hero.cta2">Tính Thu Nhập</span>
+        <a href="#partners" class="btn btn-outline btn-lg">
+          <span data-i18n="hero.toPartners">For partners</span>
           <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
       </div>
     </div>
 
-    <!-- Network Snapshot — static, month-end figures (ledger presentation, no counters) -->
-    <aside class="snapshot hero-stats" aria-labelledby="snapTag">
+    <!-- At a glance — structural facts only (counts derived from data/config.js) -->
+    <aside class="snapshot hero-stats" aria-labelledby="glanceTag">
       <div class="snapshot-header">
-        <span class="snapshot-tag" id="snapTag" data-i18n="snap.tag">CHỈ SỐ MẠNG LƯỚI</span>
-        <span class="snapshot-meta" data-i18n="snap.meta">Cập nhật ngày 1 hàng tháng · Dữ liệu đã chốt sổ</span>
+        <span class="snapshot-tag" id="glanceTag" data-i18n="glance.tag">At a glance</span>
+        <span class="snapshot-meta" data-i18n="glance.meta">Terms confirmed per exchange</span>
       </div>
-
       <div class="snapshot-grid">
-        <div class="snapshot-item snapshot-clickable" onclick="openStatModal('partner')" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Xem chi tiết Partner Network">
-          <span class="snapshot-label" data-i18n="snap.partners">Partners đang hoạt động</span>
-          <span class="snapshot-value" id="goldStat237">237</span>
+        <a class="snapshot-item snapshot-clickable" href="#exchanges">
+          <span class="snapshot-label" data-i18n="glance.traders">Exchanges open for onboarding</span>
+          <span class="snapshot-value snapshot-value-accent" data-cfg="count.available">3</span>
           <svg class="icon snapshot-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </div>
-        <div class="snapshot-item snapshot-clickable snapshot-item-highlight" onclick="openStatModal('commission')" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Xem chi tiết hoa hồng">
-          <span class="snapshot-label" data-i18n="snap.paid">Đã chuyển cho partner tháng trước</span>
-          <span class="snapshot-value snapshot-value-accent" id="commissionCounter">$28,540</span>
+        </a>
+        <a class="snapshot-item snapshot-clickable" href="#how-it-works">
+          <span class="snapshot-label" data-i18n="glance.levels">Commission level — direct referrals only</span>
+          <span class="snapshot-value">1</span>
           <svg class="icon snapshot-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </div>
-        <div class="snapshot-item">
-          <span class="snapshot-label" data-i18n="snap.exchanges">Sàn đối tác chính</span>
-          <span class="snapshot-value">3</span>
-          <span class="snapshot-arrow" aria-hidden="true"></span>
-        </div>
+        </a>
+        <a class="snapshot-item snapshot-clickable" href="#contact">
+          <span class="snapshot-label" data-i18n="glance.contact">Business development on Telegram</span>
+          <span class="snapshot-value snapshot-value-sm" data-cfg="telegram.handle">@jacksondz</span>
+          <svg class="icon snapshot-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
       </div>
-
-      <p class="snapshot-foot">
-        <span data-i18n="snap.foot">Số “Đã chuyển” là tổng commission DA Affiliate đã thanh toán cho partner trong tháng trước, xác minh qua hồ sơ rút tiền.</span>
-        <a href="#verify" class="snapshot-foot-link" data-i18n="snap.foot.link">Xem cách chúng tôi xác minh →</a>
-      </p>
+      <p class="snapshot-foot" data-disclaimer="RATES">Rates and reward tiers may change according to each exchange's policy and partner program.</p>
     </aside>
   </div>
 </section>
 
 
-<!-- ═══════════════════════════════════════ GUIDE ═══════════════════════════════════════ -->
-<section class="section" id="guide" aria-labelledby="guideTitle">
+<!-- ═══════════════════════════════════════ FOR TRADERS ═══════════════════════════════════════ -->
+<section class="section" id="traders" aria-labelledby="tradersTitle">
   <div class="container">
     <div class="section-header reveal">
-      <p class="section-tag" data-i18n="guide.tag">Hướng Dẫn Toàn Diện</p>
-      <h2 class="section-title" id="guideTitle" data-i18n="guide.title">Affiliate Crypto Là Gì?</h2>
-      <p class="section-sub" data-i18n="guide.sub">Tìm hiểu từ A đến Z — từ khái niệm cơ bản đến cách tạo ra thu nhập thực sự.</p>
+      <p class="section-tag" data-i18n="traders.tag">For traders</p>
+      <h2 class="section-title" id="tradersTitle" data-i18n="traders.title">A direct fee arrangement for experienced traders</h2>
+      <p class="section-sub" data-i18n="traders.sub">For experienced, higher-volume traders who prefer a simple, direct arrangement to a membership. You register under a DA Affiliate link as an affiliate account and trade as usual.</p>
     </div>
 
-    <!-- Intro explainer -->
-    <div class="explainer-grid reveal">
-      <!-- Each card: key figure → title → one short line. The full paragraph
-           (.explainer-full) is kept and shown as the dialog's lead. -->
-      <div class="explainer-card explainer-card-clickable seq" style="--i:0" data-explainer="affiliate" onclick="openExplainerModal('affiliate')" role="button" tabindex="0" aria-haspopup="dialog">
+    <div class="dan-intro-grid reveal">
+      <div class="dan-intro-card seq" style="--i:0">
         <span class="label">01</span>
-        <p class="explainer-figure"><span class="explainer-num">1</span><span class="explainer-unit" data-ui="ec.u1">link</span></p>
-        <h3><span data-i18n="ec.h1">Affiliate Là Gì?</span></h3>
-        <p class="explainer-line" data-ui="ec.s1">Share your link — earn from every trade your referrals make.</p>
-        <p class="explainer-full" hidden><span data-i18n="ec.p1">Bạn giới thiệu người khác đăng ký sàn giao dịch crypto qua <strong>link riêng của bạn</strong>. Khi họ giao dịch, bạn nhận hoa hồng từ phí giao dịch của họ.</span></p>
-        <span class="explainer-hint" data-i18n="ec.hint1">Nhấn để hiểu rõ hơn →</span>
+        <h4 data-i18n="traders.c1.title">Register under a DA Affiliate link</h4>
+        <p data-i18n="traders.c1.body">Open your account through a DA Affiliate link on one of the exchanges available now, set up as an affiliate account.</p>
       </div>
-      <div class="explainer-card explainer-card-clickable seq" style="--i:1" data-explainer="income" onclick="openExplainerModal('income')" role="button" tabindex="0" aria-haspopup="dialog">
+      <div class="dan-intro-card seq" style="--i:1">
         <span class="label">02</span>
-        <p class="explainer-figure explainer-figure-accent"><span class="explainer-num">20–50%</span></p>
-        <h3><span data-i18n="ec.h2">Kiếm Được Bao Nhiêu?</span></h3>
-        <p class="explainer-line" data-ui="ec.s2">Of referred users' trading fees. Some exchanges pay for life.</p>
-        <p class="explainer-full" hidden><span data-i18n="ec.p2">Hoa hồng thường từ <strong>20%–50% phí giao dịch</strong> của người được giới thiệu. Một số sàn trả hoa hồng suốt đời.</span></p>
-        <span class="explainer-hint" data-i18n="ec.hint2">Nhấn để xem ví dụ thực tế →</span>
+        <h4 data-i18n="traders.c2.title">Fixed commission on your own fees</h4>
+        <p data-i18n="traders.c2.body">You receive a fixed commission on your own eligible trading fees, under exchange-specific terms. Terms are confirmed per exchange; not every exchange supports identical terms.</p>
       </div>
-      <div class="explainer-card explainer-card-clickable seq" style="--i:2" data-explainer="advantages" onclick="openExplainerModal('advantages')" role="button" tabindex="0" aria-haspopup="dialog">
+      <div class="dan-intro-card seq" style="--i:2">
         <span class="label">03</span>
-        <p class="explainer-figure"><span class="explainer-num">$0</span><span class="explainer-unit" data-ui="ec.u3">capital</span></p>
-        <h3><span data-i18n="ec.h3">Ưu Điểm Nổi Bật</span></h3>
-        <p class="explainer-line" data-ui="ec.s3">No capital. No trading experience. Passive income.</p>
-        <p class="explainer-full" hidden><span data-i18n="ec.p3">Không cần vốn đầu tư, không cần kinh nghiệm giao dịch. Thu nhập thụ động — kiếm ngay cả khi bạn ngủ.</span></p>
-        <span class="explainer-hint" data-i18n="ec.hint3">Nhấn để xem đầy đủ ưu điểm →</span>
+        <h4 data-i18n="traders.c3.title">Credited by the exchange</h4>
+        <p data-i18n="traders.c3.body">Where the exchange supports it, the commission is credited through the exchange's own affiliate system.</p>
+      </div>
+      <div class="dan-intro-card seq" style="--i:3">
+        <span class="label">04</span>
+        <h4 data-i18n="traders.c4.title">Signal-only channel</h4>
+        <p data-i18n="traders.c4.body">You get access to a signal-only channel. Every trading decision stays your own.</p>
       </div>
     </div>
 
-    <!-- Explainer Modal ── reuses stat-modal styles -->
-    <div class="stat-modal-overlay" id="explainerModalOverlay" onclick="closeExplainerModal()">
-      <div class="stat-modal explainer-modal" id="explainerModal" role="dialog" aria-modal="true" aria-label="DA Affiliate" onclick="event.stopPropagation()">
-        <button class="stat-modal-close" type="button" onclick="closeExplainerModal()" aria-label="Đóng">
-          <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-        </button>
-        <div id="explainerModalContent"></div>
-      </div>
+    <div class="verify-cta callout reveal">
+      <span class="verify-cta-text" data-i18n="traders.cashback.text">This is not the DA Cashback membership. The daily plan, member community, learning and support are part of DA Cashback.</span>
+      <a href="https://www.dacashback.asia/" data-link="cashback" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+        <span data-i18n="traders.cashback.link">See DA Cashback</span>
+        <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+        <span class="sr-only" data-ui="newTab">(opens in a new tab)</span>
+      </a>
     </div>
 
-    <!-- Step-by-Step Guide -->
-    <div class="steps-container reveal">
-      <div class="steps-head">
-        <h3 class="steps-title" data-i18n="guide.stepsTitle">8 Bước Thực Chiến Bắt Đầu Kiếm Tiền</h3>
-        <p class="steps-count" aria-hidden="true"><span id="stepCountNow">01</span><span class="steps-count-sep">/</span><span id="stepCountTotal">08</span></p>
-      </div>
-
-      <!-- Sticky step rail: track + tabs stay reachable while reading a long step -->
-      <div class="step-rail" id="stepRail">
-      <!-- Continuous progress track (scaled by renderStep) -->
-      <div class="step-track" aria-hidden="true"><span class="step-track-fill" id="stepTrackFill"></span></div>
-
-      <!-- Step tabs (labels filled by renderStep) -->
-      <div class="step-tabs" role="tablist" aria-label="Affiliate guide">
-        <button class="step-tab active" type="button" data-step="1" role="tab">1</button>
-        <button class="step-tab" type="button" data-step="2" role="tab">2</button>
-        <button class="step-tab" type="button" data-step="3" role="tab">3</button>
-        <button class="step-tab" type="button" data-step="4" role="tab">4</button>
-        <button class="step-tab" type="button" data-step="5" role="tab">5</button>
-        <button class="step-tab" type="button" data-step="6" role="tab">6</button>
-        <button class="step-tab" type="button" data-step="7" role="tab">7</button>
-        <button class="step-tab" type="button" data-step="8" role="tab">8</button>
-      </div>
-      </div><!-- /step-rail -->
-
-      <!-- Step content -->
-      <div class="step-content-wrap" id="stepContent" role="tabpanel" aria-live="polite">
-        <!-- populated by JS -->
-      </div>
-
-      <!-- Navigation -->
-      <div class="step-nav">
-        <button class="btn btn-outline" type="button" id="prevStep" disabled>
-          <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
-          <span data-i18n="guide.prev">Bước Trước</span>
-        </button>
-        <span class="step-progress-wrap">
-          <span class="step-progress" id="stepProgress">Bước 1 / 8</span>
-          <span class="step-swipe-hint" data-ui="steps.swipe">Swipe or drag ← →</span>
-        </span>
-        <button class="btn btn-primary" type="button" id="nextStep">
-          <span data-i18n="guide.next">Bước Tiếp</span>
-        </button>
-      </div>
-    </div>
-
-    <!-- Exchange comparison -->
-    <div class="comparison-section reveal">
+    <!-- Exchanges open for onboarding — rendered from data/config.js -->
+    <div class="comparison-section reveal" id="exchanges">
       <div class="comparison-head">
-        <h3 class="steps-title" data-i18n="guide.compareTitle">So Sánh Các Sàn Affiliate Hàng Đầu</h3>
+        <div>
+          <h3 class="steps-title" data-i18n="exch.title">Exchanges open for onboarding</h3>
+          <p class="section-note" data-i18n="exch.count">3 available now · 10 partnership paused</p>
+        </div>
         <a href="deals.html" class="btn btn-gold">
-          <span data-i18n="guide.viewAllDeals">Xem tất cả 12 sàn</span>
+          <span data-i18n="exch.all">View all 13 exchanges</span>
           <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
       </div>
       <div class="comparison-grid" id="comparisonGrid">
+        <!-- populated by renderExchanges() -->
+      </div>
+      <p class="note-small" data-i18n="exch.pausedNote">“Partnership paused” means we are not registering new members on that exchange right now.</p>
+      <p class="note-small" data-disclaimer="RATES">Rates and reward tiers may change according to each exchange's policy and partner program.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════ FOR PARTNERS ═══════════════════════════════════════ -->
+<section class="section section-alt" id="partners" aria-labelledby="partnersTitle">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-tag" data-i18n="partners.tag">For partners</p>
+      <h2 class="section-title" id="partnersTitle" data-i18n="partners.title">Build your channel with DA behind you</h2>
+      <p class="section-sub" data-i18n="partners.sub">DA Affiliate is DA Network's partner-development arm for people building trading communities.</p>
+    </div>
+
+    <div class="lead-statement reveal">
+      <p class="lead-statement-text" data-i18n="partners.lead">Earn recurring commission from every trade your referrals make, even when you’re offline.</p>
+      <p class="note-small" data-disclaimer="AFFILIATE">Affiliate earnings depend on your effort, audience size and market conditions. Any examples illustrate how commissions work and are not a promise of results.</p>
+    </div>
+
+    <div class="dan-intro-grid reveal">
+      <div class="dan-intro-card seq" style="--i:0">
+        <span class="label">01</span>
+        <h4 data-i18n="partners.c1.title">Direct referral business</h4>
+        <p data-i18n="partners.c1.body">Refer traders to the exchanges available now through your DA Affiliate link. Commission comes from the trading fees of traders you refer directly.</p>
+      </div>
+      <div class="dan-intro-card seq" style="--i:1">
+        <span class="label">02</span>
+        <h4 data-i18n="partners.c2.title">Exchange partnership arrangements</h4>
+        <p data-i18n="partners.c2.body">DA manages the relationship with each exchange's partner programme and confirms which terms apply to you.</p>
+      </div>
+      <div class="dan-intro-card seq" style="--i:2">
+        <span class="label">03</span>
+        <h4 data-i18n="partners.c3.title">Channel and community guidance</h4>
+        <p data-i18n="partners.c3.body">Advice on building your channel or community. You can run your own channel, as long as your referrals go through your DA Affiliate link.</p>
+      </div>
+      <div class="dan-intro-card seq" style="--i:3">
+        <span class="label">04</span>
+        <h4 data-i18n="partners.c4.title">Support, reconciliation and resources</h4>
+        <p data-i18n="partners.c4.body">Your referrals can reach DA's customer-support team and Telegram channels. DA reconciles commission against exchange records and shares partner resources.</p>
+      </div>
+    </div>
+
+    <div class="verify-cta callout reveal">
+      <span class="verify-cta-text"><strong data-i18n="partners.level.title">One direct level.</strong> <span data-i18n="partners.level.body">Commission comes from the trading fees of traders you refer directly. If you want to build a team of partners, talk to DA directly.</span></span>
+      <a href="https://t.me/jacksondz" data-link="telegramContact" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+        <span data-i18n="partners.cta">Talk to DA about partnering</span>
+        <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+        <span class="sr-only" data-ui="newTab">(opens in a new tab)</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════ HOW IT WORKS ═══════════════════════════════════════ -->
+<section class="section" id="how-it-works" aria-labelledby="howTitle">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-tag" data-i18n="how.tag">How it works</p>
+      <h2 class="section-title" id="howTitle" data-i18n="how.title">How affiliate commission works</h2>
+      <p class="section-sub" data-i18n="how.sub">Exchanges share part of the trading fees they collect with the affiliate account that referred the trader. Each exchange sets its own terms.</p>
+    </div>
+
+    <div class="explainer-grid reveal">
+      <div class="explainer-card seq" style="--i:0">
+        <span class="label">01</span>
+        <p class="explainer-figure"><span class="explainer-num" data-i18n="how.c1.num">Link</span></p>
+        <h3 data-i18n="how.c1.title">Your referral link</h3>
+        <p class="explainer-line" data-i18n="how.c1.body">A trader registers on an exchange through your link and is tied to your affiliate account.</p>
+      </div>
+      <div class="explainer-card seq" style="--i:1">
+        <span class="label">02</span>
+        <p class="explainer-figure explainer-figure-accent"><span class="explainer-num" data-i18n="how.c2.num">Fees</span></p>
+        <h3 data-i18n="how.c2.title">A share of trading fees</h3>
+        <p class="explainer-line" data-i18n="how.c2.body">When that trader pays trading fees, the exchange pays a share to the affiliate account. The share depends on the exchange, the product and the programme's terms.</p>
+      </div>
+      <div class="explainer-card seq" style="--i:2">
+        <span class="label">03</span>
+        <p class="explainer-figure"><span class="explainer-num">1</span><span class="explainer-unit" data-i18n="how.c3.unit">level</span></p>
+        <h3 data-i18n="how.c3.title">Direct referrals only</h3>
+        <p class="explainer-line" data-i18n="how.c3.body">Commission comes only from traders you refer directly. Terms can change when an exchange updates its programme.</p>
+      </div>
+    </div>
+    <p class="note-small reveal" data-disclaimer="RATES">Rates and reward tiers may change according to each exchange's policy and partner program.</p>
+
+    <!-- Step-by-Step Guide -->
+    <div class="steps-container reveal">
+      <div class="steps-head">
+        <h3 class="steps-title" data-i18n="guide.v3.stepsTitle">Getting started, step by step</h3>
+        <p class="steps-count" aria-hidden="true"><span id="stepCountNow">01</span><span class="steps-count-sep">/</span><span id="stepCountTotal">05</span></p>
+      </div>
+
+      <!-- Sticky step rail: track + tabs stay reachable while reading a long step -->
+      <div class="step-rail" id="stepRail">
+      <div class="step-track" aria-hidden="true"><span class="step-track-fill" id="stepTrackFill"></span></div>
+      <!-- Step tabs (built by renderStep from stepsData) -->
+      <div class="step-tabs" id="stepTabs" role="tablist" aria-label="Getting started"></div>
+      </div><!-- /step-rail -->
+
+      <div class="step-content-wrap" id="stepContent" role="tabpanel" aria-live="polite">
         <!-- populated by JS -->
+      </div>
+
+      <div class="step-nav">
+        <button class="btn btn-outline" type="button" id="prevStep" disabled>
+          <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+          <span data-i18n="guide.prev">Previous</span>
+        </button>
+        <span class="step-progress-wrap">
+          <span class="step-progress" id="stepProgress">Step 1 / 5</span>
+          <span class="step-swipe-hint" data-ui="steps.swipe">Swipe or drag ← →</span>
+        </span>
+        <button class="btn btn-primary" type="button" id="nextStep">
+          <span data-i18n="guide.next">Next</span>
+        </button>
       </div>
     </div>
   </div>
@@ -265,142 +336,189 @@
 <section class="section section-alt" id="calculator" aria-labelledby="calcTitle">
   <div class="container">
     <div class="section-header reveal">
-      <p class="section-tag" data-i18n="calc.tag">Công Cụ Tính Toán</p>
-      <h2 class="section-title" id="calcTitle"><span data-i18n="calc.title">Tính Thu Nhập Affiliate</span></h2>
-      <p class="section-sub" data-i18n="calc.sub">Ước tính thu nhập hàng tháng dựa trên số lượng người giới thiệu và khối lượng giao dịch.</p>
+      <p class="section-tag" data-i18n="calc.v3.tag">Calculator</p>
+      <h2 class="section-title" id="calcTitle" data-i18n="calc.v3.title">Commission calculator</h2>
+      <p class="section-sub" data-i18n="calc.v3.sub">See how the commission formula behaves with your own assumptions. Nothing here is a DA rate, a forecast or a record of past earnings.</p>
     </div>
 
     <div class="calc-grid reveal">
       <div class="card calc-card">
-        <h3 class="card-title-sm" data-i18n="calc.inputTitle">Nhập Thông Số</h3>
+        <h3 class="card-title-sm" data-i18n="calc.v3.inputTitle">Your assumptions</h3>
         <div class="form-group">
-          <label class="form-label" for="refCount" data-i18n="calc.lbl1">Số người được giới thiệu mỗi tháng</label>
-          <div class="slider-display"><span id="refCountVal">10</span> <span data-i18n="calc.unit.people">người</span></div>
+          <label class="form-label" for="calcExchange" data-i18n="calc.v3.exchange">Exchange</label>
+          <select class="form-select" id="calcExchange">
+            <option value="" data-i18n="calc.v3.exchangeCustom">Any exchange — my own assumptions</option>
+            <!-- available exchanges added by JS from data/config.js -->
+          </select>
+          <p class="slider-note calc-rate-note" id="calcRateNote" aria-live="polite"></p>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="refCount" data-i18n="calc.v3.lblRefs">Active referred traders</label>
+          <div class="slider-display"><span id="refCountVal">10</span> <span data-i18n="calc.v3.unitTraders">traders</span></div>
           <input type="range" class="slider" id="refCount" min="1" max="200" value="10" />
         </div>
         <div class="form-group">
-          <label class="form-label" for="tradeVol" data-i18n="calc.lbl2">Khối lượng giao dịch TB mỗi người (USD/tháng)</label>
+          <label class="form-label" for="tradeVol" data-i18n="calc.v3.lblVol">Monthly trading volume per trader (USD)</label>
           <div class="slider-display"><span id="tradeVolVal">$300,000</span></div>
-          <div class="slider-wrap">
-            <!-- Typical-user band: $200K–$700K on a $100K–$5M scale -->
-            <span class="slider-band" style="--from:2.04;--to:12.24" aria-hidden="true"></span>
-            <input type="range" class="slider" id="tradeVol" min="100000" max="5000000" step="10000" value="300000" aria-describedby="tradeVolNote" />
-          </div>
-          <p class="slider-note" id="tradeVolNote"><span class="slider-note-mark" aria-hidden="true"></span><span data-ui="calc.volNote">Typical user: $200K–$700K / month</span></p>
+          <input type="range" class="slider" id="tradeVol" min="100000" max="5000000" step="10000" value="300000" />
         </div>
         <div class="form-group">
-          <label class="form-label" for="commRate" data-i18n="calc.lbl3">Tỷ lệ hoa hồng (%)</label>
+          <label class="form-label" for="commRate" data-i18n="calc.v3.lblComm">Commission rate — your assumption (%)</label>
           <div class="slider-display"><span id="commRateVal">30</span>%</div>
-          <input type="range" class="slider" id="commRate" min="10" max="50" value="30" />
+          <input type="range" class="slider" id="commRate" min="5" max="50" step="1" value="30" />
         </div>
         <div class="form-group">
-          <label class="form-label" for="tradeFee" data-i18n="calc.lbl4">Phí giao dịch của sàn (%)</label>
+          <label class="form-label" for="tradeFee" data-i18n="calc.v3.lblFee">Exchange trading fee — your assumption (%)</label>
           <div class="slider-display"><span id="tradeFeeVal">0.10</span>%</div>
-          <input type="range" class="slider" id="tradeFee" min="0.05" max="0.2" step="0.01" value="0.1" />
+          <input type="range" class="slider" id="tradeFee" min="0.02" max="0.2" step="0.01" value="0.1" />
         </div>
       </div>
 
       <div class="card calc-result-card" aria-live="polite">
-        <h3 class="card-title-sm" data-i18n="calc.resultTitle">Kết Quả Ước Tính</h3>
+        <h3 class="card-title-sm" data-i18n="calc.v3.resultTitle">Results</h3>
+        <p class="calc-label" data-disclaimer="CALCULATOR">Illustrative estimate — not guaranteed earnings.</p>
         <div class="result-items">
           <div class="result-item result-item-primary">
-            <span class="result-label" data-i18n="calc.res1">Thu nhập tháng này</span>
-            <span class="result-value primary" id="monthlyEarn">$0</span>
+            <span class="result-label" data-i18n="calc.v3.res1">Estimated monthly commission</span>
+            <span class="result-value primary" id="monthlyEarn">—</span>
           </div>
           <div class="result-item result-item-secondary">
-            <span class="result-label" data-i18n="calc.res2">Thu nhập hàng năm</span>
-            <span class="result-value" id="yearlyEarn">$0</span>
+            <span class="result-label" data-i18n="calc.v3.res2">Estimated 12-month total</span>
+            <span class="result-value" id="yearlyEarn">—</span>
           </div>
           <div class="result-item">
-            <span class="result-label" data-i18n="calc.res3">Tổng phí sàn thu</span>
-            <span class="result-label-val" id="totalFees">$0</span>
+            <span class="result-label" data-i18n="calc.v3.res3">Trading fees generated per month</span>
+            <span class="result-label-val" id="totalFees">—</span>
           </div>
           <div class="result-item">
-            <span class="result-label" data-i18n="calc.res4">Hoa hồng / người</span>
-            <span class="result-label-val" id="perPerson">$0</span>
+            <span class="result-label" data-i18n="calc.v3.res4">Commission per referred trader per month</span>
+            <span class="result-label-val" id="perPerson">—</span>
           </div>
         </div>
+        <p class="result-note" data-i18n="calc.v3.chart">Cumulative estimate over 12 months, with every input held constant (no growth assumed).</p>
         <div class="result-chart-wrap">
-          <canvas id="earningsChart"></canvas>
+          <canvas id="earningsChart" aria-label="Cumulative illustrative estimate over 12 months, inputs held constant" role="img"></canvas>
         </div>
-        <p class="result-note" data-i18n="calc.note">* Ước tính giả định. Thu nhập thực tế phụ thuộc vào hoạt động của người dùng và điều khoản sàn.</p>
+        <p class="result-note" data-i18n="calc.v3.formula">Commission = referred traders × monthly volume per trader × fee rate × commission rate.</p>
+        <p class="result-note" data-disclaimer="AFFILIATE">Affiliate earnings depend on your effort, audience size and market conditions. Any examples illustrate how commissions work and are not a promise of results.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════ FAQ ═══════════════════════════════════════ -->
-<section class="section" id="faq" aria-labelledby="faqTitle">
-  <div class="container faq-layout">
-    <div class="section-header reveal">
-      <p class="section-tag" data-i18n="faq.tag">Câu Hỏi Thường Gặp</p>
-      <h2 class="section-title" id="faqTitle" data-i18n="faq.title">FAQ</h2>
-    </div>
-    <div class="faq-list reveal" id="faqList">
-      <!-- populated by JS -->
-    </div>
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════ DA Affiliate ═══════════════════════════════════════ -->
-<section class="section section-alt" id="da-network" aria-labelledby="danTitle">
+<!-- ═══════════════════════════════════════ ACCESS BY GROUP ═══════════════════════════════════════ -->
+<section class="section dq-section" id="benefits" aria-labelledby="benefitsTitle">
   <div class="container">
-
-    <!-- ── Giới thiệu ── -->
     <div class="section-header reveal">
-      <p class="section-tag dan-tag"><span data-i18n="dan.tag">Mạng Lưới Affiliate</span></p>
-      <h2 class="section-title dan-title" id="danTitle"><span data-i18n="dan.title">Giới Thiệu DA Affiliate</span></h2>
-      <p class="section-sub" data-i18n="dan.sub">Hệ thống affiliate crypto chuyên nghiệp — kết nối hàng trăm partner trên khắp Đông Nam Á với các sàn giao dịch hàng đầu thế giới.</p>
+      <p class="section-tag" data-i18n="benefits.tag">Access by group</p>
+      <h2 class="section-title" id="benefitsTitle" data-i18n="benefits.title">Who gets what</h2>
+      <p class="section-sub" data-i18n="benefits.sub">Each group gets a different set of services. Anything not listed here is not part of the current offer.</p>
     </div>
+
+    <div class="dq-grid reveal">
+      <article class="dq-card seq" style="--i:0">
+        <div class="dq-card-top">
+          <span class="label">01</span>
+          <span class="dq-badge">DA Affiliate</span>
+        </div>
+        <div class="dq-card-content dq-dash-content">
+          <h3 data-i18n="benefits.trader.title">DA Affiliate traders</h3>
+          <ul class="dq-dash-list">
+            <li><span class="dq-dash-check" aria-hidden="true"></span><span data-i18n="benefits.trader.i1">Fixed commission arrangement on your own eligible fees, where the exchange programme supports it</span></li>
+            <li><span class="dq-dash-check" aria-hidden="true"></span><span data-i18n="benefits.trader.i2">Crediting through the exchange's affiliate system, where supported</span></li>
+            <li><span class="dq-dash-check" aria-hidden="true"></span><span data-i18n="benefits.trader.i3">Signal-only channel</span></li>
+          </ul>
+          <a href="https://signal.danetwork.asia/" data-link="signalTracking" target="_blank" rel="noopener noreferrer" class="text-link">
+            <span data-i18n="benefits.trader.signal">Published signals are recorded at DA Signal Tracking</span>
+            <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+            <span class="sr-only" data-ui="newTab">(opens in a new tab)</span>
+          </a>
+        </div>
+      </article>
+
+      <article class="dq-card seq" style="--i:1">
+        <div class="dq-card-top">
+          <span class="label">02</span>
+          <span class="dq-badge">DA Cashback</span>
+        </div>
+        <div class="dq-card-content dq-dash-content">
+          <h3 data-i18n="benefits.cb.title">DA Cashback members</h3>
+          <ul class="dq-dash-list">
+            <li><span class="dq-dash-check" aria-hidden="true"></span><span data-i18n="benefits.cb.i1">Fee rewards at volume milestones</span></li>
+            <li><span class="dq-dash-check" aria-hidden="true"></span><span data-i18n="benefits.cb.i2">Daily plan</span></li>
+            <li><span class="dq-dash-check" aria-hidden="true"></span><span data-i18n="benefits.cb.i3">Member community</span></li>
+            <li><span class="dq-dash-check" aria-hidden="true"></span><span data-i18n="benefits.cb.i4">Learning</span></li>
+            <li><span class="dq-dash-check" aria-hidden="true"></span><span data-i18n="benefits.cb.i5">Support</span></li>
+          </ul>
+          <a href="https://www.dacashback.asia/" data-link="cashback" target="_blank" rel="noopener noreferrer" class="text-link">
+            <span data-i18n="benefits.cb.link">Go to DA Cashback</span>
+            <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+            <span class="sr-only" data-ui="newTab">(opens in a new tab)</span>
+          </a>
+        </div>
+      </article>
+
+      <article class="dq-card seq" style="--i:2">
+        <div class="dq-card-top">
+          <span class="label">03</span>
+          <span class="dq-badge">DA Affiliate</span>
+        </div>
+        <div class="dq-card-content dq-dash-content">
+          <h3 data-i18n="benefits.partner.title">DA Affiliate partners</h3>
+          <ul class="dq-dash-list">
+            <li><span class="dq-dash-check" aria-hidden="true"></span><span data-i18n="benefits.partner.i1">Partnership guidance</span></li>
+            <li><span class="dq-dash-check" aria-hidden="true"></span><span data-i18n="benefits.partner.i2">Exchange-relationship support</span></li>
+            <li><span class="dq-dash-check" aria-hidden="true"></span><span data-i18n="benefits.partner.i3">Channel and community development guidance</span></li>
+            <li><span class="dq-dash-check" aria-hidden="true"></span><span data-i18n="benefits.partner.i4">DA's customer-support and operational resources, including its Telegram channels</span></li>
+            <li><span class="dq-dash-check" aria-hidden="true"></span><span data-i18n="benefits.partner.i5">Commission reconciliation</span></li>
+            <li><span class="dq-dash-check" aria-hidden="true"></span><span data-i18n="benefits.partner.i6">Partner resources</span></li>
+          </ul>
+        </div>
+      </article>
+    </div><!-- /dq-grid -->
+
+    <!-- Optional perks: rendered only for perks with enabled:true in data/config.js -->
+    <div class="dq-grid perks-grid reveal" id="perksGrid" hidden></div>
 
     <!-- ── Place within the DA Network ecosystem ── -->
     <div class="eco-strip reveal">
       <div class="eco-intro">
         <p class="label" data-ui="eco.tag">Part of the DA Network ecosystem</p>
-        <a href="https://danetwork.asia/en" class="text-link" target="_blank" rel="noopener noreferrer">
+        <a href="https://danetwork.asia/en" data-link="network" class="text-link" target="_blank" rel="noopener noreferrer">
           <span data-ui="eco.link">Visit DA Network</span>
           <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
           <span class="sr-only" data-ui="newTab">(opens in a new tab)</span>
         </a>
       </div>
       <ol class="eco-stages">
-        <li class="eco-stage"><span class="label">01</span><span class="eco-stage-name" data-ui="eco.learn">Learn</span><span class="eco-brand">DA Network Content</span></li>
+        <li class="eco-stage"><span class="label">01</span><span class="eco-stage-name" data-ui="eco.learn">Learn</span><span class="eco-brand">DA Network</span></li>
         <li class="eco-stage"><span class="label">02</span><span class="eco-stage-name" data-ui="eco.trade">Trade</span><span class="eco-brand">DA Scalping</span></li>
         <li class="eco-stage"><span class="label">03</span><span class="eco-stage-name" data-ui="eco.save">Save</span><span class="eco-brand">DA Cashback</span></li>
         <li class="eco-stage is-current" aria-current="true"><span class="label">04</span><span class="eco-stage-name" data-ui="eco.earn">Earn</span><span class="eco-brand">DA Affiliate <span class="eco-here" data-ui="eco.current">You are here</span></span></li>
       </ol>
     </div>
+  </div>
+</section>
 
-    <div class="dan-intro-grid reveal">
-      <div class="dan-intro-card seq" style="--i:0">
-        <span class="label">01</span>
-        <h4 data-i18n="dan.c1.title">Phủ Sóng Rộng</h4>
-        <p data-i18n="dan.c1.body">Hoạt động tại Việt Nam, Indonesia, Philippines và đang mở rộng ra toàn Đông Nam Á với hơn 237 partner đang hoạt động.</p>
-      </div>
-      <div class="dan-intro-card seq" style="--i:1">
-        <span class="label">02</span>
-        <h4 data-i18n="dan.c2.title">Hoa Hồng Cao Nhất</h4>
-        <p data-i18n="dan.c2.body">Tỷ lệ hoa hồng lên đến <strong class="gold-text">70%</strong> — cao hơn đăng ký trực tiếp, được DA Affiliate đàm phán độc quyền với từng sàn.</p>
-      </div>
-      <div class="dan-intro-card seq" style="--i:2">
-        <span class="label">03</span>
-        <h4 data-i18n="dan.c3.title">Hỗ Trợ Toàn Diện</h4>
-        <p data-i18n="dan.c3.body">Đội ngũ admin hỗ trợ 24/7, cung cấp tài liệu, công cụ và lộ trình phát triển cá nhân hóa cho từng partner.</p>
-      </div>
-      <div class="dan-intro-card seq" style="--i:3">
-        <span class="label">04</span>
-        <h4 data-i18n="dan.c4.title">Tăng Trưởng Bền Vững</h4>
-        <p data-i18n="dan.c4.body">Nhận chia sẻ hoa hồng từ trader giới thiệu trực tiếp và sub-affiliate cấp 1 — tối đa 2 tầng.</p>
-      </div>
+<!-- ═══════════════════════════════════════ PARTNER STATISTICS ═══════════════════════════════════════ -->
+<section class="section section-alt" id="stats" aria-labelledby="statsTitle">
+  <div class="container">
+    <div class="section-header reveal">
+      <p class="section-tag" data-i18n="stats.tag">Partner statistics</p>
+      <h2 class="section-title" id="statsTitle" data-i18n="stats.title">Partner network figures</h2>
+      <p class="section-sub" data-i18n="stats.sub">Each figure is published only after it has been reconciled against exchange records, together with its period, source and date. Until then it reads “Awaiting verified data”.</p>
     </div>
 
-    <!-- ── Recent Partner Wins ── -->
-    <div class="partner-wins">
+    <!-- Rendered from DA_CONFIG.partnerMetrics; values appear only when publishable -->
+    <dl class="metric-grid reveal" id="metricGrid"></dl>
+
+    <!-- ── Partner stories: rendered only with written consent (config.partnerStories) ── -->
+    <div class="partner-wins" id="partnerStories" hidden>
       <div class="rail-head">
         <div class="partner-wins-header sub-header reveal">
-          <p class="partner-wins-badge eyebrow" data-i18n="wins.badge">CÂU CHUYỆN THẬT</p>
-          <h3 class="partner-wins-title" data-i18n="wins.title">Partner Thật, Kết Quả Thật</h3>
-          <p class="partner-wins-sub" data-i18n="wins.sub">Không phải bảng xếp hạng thu nhập. Đây là một vài câu chuyện thực tế từ các partner đang xây traffic và nhận hoa hồng qua DA Affiliate.</p>
+          <p class="partner-wins-badge eyebrow" data-i18n="stories.tag">Partner stories</p>
+          <h3 class="partner-wins-title" data-i18n="stories.title">Partner stories</h3>
+          <p class="partner-wins-sub" data-i18n="stories.sub">Shared with written consent. Results vary with channel, audience and effort.</p>
         </div>
         <div class="rail-controls" data-rail="partnerWinsGrid">
           <button type="button" class="rail-btn" data-dir="-1" aria-label="Previous" aria-controls="partnerWinsGrid">
@@ -411,55 +529,46 @@
           </button>
         </div>
       </div>
-
-      <!-- Data-driven grid: cards rendered by renderPartnerWins() in app.js from PARTNERS_DATA array -->
-      <div class="partner-wins-grid reveal" id="partnerWinsGrid" data-partner-count="5"></div>
-
-      <p class="partner-wins-note">
-        <span data-i18n="wins.note">Tất cả câu chuyện được chia sẻ với sự đồng ý của partner. Kết quả có thể khác nhau tùy vào kênh, traffic và mức độ triển khai.</span>
-        <a href="#verify" data-i18n="wins.note.link">Xem cách DA Affiliate xác minh partner →</a>
-      </p>
+      <div class="partner-wins-grid reveal" id="partnerWinsGrid"></div>
     </div>
 
-    <!-- ── Verification Block (How we verify) ── -->
+    <!-- ── How DA reconciles commissions ── -->
     <div class="verify-block" id="verify">
       <div class="verify-header sub-header reveal">
-        <p class="verify-badge eyebrow" data-i18n="verify.badge">MINH BẠCH</p>
-        <h3 class="verify-title" data-i18n="verify.title">Cách DA Affiliate Xác Minh Số Liệu</h3>
-        <p class="verify-sub" data-i18n="verify.sub">Trong một ngành mà fake screenshot và fake leaderboard là chuyện thường — đây là cách chúng tôi đảm bảo mọi con số bạn thấy là thật.</p>
+        <p class="verify-badge eyebrow" data-i18n="rec.tag">Reconciliation</p>
+        <h3 class="verify-title" data-i18n="rec.title">How DA reconciles commissions</h3>
+        <p class="verify-sub" data-i18n="rec.sub">Before a commission figure is published, it is checked against the exchanges' own records.</p>
       </div>
-
       <ol class="verify-grid reveal">
         <li class="verify-step seq" style="--i:0">
           <span class="verify-step-num">01</span>
-          <h4 data-i18n="verify.s1.title">Dữ liệu từ dashboard sàn</h4>
-          <p data-i18n="verify.s1.body">Mỗi partner đăng ký dưới link ref của DA Affiliate. Admin thấy hoa hồng pending/paid trực tiếp từ dashboard <strong>Binance, Ourbit, Bingx</strong> — không bị điều chỉnh bởi bên thứ ba.</p>
+          <h4 data-i18n="rec.s1.title">Exchange records</h4>
+          <p data-i18n="rec.s1.body">Commission data starts from each exchange's affiliate dashboard for accounts registered under DA Affiliate links.</p>
         </li>
         <li class="verify-step seq" style="--i:1">
           <span class="verify-step-num">02</span>
-          <h4 data-i18n="verify.s2.title">Hồ sơ rút tiền</h4>
-          <p data-i18n="verify.s2.body">Con số “đã chuyển” hiển thị trên trang chỉ tính commission <strong>đã thanh toán thành công</strong> đến ví/tài khoản partner — không tính phần pending hoặc bị hủy. Partner có thể đối chiếu với lịch sử rút tiền của mình.</p>
+          <h4 data-i18n="rec.s2.title">Received versus paid</h4>
+          <p data-i18n="rec.s2.body">For each period, DA matches commission received from exchanges against commission paid to partners. Pending or cancelled amounts are left out.</p>
         </li>
         <li class="verify-step seq" style="--i:2">
           <span class="verify-step-num">03</span>
-          <h4 data-i18n="verify.s3.title">Partner consent</h4>
-          <p data-i18n="verify.s3.body">Mọi câu chuyện, quote, hay số liệu cá nhân hiển thị công khai đều <strong>có sự đồng ý</strong> của partner. Bạn có thể yêu cầu gỡ thông tin của mình bất cứ lúc nào — chúng tôi xử lý trong 48h.</p>
+          <h4 data-i18n="rec.s3.title">Consent before publication</h4>
+          <p data-i18n="rec.s3.body">Partner stories, quotes and screenshots appear only with the partner's written consent.</p>
         </li>
       </ol>
-
       <div class="verify-cta">
-        <span class="verify-cta-text" data-i18n="verify.cta.text">Nghĩ rằng số liệu không khớp với rút tiền của bạn? Muốn xem chi tiết về case study của một partner cụ thể?</span>
-        <a href="#cta" class="btn btn-outline verify-cta-btn" data-i18n="verify.cta.btn">Liên hệ admin</a>
+        <span class="verify-cta-text" data-i18n="rec.cta.text">Questions about a figure, or about your own commission?</span>
+        <a href="#contact" class="btn btn-outline verify-cta-btn"><span data-i18n="rec.cta.btn">Contact DA</span></a>
       </div>
     </div>
 
-    <!-- ── Feedback / Proof ── -->
-    <div class="dan-feedback">
+    <!-- ── Proof gallery: rendered only for images with consent (config.proofImages) ── -->
+    <div class="dan-feedback" id="proofSection" hidden>
       <div class="rail-head">
         <div class="dan-fb-header sub-header reveal">
-          <p class="dan-lb-badge eyebrow" data-i18n="dan.fb.badge">BẰNG CHỨNG THỰC TẾ</p>
-          <h3 class="dan-lb-title"><span data-i18n="dan.fb.title">Hoa Hồng Thực Tế Của Partner</span></h3>
-          <p class="dan-lb-sub" data-i18n="dan.fb.sub">Ảnh chụp màn hình xác nhận hoa hồng — cập nhật liên tục từ partner trong mạng lưới.</p>
+          <p class="dan-lb-badge eyebrow" data-i18n="proof.v3.tag">Commission records</p>
+          <h3 class="dan-lb-title" data-i18n="proof.v3.title">Affiliate dashboard records</h3>
+          <p class="dan-lb-sub" data-i18n="proof.v3.sub">Screenshots from exchange affiliate dashboards, shown with consent. Each caption names the exchange and the period.</p>
         </div>
         <div class="rail-controls" data-rail="danFeedbackGrid">
           <button type="button" class="rail-btn" data-dir="-1" aria-label="Previous" aria-controls="danFeedbackGrid">
@@ -470,383 +579,64 @@
           </button>
         </div>
       </div>
-      <div class="proof-gallery reveal" id="danFeedbackGrid">
-        <figure class="proof-item proof-ourbit seq" style="--i:0" data-img="proof/proof-1.jpg" tabindex="0" role="button" aria-label="Xem ảnh Ourbit 12/2025">
-          <div class="proof-thumb">
-            <img src="proof/proof-1.jpg" alt="Ourbit commission 12/2025 - $3,358.35" loading="lazy">
-            <span class="proof-zoom" aria-hidden="true">⤢</span>
-          </div>
-          <figcaption class="proof-caption">
-            <span class="proof-exchange proof-exchange-ourbit">Ourbit</span>
-            <strong class="proof-amount">$3,358.35</strong>
-            <span class="proof-period" data-i18n="proof.period.dec25">Tháng 12/2025 · 100 users</span>
-          </figcaption>
-        </figure>
-
-        <figure class="proof-item proof-ourbit seq" style="--i:1" data-img="proof/proof-2.jpg" tabindex="0" role="button" aria-label="Xem ảnh Ourbit 02/2026">
-          <div class="proof-thumb">
-            <img src="proof/proof-2.jpg" alt="Ourbit commission 02/2026 - $5,397.16" loading="lazy">
-            <span class="proof-zoom" aria-hidden="true">⤢</span>
-          </div>
-          <figcaption class="proof-caption">
-            <span class="proof-exchange proof-exchange-ourbit">Ourbit</span>
-            <strong class="proof-amount">$5,397.16</strong>
-            <span class="proof-period" data-i18n="proof.period.feb26">Tháng 02/2026 · 32 users mới</span>
-          </figcaption>
-        </figure>
-
-        <figure class="proof-item proof-bingx seq" style="--i:2" data-img="proof/proof-3.jpg" tabindex="0" role="button" aria-label="Xem ảnh Bingx 11/2025">
-          <div class="proof-thumb">
-            <img src="proof/proof-3.jpg" alt="Bingx commission 11/2025 - $2,018.88" loading="lazy">
-            <span class="proof-zoom" aria-hidden="true">⤢</span>
-          </div>
-          <figcaption class="proof-caption">
-            <span class="proof-exchange proof-exchange-bingx">Bingx</span>
-            <strong class="proof-amount">$2,018.88</strong>
-            <span class="proof-period" data-i18n="proof.period.nov25">Tháng 11/2025 · Direct commission</span>
-          </figcaption>
-        </figure>
-
-        <figure class="proof-item proof-bingx seq" style="--i:3" data-img="proof/proof-4.jpg" tabindex="0" role="button" aria-label="Xem ảnh Bingx 01/2026">
-          <div class="proof-thumb">
-            <img src="proof/proof-4.jpg" alt="Bingx metrics 01/2026 - $566.62" loading="lazy">
-            <span class="proof-zoom" aria-hidden="true">⤢</span>
-          </div>
-          <figcaption class="proof-caption">
-            <span class="proof-exchange proof-exchange-bingx">Bingx</span>
-            <strong class="proof-amount">$566.62</strong>
-            <span class="proof-period" data-i18n="proof.period.jan26b">01/2026 · Vol $5.3M · 23 traders</span>
-          </figcaption>
-        </figure>
-
-        <figure class="proof-item proof-bingx seq" style="--i:4" data-img="proof/proof-5.jpg" tabindex="0" role="button" aria-label="Xem ảnh Bingx 02/2026">
-          <div class="proof-thumb">
-            <img src="proof/proof-5.jpg" alt="Bingx metrics 02/2026 - $936.83" loading="lazy">
-            <span class="proof-zoom" aria-hidden="true">⤢</span>
-          </div>
-          <figcaption class="proof-caption">
-            <span class="proof-exchange proof-exchange-bingx">Bingx</span>
-            <strong class="proof-amount">$936.83</strong>
-            <span class="proof-period" data-i18n="proof.period.feb26b">02/2026 · Vol $8.8M · 32 traders</span>
-          </figcaption>
-        </figure>
-
-        <figure class="proof-item proof-binance seq" style="--i:5" data-img="proof/proof-6.jpg" tabindex="0" role="button" aria-label="Xem ảnh Binance 12/2025">
-          <div class="proof-thumb">
-            <img src="proof/proof-6.jpg" alt="Binance commission 12/2025 - $1,063.04" loading="lazy">
-            <span class="proof-zoom" aria-hidden="true">⤢</span>
-          </div>
-          <figcaption class="proof-caption">
-            <span class="proof-exchange proof-exchange-binance">Binance</span>
-            <strong class="proof-amount">$1,063.04</strong>
-            <span class="proof-period" data-i18n="proof.period.dec25b">12/2025 · USDT &amp; Inverse · Settled</span>
-          </figcaption>
-        </figure>
-
-        <figure class="proof-item proof-binance seq" style="--i:6" data-img="proof/proof-7.jpg" tabindex="0" role="button" aria-label="Xem ảnh Binance 09-10/2025">
-          <div class="proof-thumb">
-            <img src="proof/proof-7.jpg" alt="Binance commission 09-10/2025 - $704.06" loading="lazy">
-            <span class="proof-zoom" aria-hidden="true">⤢</span>
-          </div>
-          <figcaption class="proof-caption">
-            <span class="proof-exchange proof-exchange-binance">Binance</span>
-            <strong class="proof-amount">$704.06</strong>
-            <span class="proof-period" data-i18n="proof.period.sep25">09-10/2025 · USDT &amp; Inverse</span>
-          </figcaption>
-        </figure>
-      </div>
-
-      <p class="proof-note" data-i18n="proof.note">
-        Tất cả screenshot trực tiếp từ dashboard sàn (Ourbit, Bingx, Binance) · Click vào ảnh để xem chi tiết · Một số thông tin nhạy cảm có thể bị che để bảo vệ partner.
-      </p>
+      <div class="proof-gallery reveal" id="danFeedbackGrid"></div>
 
       <!-- Lightbox modal -->
-      <div class="proof-lightbox" id="proofLightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Xem ảnh phóng to">
-        <button class="proof-lightbox-close" type="button" aria-label="Đóng">
+      <div class="proof-lightbox" id="proofLightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Enlarged image">
+        <button class="proof-lightbox-close" type="button" aria-label="Close">
           <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
         </button>
-        <button class="proof-lightbox-nav proof-lightbox-prev" type="button" aria-label="Ảnh trước">
+        <button class="proof-lightbox-nav proof-lightbox-prev" type="button" aria-label="Previous image">
           <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
         </button>
         <img class="proof-lightbox-img" src="" alt="">
-        <button class="proof-lightbox-nav proof-lightbox-next" type="button" aria-label="Ảnh sau">
+        <button class="proof-lightbox-nav proof-lightbox-next" type="button" aria-label="Next image">
           <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
         </button>
-        <div class="proof-lightbox-counter"><span id="proofLbIdx">1</span> / <span id="proofLbTotal">7</span></div>
-      </div>
-      <div class="dan-cta-wrap reveal">
-        <p class="dan-cta-text" data-i18n="dan.cta.text">Sẵn sàng tham gia DA Affiliate và bắt đầu kiếm hoa hồng?</p>
-        <a href="#guide" class="btn btn-primary btn-lg dan-cta-btn">
-          <span data-i18n="dan.cta.btn">Bắt Đầu Ngay</span>
-          <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
+        <div class="proof-lightbox-counter"><span id="proofLbIdx">1</span> / <span id="proofLbTotal">0</span></div>
       </div>
     </div>
-
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════ ĐẶC QUYỀN ═══════════════════════════════════════ -->
-<section class="section dq-section" id="dac-quyen" aria-labelledby="dqTitle">
-  <div class="container">
-
-    <!-- Header -->
+<!-- ═══════════════════════════════════════ FAQ ═══════════════════════════════════════ -->
+<section class="section" id="faq" aria-labelledby="faqTitle">
+  <div class="container faq-layout">
     <div class="section-header reveal">
-      <p class="section-tag dq-tag" data-i18n="dq.tag">Dành riêng cho Partner DA Affiliate</p>
-      <h2 class="section-title dq-title" id="dqTitle"><span data-i18n="dq.title">Đặc Quyền Tại DA Affiliate</span></h2>
-      <p class="section-sub dq-sub" data-i18n="dq.sub">Chỉ <strong style="color:var(--color-gold)">237 partner</strong> đang hoạt động mới có quyền truy cập. Những điều bên ngoài không thể mua được.</p>
+      <p class="section-tag" data-i18n="faq.v3.tag">FAQ</p>
+      <h2 class="section-title" id="faqTitle" data-i18n="faq.v3.title">Questions and answers</h2>
     </div>
-
-    <!-- 3 Privilege Cards -->
-    <div class="dq-grid reveal">
-
-      <!-- Card 1: Bot + Dashboard Teaser -->
-      <article class="dq-card dq-card-dashboard seq" style="--i:0">
-        <div class="dq-card-top">
-          <span class="label">01</span>
-          <span class="dq-badge"><span class="dot" aria-hidden="true"></span>DA Signal Tracking</span>
-        </div>
-        <div class="dq-card-icon" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="2" y="3" width="20" height="14" rx="1.5"/>
-            <path d="M8 21h8M12 17v4"/>
-            <path d="M6 12l3-3 3 2 4-4"/>
-          </svg>
-        </div>
-        <div class="dq-card-content dq-dash-content">
-          <ul class="dq-dash-list">
-            <li><span class="dq-dash-check" aria-hidden="true"></span><span data-i18n="dash.point1">Có cơ hội sử dụng <strong>Bot giao dịch độc quyền</strong> của DA Affiliate</span></li>
-            <li><span class="dq-dash-check" aria-hidden="true"></span><span data-i18n="dash.point2">Có trang web tracking signal <strong>minh bạch về hiệu suất</strong> của Bot</span></li>
-          </ul>
-          <a
-            href="https://signal.danetwork.asia/"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn btn-gold dq-dash-btn"
-            onclick="trackDashboardCta()"
-            data-i18n="dash.btn"
-          >Mở dashboard →</a>
-          <p class="dq-dash-disclaimer" data-i18n="dash.disclaimer">Hiệu suất quá khứ không đảm bảo kết quả trong tương lai. Nội dung này không phải lời khuyên đầu tư.</p>
-        </div>
-      </article>
-
-      <!-- Card 2: Market Plan -->
-      <article class="dq-card dq-card-blue seq" style="--i:1" onclick="openDqModal('market')" role="button" tabindex="0" aria-haspopup="dialog">
-        <div class="dq-card-top">
-          <span class="label">02</span>
-          <span class="dq-badge dq-badge-live"><span class="dot" aria-hidden="true"></span>LIVE hàng ngày</span>
-        </div>
-        <div class="dq-card-icon" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-          </svg>
-        </div>
-        <div class="dq-card-content">
-          <h3><span data-i18n="dq.card2.title">Kênh Update Plan Market</span></h3>
-          <p data-i18n="dq.card2.body">Cập nhật <strong>kế hoạch thị trường mỏi ngày</strong> từ các trader chuyên nghiệp. Biết trước thị trường sẽ đi đâu khi người khác còn đang dò xoét.</p>
-          <div class="dq-card-stat">
-            <span class="dq-stat-item">Update 7h sáng</span>
-            <span class="dq-stat-item">Phân tích sâu</span>
-          </div>
-        </div>
-        <div class="dq-card-cta">
-          <span data-i18n="dq.card.details">Xem chi tiết</span>
-          <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </div>
-      </article>
-
-      <!-- Card 3: Facts & Lifestyle -->
-      <article class="dq-card dq-card-purple seq" style="--i:2" onclick="openDqModal('facts')" role="button" tabindex="0" aria-haspopup="dialog">
-        <div class="dq-card-top">
-          <span class="label">03</span>
-          <span class="dq-badge dq-badge-exclusive"><span class="dot" aria-hidden="true"></span><span data-i18n="dq.badge.exclusive">Exclusive</span></span>
-        </div>
-        <div class="dq-card-icon" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-          </svg>
-        </div>
-        <div class="dq-card-content">
-          <h3><span data-i18n="dq.card3.title">Facts &amp; Quotes Độc Quyền</span></h3>
-          <p data-i18n="dq.card3.body">Kênh riêng chia sẻ <strong>sự thật tài chính</strong> và <strong>triết lý sống</strong> mà tệp wealthy không bạo giờ nói công khai.</p>
-          <div class="dq-card-stat">
-            <span class="dq-stat-item">Finance mindset</span>
-            <span class="dq-stat-item">Lifestyle elite</span>
-          </div>
-        </div>
-        <div class="dq-card-cta">
-          <span data-i18n="dq.card.details">Xem chi tiết</span>
-          <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </div>
-      </article>
-
-    </div><!-- /dq-grid -->
-
-    <!-- Bottom CTA strip -->
-    <div class="dq-cta-strip reveal">
-      <div class="dq-cta-left">
-        <svg class="icon dq-lock-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="1.5"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-        <div>
-          <strong><span data-i18n="dq.cta.strong">Tất cả đặc quyền trên chỉ có khi bạn là partner DA Affiliate.</span></strong>
-          <span data-i18n="dq.cta.sub">Tham gia — phản hồi trong 24–48h.</span>
-        </div>
-      </div>
-      <a href="#guide" class="btn btn-primary dq-cta-btn"><span data-i18n="dq.cta.btn">Tham Gia Để Mở Khóa</span></a>
+    <div class="faq-list reveal" id="faqList">
+      <!-- populated by JS -->
     </div>
-
   </div>
 </section>
 
-
-<!-- ══ POPUP: Market Plan ══ -->
-<div class="dq-modal" id="dqModal-market" onclick="closeDqModal(event,this)">
-  <div class="dq-modal-box dq-modal-blue" role="dialog" aria-modal="true" aria-labelledby="dqModalMarketTitle">
-    <button class="dq-modal-close" type="button" onclick="closeDqModal(null,'dqModal-market')" aria-label="Close">
-      <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-    </button>
-    <div class="dq-modal-header">
-      <div class="dq-modal-icon-wrap" aria-hidden="true">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-      </div>
-      <div>
-        <div class="dq-modal-badge" data-i18n="popup.mkt.badge">CẬP NHẬT HẰNG NGÀY · ĐỘC QUYỀN</div>
-        <h3 class="dq-modal-title" id="dqModalMarketTitle" data-i18n="popup.mkt.title">Kênh Update Plan Market</h3>
-      </div>
-    </div>
-    <div class="dq-modal-body">
-      <p class="dq-modal-lead" data-i18n="popup.mkt.lead">Trong khi hàng triệu người mở Twitter để bị bão thông tin — bạn nhận được kế hoạch gọn gàng, rõ ràng mỗi sáng lúc 7h.</p>
-      <div class="dq-modal-features">
-        <div class="dq-mf-item">
-          <span class="dq-mf-icon">01</span>
-          <div>
-            <strong data-i18n="popup.mkt.f1.title">Plan market mỗi ngày lúc 7:00 sáng</strong>
-            <small data-i18n="popup.mkt.f1.body">Phân tích xu hướng, vùng hỗ trợ/kháng cự, các pair ưu tiên trong ngày</small>
-          </div>
-        </div>
-        <div class="dq-mf-item">
-          <span class="dq-mf-icon">02</span>
-          <div>
-            <strong data-i18n="popup.mkt.f2.title">Phân tích macro + on-chain</strong>
-            <small data-i18n="popup.mkt.f2.body">Dữ liệu on-chain, sentiment tổng hợp, tác động macro tài chính toàn cầu</small>
-          </div>
-        </div>
-        <div class="dq-mf-item">
-          <span class="dq-mf-icon">03</span>
-          <div>
-            <strong data-i18n="popup.mkt.f3.title">Setup giao dịch cụ thể</strong>
-            <small data-i18n="popup.mkt.f3.body">Entry, SL, TP rõ ràng — chỉ việc đọc và quyết định. Không cần tự phân tích</small>
-          </div>
-        </div>
-        <div class="dq-mf-item">
-          <span class="dq-mf-icon">04</span>
-          <div>
-            <strong data-i18n="popup.mkt.f4.title">Cảnh báo thị trường real-time</strong>
-            <small data-i18n="popup.mkt.f4.body">Thông báo ngay khi có biến động lớn — biết trước, đưa ra quyết định sớm hơn 90% còn lại</small>
-          </div>
-        </div>
-      </div>
-      <div class="dq-modal-alert" data-i18n="popup.mkt.alert">
-        Người nắm thông tin sớm hơn <strong>kiếm nhiều hơn</strong>. Kênh này chỉ mở cho partner — không bán ra bên ngoài.
-      </div>
-    </div>
-    <div class="dq-modal-footer">
-      <a href="#guide" class="btn btn-primary dq-modal-cta" onclick="closeDqModal(null,'dqModal-market')" data-i18n="popup.mkt.cta">Tham Gia Để Vào Kênh</a>
-      <span class="dq-modal-note" data-i18n="popup.mkt.note">Miễn phí · Chỉ cần là partner DA Affiliate</span>
-    </div>
-  </div>
-</div>
-
-<!-- ══ POPUP: Facts & Lifestyle ══ -->
-<div class="dq-modal" id="dqModal-facts" onclick="closeDqModal(event,this)">
-  <div class="dq-modal-box dq-modal-purple" role="dialog" aria-modal="true" aria-labelledby="dqModalFactsTitle">
-    <button class="dq-modal-close" type="button" onclick="closeDqModal(null,'dqModal-facts')" aria-label="Close">
-      <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-    </button>
-    <div class="dq-modal-header">
-      <div class="dq-modal-icon-wrap" aria-hidden="true">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-      </div>
-      <div>
-        <div class="dq-modal-badge" data-i18n="popup.facts.badge">ĐỘC QUYỀN · KHÔNG BÁN RA NGOÀI</div>
-        <h3 class="dq-modal-title" id="dqModalFactsTitle" data-i18n="popup.facts.title">Kênh Facts &amp; Quotes Độc Quyền</h3>
-      </div>
-    </div>
-    <div class="dq-modal-body">
-      <p class="dq-modal-lead" data-i18n="popup.facts.lead">Những gì người giàu thực sự hiểu về tiền — nhưng không bao giờ nói ra ngoài. Bây giờ nó là của bạn.</p>
-      <div class="dq-modal-features">
-        <div class="dq-mf-item">
-          <span class="dq-mf-icon">01</span>
-          <div>
-            <strong data-i18n="popup.facts.f1.title">Sự thật tài chính mà trường học không dạy</strong>
-            <small data-i18n="popup.facts.f1.body">Cách người giàu thực sự nghĩ về tiền, rủi ro, đầu tư và tự do tài chính</small>
-          </div>
-        </div>
-        <div class="dq-mf-item">
-          <span class="dq-mf-icon">02</span>
-          <div>
-            <strong data-i18n="popup.facts.f2.title">Quotes của các CEO, investor, billionaire</strong>
-            <small data-i18n="popup.facts.f2.body">Triết lý sống đúc chiết từ những người đã đạt được tự do tài chính thực sự</small>
-          </div>
-        </div>
-        <div class="dq-mf-item">
-          <span class="dq-mf-icon">03</span>
-          <div>
-            <strong data-i18n="popup.facts.f3.title">Lifestyle elite — tư duy của tệp giàu</strong>
-            <small data-i18n="popup.facts.f3.body">Cách họ nhìn thời gian, quan hệ, sức khỏe, và cơ hội khác 99% dân số như thế nào</small>
-          </div>
-        </div>
-        <div class="dq-mf-item">
-          <span class="dq-mf-icon">04</span>
-          <div>
-            <strong data-i18n="popup.facts.f4.title">Cập nhật đều đặn — không spam</strong>
-            <small data-i18n="popup.facts.f4.body">Mỗi bài là một hạt nhân, chưng cất kĩ — đọc 2 phút thay đổi cách nghĩ cả ngày</small>
-          </div>
-        </div>
-      </div>
-      <div class="dq-modal-alert" data-i18n="popup.facts.alert">
-        Kênh này không có bản trả phí. <strong>Chỉ partner DA Affiliate</strong> mới được vào — và hoàn toàn miễn phí.
-      </div>
-    </div>
-    <div class="dq-modal-footer">
-      <a href="#guide" class="btn btn-primary dq-modal-cta" onclick="closeDqModal(null,'dqModal-facts')" data-i18n="popup.facts.cta">Tham Gia Để Vào Kênh</a>
-      <span class="dq-modal-note" data-i18n="popup.facts.note">Miễn phí hoàn toàn · Chỉ cần là partner</span>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════ LIÊN HỆ ═══════════════════════════════════════ -->
-<section class="section lh-section" id="lien-he" aria-labelledby="lhTitle">
+<!-- ═══════════════════════════════════════ CONTACT ═══════════════════════════════════════ -->
+<section class="section lh-section" id="contact" aria-labelledby="lhTitle">
   <div class="container lh-layout">
     <div class="section-header reveal">
-      <p class="section-tag" data-i18n="lh.tag">Hỗ Trợ</p>
-      <h2 class="section-title" id="lhTitle"><span data-i18n="lh.title">Liên Hệ DA Affiliate</span></h2>
-      <p class="section-sub" data-i18n="lh.sub">Có thắc mắc hoặc muốn tham gia network? Đội ngũ sẵn sàng hỗ trợ 24/7.</p>
+      <p class="section-tag" data-i18n="contact.tag">Contact</p>
+      <h2 class="section-title" id="lhTitle" data-i18n="contact.title">Talk to DA Affiliate</h2>
+      <p class="section-sub" data-i18n="contact.sub">Questions about the trader offering, your terms or partnering? Message the business development team on Telegram.</p>
     </div>
-    <div class="lh-body reveal" id="cta">
-      <div class="lh-cards">
-        <a href="https://t.me/jacksondz" target="_blank" rel="noopener" class="lh-card">
+    <div class="lh-body reveal">
+      <div class="lh-cards" id="contactCards">
+        <a href="https://t.me/jacksondz" data-link="telegramContact" target="_blank" rel="noopener noreferrer" class="lh-card">
           <span class="lh-card-icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.02 9.52c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.08 14.408l-2.95-.924c-.64-.203-.654-.64.136-.948l11.527-4.445c.537-.194 1.006.131.769.157z"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248l-2.02 9.52c-.145.658-.537.818-1.084.508l-3-2.210-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.08 14.408l-2.95-.924c-.64-.203-.654-.64.136-.948l11.527-4.445c.537-.194 1.006.131.769.157z"/></svg>
           </span>
           <span class="lh-card-body">
-            <strong data-i18n="lh.bd.title">Business Development</strong>
-            <span class="lh-card-handle" data-i18n="lh.bd.handle">@jacksondz</span>
+            <strong data-i18n="contact.tg.title">Business development</strong>
+            <span class="lh-card-handle" data-cfg="telegram.handle">@jacksondz</span>
           </span>
-          <span class="lh-card-tag">BD</span>
+          <span class="lh-card-tag">Telegram</span>
           <svg class="icon lh-card-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
         </a>
-
-        <div class="lh-card lh-card-email">
-          <span class="lh-card-icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="1.5"/><path d="M2 7l10 7 10-7"/></svg>
-          </span>
-          <span class="lh-card-body">
-            <strong data-i18n="lh.card3.title">Email Hỗ Trợ</strong>
-            <span class="lh-card-handle" data-i18n="lh.card3.handle">support@dacrypto.net</span>
-          </span>
-        </div>
+        <!-- Support email card is added by renderContact() only when contact.supportEmail is set -->
       </div>
-      <p class="lh-note"><span data-i18n="lh.note">Thường phản hồi trong vòng <strong>1–2 giờ</strong> trong giờ hành chính.</span></p>
+      <!-- Response time line is shown by renderContact() only when contact.supportResponseTime is set -->
+      <p class="lh-note" id="contactNote" hidden></p>
     </div>
   </div>
 </section>
@@ -858,35 +648,38 @@
   <div class="container">
     <div class="footer-inner">
       <div class="footer-brand">
-        <a href="#" class="logo" aria-label="DA Affiliate Home">
+        <a href="#" class="logo" aria-label="DA Affiliate home">
           <img class="logo-mark" src="/icon-192x192.png?v=2" alt="" width="32" height="32" loading="lazy" />
           <span class="logo-wordmark">DA Affiliate</span>
         </a>
-        <p data-i18n="footer.desc">The affiliate programme of DA Network.</p>
+        <p data-i18n="footer.v3.desc">The affiliate programme of DA Network.</p>
         <p class="footer-parent">
           <span data-ui="eco.tag">Part of the DA Network ecosystem</span>
         </p>
       </div>
       <div class="footer-cols">
-        <nav class="footer-links" aria-labelledby="fGuide">
-          <h4 id="fGuide"><span data-i18n="footer.col1">Hướng Dẫn</span></h4>
-          <a href="#guide" data-i18n="footer.link.start">Bắt Đầu</a>
-          <a href="#calculator" data-i18n="footer.link.calc">Tính Thu Nhập</a>
-          <a href="#faq">FAQ</a>
-          <a href="#da-network">DA Affiliate</a>
-          <a href="#lien-he" data-i18n="footer.link.contact">Liên Hệ</a>
+        <nav class="footer-links" aria-labelledby="fAffiliate">
+          <h4 id="fAffiliate">DA Affiliate</h4>
+          <a href="#traders" data-i18n="nav.traders">For traders</a>
+          <a href="#partners" data-i18n="nav.partners">For partners</a>
+          <a href="#how-it-works" data-i18n="nav.how">How it works</a>
+          <a href="#calculator" data-i18n="nav.calc">Calculator</a>
+          <a href="#benefits" data-i18n="nav.access">Access by group</a>
+          <a href="#stats" data-i18n="nav.stats">Partner statistics</a>
+          <a href="#faq" data-i18n="nav.faq">FAQ</a>
+          <a href="#contact" data-i18n="nav.contact">Contact</a>
         </nav>
-        <nav class="footer-links" aria-labelledby="fTools">
-          <h4 id="fTools"><span data-i18n="footer.col2">Công Cụ</span></h4>
-          <a href="#calculator" data-i18n="footer.link.calc2">Tính Thu Nhập</a>
-          <a href="deals.html" data-i18n="guide.viewAllDeals">Xem tất cả 12 sàn</a>
+        <nav class="footer-links" aria-labelledby="fExchanges">
+          <h4 id="fExchanges"><span data-i18n="nav.exchanges">Exchanges</span></h4>
+          <a href="deals.html" data-i18n="exch.all">View all 13 exchanges</a>
+          <a href="#exchanges" data-i18n="exch.title">Exchanges open for onboarding</a>
         </nav>
         <nav class="footer-links" aria-labelledby="fEco">
           <h4 id="fEco"><span data-ui="footer.eco">Ecosystem</span></h4>
-          <a href="https://danetwork.asia/en" target="_blank" rel="noopener noreferrer">DA Network</a>
-          <a href="https://www.dacashback.asia/" target="_blank" rel="noopener noreferrer">DA Cashback</a>
-          <a href="https://signal.danetwork.asia/" target="_blank" rel="noopener noreferrer">DA Signal Tracking</a>
-          <a href="https://t.me/jacksondz" target="_blank" rel="noopener noreferrer">Telegram @jacksondz</a>
+          <a href="https://danetwork.asia/en" data-link="network" target="_blank" rel="noopener noreferrer">DA Network</a>
+          <a href="https://www.dacashback.asia/" data-link="cashback" target="_blank" rel="noopener noreferrer">DA Cashback</a>
+          <a href="https://signal.danetwork.asia/" data-link="signalTracking" target="_blank" rel="noopener noreferrer">DA Signal Tracking</a>
+          <a href="https://t.me/jacksondz" data-link="telegramContact" target="_blank" rel="noopener noreferrer">Telegram <span data-cfg="telegram.handle">@jacksondz</span></a>
         </nav>
         <div class="footer-links" role="group" aria-labelledby="fLang">
           <h4 id="fLang"><span data-ui="footer.lang">Languages</span></h4>
@@ -899,21 +692,12 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p data-i18n="footer.copy2">© 2026 DA Affiliate.</p>
-      <p class="footer-disclaimer" data-i18n="footer.disclaimer"><strong>Tuyên bố miễn trách nhiệm:</strong> Nội dung trên chỉ mang tính chất thông tin và giáo dục. Không phải lời khuyên tài chính. Đầu tư crypto có rủi ro cao.</p>
+      <p data-i18n="footer.v3.copy">© 2026 DA Affiliate · part of DA Network.</p>
+      <p class="footer-disclaimer" data-disclaimer="MARKET">For information only, not financial advice. Trading crypto and stocks carries a risk of loss. Do your own research before making any decision.</p>
+      <p class="footer-disclaimer" data-disclaimer="AFFILIATE">Affiliate earnings depend on your effort, audience size and market conditions. Any examples illustrate how commissions work and are not a promise of results.</p>
     </div>
   </div>
 </footer>
-
-<!-- ── STAT MODALS ── -->
-<div class="stat-modal-overlay" id="statModalOverlay" onclick="closeStatModal()">
-  <div class="stat-modal" id="statModal" role="dialog" aria-modal="true" aria-label="DA Affiliate" onclick="event.stopPropagation()">
-    <button class="stat-modal-close" type="button" onclick="closeStatModal()" aria-label="Đóng">
-      <svg class="icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-    </button>
-    <div id="statModalContent"></div>
-  </div>
-</div>
 
 <script src="data/config.js"></script>
 <script src="app.js"></script>

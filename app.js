@@ -23,16 +23,7 @@ function closeMobileNav() {
 window.setMobileNav = setMobileNav;
 window.closeMobileNav = closeMobileNav;
 
-// ─── LUCIDE ICONS ────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  if (typeof lucide !== 'undefined') lucide.createIcons();
-});
-
 // ─── UTILITIES ──────────────────────────────────────────────────
-function getCSSVar(name) {
-  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-}
-
 // DA Network design language: no emoji used as UI decoration. Content strings
 // keep their original text; pictographs are dropped at render time only.
 // (©, ®, ™ and arrows are kept.)
@@ -44,6 +35,86 @@ window.stripEmoji = stripEmoji;
 
 var ICON_ARROW_RIGHT = '<svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
 var ICON_CHECK = '<svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+
+
+// ─── CONFIG + LANGUAGE HELPERS ──────────────────────────────────
+// Every number, URL, status and contact comes from data/config.js
+// (window.DA_CONFIG). Nothing below hardcodes them.
+var CFG = window.DA_CONFIG || {};
+
+// Locales whose structured content (step guide, FAQ) has been rewritten for
+// V3. Other locales keep their V2 data in place below but fall back to the
+// English V3 content until re-translated ("mixed V2/V3 — not releasable").
+var V3_LOCALES = ['en'];
+function pageLang() { return (document.body && document.body.getAttribute('data-lang')) || 'en'; }
+function contentLang(data) {
+  var l = pageLang();
+  return (V3_LOCALES.indexOf(l) >= 0 && data[l]) ? l : 'en';
+}
+// Translation lookup (current language → English fallback), defined by the
+// i18n engine at the end of this file. Returns '' until it is ready.
+function tr(key) { return window.daT ? window.daT(key) : ''; }
+
+function escapeHtml(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+function pad2(n) { return String(n).padStart(2, '0'); }
+function availableExchanges() {
+  return (CFG.exchanges || []).filter(function (e) { return e.status === 'available'; });
+}
+function joinNames(names) {
+  if (names.length <= 1) return names.join('');
+  return names.slice(0, -1).join(', ') + ' and ' + names[names.length - 1];
+}
+function cfgVars() {
+  var c = CFG.counts ? CFG.counts() : { total: 0, available: 0, paused: 0 };
+  var urls = CFG.urls || {};
+  var tg = (CFG.contact && CFG.contact.telegram) || {};
+  return {
+    total: c.total, available: c.available, paused: c.paused,
+    availableNames: joinNames(availableExchanges().map(function (e) { return e.name; })),
+    telegramHandle: tg.handle || '',
+    cashbackUrl: urls.cashback || '',
+    signalUrl: urls.signalTracking || '',
+    networkUrl: urls.network || ''
+  };
+}
+// Replace {token} placeholders with config-derived values (+ optional extras).
+function fillTokens(str, extra) {
+  if (typeof str !== 'string') return str;
+  var vars = cfgVars();
+  return str.replace(/\{(\w+)\}/g, function (m, k) {
+    if (extra && extra[k] !== undefined) return extra[k];
+    return vars[k] !== undefined ? vars[k] : m;
+  });
+}
+window.fillTokens = fillTokens;
+
+// Static markup bindings: data-link → href, data-cfg → text, data-disclaimer → text.
+function applyConfigBindings(root) {
+  root = root || document;
+  var urls = CFG.urls || {};
+  root.querySelectorAll('[data-link]').forEach(function (el) {
+    var u = urls[el.getAttribute('data-link')];
+    if (u) el.setAttribute('href', u);
+  });
+  var v = cfgVars();
+  var map = {
+    'count.available': v.available, 'count.paused': v.paused, 'count.total': v.total,
+    'telegram.handle': v.telegramHandle
+  };
+  root.querySelectorAll('[data-cfg]').forEach(function (el) {
+    var val = map[el.getAttribute('data-cfg')];
+    if (val !== undefined && val !== null) el.textContent = val;
+  });
+  var d = CFG.disclaimers || {};
+  root.querySelectorAll('[data-disclaimer]').forEach(function (el) {
+    var txt = d[el.getAttribute('data-disclaimer')];
+    if (txt) el.textContent = txt; else el.hidden = true;
+  });
+}
+applyConfigBindings();
 
 
 // ─── AFFILIATE GUIDE STEPS ───────────────────────────────────────
@@ -315,269 +386,87 @@ const stepsData = {
       </div>`,
     },
   ],
+  // V3 English guide. Tokens in {braces} are filled from data/config.js by fillTokens().
   en: [
     {
-      title: 'Understanding Crypto Affiliate',
-      subtitle: 'The essential knowledge foundation before you begin',
+      title: 'Choose your path',
+      subtitle: 'Trader or partner: the two offers are different',
       content: `<div class="step-body">
         <div class="step-main">
-          <h4>What Is Crypto Affiliate?</h4>
-          <p>Crypto affiliate marketing means you refer others to exchanges, apps, or crypto services through <strong>your unique referral link</strong>.</p>
-          <p>When your referral makes a trade, you automatically earn a share of their <strong>trading fee</strong> — no extra action required.</p>
-          <ul class="step-list">
-            <li>No capital or trading experience needed</li>
-            <li>Passive income — earn 24/7 even while you sleep</li>
-            <li>Commissions from 20% to 50% of trading fees</li>
-            <li>Some exchanges pay lifetime commissions</li>
-          </ul>
+          <h4>Two ways to work with DA Affiliate</h4>
+          <p><strong>Traders.</strong> Experienced, higher-volume traders who prefer a simple, direct arrangement: a fixed commission on their own eligible trading fees, credited through the exchange where supported, plus a signal-only channel.</p>
+          <p><strong>Partners.</strong> People building trading communities who refer other traders and want DA's partner team, support resources and commission reconciliation behind them.</p>
         </div>
         <div class="step-example">
-          <div class="step-example-title">📌 Real Example</div>
-          <p>You refer <strong>your friend Alex</strong> to sign up for Binance via your link.</p>
-          <p style="margin-top:12px">Alex trades <strong>$10,000 BTC</strong> at 0.1% fee = <strong>$10 fee</strong></p>
-          <p style="margin-top:8px">You receive <strong>40% commission</strong> = <strong>$4 per trade</strong></p>
-          <p style="margin-top:8px">If Alex trades 10×/month → you earn <strong>$40/month</strong> from just 1 person!</p>
-          <div class="step-tip" style="margin-top:12px"><strong>💡 Tip:</strong> 100 people × $40/month = <strong>$4,000/month passive income</strong></div>
+          <div class="step-example-title">Want a plan and a community?</div>
+          <p>If you want a daily plan, a member community, learning and support, the DA Cashback membership is the better fit. <a class="text-link" href="{cashbackUrl}" target="_blank" rel="noopener noreferrer">See DA Cashback</a></p>
         </div>
       </div>`,
     },
     {
-      title: 'Choose Your Affiliate Exchange',
-      subtitle: 'Not all exchanges are equal — pick the right one to maximize earnings',
+      title: 'Register on an available exchange',
+      subtitle: 'Only exchanges marked “Available” accept new registrations',
       content: `<div class="step-body">
         <div class="step-main">
-          <h4>Criteria for Choosing an Exchange</h4>
-          <p>A good exchange needs <strong>credibility, high commission rates</strong>, and a <strong>transparent tracking system</strong>. Key criteria:</p>
-          <ul class="step-list">
-            <li>Commission rate: at least 20%, ideally 40–50%</li>
-            <li>Cookie duration: the longer the better (30+ days)</li>
-            <li>Credibility: high trading volume, licensed</li>
-            <li>Clear dashboard: track clicks, sign-ups, earnings</li>
-            <li>On-time payouts: weekly or monthly</li>
-          </ul>
+          <h4>Use a DA Affiliate link</h4>
+          <p>Register through a DA Affiliate link on one of the exchanges available now: <strong>{availableNames}</strong>. The links are in the exchange list on this page.</p>
+          <p>“Partnership paused” means we are not registering new members on that exchange right now.</p>
         </div>
         <div class="step-example">
-          <div class="step-example-title">📌 Top 3 Recommended Exchanges</div>
-          <p>The 3 best exchanges to start with DA Affiliate — validated by <strong>237+ partners</strong>. Details below ↓</p>
-        </div>
-      </div>
-      <div class="exchange-cards-wrap">
-        <div class="exchange-cards-header">
-          <h4>🚀 TOP 3 RECOMMENDED EXCHANGES FOR DA Affiliate PARTNERS</h4>
-          <p>The 3 best exchanges to start with — validated by 237+ partners</p>
-        </div>
-        <div class="exchange-cards">
-          <div class="exchange-card rank-1">
-            <div class="exchange-card-top">
-              <span class="exchange-rank">🥇 #1</span>
-            </div>
-            <h5 class="exchange-name">BINANCE</h5>
-            <p class="exchange-tagline">The World's Largest Exchange</p>
-            <ul class="exchange-stats">
-              <li>100M+ users globally</li>
-              <li>Highest liquidity, lowest trading fees</li>
-              <li>Multi-language support, A+ reputation</li>
-            </ul>
-            <p class="exchange-why">Binance is the ideal gateway to get started. With 100M+ users, referral opportunities are virtually unlimited. While the 31.5% commission isn't the highest, the massive trading volume guarantees steady commission flow.</p>
-            <div class="exchange-commission">
-              <span class="exchange-commission-label">Commission</span>
-              <span class="exchange-commission-value">31.5%</span>
-            </div>
-            <div class="exchange-bestfor"><strong>Best for:</strong> Beginners + high-volume referrals</div>
-          </div>
-          <div class="exchange-card rank-2">
-            <div class="exchange-card-top">
-              <span class="exchange-rank">🥈 #2</span>
-              <span class="exchange-badge">🔗 Close Partnership</span>
-            </div>
-            <h5 class="exchange-name">OURBIT</h5>
-            <p class="exchange-tagline">DA Affiliate's Strategic Partner</p>
-            <ul class="exchange-stats">
-              <li>Highest commission in SEA: 43%</li>
-              <li>Focused on the Southeast Asia market</li>
-              <li>Direct support from the DA Affiliate team</li>
-            </ul>
-            <p class="exchange-why">Ourbit is DA Affiliate's strategic choice. The 43% commission is the highest in Southeast Asia — helping partners earn more from the same number of referrals. The Ourbit team supports you directly, plus extra backup from DA Affiliate — you're never alone.</p>
-            <div class="exchange-commission">
-              <span class="exchange-commission-label">Commission</span>
-              <span class="exchange-commission-value">43% <span class="star">⭐</span></span>
-            </div>
-            <div class="exchange-bestfor"><strong>Best for:</strong> Maximum earnings + dedicated support</div>
-          </div>
-          <div class="exchange-card rank-3">
-            <div class="exchange-card-top">
-              <span class="exchange-rank">🥉 #3</span>
-              <span class="exchange-badge">🛡️ Partner-Friendly</span>
-            </div>
-            <h5 class="exchange-name">BINGX</h5>
-            <p class="exchange-tagline">Best Partner Support Program</p>
-            <ul class="exchange-stats">
-              <li>Dedicated partner support team</li>
-              <li>Constant user promotions and campaigns</li>
-              <li>Fast payouts, 24/7 support</li>
-            </ul>
-            <p class="exchange-why">Bingx stands out thanks to its dedicated partner support team plus non-stop promotions for users. That means your users trade more — and your commissions grow with them. The 24/7 support is a major bonus.</p>
-            <div class="exchange-commission">
-              <span class="exchange-commission-label">Commission</span>
-              <span class="exchange-commission-value">28%</span>
-            </div>
-            <div class="exchange-bestfor"><strong>Best for:</strong> User retention + consistent activity</div>
-          </div>
-        </div>
-        <div class="exchange-strategy-tip">
-          <h5>💡 TIP: Sign up for all 3 exchanges to maximize income</h5>
-          <ul>
-            <li>Use <strong>Binance</strong> as your "base" — huge volume, massive user base</li>
-            <li>Use <strong>Ourbit</strong> as your "high-margin" — 43% commission, highest in SEA</li>
-            <li>Use <strong>Bingx</strong> as your "engagement" — best partner support program</li>
-          </ul>
-          <p><strong>The approach:</strong> Split your users into 3 groups and recommend the exchange that fits their needs. In total, you'll collect commissions from all 3 exchanges without dramatically increasing your effort.</p>
+          <div class="step-example-title">Already have an account?</div>
+          <p>Whether an existing account can be linked depends on the exchange. Ask DA before you open a new account, and follow the exchange's own rules.</p>
         </div>
       </div>`,
     },
     {
-      title: 'Register Under DA Affiliate',
-      subtitle: 'Sign up under DA Affiliate\'s ref — contact admin for commission support & growth roadmap',
+      title: 'Confirm your terms with DA',
+      subtitle: 'Terms are set per exchange, product and tier',
       content: `<div class="step-body">
         <div class="step-main">
-          <h4>How to Start With DA Affiliate</h4>
+          <h4>What gets confirmed</h4>
+          <p>Message {telegramHandle} on Telegram with the exchange you registered on. DA confirms the terms that apply to your account:</p>
           <ul class="step-list">
-            <li>Create your exchange account <strong>under DA Affiliate's referral link</strong></li>
-            <li>Message the DA Affiliate admin after completing sign-up</li>
-            <li>Admin confirms your account and <strong>unlocks your commission roadmap</strong></li>
-            <li>Receive personalized support: strategy, materials, and performance tracking</li>
-            <li>Level up progressively — unlock higher commissions as you hit milestones</li>
+            <li>the product the commission applies to</li>
+            <li>how the commission is calculated</li>
+            <li>your tier and any eligibility conditions</li>
+            <li>when the terms start, and whether they end</li>
           </ul>
-          <div class="step-tip"><strong>🎯 Why register through DA Affiliate?</strong> You get <strong>above-default commission rates</strong>, direct admin support, and a clear upgrade roadmap tied to your volume.</div>
+          <p>Not all exchanges support identical terms. Rates and reward tiers may change according to each exchange's policy and partner program.</p>
         </div>
         <div class="step-example">
-          <div class="step-example-title">📊 DA Affiliate Partner Roadmap</div>
-          <div class="partner-roadmap">
-            <div class="roadmap-exchange"><div class="roadmap-exchange-name">Bingx</div><div class="roadmap-tiers"><div class="roadmap-tier tier-base"><span class="tier-label">Base</span><span class="tier-val">25%</span><span class="tier-req">0 – 10M vol</span></div><div class="roadmap-tier tier-mid"><span class="tier-label">Middle</span><span class="tier-val">30%</span><span class="tier-req">10M vol</span></div><div class="roadmap-tier tier-max"><span class="tier-label">Max</span><span class="tier-val">39%</span><span class="tier-req">50M vol</span></div></div></div>
-            <div class="roadmap-exchange"><div class="roadmap-exchange-name">Bitunix</div><div class="roadmap-tiers"><div class="roadmap-tier tier-base"><span class="tier-label">Base</span><span class="tier-val">33%</span><span class="tier-req">0 – 10M vol</span></div><div class="roadmap-tier tier-mid"><span class="tier-label">Middle</span><span class="tier-val">37%</span><span class="tier-req">10M vol</span></div><div class="roadmap-tier tier-max"><span class="tier-label">Max</span><span class="tier-val">45%</span><span class="tier-req">50M vol</span></div></div></div>
-          </div>
-          <div class="step-tip" style="margin-top:14px"><strong>📩 Contact admin:</strong> After creating your account, send your UID or registration email to the DA Affiliate admin to activate your commissions and track your roadmap.</div>
+          <div class="step-example-title">Why no rates on this page?</div>
+          <p>We publish a rate only after it is confirmed for a specific exchange, product and period. Until then you will see “Terms confirmed per exchange”.</p>
         </div>
       </div>`,
     },
     {
-      title: 'Create Engaging Content',
-      subtitle: 'Content is king — create it right so people actually click your links',
+      title: 'Trade, or share your link',
+      subtitle: 'What happens once you are set up',
       content: `<div class="step-body">
         <div class="step-main">
-          <h4>Effective Content Formats</h4>
-          <p>Viewers need <strong>a reason to click</strong> your link — don't just spam bare links. Provide real value:</p>
-          <ul class="step-list">
-            <li>Tutorial videos: "How to buy Bitcoin for the first time"</li>
-            <li>Review articles: "Binance Review 2026 — Pros and Cons"</li>
-            <li>X/Twitter threads: "5 things to know before investing in crypto"</li>
-            <li>Short Reels/TikToks: Explain simple concepts</li>
-            <li>Telegram/Discord groups: Provide free signals and analysis</li>
-          </ul>
+          <h4>After setup</h4>
+          <p><strong>Traders.</strong> Trade as you normally do. Where the exchange supports it, your commission is credited through its affiliate system.</p>
+          <p><strong>Partners.</strong> Share your DA Affiliate link in your own channel or community. Tell your audience it is an affiliate link, and never promise them profits.</p>
         </div>
         <div class="step-example">
-          <div class="step-example-title">📌 Real Content Examples</div>
-          <p><strong>High-performing article titles:</strong></p>
-          <div class="example-box">"Best place to buy Bitcoin safely in 2026? [5 exchange review]"<br><br>"How to register on Binance 2026 — Get $100 bonus"<br><br>"Binance vs OKX: Which exchange is better?"</div>
-          <div class="step-tip" style="margin-top:12px"><strong>💡 SEO tip:</strong> Place your referral link in the <strong>first 3 lines</strong> and at the <strong>end of the post</strong>. Don't make readers hunt for it.</div>
+          <div class="step-example-title">How the formula works</div>
+          <p>A referred trader with $100,000 of monthly volume at a 0.05% fee pays $50 in fees. At a 30% commission rate, the commission on those fees would be $15.</p>
+          <p>These figures only illustrate the formula. They are not DA rates and not a forecast.</p>
         </div>
       </div>`,
     },
     {
-      title: 'Build Your Channel & Audience',
-      subtitle: 'No audience = no income. This is the most important part!',
+      title: 'Track and reconcile',
+      subtitle: "Check the exchange dashboard and DA's reconciliation",
       content: `<div class="step-body">
         <div class="step-main">
-          <h4>Choose the Right Channel for You</h4>
-          <p>Each platform has unique strengths. Pick <strong>1–2 channels</strong> that match your skills and interests, then go deep:</p>
-          <ul class="step-list">
-            <li><strong>YouTube:</strong> Long-form content, great SEO, most passive income</li>
-            <li><strong>TikTok/Reels:</strong> Fast viral potential, easy reach to new audiences</li>
-            <li><strong>Telegram Channel:</strong> Trading signals, market updates</li>
-            <li><strong>Facebook Group:</strong> Tight community, high engagement</li>
-            <li><strong>Blog/Website:</strong> Long-term SEO, high credibility</li>
-          </ul>
+          <h4>Where to check</h4>
+          <p>Each exchange's affiliate dashboard shows referred accounts and commission. For each period, DA reconciles commission received from exchanges against commission paid.</p>
+          <p>If something does not match, contact DA with the exchange, the period and your UID.</p>
         </div>
         <div class="step-example">
-          <div class="step-example-title">📌 Your First 30 Days Roadmap</div>
-          <p><strong>Week 1–2:</strong> Choose platform, create account, publish 10 pieces of content</p>
-          <p style="margin-top:8px"><strong>Week 3:</strong> Optimize content based on feedback, engage with followers</p>
-          <p style="margin-top:8px"><strong>Week 4:</strong> Analyze data, double down on what's working</p>
-          <div class="step-tip" style="margin-top:12px"><strong>🎯 Realistic goal:</strong> Month 1: 100 followers → Month 3: 500+ regular viewers → Meaningful income</div>
-        </div>
-      </div>`,
-    },
-    {
-      title: 'Track Your Performance',
-      subtitle: 'Measure to improve — not tracking = not growing',
-      content: `<div class="step-body">
-        <div class="step-main">
-          <h4>Key Metrics to Monitor</h4>
-          <p>Every affiliate exchange has its own <strong>tracking dashboard</strong>. Check it daily to optimize your strategy:</p>
-          <ul class="step-list">
-            <li><strong>Clicks:</strong> Number of clicks on your referral link</li>
-            <li><strong>Registrations:</strong> Successful sign-ups</li>
-            <li><strong>Active Traders:</strong> People who actually trade</li>
-            <li><strong>Trading Volume:</strong> Total volume generated</li>
-            <li><strong>Commission Earned:</strong> Total commissions received</li>
-          </ul>
-        </div>
-        <div class="step-example">
-          <div class="step-example-title">📌 Real Conversion Rate Example</div>
-          <p>Sample dashboard for a beginner's first month:</p>
-          <div class="example-box">Clicks: <span class="highlight">1,200</span><br>Registrations: <span class="highlight">48</span> (4% conversion)<br>Active traders: <span class="highlight">12</span> (25% of registrations)<br>Total volume: <span class="highlight">$45,000</span><br>Commission: <span class="highlight">~$18</span></div>
-          <div class="step-tip" style="margin-top:12px"><strong>💡 Benchmark:</strong> A good CTR is 3–5%. If lower → improve link placement and call-to-action.</div>
-        </div>
-      </div>`,
-    },
-    {
-      title: 'Optimize & Scale Up',
-      subtitle: 'From $50/month to $500/month and beyond',
-      content: `<div class="step-body">
-        <div class="step-main">
-          <h4>Strategy to Double Your Income</h4>
-          <p>Once you have your first earnings, here's how to <strong>grow systematically</strong>:</p>
-          <ul class="step-list">
-            <li>Focus on the top 20% of content driving 80% of traffic</li>
-            <li>Repurpose content: 1 video → article + thread + reel</li>
-            <li>Build an email list for remarketing</li>
-            <li>Collaborate with other creators in the crypto community</li>
-            <li>Run paid ads once ROI is proven</li>
-          </ul>
-        </div>
-        <div class="step-example">
-          <div class="step-example-title">📌 Real Scale-Up Example</div>
-          <p><strong>Month 1:</strong> 10 people, $40 commission</p>
-          <p style="margin-top:8px"><strong>Month 3:</strong> 80 people, $320 commission (SEO traffic growth)</p>
-          <p style="margin-top:8px"><strong>Month 6:</strong> 250 people, $1,000+ commission (viral content)</p>
-          <p style="margin-top:8px"><strong>Month 12:</strong> 1,000+ people, $4,000+ commission/month</p>
-          <div class="step-tip" style="margin-top:12px"><strong>🚀 Key insight:</strong> Staying consistent through the first 6 months is the biggest challenge. Most people quit before seeing results!</div>
-        </div>
-      </div>`,
-    },
-    {
-      title: 'Compliance & Risks to Know',
-      subtitle: 'Do it right from the start to avoid problems later',
-      content: `<div class="step-body">
-        <div class="step-main">
-          <h4>Essential Things You Must Know</h4>
-          <ul class="step-list">
-            <li><strong>Always disclose</strong> that your link is an affiliate link</li>
-            <li>No fraudulent promotion (fake volume, fake reviews)</li>
-            <li>Read the <strong>Terms of Service</strong> for each affiliate program carefully</li>
-            <li>Never click your own referral links</li>
-            <li>Declare affiliate income per your local tax regulations</li>
-          </ul>
-          <div class="step-tip" style="margin-top:12px"><strong>⚠️ Warning:</strong> Violating ToS can lead to <strong>account suspension and loss of all unpaid commissions</strong>!</div>
-        </div>
-        <div class="step-example">
-          <div class="step-example-title">📌 Sample Disclosure Statement</div>
-          <p>Add to the end of every post/video:</p>
-          <div class="example-box">"This post contains affiliate links. If you sign up through my link, I earn a commission at no extra cost to you. Thank you for your support!"</div>
-          <p style="margin-top:12px"><strong>Risks to remember:</strong></p>
-          <p>• Bear market → fewer trades → lower income</p>
-          <p>• Exchanges may change or cancel affiliate programs</p>
-          <p>• Increasing competition in the crypto space</p>
+          <div class="step-example-title">Keep in mind</div>
+          <p>Affiliate earnings depend on your effort, audience size and market conditions. Any examples illustrate how commissions work and are not a promise of results.</p>
         </div>
       </div>`,
     },
@@ -588,8 +477,9 @@ let currentStep = 1;
 
 
 function renderStep(n) {
-  var lang = (document.body.getAttribute('data-lang') || 'vi');
-  var steps = stepsData[lang] || stepsData['en'] || stepsData['vi'];
+  var lang = contentLang(stepsData);
+  var steps = stepsData[lang];
+  ensureStepTabs(steps.length);
   const s = steps[n - 1];
   const el = document.getElementById('stepContent');
   if (!el || !s) return;
@@ -598,11 +488,11 @@ function renderStep(n) {
     <div class="step-panel-header">
       <div class="step-number-big" aria-hidden="true">${pad(n)}</div>
       <div>
-        <h4 class="step-panel-title">${s.title}</h4>
-        <p class="step-panel-subtitle">${s.subtitle}</p>
+        <h4 class="step-panel-title">${fillTokens(s.title)}</h4>
+        <p class="step-panel-subtitle">${fillTokens(s.subtitle)}</p>
       </div>
     </div>
-    ${s.content}
+    ${fillTokens(s.content)}
   </div>`);
   // Animate only real step changes (not first paint or a language re-render)
   var dir = n > currentStep ? 1 : -1;
@@ -626,15 +516,15 @@ function renderStep(n) {
     t.tabIndex = i + 1 === n ? 0 : -1;
     if (st) {
       t.innerHTML = '<span class="step-tab-num">' + pad(i + 1) + '</span>'
-        + '<span class="step-tab-title">' + stripEmoji(st.title) + '</span>';
+        + '<span class="step-tab-title">' + stripEmoji(fillTokens(st.title)) + '</span>';
     }
   });
   // Update progress
   const prog = document.getElementById('stepProgress');
-  var stepLabel = {vi:'Bước',en:'Step',th:'ขั้นตอน',ko:'단계',id:'Langkah'}[lang]||'Step';
+  var stepLabel = tr('steps.word') || 'Step';
   if (prog) prog.textContent = stepLabel + ' ' + n + ' / ' + steps.length;
-  var btnComplete = {vi:'Hoàn Thành',en:'Complete',th:'เสร็จสิ้น',ko:'완료',id:'Selesai'}[lang]||'Complete';
-  var btnNext     = {vi:'Bước Tiếp', en:'Next',     th:'ถัดไป',   ko:'다음', id:'Berikutnya'}[lang]||'Next';
+  var btnComplete = tr('steps.complete') || 'Done';
+  var btnNext     = tr('guide.next') || 'Next';
   // Update buttons
   const prev = document.getElementById('prevStep');
   const next = document.getElementById('nextStep');
@@ -647,7 +537,6 @@ function renderStep(n) {
     }
   }
   currentStep = n;
-  if (typeof lucide !== 'undefined') lucide.createIcons();
 }
 
 // Step transition: old panel fades/slides out, the frame eases to the new
@@ -704,8 +593,16 @@ function scrollStepsIntoView() {
 }
 
 function stepCount() {
-  var lang = (document.body.getAttribute('data-lang') || 'vi');
-  return (stepsData[lang] || stepsData['en'] || stepsData['vi']).length;
+  return stepsData[contentLang(stepsData)].length;
+}
+
+// Tabs are built from the step data, so the guide can have any number of steps.
+function ensureStepTabs(n) {
+  var wrap = document.getElementById('stepTabs');
+  if (!wrap || wrap.children.length === n) return;
+  var html = '';
+  for (var i = 1; i <= n; i++) html += '<button class="step-tab" type="button" data-step="' + i + '" role="tab">' + i + '</button>';
+  wrap.innerHTML = html;
 }
 function goToStep(n) {
   if (n < 1 || n > stepCount() || n === currentStep) return;
@@ -799,7 +696,6 @@ document.addEventListener('keydown', function (e) {
 
 // Progressive disclosure (DA Network pattern): the core of each step stays
 // visible; long secondary paragraphs fold into a native <details> "Details".
-var DETAILS_LABEL = { vi: 'Chi tiết', en: 'Details', th: 'รายละเอียด', ko: '상세', id: 'Detail' };
 function makeDisclosure(nodes, label) {
   if (!nodes.length) return;
   var d = document.createElement('details');
@@ -810,7 +706,7 @@ function makeDisclosure(nodes, label) {
   nodes.forEach(function (n) { body.appendChild(n); });
 }
 function collapseStepDetails(root, lang) {
-  var label = DETAILS_LABEL[lang] || DETAILS_LABEL.en;
+  var label = tr('steps.details') || 'Details';
   // Exchange cards (step 2): keep name, tagline, rate; fold the long "why".
   root.querySelectorAll('.exchange-card').forEach(function (card) {
     makeDisclosure(Array.prototype.slice.call(card.querySelectorAll('.exchange-stats, .exchange-why')), label);
@@ -831,20 +727,26 @@ function collapseStepDetails(root, lang) {
   }
 }
 
-document.querySelectorAll('.step-tab').forEach((btn) => {
-  btn.addEventListener('click', () => goToStep(parseInt(btn.dataset.step)));
-  // Tablist keyboard pattern: ←/→ move between steps
-  btn.addEventListener('keydown', (e) => {
+// Tab clicks + tablist keyboard pattern (←/→), delegated because tabs are rebuilt.
+(function () {
+  var wrap = document.getElementById('stepTabs');
+  if (!wrap) return;
+  wrap.addEventListener('click', function (e) {
+    var b = e.target.closest('.step-tab');
+    if (b) goToStep(parseInt(b.dataset.step, 10));
+  });
+  wrap.addEventListener('keydown', function (e) {
     if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+    if (!e.target.closest('.step-tab')) return;
     e.preventDefault();
-    var tabs = document.querySelectorAll('.step-tab');
+    var tabs = wrap.querySelectorAll('.step-tab');
     var next = currentStep + (e.key === 'ArrowRight' ? 1 : -1);
     if (next < 1) next = tabs.length;
     if (next > tabs.length) next = 1;
     renderStep(next);
-    tabs[next - 1].focus();
+    wrap.querySelectorAll('.step-tab')[next - 1].focus();
   });
-});
+})();
 document.getElementById('prevStep')?.addEventListener('click', () => {
   goToStep(currentStep - 1);
 });
@@ -855,175 +757,194 @@ document.getElementById('nextStep')?.addEventListener('click', () => {
 
 renderStep(1);
 
-// ─── COMPARISON TABLE ────────────────────────────────────────────
-const grid = document.getElementById('comparisonGrid');
-function renderComparison() {
+// ─── EXCHANGES OPEN FOR ONBOARDING (from data/config.js) ─────────
+// Only `available` exchanges are listed here, each with its byte-identical
+// referral link. A rate appears only when its commission terms are
+// publishable (RECONCILED/VERIFIED + publish); otherwise "Terms confirmed
+// per exchange".
+function renderExchanges() {
+  var grid = document.getElementById('comparisonGrid');
   if (!grid) return;
-  var lang = (document.body.getAttribute('data-lang') || 'vi');
-  var isEN = lang !== 'vi';
-
-  // ── 3 cluster cards shown on index page ──────────────────────
-  // Full gold tone — all highlight values unified
-  var gold1 = '#ffd966';  // light gold
-  var gold2 = '#f7931a';  // amber gold
-  var gold3 = '#e8650a';  // deep gold
-
-  var clusters = [
-    {
-      icon: '\uD83D\uDCB9',
-      label: isEN ? 'Highest Commission' : 'Hoa H\u1ed3ng Cao Nh\u1ea5t',
-      tag: 'Forex',
-      tagColor: gold1,
-      exchanges: ['Exness', 'Vantage', 'XM'],
-      rate: '70%',
-      rateNote: isEN ? 'Revenue Share' : 'Doanh Thu',
-      highlight: gold1,
-      topBar: 'linear-gradient(90deg,' + gold1 + ',' + gold2 + ')',
-      desc: isEN
-        ? 'Best for KOLs targeting forex traders. Lifetime revenue share up to 70%.'
-        : 'L\u00fd t\u01b0\u1edfng cho KOL th\u1ecb tr\u01b0\u1eddng Forex. Hoa h\u1ed3ng doanh thu tr\u1ecdn \u0111\u1eddi l\u00ean t\u1edbi 70%.'
-    },
-    {
-      icon: '\u20BF',
-      label: isEN ? 'Most Popular Crypto' : 'Crypto Ph\u1ed5 Bi\u1ebfn Nh\u1ea5t',
-      tag: 'Crypto',
-      tagColor: gold2,
-      exchanges: ['Binance', 'Bybit', 'OKX'],
-      rate: '31\u201335%',
-      rateNote: isEN ? 'Commission' : 'Hoa H\u1ed3ng',
-      highlight: gold2,
-      topBar: 'linear-gradient(90deg,' + gold2 + ',' + gold3 + ')',
-      desc: isEN
-        ? 'Top 3 global exchanges by volume. Massive user base for easy conversions.'
-        : 'Top 3 s\u00e0n crypto theo kh\u1ed1i l\u01b0\u1ee3ng giao d\u1ecbch. L\u01b0\u1ee3ng user kh\u1ed5ng l\u1ed3 d\u1ec5 chuy\u1ec3n \u0111\u1ed5i.'
-    },
-    {
-      icon: '\uD83D\uDE80',
-      label: isEN ? 'High-Potential Picks' : 'Ti\u1ec1m N\u0103ng T\u0103ng Tr\u01b0\u1edfng',
-      tag: 'Crypto',
-      tagColor: gold3,
-      exchanges: ['Gate.io', 'Bitunix', 'KuCoin'],
-      rate: '33\u201342%',
-      rateNote: isEN ? 'Commission' : 'Hoa H\u1ed3ng',
-      highlight: gold3,
-      topBar: 'linear-gradient(90deg,' + gold3 + ',' + gold1 + ')',
-      desc: isEN
-        ? 'Higher commission rates with strong altcoin selection. Great for niche communities.'
-        : 'T\u1ef7 l\u1ec7 hoa h\u1ed3ng cao h\u01a1n, danh m\u1ee5c altcoin \u0111a d\u1ea1ng. Ph\u00f9 h\u1ee3p c\u1ed9ng \u0111\u1ed3ng ni\u1ec1m tin cao.'
-    }
-  ];
-
-  // DA Network ledger layout: index · market · category, then the rate, the
-  // exchanges in the cluster and a one-line description. No inline styling.
-  grid.innerHTML = clusters.map(function(c, i) {
+  var labels = CFG.exchangeStatusLabels || {};
+  var markets = CFG.marketLabels || {};
+  grid.innerHTML = availableExchanges().map(function (ex, i) {
+    var rate = CFG.publishedRate ? CFG.publishedRate(ex) : null;
+    var terms = rate
+      ? '<p class="compare-rate"><span class="compare-rate-num">' + escapeHtml(rate.ratePct) + '%</span>'
+        + '<span class="compare-rate-note">' + escapeHtml(tr('exch.rate')) + '</span></p>'
+      : '<p class="compare-desc">' + escapeHtml(tr('exch.terms')) + '</p>';
     return '<article class="compare-card">'
       + '<div class="compare-card-top">'
-      +   '<span class="label">' + String(i + 1).padStart(2, '0') + '</span>'
-      +   '<span class="compare-tag">' + c.tag + '</span>'
+      +   '<span class="label">' + pad2(i + 1) + '</span>'
+      +   '<span class="compare-tag">' + escapeHtml(markets[ex.market] || ex.market) + '</span>'
       + '</div>'
-      + '<h4 class="compare-label">' + c.label + '</h4>'
-      + '<p class="compare-rate"><span class="compare-rate-num">' + c.rate + '</span>'
-      +   '<span class="compare-rate-note">' + c.rateNote + '</span></p>'
-      + '<ul class="compare-exchanges">'
-      +   c.exchanges.map(function(ex) { return '<li>' + ex + '</li>'; }).join('')
-      + '</ul>'
-      + '<p class="compare-desc">' + c.desc + '</p>'
+      + '<h4 class="compare-label">' + escapeHtml(ex.name) + '</h4>'
+      + '<p class="status-pill status-' + escapeHtml(ex.status) + '">' + escapeHtml(labels[ex.status] || ex.status) + '</p>'
+      + terms
+      + (ex.referralUrl
+        ? '<a class="btn btn-gold compare-cta" href="' + escapeHtml(ex.referralUrl) + '" target="_blank" rel="noopener noreferrer sponsored">'
+          + escapeHtml(fillTokens(tr('exch.join'), { name: ex.name })) + '</a>'
+        : '')
       + '</article>';
   }).join('');
 }
-renderComparison();
+renderExchanges();
 
 // ─── CALCULATOR ──────────────────────────────────────────────────
-let earningsChart = null;
-function calcEarnings() {
-  const refs = parseInt(document.getElementById('refCount')?.value || 10);
-  const vol = parseInt(document.getElementById('tradeVol')?.value || 5000);
-  const comm = parseInt(document.getElementById('commRate')?.value || 30) / 100;
-  const fee = parseFloat(document.getElementById('tradeFee')?.value || 0.1) / 100;
+// Illustrative only. Inputs are the visitor's own assumptions; a commission
+// rate is pre-filled only from publishable per-exchange terms in config.
+// No growth curve: the chart shows the cumulative total with inputs constant.
+var earningsChart = null;
+var CALC_IDS = ['refCount', 'tradeVol', 'commRate', 'tradeFee'];
 
-  document.getElementById('refCountVal').textContent = refs;
-  document.getElementById('tradeVolVal').textContent = '$' + vol.toLocaleString('en-US');
-  document.getElementById('commRateVal').textContent = Math.round(comm * 100);
-  document.getElementById('tradeFeeVal').textContent = (fee * 100).toFixed(2);
+function setupCalculator() {
+  var c = CFG.calculator || {};
+  var d = c.defaults || {};
+  var r = c.ranges || {};
+  function apply(id, range, val) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    if (range) { el.min = range.min; el.max = range.max; el.step = range.step; }
+    if (val !== undefined && val !== null) el.value = val;
+  }
+  apply('refCount', r.referredTraders, d.referredTraders);
+  apply('tradeVol', r.monthlyVolumeUsd, d.monthlyVolumeUsd);
+  apply('commRate', r.commissionPct, d.commissionPct);
+  apply('tradeFee', r.feePct, d.feePct);
 
-  const totalFees = refs * vol * fee;
-  const monthly = totalFees * comm;
-  const yearly = monthly * 12;
-  const perPerson = vol * fee * comm;
-
-  document.getElementById('monthlyEarn').textContent = '$' + monthly.toFixed(2);
-  document.getElementById('yearlyEarn').textContent = '$' + yearly.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  document.getElementById('totalFees').textContent = '$' + totalFees.toFixed(2);
-  document.getElementById('perPerson').textContent = '$' + perPerson.toFixed(2);
-
-  // Projection chart (12 months, linear growth estimate)
-  const months = ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10', 'T11', 'T12'];
-  const growthData = months.map((_, i) => {
-    const growth = 1 + i * 0.15; // 15% monthly growth estimate
-    return parseFloat((monthly * growth).toFixed(2));
-  });
-
-  const canvas = document.getElementById('earningsChart');
-  if (canvas) {
-    const ctx = canvas.getContext('2d');
-    if (earningsChart) earningsChart.destroy();
-    earningsChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: months,
-        datasets: [{
-          label: 'Thu nhập (USD)',
-          data: growthData,
-          // DA Network tokens: --color-gold, --color-faint, --color-line
-          borderColor: '#d7ad52',
-          backgroundColor: 'rgba(215,173,82,0.06)',
-          fill: true,
-          tension: 0.35,
-          pointRadius: 0,
-          pointHoverRadius: 4,
-          pointBackgroundColor: '#d7ad52',
-          borderWidth: 1.5,
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        interaction: { mode: 'index', intersect: false },
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            backgroundColor: '#171717',
-            borderColor: 'rgba(255,255,255,0.16)',
-            borderWidth: 1,
-            titleColor: '#989898',
-            bodyColor: '#f5f5f3',
-            cornerRadius: 4,
-            displayColors: false,
-            callbacks: { label: ctx => ' $' + ctx.parsed.y.toFixed(2) }
-          }
-        },
-        scales: {
-          x: {
-            ticks: { color: '#707070', font: { size: 10, family: 'Geist Mono, ui-monospace, monospace' } },
-            grid: { display: false },
-            border: { color: 'rgba(255,255,255,0.08)' }
-          },
-          y: {
-            ticks: { color: '#707070', font: { size: 10, family: 'Geist Mono, ui-monospace, monospace' }, callback: v => '$' + v },
-            grid: { color: 'rgba(255,255,255,0.06)' },
-            border: { display: false }
-          }
-        },
-        animation: { duration: 400 }
-      }
+  var sel = document.getElementById('calcExchange');
+  if (sel) {
+    availableExchanges().forEach(function (ex) {
+      var o = document.createElement('option');
+      o.value = ex.id;
+      o.textContent = ex.name;
+      sel.appendChild(o);
     });
+    sel.addEventListener('change', function () { calcRateNote(true); });
+  }
+  CALC_IDS.forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el) el.addEventListener('input', calcEarnings);
+  });
+}
+
+function selectedCalcExchange() {
+  var sel = document.getElementById('calcExchange');
+  var id = sel ? sel.value : '';
+  return (CFG.exchanges || []).filter(function (e) { return e.id === id; })[0] || null;
+}
+
+// Updates the note under the exchange picker; when `applyRate` is true and the
+// exchange has publishable terms, moves the commission slider to that rate.
+function calcRateNote(applyRate) {
+  var note = document.getElementById('calcRateNote');
+  var ex = selectedCalcExchange();
+  var rate = ex && CFG.publishedRate ? CFG.publishedRate(ex) : null;
+  var text;
+  if (!ex) text = tr('calc.v3.rateNoteCustom');
+  else if (rate) text = fillTokens(tr('calc.v3.rateNoteSet'), { name: ex.name });
+  else text = fillTokens(tr('calc.v3.rateNoteNone'), { name: ex.name });
+  if (note) note.textContent = text;
+  if (applyRate && rate) {
+    var slider = document.getElementById('commRate');
+    if (slider) {
+      slider.value = rate.ratePct;
+      slider.dispatchEvent(new Event('input', { bubbles: true }));
+    }
   }
 }
 
-['refCount', 'tradeVol', 'commRate', 'tradeFee'].forEach(id => {
-  document.getElementById(id)?.addEventListener('input', calcEarnings);
-});
+function fmtUSD(n, dp) {
+  return '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: dp, maximumFractionDigits: dp });
+}
+
+function calcEarnings() {
+  var months = (CFG.calculator && CFG.calculator.months) || 12;
+  var refs = parseInt(document.getElementById('refCount')?.value || 0, 10);
+  var vol = parseInt(document.getElementById('tradeVol')?.value || 0, 10);
+  var comm = parseFloat(document.getElementById('commRate')?.value || 0) / 100;
+  var fee = parseFloat(document.getElementById('tradeFee')?.value || 0) / 100;
+
+  document.getElementById('refCountVal').textContent = refs;
+  document.getElementById('tradeVolVal').textContent = fmtUSD(vol, 0);
+  document.getElementById('commRateVal').textContent = Math.round(comm * 100);
+  document.getElementById('tradeFeeVal').textContent = (fee * 100).toFixed(2);
+
+  var totalFees = refs * vol * fee;
+  var monthly = totalFees * comm;
+  var perPerson = vol * fee * comm;
+
+  document.getElementById('monthlyEarn').textContent = fmtUSD(monthly, 2);
+  document.getElementById('yearlyEarn').textContent = fmtUSD(monthly * months, 0);
+  document.getElementById('totalFees').textContent = fmtUSD(totalFees, 2);
+  document.getElementById('perPerson').textContent = fmtUSD(perPerson, 2);
+
+  var mWord = tr('calc.v3.month') || 'M';
+  var labels = [], data = [];
+  for (var i = 0; i < months; i++) {
+    labels.push(mWord + (i + 1));
+    data.push(parseFloat((monthly * (i + 1)).toFixed(2)));
+  }
+
+  var canvas = document.getElementById('earningsChart');
+  if (!canvas || typeof Chart === 'undefined') return;
+  if (earningsChart) earningsChart.destroy();
+  earningsChart = new Chart(canvas.getContext('2d'), {
+    type: 'line',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: tr('calc.v3.chartLabel') || 'Cumulative estimate (USD)',
+        data: data,
+        // DA Network tokens: --color-gold, --color-faint, --color-line
+        borderColor: '#d7ad52',
+        backgroundColor: 'rgba(215,173,82,0.06)',
+        fill: true,
+        tension: 0,
+        pointRadius: 0,
+        pointHoverRadius: 4,
+        pointBackgroundColor: '#d7ad52',
+        borderWidth: 1.5,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#171717',
+          borderColor: 'rgba(255,255,255,0.16)',
+          borderWidth: 1,
+          titleColor: '#989898',
+          bodyColor: '#f5f5f3',
+          cornerRadius: 4,
+          displayColors: false,
+          callbacks: { label: function (ctx) { return ' ' + fmtUSD(ctx.parsed.y, 2); } }
+        }
+      },
+      scales: {
+        x: {
+          ticks: { color: '#707070', font: { size: 10, family: 'Geist Mono, ui-monospace, monospace' } },
+          grid: { display: false },
+          border: { color: 'rgba(255,255,255,0.08)' }
+        },
+        y: {
+          ticks: { color: '#707070', font: { size: 10, family: 'Geist Mono, ui-monospace, monospace' }, callback: function (v) { return '$' + Number(v).toLocaleString('en-US'); } },
+          grid: { color: 'rgba(255,255,255,0.06)' },
+          border: { display: false }
+        }
+      },
+      animation: { duration: 400 }
+    }
+  });
+}
+
+setupCalculator();
+calcRateNote(false);
 calcEarnings();
+
 
 // ─── FAQ ─────────────────────────────────────────────────────────
 const faqsData = {
@@ -1061,38 +982,43 @@ const faqsData = {
       a: 'Mỗi sàn đều có <strong>dashboard riêng</strong> để theo dõi click, đăng ký và hoa hồng. Ngoài ra, bạn có thể dùng <strong>UTM parameters</strong> trong Google Analytics để phân tích nguồn traffic chi tiết hơn và biết nội dung nào đang hoạt động tốt nhất.'
     },
   ],
+  // V3 English FAQ. Tokens in {braces} are filled from data/config.js by fillTokens().
   en: [
     {
-      q: 'How much money do I need to start crypto affiliate marketing?',
-      a: '<strong>No money needed!</strong> All crypto affiliate programs are free to join. The only optional cost is if you want to run paid ads to grow traffic faster.'
+      q: 'What is DA Affiliate?',
+      a: 'DA Affiliate is the affiliate programme of DA Network. It offers a fixed commission arrangement for experienced, higher-volume traders, and partner development for people building trading communities.'
     },
     {
-      q: 'How much can I earn from crypto affiliate marketing?',
-      a: 'Earnings depend on the size and quality of your audience. Beginners can earn <strong>$50–$200/month</strong> after 2–3 months. Creators with large audiences can earn <strong>$5,000–$50,000+/month</strong>. There is no upper limit.'
+      q: 'How is the trader offering different from DA Cashback?',
+      a: 'DA Cashback is a membership: fee rewards at volume milestones plus a daily plan, member community, learning and support. The DA Affiliate trader offering is a direct arrangement: a fixed commission on your own eligible trading fees, where the exchange programme supports it, and a signal-only channel. It does not include the DA Cashback membership benefits. <a class="text-link" href="{cashbackUrl}" target="_blank" rel="noopener noreferrer">See DA Cashback</a>'
     },
     {
-      q: 'Do I need to know how to trade crypto?',
-      a: '<strong>Not required</strong>, but very helpful. Basic crypto knowledge helps you produce more credible content. However, many successful affiliates focus solely on sign-up and exchange guides — no trading skills needed.'
+      q: 'Which exchanges can I join through DA Affiliate?',
+      a: '{availableNames} are available now. The other exchanges on our list show “Partnership paused”, which means we are not registering new members on them right now. <a class="text-link" href="deals.html">See all {total} exchanges</a>'
     },
     {
-      q: 'Are commissions paid for life?',
-      a: 'It depends on the program. <strong>Binance, Bybit, and OKX</strong> all offer lifetime commissions — meaning you earn as long as the referred user keeps trading, with no expiry.'
+      q: 'What commission rate will I get?',
+      a: "Terms are confirmed per exchange. They depend on the product, how the commission is calculated, your tier and your eligibility. We publish a rate only once it is confirmed. Rates and reward tiers may change according to each exchange's policy and partner program."
     },
     {
-      q: 'How do I improve my conversion rate?',
-      a: 'The most effective methods: (1) <strong>Place links correctly</strong> — first 3 lines and end of post; (2) <strong>Create urgency</strong> — time-limited sign-up bonuses; (3) <strong>Social proof</strong> — share your real earnings; (4) <strong>Detailed tutorials</strong> — step-by-step guides that keep users from dropping off.'
+      q: 'For how long is commission paid?',
+      a: "It depends on each exchange's programme. DA tells you what applies when your terms are confirmed."
     },
     {
-      q: 'Is crypto affiliate marketing legal?',
-      a: '<strong>Legal</strong> as affiliate marketing. However, you need to <strong>declare your income</strong> and pay taxes accordingly. Consult a tax professional if your earnings exceed certain thresholds.'
+      q: 'Can I build a team of partners under me?',
+      a: 'DA Affiliate pays on one direct level: commission comes from the trading fees of traders you refer directly. If you want to build a team of partners, talk to DA directly.'
     },
     {
-      q: 'Which platform is best for crypto affiliate marketing?',
-      a: 'In practice: <strong>YouTube</strong> has the highest long-term ROI (videos rank in SEO forever). <strong>Telegram</strong> is great for trading communities. <strong>TikTok</strong> is the fastest-growing channel right now. <strong>Facebook Groups</strong> have high engagement. Start with the platform where you already have an audience.'
+      q: 'How much can a partner make?',
+      a: 'There is no typical figure we can promise. Affiliate earnings depend on your effort, audience size and market conditions. The calculator shows how the formula behaves with your own assumptions.'
     },
     {
-      q: 'How do I track my affiliate earnings?',
-      a: 'Every exchange has its own <strong>dashboard</strong> to track clicks, sign-ups, and commissions. You can also use <strong>UTM parameters</strong> in Google Analytics to analyze traffic sources in more detail and identify which content performs best.'
+      q: 'Are there rules I need to check where I live?',
+      a: "Rules on affiliate marketing, promoting crypto products and declaring income differ by country. Check the rules that apply to you, and each exchange's eligibility terms, before you start. This site does not give legal or tax advice."
+    },
+    {
+      q: 'How do I join?',
+      a: 'Message {telegramHandle} on Telegram. Say whether you are joining as a trader or a partner, and which exchange you use or plan to use.'
     },
   ],
   th: [
@@ -1130,19 +1056,18 @@ const faqsData = {
 const faqList = document.getElementById('faqList');
 function renderFaqs() {
   if (!faqList) return;
-  var lang = (document.body.getAttribute('data-lang') || 'vi');
-  var faqs = faqsData[lang] || faqsData['en'] || faqsData['vi'];
+  var faqs = faqsData[contentLang(faqsData)];
   faqList.innerHTML = stripEmoji(faqs.map((f, i) => `
     <div class="faq-item" data-faq="${i}">
       <h3 class="faq-heading">
         <button class="faq-question" id="faq-q-${i}" aria-expanded="false" aria-controls="faq-a-${i}" onclick="toggleFaq(${i})">
           <span class="faq-num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>
-          <span class="faq-q-text">${f.q}</span>
+          <span class="faq-q-text">${fillTokens(f.q)}</span>
           <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
         </button>
       </h3>
       <div class="faq-answer" id="faq-a-${i}" role="region" aria-labelledby="faq-q-${i}">
-        <div class="faq-answer-inner"><div class="faq-answer-body">${f.a}</div></div>
+        <div class="faq-answer-inner"><div class="faq-answer-body">${fillTokens(f.a)}</div></div>
       </div>
     </div>
   `).join(''));
@@ -1184,467 +1109,171 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 
-console.log('✅ DA Affiliate loaded.');
+/* ══════════════════════════════════════════
+   PARTNER STATISTICS — from DA_CONFIG.partnerMetrics
+   A value is shown only when CFG.isPublishable(metric) is true
+   (value set, publish:true, RECONCILED or VERIFIED). Otherwise the tile
+   reads "Awaiting verified data" — never 0, never "Verified".
+══════════════════════════════════════════ */
+function formatMetric(m) {
+  if (typeof m.value === 'number') {
+    return m.unit === 'USD' ? fmtUSD(m.value, 0) : m.value.toLocaleString('en-US');
+  }
+  return String(m.value);
+}
+function renderMetrics() {
+  var grid = document.getElementById('metricGrid');
+  if (!grid) return;
+  var isPub = CFG.isPublishable || function () { return false; };
+  grid.innerHTML = (CFG.partnerMetrics || []).map(function (m) {
+    var pub = isPub(m);
+    var meta = '';
+    if (pub) {
+      var bits = [];
+      if (m.reportingPeriod) bits.push(escapeHtml(tr('stats.period')) + ': ' + escapeHtml(m.reportingPeriod));
+      if (m.source) bits.push(escapeHtml(tr('stats.source')) + ': ' + escapeHtml(m.source));
+      if (m.lastUpdated) bits.push(escapeHtml(tr('stats.updated')) + ': ' + escapeHtml(m.lastUpdated));
+      meta = '<dd class="metric-meta">' + bits.join(' · ') + '</dd>';
+    }
+    return '<div class="metric-tile' + (pub ? '' : ' is-pending') + '">'
+      + '<dt class="metric-label">' + escapeHtml(m.label) + '</dt>'
+      + '<dd class="metric-value">' + (pub ? escapeHtml(formatMetric(m)) : '<span class="metric-pending">' + escapeHtml(tr('stats.awaiting')) + '</span>') + '</dd>'
+      + meta
+      + '</div>';
+  }).join('');
+}
+renderMetrics();
 
 /* ══════════════════════════════════════════
-   STAT MODALS
+   OPTIONAL PERKS — rendered only when enabled:true in config
+   (trading bot, Plan Market, Facts & Quotes are all disabled today)
 ══════════════════════════════════════════ */
-const MODAL_DATA = {
-  partner: {
-    tag: '✓ ĐÃ XÁC MINH',
-    tagClass: 'modal-tag-green',
-    bigNum: '237',
-    bigNumClass: 'stat-value-gold',
-    title: 'Partner đang hoạt động cùng DA Affiliate',
-    subtitle: 'Số liệu chốt cuối tháng — cập nhật ngày 1 hàng tháng',
-    rows: [
-      { label: '👥 Tổng partner trong mạng lưới', val: '237', cls: 'gold' },
-      { label: '📈 Partner hoạt động ≥ 3 tháng', val: '~62%', cls: 'green', note: 'Tracking liên tục' },
-      { label: '🌍 Thị trường chính', val: 'Việt Nam, Indonesia, Philippines' },
-      { label: '⏱️ Thời gian trung bình đến income đầu tiên', val: '4–8 tuần', note: 'Tùy kênh content' },
-      { label: '✅ Tiêu chí xét duyệt', val: 'Review từng hồ sơ' },
-    ],
-    note: '<strong>Làm thế nào để trở thành partner?</strong> Đăng ký tài khoản sàn qua link ref của DA Affiliate, sau đó liên hệ admin để được xét duyệt. Chúng tôi review từng partner — không tuyển ồ ạt. Phản hồi thông thường trong 24–48 giờ.'
-  },
-  commission: {
-    tag: '✓ ĐÃ CHỐT SỔ',
-    tagClass: 'modal-tag-green',
-    bigNum: null, // rendered from #commissionCounter
-    bigNumClass: 'commission-value',
-    title: 'Hoa hồng DA Affiliate đã thanh toán cho partner',
-    subtitle: 'Tổng commission chuyển thành công trong tháng trước — đã xác minh qua hồ sơ rút tiền',
-    rows: [
-      { label: '📆 Chu kỳ chốt sổ', val: 'Hàng tháng · Ngày 1', note: 'Dữ liệu đã finalize' },
-      { label: '💸 Tổng đã chuyển tháng trước', val: '$28,540', cls: 'gold-hero' },
-      { label: '📤 Phương thức thanh toán', val: 'USDT (TRC20 / ERC20)' },
-      { label: '⏰ Chu kỳ thanh toán partner', val: 'Hàng tuần hoặc hàng tháng' },
-      { label: '🔍 Nguồn dữ liệu', val: 'Hồ sơ rút tiền + dashboard sàn' },
-      { label: '⚖️ Tỷ lệ hoa hồng theo sàn', val: '28% – 43%', note: 'Binance / Bingx / Ourbit' },
-    ],
-    note: '<strong>Con số này có ý nghĩa gì?</strong> Đây là tổng commission DA Affiliate đã <em>thanh toán thành công</em> cho partner trong tháng đã chốt sổ — không tính phần pending hoặc bị hủy. Partner có thể đối chiếu với hồ sơ rút tiền của mình — liên hệ admin nếu thấy không khớp.'
-  }
-};
-
-// Reported figures are rendered as-is — no counting animation
-// (DA Network: "No animated counters"). Rows enter with the shared
-// `.seq` stagger defined in style.css.
-function openStatModal(type) {
-  const data = MODAL_DATA[type];
-  if (!data) return;
-
-  const bigNumRaw = data.bigNum || document.getElementById('commissionCounter')?.textContent || '';
-
-  const rowsHTML = data.rows.map((r, i) => `
-    <div class="modal-row seq" style="--i:${i}">
-      <span class="modal-row-label">${r.label}</span>
-      <span class="modal-row-val-wrap">
-        <span class="modal-row-val ${r.cls || ''}">${r.val}</span>
-        ${r.note ? `<span class="modal-row-note">${r.note}</span>` : ''}
-      </span>
-    </div>
-  `).join('');
-
-  const content = document.getElementById('statModalContent');
-  content.setAttribute('data-inview', 'false');
-  content.innerHTML = stripEmoji(`
-    <span class="modal-tag ${data.tagClass}">${data.tag}</span>
-    <div class="modal-big-num ${data.bigNumClass}" id="modalBigNum">${bigNumRaw}</div>
-    <p class="modal-subtitle">${data.title}</p>
-    <p class="modal-period">${data.subtitle}</p>
-    <div class="modal-rows">${rowsHTML}</div>
-    <div class="modal-note">${data.note}</div>
-  `);
-
-  const overlay = document.getElementById('statModalOverlay');
-  overlay.classList.add('open');
-  document.body.style.overflow = 'hidden';
-  requestAnimationFrame(() => requestAnimationFrame(() => content.setAttribute('data-inview', 'true')));
-  overlay.querySelector('.stat-modal-close')?.focus({ preventScroll: true });
+function renderPerks() {
+  var grid = document.getElementById('perksGrid');
+  if (!grid) return;
+  var perks = CFG.perks || {};
+  var on = Object.keys(perks).filter(function (k) { return perks[k] && perks[k].enabled && perks[k].title; });
+  grid.hidden = on.length === 0;
+  grid.innerHTML = on.map(function (k, i) {
+    var p = perks[k];
+    return '<article class="dq-card"><div class="dq-card-top"><span class="label">' + pad2(i + 1) + '</span></div>'
+      + '<div class="dq-card-content"><h3>' + escapeHtml(p.title) + '</h3>'
+      + (p.description ? '<p>' + escapeHtml(p.description) + '</p>' : '') + '</div></article>';
+  }).join('');
 }
-
-function closeStatModal() {
-  document.getElementById('statModalOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-// Close on Escape
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeStatModal();
-});
+renderPerks();
 
 /* ══════════════════════════════════════════
-   EXPLAINER CARD MODALS
+   PARTNER STORIES — only stories with written consent (config.partnerStories)
 ══════════════════════════════════════════ */
-const EXPLAINER_DATA = {
-  affiliate: {
-    icon: '🔗',
-    title: 'Affiliate Crypto Là Gì?',
-    sub: 'Giải thích chi tiết — dành cho người mới bắt đầu',
-    sections: [
-      {
-        heading: 'Cơ chế hoạt động',
-        type: 'steps',
-        items: [
-          { num: '1', text: 'Bạn đăng ký chương trình affiliate tại sàn (Binance, Bybit, OKX...) và nhận một <strong>link giới thiệu riêng</strong>.' },
-          { num: '2', text: 'Chia sẻ link đó lên mạng xã hội, nhóm Telegram, YouTube, TikTok hoặc blog cá nhân.' },
-          { num: '3', text: 'Mỗi người bấm vào link và đăng ký tài khoản sẽ được <strong>gắn vào hệ thống của bạn</strong>.' },
-          { num: '4', text: 'Khi họ giao dịch, bạn tự động nhận % hoa hồng — suốt thời gian họ còn giao dịch.' },
-        ]
-      },
-      {
-        heading: 'Ví dụ thực tế',
-        type: 'highlight',
-        text: 'Bạn giới thiệu cho <strong>1 người bạn</strong> đăng ký Binance. Người đó giao dịch <strong>$50,000/tháng</strong> với phí 0.1% = $50 phí. Binance trả bạn <strong>40% = $20/tháng</strong> — chỉ từ 1 người, suốt đời họ còn dùng.'
-      }
-    ]
-  },
-  income: {
-    icon: '💸',
-    title: 'Bạn Có Thể Kiếm Bao Nhiêu?',
-    sub: 'Ước tính thực tế dựa trên số người giới thiệu',
-    sections: [
-      {
-        heading: 'Bảng thu nhập ước tính / tháng',
-        type: 'table',
-        rows: [
-          { label: '5 người giới thiệu · $5,000 GD/người', val: '~$150' },
-          { label: '20 người giới thiệu · $5,000 GD/người', val: '~$600' },
-          { label: '50 người giới thiệu · $10,000 GD/người', val: '~$3,000' },
-          { label: '100 người giới thiệu · $20,000 GD/người', val: '~$12,000' },
-          { label: 'Top partner DA Affiliate (237 người)', val: '~$2,840' },
-        ]
-      },
-      {
-        heading: 'Công thức tính',
-        type: 'highlight',
-        text: '<strong>Thu nhập = Số người × Khối lượng GD × Phí sàn × Tỷ lệ hoa hồng</strong><br><br>Ví dụ: 20 người × $10,000 × 0.1% × 30% = <strong>$600/tháng</strong>. Số này tích lũy theo thời gian khi mạng lưới lớn dần.'
-      }
-    ]
-  },
-  advantages: {
-    icon: '⚡',
-    title: 'Tại Sao Affiliate Crypto Là Lựa Chọn Tốt?',
-    sub: '6 ưu điểm nổi bật so với các hình thức kiếm tiền online khác',
-    sections: [
-      {
-        heading: 'Ưu điểm vượt trội',
-        type: 'pills',
-        items: [
-          { icon: '🚫', text: 'Không cần vốn đầu tư' },
-          { icon: '📈', text: 'Thu nhập thụ động 24/7' },
-          { icon: '🔄', text: 'Hoa hồng tự động' },
-          { icon: '🌐', text: 'Làm việc từ bất cứ đâu' },
-          { icon: '🔒', text: 'Không rủi ro mất vốn' },
-          { icon: '⚡', text: 'Bắt đầu ngay hôm nay' },
-          { icon: '📊', text: 'Dashboard theo dõi realtime' },
-          { icon: '💳', text: 'Thanh toán USDT hàng tuần' },
-        ]
-      },
-      {
-        heading: 'So sánh với các hình thức khác',
-        type: 'highlight',
-        text: '• <strong>Trading thông thường</strong>: Cần vốn, cần kinh nghiệm, có thể thua lỗ.<br>• <strong>Affiliate crypto</strong>: Không cần vốn, thu nhập từ hoạt động của người khác, <strong>rủi ro bằng 0</strong>.<br>• Thị trường crypto giao dịch 24/7, hoa hồng phát sinh liên tục kể cả khi bạn ngủ.'
-      }
-    ]
-  }
-};
-
-function openExplainerModal(type) {
-  const data = EXPLAINER_DATA[type];
-  if (!data) return;
-
-  let sectionsHTML = data.sections.map((s, si) => {
-    let inner = '';
-    if (s.type === 'steps') {
-      inner = `<div class="explainer-steps">${s.items.map((item, i) =>
-        `<div class="explainer-step" data-delay="${si * 100 + i * 80}">
-          <span class="explainer-step-num">${item.num}</span>
-          <span>${item.text}</span>
-        </div>`
-      ).join('')}</div>`;
-    } else if (s.type === 'highlight') {
-      inner = `<div class="explainer-highlight-box">${s.text}</div>`;
-    } else if (s.type === 'table') {
-      inner = s.rows.map(r =>
-        `<div class="income-example-row"><span class="label">${r.label}</span><span class="val">${r.val}</span></div>`
-      ).join('');
-    } else if (s.type === 'pills') {
-      inner = `<div class="advantage-pills">${s.items.map((p, i) =>
-        `<div class="advantage-pill" data-delay="${i * 55}">${p.icon} ${p.text}</div>`
-      ).join('')}</div>`;
-    }
-    return `<div class="explainer-section"><h4>${s.heading}</h4>${inner}</div>`;
-  }).join('<div class="modal-divider"></div>');
-
-  document.getElementById('explainerModalContent').innerHTML = `
-    <span class="explainer-modal-icon">${data.icon}</span>
-    <h2>${data.title}</h2>
-    <p class="em-sub">${data.sub}</p>
-    <div class="modal-divider"></div>
-    ${sectionsHTML}
-  `;
-  const emContent = document.getElementById('explainerModalContent');
-  emContent.innerHTML = stripEmoji(emContent.innerHTML);
-  // The card shows only a key figure + one line; its full (translated)
-  // paragraph opens the dialog instead.
-  const full = document.querySelector('.explainer-card[data-explainer="' + type + '"] .explainer-full');
-  const sub = emContent.querySelector('.em-sub');
-  if (full && sub) {
-    const lead = document.createElement('p');
-    lead.className = 'em-lead';
-    lead.innerHTML = full.innerHTML;
-    sub.after(lead);
-  }
-
-  const overlay = document.getElementById('explainerModalOverlay');
-  overlay.classList.add('open');
-  document.body.style.overflow = 'hidden';
-  overlay.querySelector('.stat-modal-close')?.focus({ preventScroll: true });
-
-  // Animate staggered elements
-  requestAnimationFrame(() => requestAnimationFrame(() => {
-    document.querySelectorAll('#explainerModalContent .explainer-step, #explainerModalContent .advantage-pill').forEach(el => {
-      const delay = parseInt(el.dataset.delay || 0);
-      setTimeout(() => el.classList.add('visible'), delay);
-    });
-  }));
+function renderStories() {
+  var wrap = document.getElementById('partnerStories');
+  var grid = document.getElementById('partnerWinsGrid');
+  if (!wrap || !grid) return;
+  var stories = (CFG.partnerStories || []).filter(function (s) { return s && s.consent === true; });
+  wrap.hidden = stories.length === 0;
+  grid.innerHTML = stories.map(function (s) {
+    var initials = String(s.name || '').split(/\s+/).map(function (w) { return w.charAt(0); }).join('').slice(0, 2).toUpperCase();
+    return '<article class="win-card">'
+      + '<header class="win-card-head">'
+      +   '<span class="win-avatar" aria-hidden="true">' + escapeHtml(initials) + '</span>'
+      +   '<div class="win-identity"><strong>' + escapeHtml(s.name) + '</strong>'
+      +   (s.channel ? '<small>' + escapeHtml(s.channel) + '</small>' : '') + '</div>'
+      + '</header>'
+      + (s.quote ? '<blockquote class="win-quote">' + escapeHtml(s.quote) + '</blockquote>' : '')
+      + '<dl class="win-meta">'
+      +   (s.exchange ? '<div><dt class="sr-only">Exchange</dt><dd class="win-exchange">' + escapeHtml(s.exchange) + '</dd></div>' : '')
+      +   (s.period ? '<div><dt class="sr-only">Period</dt><dd class="win-commission">' + escapeHtml(s.period) + '</dd></div>' : '')
+      + '</dl>'
+      + '</article>';
+  }).join('');
 }
-
-function closeExplainerModal() {
-  document.getElementById('explainerModalOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    closeStatModal();
-    closeExplainerModal();
-  }
-});
-
+renderStories();
 
 /* ══════════════════════════════════════════
-   PARTNER WINS — DATA-DRIVEN RENDER
-   Tất cả partner stories được định nghĩa trong PARTNERS_DATA bên dưới.
-   Để chỉnh nội dung partner: chỉ cần sửa array này.
-   Mỗi partner có quote VI + EN để dịch song ngữ.
+   PROOF GALLERY — only images with consent:true and publish:true
+   (config.proofImages). Click-to-zoom + keyboard nav (← → Esc).
 ══════════════════════════════════════════ */
-const PARTNERS_DATA = [
-  {
-    initials: 'HP',
-    name: 'Hung Pham',
-    city: 'Ha Noi',
-    channel: 'Unicorn trading Crypto',
-    exchange: 'Ourbit',
-    commission: 5543,
-    accent: { from: '#0ea5b7', to: '#22d3ee' }, // teal (Ourbit)
-    quote: {
-      vi: '“Mình bắt đầu từ cộng đồng nhỏ, chia sẻ tutorial và tín hiệu cơ bản. Sau vài tháng, hoa hồng bắt đầu ổn định hơn nhờ traffic thật.”',
-      en: '“I started from a small community, sharing tutorials and basic signals. After a few months, commission became more stable thanks to real traffic.”'
-    }
-  },
-  {
-    initials: 'AR',
-    name: 'Aiman Rahman',
-    city: 'Kuala Lumpur',
-    channel: 'Bitcoin Malaya',
-    exchange: 'BingX',
-    commission: 4210,
-    accent: { from: '#7c5cff', to: '#a78bfa' }, // purple (BingX)
-    quote: {
-      vi: '“Mình tập trung xây cộng đồng Telegram bằng nội dung thị trường mỗi ngày. DA Affiliate giúp mình tracking referral và tối ưu commission dễ hơn.”',
-      en: '“I focus on building a Telegram community with daily market content. DA Affiliate makes it easier to track referrals and optimize commission.”'
-    }
-  },
-  {
-    initials: 'KW',
-    name: 'Kelvin Wong',
-    city: 'Hong Kong',
-    channel: 'Anbu Crypto Alpha',
-    exchange: 'Binance',
-    commission: 3870,
-    accent: { from: '#f7931a', to: '#ffcc44' }, // gold (Binance)
-    quote: {
-      vi: '“Mình đã có audience về crypto từ trước. Khi chuyển traffic sang các campaign phù hợp, tỷ lệ chuyển đổi tốt hơn mong đợi.”',
-      en: '“I already had a crypto audience. When I redirected traffic to suitable campaigns, conversion rate exceeded expectations.”'
-    }
-  },
-  {
-    initials: 'TN',
-    name: 'Tung Nguyen',
-    city: 'Đà Nẵng',
-    channel: 'Wealth club crypto',
-    exchange: 'OKX',
-    commission: 3150,
-    accent: { from: '#3b82f6', to: '#60a5fa' }, // blue (OKX)
-    quote: {
-      vi: '“Mình không chạy ads lớn, chủ yếu làm content đều và hướng dẫn người mới. Kết quả đến từ việc giữ niềm tin với cộng đồng.”',
-      en: '“I don’t run big ads — mostly consistent content and onboarding for newcomers. Results come from keeping trust with the community.”'
-    }
-  },
-  {
-    initials: 'NC',
-    name: 'Narin Chaiyo',
-    city: 'Bangkok',
-    channel: 'Shadow trading public',
-    exchange: 'Bybit',
-    commission: 2980,
-    accent: { from: '#fbbf24', to: '#fde047' }, // yellow (Bybit)
-    quote: {
-      vi: '“Mình bắt đầu bằng nhóm nhỏ về copy trading. Sau khi có quy trình onboarding rõ ràng, thu nhập referral tăng ổn định hơn.”',
-      en: '“I started with a small copy-trading group. Once we had a clear onboarding process, referral income grew more steadily.”'
-    }
-  }
-];
+(function initProofGallery() {
+  var section = document.getElementById('proofSection');
+  var gallery = document.getElementById('danFeedbackGrid');
+  var lb = document.getElementById('proofLightbox');
+  if (!section || !gallery || !lb) return;
+  var images = (CFG.proofImages || []).filter(function (p) { return p && p.consent === true && p.publish === true; });
+  section.hidden = images.length === 0;
+  if (!images.length) return;
 
-(function initPartnerWins() {
-  function escapeHtml(s) {
-    return String(s)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
-  }
-  function formatUSDT(n) {
-    return Number(n).toLocaleString('en-US', { maximumFractionDigits: 0 }) + ' USDT';
-  }
-  function currentLang() {
-    try {
-      var l = document.body.getAttribute('data-lang') || document.documentElement.lang || 'vi';
-      return ['vi','en','th','ko','id'].indexOf(l) >= 0 ? l : 'vi';
-    } catch (e) {
-      return 'vi';
-    }
-  }
-  function t(lang, viStr, enStr) {
-    return lang === 'vi' ? viStr : enStr;
-  }
+  gallery.innerHTML = images.map(function (p, i) {
+    var caption = [p.exchange, p.period].filter(Boolean).join(' · ');
+    return '<figure class="proof-item seq" style="--i:' + i + '" data-img="' + escapeHtml(p.file) + '" tabindex="0" role="button" aria-label="' + escapeHtml(caption) + '">'
+      + '<div class="proof-thumb"><img src="' + escapeHtml(p.file) + '" alt="' + escapeHtml(caption) + '" loading="lazy"><span class="proof-zoom" aria-hidden="true">⤢</span></div>'
+      + '<figcaption class="proof-caption"><span class="proof-exchange">' + escapeHtml(p.exchange || '') + '</span>'
+      + '<span class="proof-period">' + escapeHtml(p.period || '') + '</span></figcaption>'
+      + '</figure>';
+  }).join('');
 
-  function render() {
-    const grid = document.getElementById('partnerWinsGrid');
-    if (!grid) return;
-    const lang = currentLang();
-    const L = {
-      verifiedBadge: t(lang, 'Đã xác minh bởi DA Affiliate', 'Verified by DA Affiliate'),
-      verifyTip: t(lang, 'Partner đã đồng ý chia sẻ câu chuyện', 'Partner consented to share this story'),
-      lblChannel: t(lang, 'Kênh', 'Channel'),
-      lblExchange: t(lang, 'Sàn chính', 'Main exchange'),
-      lblCommission: t(lang, 'Hoa hồng đã nhận', 'Commission earned')
-    };
-
-    grid.innerHTML = PARTNERS_DATA.map(function (p) {
-      // Avatars use the neutral DA Network surface; `p.accent` is no longer rendered.
-      const quote = (p.quote && p.quote[lang]) ? p.quote[lang] : (p.quote && p.quote.vi) || '';
-      return ''
-        + '<article class="win-card">'
-        +   '<header class="win-card-head">'
-        +     '<span class="win-avatar" aria-hidden="true">' + escapeHtml(p.initials) + '</span>'
-        +     '<div class="win-identity">'
-        +       '<strong>' + escapeHtml(p.name) + '</strong>'
-        +       '<small>' + escapeHtml(p.city) + ' · ' + escapeHtml(p.channel) + '</small>'
-        +     '</div>'
-        +     '<span class="win-verify" title="' + escapeHtml(L.verifyTip) + '">'
-        +       '<svg class="win-verified-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>'
-        +       '<span class="sr-only">' + escapeHtml(L.verifiedBadge) + '</span>'
-        +     '</span>'
-        +   '</header>'
-        +   '<blockquote class="win-quote">' + escapeHtml(quote) + '</blockquote>'
-        // Calm footer: one line instead of a 3-row table (channel is already under the name)
-        +   '<dl class="win-meta">'
-        +     '<div><dt class="sr-only">' + escapeHtml(L.lblExchange) + '</dt><dd class="win-exchange">' + escapeHtml(p.exchange) + '</dd></div>'
-        +     '<div><dt class="sr-only">' + escapeHtml(L.lblCommission) + '</dt><dd class="win-commission">' + escapeHtml(formatUSDT(p.commission)) + '</dd></div>'
-        +   '</dl>'
-        + '</article>';
-    }).join('');
+  var items = Array.from(gallery.querySelectorAll('.proof-item'));
+  var img = lb.querySelector('.proof-lightbox-img');
+  var idxEl = document.getElementById('proofLbIdx');
+  var totalEl = document.getElementById('proofLbTotal');
+  if (totalEl) totalEl.textContent = items.length;
+  var current = 0;
+  function show(i) {
+    current = (i + items.length) % items.length;
+    img.src = items[current].getAttribute('data-img');
+    var a = items[current].querySelector('img');
+    img.alt = a ? a.alt : '';
+    if (idxEl) idxEl.textContent = current + 1;
   }
-
-  function init() {
-    render();
-    // Re-render when language switches
-    document.querySelectorAll('[data-lang], .lang-switch, .lang-btn').forEach(function (btn) {
-      btn.addEventListener('click', function () { setTimeout(render, 50); });
-    });
-    window.addEventListener('storage', function (e) {
-      if (e.key === 'lang') render();
-    });
-    // Expose for manual re-render after i18n switches
-    window.renderPartnerWins = render;
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  function open(i) { show(i); lb.classList.add('is-open'); lb.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; }
+  function close() { lb.classList.remove('is-open'); lb.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; img.src = ''; }
+  items.forEach(function (el, i) {
+    el.addEventListener('click', function () { open(i); });
+    el.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(i); } });
+  });
+  lb.querySelector('.proof-lightbox-close').addEventListener('click', close);
+  lb.querySelector('.proof-lightbox-prev').addEventListener('click', function (e) { e.stopPropagation(); show(current - 1); });
+  lb.querySelector('.proof-lightbox-next').addEventListener('click', function (e) { e.stopPropagation(); show(current + 1); });
+  lb.addEventListener('click', function (e) { if (e.target === lb) close(); });
+  document.addEventListener('keydown', function (e) {
+    if (!lb.classList.contains('is-open')) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') show(current - 1);
+    else if (e.key === 'ArrowRight') show(current + 1);
+  });
 })();
 
 /* ══════════════════════════════════════════
-   PROOF GALLERY LIGHTBOX
-   Click-to-zoom + keyboard nav (← → Esc)
+   CONTACT — email card and response time only when set in config
+   (supportEmail and supportResponseTime are null today → hidden)
 ══════════════════════════════════════════ */
-(function initProofLightbox() {
-  function init() {
-    const items = Array.from(document.querySelectorAll('.proof-item'));
-    const lb = document.getElementById('proofLightbox');
-    if (!items.length || !lb) return;
-    const img = lb.querySelector('.proof-lightbox-img');
-    const closeBtn = lb.querySelector('.proof-lightbox-close');
-    const prevBtn = lb.querySelector('.proof-lightbox-prev');
-    const nextBtn = lb.querySelector('.proof-lightbox-next');
-    const idxEl = document.getElementById('proofLbIdx');
-    const totalEl = document.getElementById('proofLbTotal');
-    if (totalEl) totalEl.textContent = items.length;
-    let current = 0;
-
-    function show(i) {
-      current = (i + items.length) % items.length;
-      const src = items[current].getAttribute('data-img');
-      const altEl = items[current].querySelector('img');
-      img.src = src;
-      img.alt = altEl ? altEl.alt : '';
-      if (idxEl) idxEl.textContent = current + 1;
-    }
-    function open(i) {
-      show(i);
-      lb.classList.add('is-open');
-      lb.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-    }
-    function close() {
-      lb.classList.remove('is-open');
-      lb.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-      img.src = '';
-    }
-
-    items.forEach((el, i) => {
-      el.addEventListener('click', () => open(i));
-      el.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          open(i);
-        }
-      });
-    });
-    closeBtn.addEventListener('click', close);
-    prevBtn.addEventListener('click', (e) => { e.stopPropagation(); show(current - 1); });
-    nextBtn.addEventListener('click', (e) => { e.stopPropagation(); show(current + 1); });
-    lb.addEventListener('click', (e) => {
-      if (e.target === lb) close();
-    });
-    document.addEventListener('keydown', (e) => {
-      if (!lb.classList.contains('is-open')) return;
-      if (e.key === 'Escape') close();
-      else if (e.key === 'ArrowLeft') show(current - 1);
-      else if (e.key === 'ArrowRight') show(current + 1);
-    });
+function renderContact() {
+  var c = CFG.contact || {};
+  var cards = document.getElementById('contactCards');
+  var existing = document.getElementById('contactEmailCard');
+  if (cards && c.supportEmail && !existing) {
+    var a = document.createElement('a');
+    a.id = 'contactEmailCard';
+    a.className = 'lh-card lh-card-email';
+    a.href = 'mailto:' + c.supportEmail;
+    a.innerHTML = '<span class="lh-card-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="1.5"/><path d="M2 7l10 7 10-7"/></svg></span>'
+      + '<span class="lh-card-body"><strong></strong><span class="lh-card-handle"></span></span>';
+    a.querySelector('.lh-card-handle').textContent = c.supportEmail;
+    cards.appendChild(a);
   }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
+  var card = document.getElementById('contactEmailCard');
+  if (card) card.querySelector('strong').textContent = tr('contact.email.title');
+  var note = document.getElementById('contactNote');
+  if (note) {
+    var bits = [];
+    if (c.supportResponseTime) bits.push(fillTokens(tr('contact.response'), { time: c.supportResponseTime }));
+    if (c.supportHours) bits.push(fillTokens(tr('contact.hours'), { hours: c.supportHours }));
+    note.textContent = bits.join(' ');
+    note.hidden = bits.length === 0;
   }
-})();
+}
+renderContact();
+
 
 /* ══════════════════════════════════════════════════════════
    NAV — Dropdown & Active Section Tracking
@@ -1675,7 +1304,7 @@ const PARTNERS_DATA = [
   });
 
   // ── Active section tracking via IntersectionObserver ──
-  const sectionIds = ['guide', 'calculator', 'faq', 'da-network', 'dac-quyen', 'lien-he'];
+  const sectionIds = ['traders', 'partners', 'how-it-works', 'calculator', 'benefits', 'stats', 'faq', 'contact'];
   const navLinks = document.querySelectorAll('.nav-link[data-section], .nav-link-dd[data-section]');
 
   function setActive(sectionId) {
@@ -1701,55 +1330,6 @@ const PARTNERS_DATA = [
 
   sectionEls.forEach(el => obs.observe(el));
 })();
-
-/* ══════════════════════════════════════════════════════════
-   ĐẶC QUYỀN — Modal logic
-══════════════════════════════════════════════════════════ */
-window.openDqModal = function(key) {
-  var modal = document.getElementById('dqModal-' + key);
-  if (!modal) return;
-  document.body.style.overflow = 'hidden';
-  modal.classList.add('is-open');
-  // Re-trigger animation on box
-  var box = modal.querySelector('.dq-modal-box');
-  if (box) {
-    box.style.animation = 'none';
-    box.offsetHeight; // reflow
-    box.style.animation = '';
-  }
-};
-
-window.closeDqModal = function(e, target) {
-  var id = typeof target === 'string' ? target : (target && target.id);
-  if (e && e.target !== (typeof target === 'string' ? document.getElementById(target) : target)) {
-    if (typeof target !== 'string') return; // clicked inside box
-  }
-  var modal = document.getElementById ? (typeof target === 'string' ? document.getElementById(target) : target) : null;
-  if (!modal && typeof target === 'string') modal = document.getElementById(target);
-  if (modal) {
-    modal.classList.remove('is-open');
-    document.body.style.overflow = '';
-  }
-};
-
-// Dashboard CTA tracking — safe wrapper, no-op if no analytics installed
-window.trackDashboardCta = function() {
-  var evt = 'dashboard_cta_click';
-  var params = { source_site: 'danetwork', target_url: 'https://signal.danetwork.asia/', section: 'signal_teaser' };
-  if (typeof gtag === 'function') gtag('event', evt, params);
-  if (typeof fbq === 'function') fbq('trackCustom', evt, params);
-  if (typeof plausible === 'function') plausible(evt, { props: params });
-};
-
-// Close on Escape key
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') {
-    document.querySelectorAll('.dq-modal.is-open').forEach(function(m) {
-      m.classList.remove('is-open');
-    });
-    document.body.style.overflow = '';
-  }
-});
 
 /* ══════════════════════════════════════════════════════════
    i18n — LANGUAGE TOGGLE ENGINE
@@ -1963,209 +1543,176 @@ document.addEventListener('keydown', function(e) {
       'footer.copy2': '© 2026 DA Affiliate.',
     },
     en: {
-      'proof.period.dec25':'Dec 2025 · 100 users','proof.period.feb26':'Feb 2026 · 32 new users','proof.period.nov25':'Nov 2025 · Direct commission',
-      'proof.period.jan26b':'01/2026 · Vol $5.3M · 23 traders','proof.period.feb26b':'02/2026 · Vol $8.8M · 32 traders','proof.period.dec25b':'12/2025 · USDT &amp; Inverse · Settled','proof.period.sep25':'09-10/2025 · USDT &amp; Inverse',
-      'proof.note':'All screenshots come directly from exchange dashboards (Ourbit, Bingx, Binance) · Click an image to see details · Some sensitive information may be hidden to protect partners.',
+      // V3 English master copy. Tokens in {braces} are filled from data/config.js.
       // Nav
-      'nav.cta':       'Get Started',
-      'nav.guide':     'Guide',
-      'nav.calc':      'Calculator',
-      'nav.faq':       'FAQ',
-      'nav.network':   'DA Affiliate',
-      'nav.privilege': '⭐ Privileges',
+      'nav.traders':  'For traders',
+      'nav.partners': 'For partners',
+      'nav.how':      'How it works',
+      'nav.calc':     'Calculator',
+      'nav.exchanges':'Exchanges',
+      'nav.faq':      'FAQ',
+      'nav.access':   'Access by group',
+      'nav.stats':    'Partner statistics',
+      'nav.contact':  'Contact',
+      'nav.join':     'Join DA Affiliate',
       // Hero
-      'hero.badge':  'Full A–Z Guide • 100% Free',
-      'hero.title1': 'Earn Money With',
-      'hero.title2': 'Crypto Affiliate',
-      'hero.title3': 'From Scratch',
-      'hero.sub':    'A comprehensive, beginner-friendly guide. From the basics to real trading strategies — with step-by-step examples.',
-      'hero.cta1':   'Read the Guide',
-      'hero.cta2':   'Calculate Income',
-      // Network Snapshot (replaces fake live stats)
-      'snap.tag':        '📊 NETWORK SNAPSHOT',
-      'snap.meta':       'Updated on the 1st of each month · Closed-book data',
-      'snap.partners':   'Active partners',
-      'snap.paid':       'Paid to partners last month',
-      'snap.exchanges':  'Core partner exchanges',
-      'snap.foot':       '“Paid” shows total commission DA Affiliate has actually transferred to partners last month, verified via withdrawal records.',
-      'snap.foot.link':  'See how we verify →',
-      // Legacy keys kept for backwards compat in modal/aria-labels
-      'stats.active':     '✓ VERIFIED',
-      'stats.partners':   'PARTNERS',
-      'stats.partnerSub': 'Updated on the 1st of each month',
-      'stats.hint':       'Tap for details →',
-      'stats.live':       '✓ CLOSED BOOK',
-      'stats.commLabel':  'COMMISSION PAID LAST MONTH',
-      // Guide
-      'guide.tag':        'Complete Guide',
-      'guide.title':      'What Is Crypto Affiliate?',
-      'guide.sub':        'Learn everything from A to Z — from the basics to generating real income.',
-      'guide.stepsTitle': '8 Action Steps to Start Earning',
-      // Explainer cards
-      'ec.title1': 'What Is Crypto Affiliate Marketing?',
-      'ec.title2': 'Income From Crypto Affiliate',
-      'ec.title3': 'Why Choose DA Affiliate?',
-      // Calculator
-      'calc.tag':   'Calculation Tool',
-      'calc.title': 'Affiliate Income Calculator',
-      'calc.sub':   'Estimate your monthly earnings based on your referral count and trading volume.',
-      // FAQ
-      'faq.tag':   'Frequently Asked Questions',
-      'faq.title': 'FAQ',
-      // DA Affiliate
-      'dan.tag':     'Affiliate Network',
-      'dan.title':   'About DA Affiliate',
-      'dan.sub':     'A professional crypto affiliate system — connecting hundreds of partners across Southeast Asia with top global exchanges.',
-      'dan.lb.title':'Partners Doing Well', // legacy fallback
-      'dan.fb.title':'Real Partner Commissions',
-      // Đặc Quyền
-      'dq.tag':   '🔒 Exclusive to DA Affiliate Partners',
-      'dq.title': 'DA Affiliate Member Privileges',
-      'dq.sub':   'Only <strong style="color:var(--color-gold)">237 active partners</strong> have access. These are things money can\'t buy outside.',
-      'dq.card1.title': 'AI Trading Bot — Korean Team',
-      'dq.card2.title': 'Daily Market Plan Channel',
-      'dq.card3.title': 'Exclusive Finance Facts & Quotes',
-      'dq.cta.strong': 'All privileges above are reserved for DA Affiliate partners only.',
-      'dq.cta.btn':    '⚡ Join to Unlock',
-      // Liên Hệ
-      'lh.tag':   'Support',
-      'lh.title': 'Contact DA Affiliate',
-      'lh.sub':   'Have questions or want to join the network? Our team is available 24/7.',
-      // Footer
-      'footer.desc':  'The affiliate programme of DA Network.',
-      'footer.col1':  'Guide',
-      'footer.col2':  'Tools',
-      'footer.col3':  'About DA Affiliate',
-      'footer.copy':  '© 2026 DA Affiliate. All rights reserved.',
-
-      // Explainer cards
-      'ec.h1': 'What Is Affiliate?',
-      'ec.p1': 'You refer others to sign up for a crypto exchange through <strong>your unique link</strong>. When they trade, you earn a commission from their trading fees.',
-      'ec.hint1': 'Tap to learn more →',
-      'ec.h2': 'How Much Can You Earn?',
-      'ec.p2': 'Commissions typically range from <strong>20%–50% of trading fees</strong> from referred users. Some exchanges pay lifetime commissions.',
-      'ec.hint2': 'Tap to see real examples →',
-      'ec.h3': 'Key Advantages',
-      'ec.p3': 'No capital required, no trading experience needed. Passive income — earn even while you sleep.',
-      'ec.hint3': 'Tap to see all advantages →',
-      // Guide nav & comparison
+      'hero.eyebrow':    'The affiliate programme of DA Network',
+      'hero.h1':         'DA Affiliate',
+      'hero.h2':         'for experienced traders and community builders.',
+      'hero.lead':       'Two groups, two offers. Experienced, higher-volume traders can take a simple, direct arrangement: a fixed commission on their own eligible trading fees. People building trading communities get a partner team, support resources and commission reconciliation behind them.',
+      'hero.join':       'Join DA Affiliate',
+      'hero.toTraders':  'For traders',
+      'hero.toPartners': 'For partners',
+      // At a glance
+      'glance.tag':     'At a glance',
+      'glance.meta':    'Terms confirmed per exchange',
+      'glance.traders': 'Exchanges open for onboarding',
+      'glance.levels':  'Commission level — direct referrals only',
+      'glance.contact': 'Business development on Telegram',
+      // For traders
+      'traders.tag':   'For traders',
+      'traders.title': 'A direct fee arrangement for experienced traders',
+      'traders.sub':   'For experienced, higher-volume traders who prefer a simple, direct arrangement to a membership. You register under a DA Affiliate link as an affiliate account and trade as usual.',
+      'traders.c1.title': 'Register under a DA Affiliate link',
+      'traders.c1.body':  'Open your account through a DA Affiliate link on one of the exchanges available now, set up as an affiliate account.',
+      'traders.c2.title': 'Fixed commission on your own fees',
+      'traders.c2.body':  'You receive a fixed commission on your own eligible trading fees, under exchange-specific terms. Terms are confirmed per exchange; not every exchange supports identical terms.',
+      'traders.c3.title': 'Credited by the exchange',
+      'traders.c3.body':  "Where the exchange supports it, the commission is credited through the exchange's own affiliate system.",
+      'traders.c4.title': 'Signal-only channel',
+      'traders.c4.body':  'You get access to a signal-only channel. Every trading decision stays your own.',
+      'traders.cashback.text': 'This is not the DA Cashback membership. The daily plan, member community, learning and support are part of DA Cashback.',
+      'traders.cashback.link': 'See DA Cashback',
+      // Exchanges
+      'exch.title':      'Exchanges open for onboarding',
+      'exch.count':      '{available} available now · {paused} partnership paused',
+      'exch.all':        'View all {total} exchanges',
+      'exch.pausedNote': '“Partnership paused” means we are not registering new members on that exchange right now.',
+      'exch.terms':      'Terms confirmed per exchange',
+      'exch.rate':       'Confirmed rate',
+      'exch.join':       'Register on {name}',
+      // For partners
+      'partners.tag':   'For partners',
+      'partners.title': 'Build your channel with DA behind you',
+      'partners.sub':   "DA Affiliate is DA Network's partner-development arm for people building trading communities.",
+      'partners.lead':  'Earn recurring commission from every trade your referrals make, even when you’re offline.',
+      'partners.c1.title': 'Direct referral business',
+      'partners.c1.body':  'Refer traders to the exchanges available now through your DA Affiliate link. Commission comes from the trading fees of traders you refer directly.',
+      'partners.c2.title': 'Exchange partnership arrangements',
+      'partners.c2.body':  "DA manages the relationship with each exchange's partner programme and confirms which terms apply to you.",
+      'partners.c3.title': 'Channel and community guidance',
+      'partners.c3.body':  'Advice on building your channel or community. You can run your own channel, as long as your referrals go through your DA Affiliate link.',
+      'partners.c4.title': 'Support, reconciliation and resources',
+      'partners.c4.body':  "Your referrals can reach DA's customer-support team and Telegram channels. DA reconciles commission against exchange records and shares partner resources.",
+      'partners.level.title': 'One direct level.',
+      'partners.level.body':  'Commission comes from the trading fees of traders you refer directly. If you want to build a team of partners, talk to DA directly.',
+      'partners.cta': 'Talk to DA about partnering',
+      // How it works
+      'how.tag':   'How it works',
+      'how.title': 'How affiliate commission works',
+      'how.sub':   'Exchanges share part of the trading fees they collect with the affiliate account that referred the trader. Each exchange sets its own terms.',
+      'how.c1.num':   'Link',
+      'how.c1.title': 'Your referral link',
+      'how.c1.body':  'A trader registers on an exchange through your link and is tied to your affiliate account.',
+      'how.c2.num':   'Fees',
+      'how.c2.title': 'A share of trading fees',
+      'how.c2.body':  "When that trader pays trading fees, the exchange pays a share to the affiliate account. The share depends on the exchange, the product and the programme's terms.",
+      'how.c3.unit':  'level',
+      'how.c3.title': 'Direct referrals only',
+      'how.c3.body':  'Commission comes only from traders you refer directly. Terms can change when an exchange updates its programme.',
+      'guide.v3.stepsTitle': 'Getting started, step by step',
       'guide.prev': 'Previous',
       'guide.next': 'Next',
-      'guide.compareTitle': 'Top Crypto Affiliate Exchanges Compared',
-      'guide.viewAllDeals': 'View All 12 Exchanges',
       // Calculator
-      'calc.inputTitle': 'Enter Parameters',
-      'calc.lbl1': 'Referrals per month',
-      'calc.unit.people': 'people',
-      'calc.lbl2': 'Avg. trading volume per person (USD/month)',
-      'calc.lbl3': 'Commission rate (%)',
-      'calc.lbl4': 'Exchange trading fee (%)',
-      'calc.resultTitle': 'Estimated Results',
-      'calc.res1': 'This month\'s income',
-      'calc.res2': 'Annual income',
-      'calc.res3': 'Total exchange fees',
-      'calc.res4': 'Commission per person',
-      'calc.note': '* Estimated projection. Actual income depends on user activity and exchange terms.',
-      // DA Affiliate intro cards
-      'dan.c1.title': 'Wide Coverage',
-      'dan.c1.body': 'Operating in Vietnam, Indonesia, Philippines — and expanding across Southeast Asia with 237+ active partners.',
-      'dan.c2.title': 'Highest Commissions',
-      'dan.c2.body': 'Commission rates up to <strong class="gold-text">70%</strong> — higher than direct sign-ups, negotiated exclusively by DA Affiliate with each exchange.',
-      'dan.c3.title': 'Full Support',
-      'dan.c3.body': '24/7 admin support with resources, tools, and personalized growth roadmaps for every partner.',
-      'dan.c4.title': 'Sustainable Growth',
-      'dan.c4.body': 'Earn commission from direct referrals and tier-1 sub-affiliates — up to 2 levels.',
-      // Partner Wins (replaces fake leaderboard)
-      'wins.badge': '🎯 REAL STORIES',
-      'wins.title': 'Real Partners, Real Results',
-      'wins.sub': 'Not an income leaderboard. Just a few real stories from partners building traffic and earning commission through DA Affiliate.',
-      'wins.note': 'All stories are shared with partner consent. Results may vary depending on channel, traffic, and execution.',
-      'wins.note.link': 'See how DA Affiliate verifies partners →',
-      // Verification block
-      'verify.badge': '🔍 TRANSPARENCY',
-      'verify.title': 'How DA Affiliate Verifies Numbers',
-      'verify.sub': 'In an industry where fake screenshots and fake leaderboards are routine — here\'s how we make sure every number you see is real.',
-      'verify.s1.title': 'Exchange dashboard data',
-      'verify.s1.body': 'Every partner registers under DA Affiliate\'s ref link. Admin sees pending/paid commissions directly from <strong>Binance, Ourbit, Bingx</strong> dashboards — untouched by third parties.',
-      'verify.s2.title': 'Withdrawal records',
-      'verify.s2.body': 'The “paid” number on this site counts only commissions <strong>successfully transferred</strong> to partner wallets/accounts — excluding pending or canceled. Partners can cross-check against their own withdrawal history.',
-      'verify.s3.title': 'Partner consent',
-      'verify.s3.body': 'Every story, quote, and personal stat shown publicly is <strong>shared with consent</strong>. You can request to remove your info at any time — we process within 48h.',
-      'verify.cta.text': 'Think the numbers don\'t match your withdrawals? Want details on a specific partner case study?',
-      'verify.cta.btn': '📩 Contact admin',
-      // Legacy leaderboard keys (kept for safety)
-      'dan.lb.badge': '🎯 REAL STORIES',
-      'dan.lb.sub': 'Monthly snapshot · Data from DA Affiliate',
-      'dan.lb.h.channel': 'Channel',
-      'dan.lb.h.earn': 'Commission/Month',
-      'dan.lb.h.rate': 'Rate',
-      'dan.lb.note': '* Partner consent and data transparency are DA Affiliate\'s commitment.',
-      // Feedback
-      'dan.fb.badge': '📸 REAL PROOF',
-      'dan.fb.sub': 'Commission confirmation screenshots — continuously updated from partners in the network.',
-      'dan.fb.ph1': 'Images coming soon',
-      'dan.fb.ph2': 'Partners submit feedback screenshots to admin for display here',
-      'dan.cta.text': 'Ready to join DA Affiliate and start earning commissions?',
-      'dan.cta.btn': 'Get Started Now',
-      // Đặc Quyền cards
-      'dq.badge.limited': '✓ Hand-picked partners',
-      'dq.card1.body': "Don't convince your community. Send them this link.",
-      'dq.card2.body': 'Daily <strong>market plan updates</strong> from professional traders. Know where the market is heading before everyone else.',
-      'dq.card3.body': 'A private channel sharing <strong>financial truths</strong> and <strong>life philosophy</strong> that the wealthy never say publicly.',
-      'dq.card.details': 'View details',
-      'dq.cta.sub': 'Join — we respond within 24–48h.',
-      'dash.point1': 'Opportunity to use DA Affiliate\'s <strong>exclusive trading bot</strong>',
-      'dash.point2': 'Signal tracking website with <strong>transparent bot performance</strong>',
-      'dash.btn': 'Open dashboard →',
-      'dash.disclaimer': 'Past performance does not guarantee future results. This is not investment advice.',
-      // Popup Bot
-      // Popup Market
-      'popup.mkt.badge': '🟢 UPDATED DAILY · EXCLUSIVE',
-      'popup.mkt.title': 'Daily Market Plan Channel',
-      'popup.mkt.lead': 'While millions scroll Twitter through information overload — you receive a clean, clear plan every morning at 7am.',
-      'popup.mkt.f1.title': 'Market plan every day at 7:00 AM',
-      'popup.mkt.f1.body': 'Trend analysis, support/resistance zones, priority pairs for the day',
-      'popup.mkt.f2.title': 'Macro + On-chain Analysis',
-      'popup.mkt.f2.body': 'On-chain data, aggregated sentiment, global macro financial impact',
-      'popup.mkt.f3.title': 'Specific Trade Setups',
-      'popup.mkt.f3.body': 'Clear Entry, SL, TP — just read and decide. No self-analysis needed',
-      'popup.mkt.f4.title': 'Real-time Market Alerts',
-      'popup.mkt.f4.body': 'Instant alerts on major moves — act before 90% of the market',
-      'popup.mkt.alert': '📊 Those who get information first <strong>earn more</strong>. This channel is partner-only — not available outside.',
-      'popup.mkt.cta': '🔓 Join to Access the Channel',
-      'popup.mkt.note': 'Free · DA Affiliate partners only',
-      // Popup Facts
-      'dq.badge.exclusive':'💎 Exclusive', 'popup.facts.badge': '💎 EXCLUSIVE · NOT FOR SALE',
-      'popup.facts.title': 'Exclusive Facts &amp; Quotes Channel',
-      'popup.facts.lead': 'What the truly wealthy understand about money — but never say out loud. Now it\'s yours.',
-      'popup.facts.f1.title': 'Financial truths schools never teach',
-      'popup.facts.f1.body': 'How the wealthy truly think about money, risk, investing, and financial freedom',
-      'popup.facts.f2.title': 'Quotes from CEOs, investors, billionaires',
-      'popup.facts.f2.body': 'Life philosophies distilled from those who have achieved true financial freedom',
-      'popup.facts.f3.title': 'Elite lifestyle — the mindset of the wealthy',
-      'popup.facts.f3.body': 'How they see time, relationships, health, and opportunity — different from 99% of people',
-      'popup.facts.f4.title': 'Regular updates — no spam',
-      'popup.facts.f4.body': 'Every post is a concentrated insight — 2 minutes of reading changes your thinking for the whole day',
-      'popup.facts.alert': '✨ This channel has no paid version. <strong>Only DA Affiliate partners</strong> get in — completely free.',
-      'popup.facts.cta': '🔓 Join to Access the Channel',
-      'popup.facts.note': 'Completely free · Just be a partner',
+      'calc.v3.tag':    'Calculator',
+      'calc.v3.title':  'Commission calculator',
+      'calc.v3.sub':    'See how the commission formula behaves with your own assumptions. Nothing here is a DA rate, a forecast or a record of past earnings.',
+      'calc.v3.inputTitle': 'Your assumptions',
+      'calc.v3.exchange':   'Exchange',
+      'calc.v3.exchangeCustom': 'Any exchange — my own assumptions',
+      'calc.v3.rateNoteCustom': 'Commission rates are confirmed per exchange. The calculator uses the rate you enter.',
+      'calc.v3.rateNoteNone':   'No commission rate is published for {name} yet. The calculator uses the rate you enter.',
+      'calc.v3.rateNoteSet':    'Rate set from the confirmed {name} terms.',
+      'calc.v3.lblRefs':    'Active referred traders',
+      'calc.v3.unitTraders':'traders',
+      'calc.v3.lblVol':     'Monthly trading volume per trader (USD)',
+      'calc.v3.lblComm':    'Commission rate — your assumption (%)',
+      'calc.v3.lblFee':     'Exchange trading fee — your assumption (%)',
+      'calc.v3.resultTitle':'Results',
+      'calc.v3.res1': 'Estimated monthly commission',
+      'calc.v3.res2': 'Estimated 12-month total',
+      'calc.v3.res3': 'Trading fees generated per month',
+      'calc.v3.res4': 'Commission per referred trader per month',
+      'calc.v3.chart':   'Cumulative estimate over 12 months, with every input held constant (no growth assumed).',
+      'calc.v3.chartLabel': 'Cumulative estimate (USD)',
+      'calc.v3.month':   'M',
+      'calc.v3.formula': 'Commission = referred traders × monthly volume per trader × fee rate × commission rate.',
+      // Access by group
+      'benefits.tag':   'Access by group',
+      'benefits.title': 'Who gets what',
+      'benefits.sub':   'Each group gets a different set of services. Anything not listed here is not part of the current offer.',
+      'benefits.trader.title': 'DA Affiliate traders',
+      'benefits.trader.i1': 'Fixed commission arrangement on your own eligible fees, where the exchange programme supports it',
+      'benefits.trader.i2': "Crediting through the exchange's affiliate system, where supported",
+      'benefits.trader.i3': 'Signal-only channel',
+      'benefits.trader.signal': 'Published signals are recorded at DA Signal Tracking',
+      'benefits.cb.title': 'DA Cashback members',
+      'benefits.cb.i1': 'Fee rewards at volume milestones',
+      'benefits.cb.i2': 'Daily plan',
+      'benefits.cb.i3': 'Member community',
+      'benefits.cb.i4': 'Learning',
+      'benefits.cb.i5': 'Support',
+      'benefits.cb.link': 'Go to DA Cashback',
+      'benefits.partner.title': 'DA Affiliate partners',
+      'benefits.partner.i1': 'Partnership guidance',
+      'benefits.partner.i2': 'Exchange-relationship support',
+      'benefits.partner.i3': 'Channel and community development guidance',
+      'benefits.partner.i4': "DA's customer-support and operational resources, including its Telegram channels",
+      'benefits.partner.i5': 'Commission reconciliation',
+      'benefits.partner.i6': 'Partner resources',
+      // Partner statistics
+      'stats.tag':   'Partner statistics',
+      'stats.title': 'Partner network figures',
+      'stats.sub':   'Each figure is published only after it has been reconciled against exchange records, together with its period, source and date. Until then it reads “Awaiting verified data”.',
+      'stats.awaiting': 'Awaiting verified data',
+      'stats.period':   'Period',
+      'stats.source':   'Source',
+      'stats.updated':  'Updated',
+      'stories.tag':   'Partner stories',
+      'stories.title': 'Partner stories',
+      'stories.sub':   'Shared with written consent. Results vary with channel, audience and effort.',
+      'rec.tag':   'Reconciliation',
+      'rec.title': 'How DA reconciles commissions',
+      'rec.sub':   "Before a commission figure is published, it is checked against the exchanges' own records.",
+      'rec.s1.title': 'Exchange records',
+      'rec.s1.body':  "Commission data starts from each exchange's affiliate dashboard for accounts registered under DA Affiliate links.",
+      'rec.s2.title': 'Received versus paid',
+      'rec.s2.body':  'For each period, DA matches commission received from exchanges against commission paid to partners. Pending or cancelled amounts are left out.',
+      'rec.s3.title': 'Consent before publication',
+      'rec.s3.body':  "Partner stories, quotes and screenshots appear only with the partner's written consent.",
+      'rec.cta.text': 'Questions about a figure, or about your own commission?',
+      'rec.cta.btn':  'Contact DA',
+      'proof.v3.tag':   'Commission records',
+      'proof.v3.title': 'Affiliate dashboard records',
+      'proof.v3.sub':   'Screenshots from exchange affiliate dashboards, shown with consent. Each caption names the exchange and the period.',
+      // FAQ
+      'faq.v3.tag':   'FAQ',
+      'faq.v3.title': 'Questions and answers',
       // Contact
-      'lh.bd.title': 'Business Development',
-      'lh.bd.handle': '@jacksondz',
-      'lh.card1.title': 'Telegram Admin',
-      'lh.card1.handle': '@dacrypto_admin',
-      'lh.card2.title': 'Community Group',
-      'lh.card2.handle': 'DA NETWORK Telegram Group',
-      'lh.card3.title': 'Support Email',
-      'lh.card3.handle': 'support@dacrypto.net',
-      'lh.note': 'Typically responds within <strong>1–2 hours</strong> during business hours.',
-      // Footer links
-      'footer.link.start': 'Get Started',
-      'footer.link.calc': 'Calculator',
-      'footer.link.contact': 'Contact',
-      'footer.link.calc2': 'Calculator',
-      'footer.disclaimer': '<strong>Disclaimer:</strong> Content is for informational and educational purposes only. Not financial advice. Crypto investments carry high risk.',
-      'footer.copy2': '© 2026 DA Affiliate.',
+      'contact.tag':   'Contact',
+      'contact.title': 'Talk to DA Affiliate',
+      'contact.sub':   'Questions about the trader offering, your terms or partnering? Message the business development team on Telegram.',
+      'contact.tg.title':    'Business development',
+      'contact.email.title': 'Support email',
+      'contact.response':    'Typical response time: {time}.',
+      'contact.hours':       'Support hours: {hours}.',
+      // Footer
+      'footer.v3.desc': 'The affiliate programme of DA Network.',
+      'footer.v3.copy': '© 2026 DA Affiliate · part of DA Network.',
+      // JS-rendered labels
+      'steps.word':     'Step',
+      'steps.complete': 'Done',
+      'steps.details':  'Details',
     },
     th: {
       'nav.cta':'เริ่มต้นเลย','nav.guide':'คู่มือ','nav.calc':'คำนวณรายได้','nav.faq':'คำถาม','nav.network':'DA Affiliate','nav.privilege':'⭐ สิทธิพิเศษ',
@@ -2313,6 +1860,13 @@ document.addEventListener('keydown', function(e) {
     },
   };
 
+  // Lookup used by the renderers above: current language → English → ''.
+  window.daT = function(key) {
+    var t = translations[currentLang] || {};
+    var v = t[key] !== undefined ? t[key] : translations.en[key];
+    return v === undefined ? '' : fillTokens(v);
+  };
+
   // English is the default; a visitor's choice is remembered across pages.
   var LANG_KEY = 'dacrypto-lang';
   var currentLang = 'en';
@@ -2327,10 +1881,13 @@ document.addEventListener('keydown', function(e) {
     if (!instant) document.body.classList.add('lang-switching');
 
     var apply = function() {
+      // Missing keys fall back to English (V3 keys exist only in `en` so far).
+      var en = translations.en;
       document.querySelectorAll('[data-i18n]').forEach(function(el) {
         var key = el.getAttribute('data-i18n');
-        if (t[key] !== undefined) {
-          el.innerHTML = stripEmoji(t[key]);
+        var v = t[key] !== undefined ? t[key] : en[key];
+        if (v !== undefined) {
+          el.innerHTML = stripEmoji(fillTokens(v));
         }
       });
 
@@ -2352,8 +1909,13 @@ document.addEventListener('keydown', function(e) {
       document.body.classList.remove('lang-switching');
       // Re-render JS-driven sections
       renderStep(currentStep);
-      renderComparison();
+      renderExchanges();
       renderFaqs();
+      renderMetrics();
+      renderStories();
+      renderContact();
+      calcRateNote(false);
+      calcEarnings();
     };
     if (instant) apply(); else setTimeout(apply, 180);
   }
@@ -2373,7 +1935,6 @@ document.addEventListener('keydown', function(e) {
     // Close dropdown
     var dd = document.getElementById('langDropdown');
     if (dd) dd.classList.remove('open');
-    if (window.renderPartnerWins) setTimeout(window.renderPartnerWins, 220);
   };
 
   window.toggleLangDropdown = function() {

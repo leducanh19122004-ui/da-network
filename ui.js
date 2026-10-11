@@ -16,12 +16,7 @@
       'eco.learn': 'Learn', 'eco.trade': 'Trade', 'eco.save': 'Save', 'eco.earn': 'Earn',
       'footer.eco': 'Ecosystem', 'footer.lang': 'Languages',
       openMenu: 'Open menu', closeMenu: 'Close menu',
-      'ec.u1': 'link', 'ec.u3': 'capital',
-      'ec.s1': 'Share your link — earn from every trade your referrals make.',
-      'ec.s2': "Of referred users' trading fees. Some exchanges pay for life.",
-      'ec.s3': 'No capital. No trading experience. Passive income.',
-      'steps.swipe': 'Swipe or drag ← →',
-      'calc.volNote': 'Typical user: $200K–$700K / month'
+      'steps.swipe': 'Swipe or drag ← →'
     },
     vi: {
       skip: 'Chuyển đến nội dung', newTab: '(mở trong tab mới)',
@@ -29,12 +24,7 @@
       'eco.learn': 'Học', 'eco.trade': 'Giao dịch', 'eco.save': 'Tiết kiệm', 'eco.earn': 'Thu nhập',
       'footer.eco': 'Hệ sinh thái', 'footer.lang': 'Ngôn ngữ',
       openMenu: 'Mở menu', closeMenu: 'Đóng menu',
-      'ec.u1': 'link', 'ec.u3': 'vốn',
-      'ec.s1': 'Chia sẻ link — nhận hoa hồng từ mọi giao dịch của người bạn giới thiệu.',
-      'ec.s2': 'Phí giao dịch của người được giới thiệu. Một số sàn trả trọn đời.',
-      'ec.s3': 'Không cần vốn. Không cần kinh nghiệm. Thu nhập thụ động.',
-      'steps.swipe': 'Vuốt hoặc kéo ← →',
-      'calc.volNote': 'Người dùng phổ thông trung bình: $200K–$700K / tháng'
+      'steps.swipe': 'Vuốt hoặc kéo ← →'
     },
     th: {
       skip: 'ข้ามไปยังเนื้อหา', newTab: '(เปิดในแท็บใหม่)',
@@ -42,12 +32,7 @@
       'eco.learn': 'เรียนรู้', 'eco.trade': 'เทรด', 'eco.save': 'ประหยัด', 'eco.earn': 'รายได้',
       'footer.eco': 'ระบบนิเวศ', 'footer.lang': 'ภาษา',
       openMenu: 'เปิดเมนู', closeMenu: 'ปิดเมนู',
-      'ec.u1': 'ลิงก์', 'ec.u3': 'เงินทุน',
-      'ec.s1': 'แชร์ลิงก์ของคุณ รับค่าคอมมิชชันจากทุกการเทรดของผู้ที่คุณแนะนำ',
-      'ec.s2': 'ของค่าธรรมเนียมการเทรดจากผู้ที่คุณแนะนำ บางแพลตฟอร์มจ่ายตลอดชีพ',
-      'ec.s3': 'ไม่ต้องใช้ทุน ไม่ต้องมีประสบการณ์เทรด รายได้แบบพาสซีฟ',
-      'steps.swipe': 'ปัดหรือลาก ← →',
-      'calc.volNote': 'ผู้ใช้ทั่วไปโดยเฉลี่ย: $200K–$700K / เดือน'
+      'steps.swipe': 'ปัดหรือลาก ← →'
     },
     ko: {
       skip: '본문으로 건너뛰기', newTab: '(새 탭에서 열림)',
@@ -55,12 +40,7 @@
       'eco.learn': '학습', 'eco.trade': '거래', 'eco.save': '절감', 'eco.earn': '수익',
       'footer.eco': '에코시스템', 'footer.lang': '언어',
       openMenu: '메뉴 열기', closeMenu: '메뉴 닫기',
-      'ec.u1': '링크', 'ec.u3': '자본',
-      'ec.s1': '링크를 공유하고, 추천한 사용자의 모든 거래에서 커미션을 받으세요.',
-      'ec.s2': '추천 사용자 거래 수수료 기준. 일부 거래소는 평생 지급합니다.',
-      'ec.s3': '자본도, 트레이딩 경험도 필요 없는 패시브 인컴.',
-      'steps.swipe': '스와이프 또는 드래그 ← →',
-      'calc.volNote': '일반 사용자 평균: 월 $200K–$700K'
+      'steps.swipe': '스와이프 또는 드래그 ← →'
     },
     id: {
       skip: 'Langsung ke konten', newTab: '(terbuka di tab baru)',
@@ -68,12 +48,7 @@
       'eco.learn': 'Belajar', 'eco.trade': 'Trading', 'eco.save': 'Hemat', 'eco.earn': 'Hasilkan',
       'footer.eco': 'Ekosistem', 'footer.lang': 'Bahasa',
       openMenu: 'Buka menu', closeMenu: 'Tutup menu',
-      'ec.u1': 'link', 'ec.u3': 'modal',
-      'ec.s1': 'Bagikan link Anda — dapatkan komisi dari setiap trade referral Anda.',
-      'ec.s2': 'Dari biaya trading pengguna referral. Beberapa bursa membayar seumur hidup.',
-      'ec.s3': 'Tanpa modal. Tanpa pengalaman trading. Penghasilan pasif.',
-      'steps.swipe': 'Geser atau seret ← →',
-      'calc.volNote': 'Rata-rata pengguna biasa: $200K–$700K / bulan'
+      'steps.swipe': 'Geser atau seret ← →'
     }
   };
 
@@ -86,7 +61,9 @@
     var lang = currentLang();
     var s = UI[lang];
     document.querySelectorAll('[data-ui]').forEach(function (el) {
-      var v = s[el.getAttribute('data-ui')];
+      var key = el.getAttribute('data-ui');
+    // Missing keys fall back to English.
+    var v = s[key] !== undefined ? s[key] : UI.en[key];
       if (v !== undefined) el.textContent = v;
     });
     syncMenuLabel();
