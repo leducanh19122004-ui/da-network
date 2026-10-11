@@ -60,22 +60,44 @@ function escapeHtml(s) {
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 function pad2(n) { return String(n).padStart(2, '0'); }
-function availableExchanges() {
-  return (CFG.exchanges || []).filter(function (e) { return e.status === 'available'; });
+// Registry helpers (V3.1 two-field model; see data/config.js).
+function canRegister(e) { return CFG.canRegister ? CFG.canRegister(e) : false; }
+function registerExchanges() { return (CFG.exchanges || []).filter(canRegister); }
+function partnerExchanges() {
+  return (CFG.exchanges || []).filter(function (e) { return e.partnershipStatus === 'active'; });
 }
+function exchangeNames(fn) { return (CFG.exchanges || []).filter(fn).map(function (e) { return e.name; }); }
 function joinNames(names) {
   if (names.length <= 1) return names.join('');
   return names.slice(0, -1).join(', ') + ' and ' + names[names.length - 1];
 }
+// Conditional sentences built from the registry. EN only (V3.1 is not
+// translated); a sentence is '' when its list is empty, so copy never names
+// an empty set.
+var REGISTRY_SENTENCES = {
+  linkUpdating: 'The registration link for {names} is being updated; the partnership itself is unchanged.',
+  newPartners: 'New partners being set up: {names} — registration links and terms will be published once confirmed.'
+};
+function registrySentence(key, names) {
+  return names.length ? REGISTRY_SENTENCES[key].replace('{names}', joinNames(names)) : '';
+}
 function cfgVars() {
-  var c = CFG.counts ? CFG.counts() : { total: 0, available: 0, paused: 0 };
+  var c = CFG.counts ? CFG.counts() : { total: 0, active: 0, newDealPending: 0, paused: 0, registerOpen: 0, linkUpdating: 0, linkComing: 0 };
   var urls = CFG.urls || {};
   var tg = (CFG.contact && CFG.contact.telegram) || {};
+  var updating = exchangeNames(function (e) { return e.referralLinkStatus === 'awaiting_update'; });
+  var newOnes = exchangeNames(function (e) { return e.partnershipStatus === 'new_deal_pending'; });
   return {
-    total: c.total, available: c.available, paused: c.paused,
-    availableNames: joinNames(availableExchanges().map(function (e) { return e.name; })),
+    total: c.total, active: c.active, newDealPending: c.newDealPending, paused: c.paused,
+    registerOpen: c.registerOpen, linkUpdating: c.linkUpdating, linkComing: c.linkComing,
+    registerNames: joinNames(registerExchanges().map(function (e) { return e.name; })),
+    linkUpdatingNames: joinNames(updating),
+    newPartnerNames: joinNames(newOnes),
+    linkUpdatingSentence: registrySentence('linkUpdating', updating),
+    newPartnersSentence: registrySentence('newPartners', newOnes),
     telegramHandle: tg.handle || '',
     cashbackUrl: urls.cashback || '',
+    networkTradersUrl: urls.networkTraders || '',
     signalUrl: urls.signalTracking || '',
     networkUrl: urls.network || ''
   };
@@ -101,12 +123,17 @@ function applyConfigBindings(root) {
   });
   var v = cfgVars();
   var map = {
-    'count.available': v.available, 'count.paused': v.paused, 'count.total': v.total,
+    'count.registerOpen': v.registerOpen, 'count.active': v.active, 'count.newDealPending': v.newDealPending,
+    'count.paused': v.paused, 'count.total': v.total,
     'telegram.handle': v.telegramHandle
   };
   root.querySelectorAll('[data-cfg]').forEach(function (el) {
     var val = map[el.getAttribute('data-cfg')];
     if (val !== undefined && val !== null) el.textContent = val;
+  });
+  // data-requires="<token>": hide the element when that derived sentence is empty.
+  root.querySelectorAll('[data-requires]').forEach(function (el) {
+    el.hidden = !v[el.getAttribute('data-requires')];
   });
   var d = CFG.disclaimers || {};
   root.querySelectorAll('[data-disclaimer]').forEach(function (el) {
@@ -398,18 +425,19 @@ const stepsData = {
           <p><strong>Partners.</strong> People building trading communities who refer other traders and want DA's partner team, support resources and commission reconciliation behind them.</p>
         </div>
         <div class="step-example">
-          <div class="step-example-title">Want a plan and a community?</div>
-          <p>If you want a daily plan, a member community, learning and support, the DA Cashback membership is the better fit. <a class="text-link" href="{cashbackUrl}" target="_blank" rel="noopener noreferrer">See DA Cashback</a></p>
+          <div class="step-example-title">Want plans, a community and support?</div>
+          <p>Daily market plans and trading signals, the trader community, learning resources, direct team support and Volume Rewards are DA Network trader benefits. <a class="text-link" href="{networkTradersUrl}" target="_blank" rel="noopener noreferrer">See DA Network trader benefits</a></p>
         </div>
       </div>`,
     },
     {
-      title: 'Register on an available exchange',
-      subtitle: 'Only exchanges marked “Available” accept new registrations',
+      title: 'Register where a link is available',
+      subtitle: 'Only exchanges with a Register button accept new registrations through DA Affiliate',
       content: `<div class="step-body">
         <div class="step-main">
           <h4>Use a DA Affiliate link</h4>
-          <p>Register through a DA Affiliate link on one of the exchanges available now: <strong>{availableNames}</strong>. The links are in the exchange list on this page.</p>
+          <p>Register through a DA Affiliate link on an exchange that is open for registration now: <strong>{registerNames}</strong>. The links are in the exchange list on this page.</p>
+          <p>{linkUpdatingSentence} {newPartnersSentence}</p>
           <p>“Partnership paused” means we are not registering new members on that exchange right now.</p>
         </div>
         <div class="step-example">
@@ -461,7 +489,7 @@ const stepsData = {
       content: `<div class="step-body">
         <div class="step-main">
           <h4>Where to check</h4>
-          <p>Each exchange's affiliate dashboard shows referred accounts and commission. For each period, DA reconciles commission received from exchanges against commission paid.</p>
+          <p>Each exchange's affiliate dashboard shows referred accounts and commission. For each period, DA reconciles the partner commission received from exchanges against the affiliate commission paid to partners.</p>
           <p>If something does not match, contact DA with the exchange, the period and your UID.</p>
         </div>
         <div class="step-example">
@@ -757,17 +785,16 @@ document.getElementById('nextStep')?.addEventListener('click', () => {
 
 renderStep(1);
 
-// ─── EXCHANGES OPEN FOR ONBOARDING (from data/config.js) ─────────
-// Only `available` exchanges are listed here, each with its byte-identical
-// referral link. A rate appears only when its commission terms are
-// publishable (RECONCILED/VERIFIED + publish); otherwise "Terms confirmed
-// per exchange".
+// ─── PARTNER EXCHANGES (from data/config.js) ─────────────────────
+// Exchanges with partnershipStatus 'active' are listed here. A Register
+// button appears only when canRegister() (link 'available' + https URL);
+// otherwise the link state is shown as text ("Registration link updating").
+// A rate appears only when its commission terms are publishable
+// (RECONCILED/VERIFIED + publish); otherwise "Terms confirmed per exchange".
 function renderExchanges() {
   var grid = document.getElementById('comparisonGrid');
   if (!grid) return;
-  var labels = CFG.exchangeStatusLabels || {};
-  var markets = CFG.marketLabels || {};
-  grid.innerHTML = availableExchanges().map(function (ex, i) {
+  grid.innerHTML = partnerExchanges().map(function (ex, i) {
     var rate = CFG.publishedRate ? CFG.publishedRate(ex) : null;
     var terms = rate
       ? '<p class="compare-rate"><span class="compare-rate-num">' + escapeHtml(rate.ratePct) + '%</span>'
@@ -776,17 +803,23 @@ function renderExchanges() {
     return '<article class="compare-card">'
       + '<div class="compare-card-top">'
       +   '<span class="label">' + pad2(i + 1) + '</span>'
-      +   '<span class="compare-tag">' + escapeHtml(markets[ex.market] || ex.market) + '</span>'
+      +   '<span class="compare-tag">' + escapeHtml(CFG.marketLabel(ex)) + '</span>'
       + '</div>'
       + '<h4 class="compare-label">' + escapeHtml(ex.name) + '</h4>'
-      + '<p class="status-pill status-' + escapeHtml(ex.status) + '">' + escapeHtml(labels[ex.status] || ex.status) + '</p>'
+      + '<p class="status-pill status-' + escapeHtml(ex.partnershipStatus) + '">' + escapeHtml(CFG.partnershipLabel(ex)) + '</p>'
       + terms
-      + (ex.referralUrl
-        ? '<a class="btn btn-gold compare-cta" href="' + escapeHtml(ex.referralUrl) + '" target="_blank" rel="noopener noreferrer sponsored">'
-          + escapeHtml(fillTokens(tr('exch.join'), { name: ex.name })) + '</a>'
-        : '')
+      + linkHtml(ex)
       + '</article>';
   }).join('');
+}
+// Register button (only when canRegister) or the link-state text; never a '#' href.
+function linkHtml(ex) {
+  if (canRegister(ex)) {
+    return '<a class="btn btn-gold compare-cta" href="' + escapeHtml(ex.referralUrl) + '" target="_blank" rel="noopener noreferrer sponsored">'
+      + escapeHtml(fillTokens(tr('exch.join'), { name: ex.name })) + '</a>';
+  }
+  var state = CFG.linkStateLabel ? CFG.linkStateLabel(ex) : null;
+  return state ? '<p class="link-state link-state-' + escapeHtml(ex.referralLinkStatus) + '">' + escapeHtml(state) + '</p>' : '';
 }
 renderExchanges();
 
@@ -814,7 +847,9 @@ function setupCalculator() {
 
   var sel = document.getElementById('calcExchange');
   if (sel) {
-    availableExchanges().forEach(function (ex) {
+    // Active partners only. A rate is pre-filled only from publishable terms
+    // (calcRateNote); otherwise the visitor's own rate is used.
+    partnerExchanges().forEach(function (ex) {
       var o = document.createElement('option');
       o.value = ex.id;
       o.textContent = ex.name;
@@ -989,12 +1024,16 @@ const faqsData = {
       a: 'DA Affiliate is the affiliate programme of DA Network. It offers a fixed commission arrangement for experienced, higher-volume traders, and partner development for people building trading communities.'
     },
     {
-      q: 'How is the trader offering different from DA Cashback?',
-      a: 'DA Cashback is a membership: fee rewards at volume milestones plus a daily plan, member community, learning and support. The DA Affiliate trader offering is a direct arrangement: a fixed commission on your own eligible trading fees, where the exchange programme supports it, and a signal-only channel. It does not include the DA Cashback membership benefits. <a class="text-link" href="{cashbackUrl}" target="_blank" rel="noopener noreferrer">See DA Cashback</a>'
+      q: 'How is the trader offering different from DA Network trader benefits?',
+      a: 'DA Network trader benefits — daily market plans and trading signals, the trader community, learning resources, direct team support and Volume Rewards — are on the DA Network Traders page. The DA Affiliate trader offering is a direct arrangement: a fixed commission on your own eligible trading fees, where the exchange programme supports it, and a signal-only channel. <a class="text-link" href="{networkTradersUrl}" target="_blank" rel="noopener noreferrer">See DA Network trader benefits</a>'
+    },
+    {
+      q: 'What is DA Cashback?',
+      a: "DA Cashback is DA Network's independent fee-rebate platform. It is a separate website and a separate programme from DA Affiliate, and it is not the DA Network trader membership. <a class=\"text-link\" href=\"{cashbackUrl}\" target=\"_blank\" rel=\"noopener noreferrer\">Visit DA Cashback</a>"
     },
     {
       q: 'Which exchanges can I join through DA Affiliate?',
-      a: '{availableNames} are available now. The other exchanges on our list show “Partnership paused”, which means we are not registering new members on them right now. <a class="text-link" href="deals.html">See all {total} exchanges</a>'
+      a: '{registerNames} are open for registration now. {linkUpdatingSentence} {newPartnersSentence} The other exchanges on our list show “Partnership paused”, which means we are not registering new members on them right now. <a class="text-link" href="deals.html">See all {total} exchanges</a>'
     },
     {
       q: 'What commission rate will I get?',
@@ -1133,6 +1172,8 @@ function renderMetrics() {
       if (m.reportingPeriod) bits.push(escapeHtml(tr('stats.period')) + ': ' + escapeHtml(m.reportingPeriod));
       if (m.source) bits.push(escapeHtml(tr('stats.source')) + ': ' + escapeHtml(m.source));
       if (m.lastUpdated) bits.push(escapeHtml(tr('stats.updated')) + ': ' + escapeHtml(m.lastUpdated));
+      // accrued / approved / paid — one state per figure, never mixed
+      if (m.paymentState) bits.push(escapeHtml(tr('stats.state')) + ': ' + escapeHtml(m.paymentState));
       meta = '<dd class="metric-meta">' + bits.join(' · ') + '</dd>';
     }
     return '<div class="metric-tile' + (pub ? '' : ' is-pending') + '">'
@@ -1566,7 +1607,7 @@ renderContact();
       // At a glance
       'glance.tag':     'At a glance',
       'glance.meta':    'Terms confirmed per exchange',
-      'glance.traders': 'Exchanges open for onboarding',
+      'glance.traders': 'Exchanges open for registration',
       'glance.levels':  'Commission level — direct referrals only',
       'glance.contact': 'Business development on Telegram',
       // For traders
@@ -1574,19 +1615,21 @@ renderContact();
       'traders.title': 'A direct fee arrangement for experienced traders',
       'traders.sub':   'For experienced, higher-volume traders who prefer a simple, direct arrangement to a membership. You register under a DA Affiliate link as an affiliate account and trade as usual.',
       'traders.c1.title': 'Register under a DA Affiliate link',
-      'traders.c1.body':  'Open your account through a DA Affiliate link on one of the exchanges available now, set up as an affiliate account.',
+      'traders.c1.body':  'Open your account through a DA Affiliate link on an exchange that is open for registration, set up as an affiliate account.',
       'traders.c2.title': 'Fixed commission on your own fees',
       'traders.c2.body':  'You receive a fixed commission on your own eligible trading fees, under exchange-specific terms. Terms are confirmed per exchange; not every exchange supports identical terms.',
       'traders.c3.title': 'Credited by the exchange',
       'traders.c3.body':  "Where the exchange supports it, the commission is credited through the exchange's own affiliate system.",
       'traders.c4.title': 'Signal-only channel',
       'traders.c4.body':  'You get access to a signal-only channel. Every trading decision stays your own.',
-      'traders.cashback.text': 'This is not the DA Cashback membership. The daily plan, member community, learning and support are part of DA Cashback.',
-      'traders.cashback.link': 'See DA Cashback',
+      'traders.network.text': 'Looking for daily market plans and signals, a trader community, learning, direct support and Volume Rewards? Those are DA Network trader benefits, not part of this offer.',
+      'traders.network.link': 'See DA Network trader benefits',
       // Exchanges
-      'exch.title':      'Exchanges open for onboarding',
-      'exch.count':      '{available} available now · {paused} partnership paused',
+      'exch.title':      'Partner exchanges',
+      'exch.count':      '{registerOpen} open for registration · {linkUpdating} link updating · {newDealPending} new partners being set up · {paused} partnership paused',
       'exch.all':        'View all {total} exchanges',
+      'exch.newNote':    '{newPartnersSentence}',
+      'exch.updatingNote': '{linkUpdatingSentence}',
       'exch.pausedNote': '“Partnership paused” means we are not registering new members on that exchange right now.',
       'exch.terms':      'Terms confirmed per exchange',
       'exch.rate':       'Confirmed rate',
@@ -1595,9 +1638,9 @@ renderContact();
       'partners.tag':   'For partners',
       'partners.title': 'Build your channel with DA behind you',
       'partners.sub':   "DA Affiliate is DA Network's partner-development arm for people building trading communities.",
-      'partners.lead':  'Earn recurring commission from every trade your referrals make, even when you’re offline.',
+      'partners.lead':  'Refer traders through your DA Affiliate link and receive a share of the eligible trading fees they pay, under each exchange’s terms.',
       'partners.c1.title': 'Direct referral business',
-      'partners.c1.body':  'Refer traders to the exchanges available now through your DA Affiliate link. Commission comes from the trading fees of traders you refer directly.',
+      'partners.c1.body':  'Refer traders to the exchanges open for registration through your DA Affiliate link. Commission comes from the trading fees of traders you refer directly.',
       'partners.c2.title': 'Exchange partnership arrangements',
       'partners.c2.body':  "DA manages the relationship with each exchange's partner programme and confirms which terms apply to you.",
       'partners.c3.title': 'Channel and community guidance',
@@ -1656,13 +1699,13 @@ renderContact();
       'benefits.trader.i2': "Crediting through the exchange's affiliate system, where supported",
       'benefits.trader.i3': 'Signal-only channel',
       'benefits.trader.signal': 'Published signals are recorded at DA Signal Tracking',
-      'benefits.cb.title': 'DA Cashback members',
-      'benefits.cb.i1': 'Fee rewards at volume milestones',
-      'benefits.cb.i2': 'Daily plan',
-      'benefits.cb.i3': 'Member community',
-      'benefits.cb.i4': 'Learning',
-      'benefits.cb.i5': 'Support',
-      'benefits.cb.link': 'Go to DA Cashback',
+      'benefits.net.title': 'DA Network traders',
+      'benefits.net.i1': 'Daily market plans and trading signals',
+      'benefits.net.i2': 'Trader community',
+      'benefits.net.i3': 'Learning resources',
+      'benefits.net.i4': 'Direct team support',
+      'benefits.net.i5': "Volume Rewards, funded by a portion of DA Network's partner commission",
+      'benefits.net.link': 'See DA Network trader benefits',
       'benefits.partner.title': 'DA Affiliate partners',
       'benefits.partner.i1': 'Partnership guidance',
       'benefits.partner.i2': 'Exchange-relationship support',
@@ -1670,14 +1713,17 @@ renderContact();
       'benefits.partner.i4': "DA's customer-support and operational resources, including its Telegram channels",
       'benefits.partner.i5': 'Commission reconciliation',
       'benefits.partner.i6': 'Partner resources',
+      'benefits.cashback': "DA Cashback is DA Network's independent fee-rebate platform, separate from DA Affiliate and from the DA Network trader benefits.",
+      'benefits.cashbackLink': 'Visit DA Cashback',
       // Partner statistics
       'stats.tag':   'Partner statistics',
       'stats.title': 'Partner network figures',
-      'stats.sub':   'Each figure is published only after it has been reconciled against exchange records, together with its period, source and date. Until then it reads “Awaiting verified data”.',
+      'stats.sub':   'Each figure is published only after it has been reconciled against exchange records, together with its period, source and date. Until then it reads “Awaiting verified data”. Partner commission received, affiliate commission paid and retained commission are reported separately and never added together.',
       'stats.awaiting': 'Awaiting verified data',
       'stats.period':   'Period',
       'stats.source':   'Source',
       'stats.updated':  'Updated',
+      'stats.state':    'State',
       'stories.tag':   'Partner stories',
       'stories.title': 'Partner stories',
       'stories.sub':   'Shared with written consent. Results vary with channel, audience and effort.',
@@ -1687,7 +1733,7 @@ renderContact();
       'rec.s1.title': 'Exchange records',
       'rec.s1.body':  "Commission data starts from each exchange's affiliate dashboard for accounts registered under DA Affiliate links.",
       'rec.s2.title': 'Received versus paid',
-      'rec.s2.body':  'For each period, DA matches commission received from exchanges against commission paid to partners. Pending or cancelled amounts are left out.',
+      'rec.s2.body':  'For each period, DA matches the partner commission received from exchanges against the affiliate commission paid to partners. Accrued, approved and paid amounts are kept apart; pending or cancelled amounts are left out.',
       'rec.s3.title': 'Consent before publication',
       'rec.s3.body':  "Partner stories, quotes and screenshots appear only with the partner's written consent.",
       'rec.cta.text': 'Questions about a figure, or about your own commission?',
@@ -1709,6 +1755,7 @@ renderContact();
       // Footer
       'footer.v3.desc': 'The affiliate programme of DA Network.',
       'footer.v3.copy': '© 2026 DA Affiliate · part of DA Network.',
+      'footer.networkTraders': 'DA Network for traders',
       // JS-rendered labels
       'steps.word':     'Step',
       'steps.complete': 'Done',

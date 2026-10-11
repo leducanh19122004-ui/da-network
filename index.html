@@ -46,7 +46,7 @@
 <!-- ═══════════════════════════════════════ HEADER ═══════════════════════════════════════ -->
 <header class="site-header">
   <div class="container header-inner">
-    <a href="#" class="logo" aria-label="DA Affiliate home">
+    <a href="#top" class="logo" aria-label="DA Affiliate home">
       <img class="logo-mark" src="/icon-192x192.png?v=2" alt="" width="28" height="28" />
       <span class="logo-wordmark">DA Affiliate</span>
     </a>
@@ -146,8 +146,8 @@
       </div>
       <div class="snapshot-grid">
         <a class="snapshot-item snapshot-clickable" href="#exchanges">
-          <span class="snapshot-label" data-i18n="glance.traders">Exchanges open for onboarding</span>
-          <span class="snapshot-value snapshot-value-accent" data-cfg="count.available">3</span>
+          <span class="snapshot-label" data-i18n="glance.traders">Exchanges open for registration</span>
+          <span class="snapshot-value snapshot-value-accent" data-cfg="count.registerOpen">2</span>
           <svg class="icon snapshot-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
         <a class="snapshot-item snapshot-clickable" href="#how-it-works">
@@ -180,7 +180,7 @@
       <div class="dan-intro-card seq" style="--i:0">
         <span class="label">01</span>
         <h4 data-i18n="traders.c1.title">Register under a DA Affiliate link</h4>
-        <p data-i18n="traders.c1.body">Open your account through a DA Affiliate link on one of the exchanges available now, set up as an affiliate account.</p>
+        <p data-i18n="traders.c1.body">Open your account through a DA Affiliate link on an exchange that is open for registration, set up as an affiliate account.</p>
       </div>
       <div class="dan-intro-card seq" style="--i:1">
         <span class="label">02</span>
@@ -200,29 +200,31 @@
     </div>
 
     <div class="verify-cta callout reveal">
-      <span class="verify-cta-text" data-i18n="traders.cashback.text">This is not the DA Cashback membership. The daily plan, member community, learning and support are part of DA Cashback.</span>
-      <a href="https://www.dacashback.asia/" data-link="cashback" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
-        <span data-i18n="traders.cashback.link">See DA Cashback</span>
+      <span class="verify-cta-text" data-i18n="traders.network.text">Looking for daily market plans and signals, a trader community, learning, direct support and Volume Rewards? Those are DA Network trader benefits, not part of this offer.</span>
+      <a href="https://danetwork.asia/en/traders" data-link="networkTraders" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+        <span data-i18n="traders.network.link">See DA Network trader benefits</span>
         <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
         <span class="sr-only" data-ui="newTab">(opens in a new tab)</span>
       </a>
     </div>
 
-    <!-- Exchanges open for onboarding — rendered from data/config.js -->
+    <!-- Partner exchanges — rendered from data/config.js (partnershipStatus 'active') -->
     <div class="comparison-section reveal" id="exchanges">
       <div class="comparison-head">
         <div>
-          <h3 class="steps-title" data-i18n="exch.title">Exchanges open for onboarding</h3>
-          <p class="section-note" data-i18n="exch.count">3 available now · 10 partnership paused</p>
+          <h3 class="steps-title" data-i18n="exch.title">Partner exchanges</h3>
+          <p class="section-note" data-i18n="exch.count">2 open for registration · 1 link updating · 3 new partners being set up · 8 partnership paused</p>
         </div>
         <a href="deals.html" class="btn btn-gold">
-          <span data-i18n="exch.all">View all 13 exchanges</span>
+          <span data-i18n="exch.all">View all 14 exchanges</span>
           <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
       </div>
       <div class="comparison-grid" id="comparisonGrid">
         <!-- populated by renderExchanges() -->
       </div>
+      <p class="note-small" data-requires="linkUpdatingSentence" data-i18n="exch.updatingNote">The registration link for BingX is being updated; the partnership itself is unchanged.</p>
+      <p class="note-small" data-requires="newPartnersSentence" data-i18n="exch.newNote">New partners being set up: OKX, PrimeXBT and Vantage — registration links and terms will be published once confirmed.</p>
       <p class="note-small" data-i18n="exch.pausedNote">“Partnership paused” means we are not registering new members on that exchange right now.</p>
       <p class="note-small" data-disclaimer="RATES">Rates and reward tiers may change according to each exchange's policy and partner program.</p>
     </div>
@@ -240,7 +242,7 @@
     </div>
 
     <div class="lead-statement reveal">
-      <p class="lead-statement-text" data-i18n="partners.lead">Earn recurring commission from every trade your referrals make, even when you’re offline.</p>
+      <p class="lead-statement-text" data-i18n="partners.lead">Refer traders through your DA Affiliate link and receive a share of the eligible trading fees they pay, under each exchange’s terms.</p>
       <p class="note-small" data-disclaimer="AFFILIATE">Affiliate earnings depend on your effort, audience size and market conditions. Any examples illustrate how commissions work and are not a promise of results.</p>
     </div>
 
@@ -248,7 +250,7 @@
       <div class="dan-intro-card seq" style="--i:0">
         <span class="label">01</span>
         <h4 data-i18n="partners.c1.title">Direct referral business</h4>
-        <p data-i18n="partners.c1.body">Refer traders to the exchanges available now through your DA Affiliate link. Commission comes from the trading fees of traders you refer directly.</p>
+        <p data-i18n="partners.c1.body">Refer traders to the exchanges open for registration through your DA Affiliate link. Commission comes from the trading fees of traders you refer directly.</p>
       </div>
       <div class="dan-intro-card seq" style="--i:1">
         <span class="label">02</span>
@@ -432,6 +434,28 @@
       <article class="dq-card seq" style="--i:0">
         <div class="dq-card-top">
           <span class="label">01</span>
+          <span class="dq-badge">DA Network</span>
+        </div>
+        <div class="dq-card-content dq-dash-content">
+          <h3 data-i18n="benefits.net.title">DA Network traders</h3>
+          <ul class="dq-dash-list">
+            <li><span class="dq-dash-check" aria-hidden="true"></span><span data-i18n="benefits.net.i1">Daily market plans and trading signals</span></li>
+            <li><span class="dq-dash-check" aria-hidden="true"></span><span data-i18n="benefits.net.i2">Trader community</span></li>
+            <li><span class="dq-dash-check" aria-hidden="true"></span><span data-i18n="benefits.net.i3">Learning resources</span></li>
+            <li><span class="dq-dash-check" aria-hidden="true"></span><span data-i18n="benefits.net.i4">Direct team support</span></li>
+            <li><span class="dq-dash-check" aria-hidden="true"></span><span data-i18n="benefits.net.i5">Volume Rewards, funded by a portion of DA Network's partner commission</span></li>
+          </ul>
+          <a href="https://danetwork.asia/en/traders" data-link="networkTraders" target="_blank" rel="noopener noreferrer" class="text-link">
+            <span data-i18n="benefits.net.link">See DA Network trader benefits</span>
+            <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+            <span class="sr-only" data-ui="newTab">(opens in a new tab)</span>
+          </a>
+        </div>
+      </article>
+
+      <article class="dq-card seq" style="--i:1">
+        <div class="dq-card-top">
+          <span class="label">02</span>
           <span class="dq-badge">DA Affiliate</span>
         </div>
         <div class="dq-card-content dq-dash-content">
@@ -443,28 +467,6 @@
           </ul>
           <a href="https://signal.danetwork.asia/" data-link="signalTracking" target="_blank" rel="noopener noreferrer" class="text-link">
             <span data-i18n="benefits.trader.signal">Published signals are recorded at DA Signal Tracking</span>
-            <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
-            <span class="sr-only" data-ui="newTab">(opens in a new tab)</span>
-          </a>
-        </div>
-      </article>
-
-      <article class="dq-card seq" style="--i:1">
-        <div class="dq-card-top">
-          <span class="label">02</span>
-          <span class="dq-badge">DA Cashback</span>
-        </div>
-        <div class="dq-card-content dq-dash-content">
-          <h3 data-i18n="benefits.cb.title">DA Cashback members</h3>
-          <ul class="dq-dash-list">
-            <li><span class="dq-dash-check" aria-hidden="true"></span><span data-i18n="benefits.cb.i1">Fee rewards at volume milestones</span></li>
-            <li><span class="dq-dash-check" aria-hidden="true"></span><span data-i18n="benefits.cb.i2">Daily plan</span></li>
-            <li><span class="dq-dash-check" aria-hidden="true"></span><span data-i18n="benefits.cb.i3">Member community</span></li>
-            <li><span class="dq-dash-check" aria-hidden="true"></span><span data-i18n="benefits.cb.i4">Learning</span></li>
-            <li><span class="dq-dash-check" aria-hidden="true"></span><span data-i18n="benefits.cb.i5">Support</span></li>
-          </ul>
-          <a href="https://www.dacashback.asia/" data-link="cashback" target="_blank" rel="noopener noreferrer" class="text-link">
-            <span data-i18n="benefits.cb.link">Go to DA Cashback</span>
             <svg class="icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
             <span class="sr-only" data-ui="newTab">(opens in a new tab)</span>
           </a>
@@ -490,6 +492,16 @@
       </article>
     </div><!-- /dq-grid -->
 
+    <!-- DA Cashback: independent fee-rebate platform (not the trader membership) -->
+    <div class="verify-cta callout reveal">
+      <span class="verify-cta-text" data-i18n="benefits.cashback">DA Cashback is DA Network's independent fee-rebate platform, separate from DA Affiliate and from the DA Network trader benefits.</span>
+      <a href="https://www.dacashback.asia/" data-link="cashback" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+        <span data-i18n="benefits.cashbackLink">Visit DA Cashback</span>
+        <svg class="icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+        <span class="sr-only" data-ui="newTab">(opens in a new tab)</span>
+      </a>
+    </div>
+
     <!-- Optional perks: rendered only for perks with enabled:true in data/config.js -->
     <div class="dq-grid perks-grid reveal" id="perksGrid" hidden></div>
 
@@ -504,10 +516,11 @@
         </a>
       </div>
       <ol class="eco-stages">
-        <li class="eco-stage"><span class="label">01</span><span class="eco-stage-name" data-ui="eco.learn">Learn</span><span class="eco-brand">DA Network</span></li>
-        <li class="eco-stage"><span class="label">02</span><span class="eco-stage-name" data-ui="eco.trade">Trade</span><span class="eco-brand">DA Scalping</span></li>
-        <li class="eco-stage"><span class="label">03</span><span class="eco-stage-name" data-ui="eco.save">Save</span><span class="eco-brand">DA Cashback</span></li>
-        <li class="eco-stage is-current" aria-current="true"><span class="label">04</span><span class="eco-stage-name" data-ui="eco.earn">Earn</span><span class="eco-brand">DA Affiliate <span class="eco-here" data-ui="eco.current">You are here</span></span></li>
+        <li class="eco-stage"><span class="label">01</span><a class="eco-stage-name" href="https://danetwork.asia/en" data-link="network" target="_blank" rel="noopener noreferrer">DA Network</a><span class="eco-brand" data-ui="eco.network">Parent organization</span></li>
+        <li class="eco-stage"><span class="label">02</span><a class="eco-stage-name" href="https://danetwork.asia/en/traders" data-link="networkTraders" target="_blank" rel="noopener noreferrer">DA Network for traders</a><span class="eco-brand" data-ui="eco.traders">Trader benefits</span></li>
+        <li class="eco-stage"><span class="label">03</span><a class="eco-stage-name" href="https://www.dacashback.asia/" data-link="cashback" target="_blank" rel="noopener noreferrer">DA Cashback</a><span class="eco-brand" data-ui="eco.cashback">Fee rebates</span></li>
+        <li class="eco-stage"><span class="label">04</span><a class="eco-stage-name" href="https://signal.danetwork.asia/" data-link="signalTracking" target="_blank" rel="noopener noreferrer">DA Signal Tracking</a><span class="eco-brand" data-ui="eco.signal">Public signal record</span></li>
+        <li class="eco-stage is-current" aria-current="true"><span class="label">05</span><span class="eco-stage-name">DA Affiliate</span><span class="eco-brand"><span data-ui="eco.affiliate">Affiliate programme</span> <span class="eco-here" data-ui="eco.current">You are here</span></span></li>
       </ol>
     </div>
   </div>
@@ -519,7 +532,7 @@
     <div class="section-header reveal">
       <p class="section-tag" data-i18n="stats.tag">Partner statistics</p>
       <h2 class="section-title" id="statsTitle" data-i18n="stats.title">Partner network figures</h2>
-      <p class="section-sub" data-i18n="stats.sub">Each figure is published only after it has been reconciled against exchange records, together with its period, source and date. Until then it reads “Awaiting verified data”.</p>
+      <p class="section-sub" data-i18n="stats.sub">Each figure is published only after it has been reconciled against exchange records, together with its period, source and date. Until then it reads “Awaiting verified data”. Partner commission received, affiliate commission paid and retained commission are reported separately and never added together.</p>
     </div>
 
     <!-- Rendered from DA_CONFIG.partnerMetrics; values appear only when publishable -->
@@ -561,7 +574,7 @@
         <li class="verify-step seq" style="--i:1">
           <span class="verify-step-num">02</span>
           <h4 data-i18n="rec.s2.title">Received versus paid</h4>
-          <p data-i18n="rec.s2.body">For each period, DA matches commission received from exchanges against commission paid to partners. Pending or cancelled amounts are left out.</p>
+          <p data-i18n="rec.s2.body">For each period, DA matches the partner commission received from exchanges against the affiliate commission paid to partners. Accrued, approved and paid amounts are kept apart; pending or cancelled amounts are left out.</p>
         </li>
         <li class="verify-step seq" style="--i:2">
           <span class="verify-step-num">03</span>
@@ -661,7 +674,7 @@
   <div class="container">
     <div class="footer-inner">
       <div class="footer-brand">
-        <a href="#" class="logo" aria-label="DA Affiliate home">
+        <a href="#top" class="logo" aria-label="DA Affiliate home">
           <img class="logo-mark" src="/icon-192x192.png?v=2" alt="" width="32" height="32" loading="lazy" />
           <span class="logo-wordmark">DA Affiliate</span>
         </a>
@@ -684,14 +697,16 @@
         </nav>
         <nav class="footer-links" aria-labelledby="fExchanges">
           <h4 id="fExchanges"><span data-i18n="nav.exchanges">Exchanges</span></h4>
-          <a href="deals.html" data-i18n="exch.all">View all 13 exchanges</a>
-          <a href="#exchanges" data-i18n="exch.title">Exchanges open for onboarding</a>
+          <a href="deals.html" data-i18n="exch.all">View all 14 exchanges</a>
+          <a href="#exchanges" data-i18n="exch.title">Partner exchanges</a>
         </nav>
         <nav class="footer-links" aria-labelledby="fEco">
           <h4 id="fEco"><span data-ui="footer.eco">Ecosystem</span></h4>
           <a href="https://danetwork.asia/en" data-link="network" target="_blank" rel="noopener noreferrer">DA Network</a>
+          <a href="https://danetwork.asia/en/traders" data-link="networkTraders" target="_blank" rel="noopener noreferrer"><span data-i18n="footer.networkTraders">DA Network for traders</span></a>
           <a href="https://www.dacashback.asia/" data-link="cashback" target="_blank" rel="noopener noreferrer">DA Cashback</a>
           <a href="https://signal.danetwork.asia/" data-link="signalTracking" target="_blank" rel="noopener noreferrer">DA Signal Tracking</a>
+          <span class="footer-current" aria-current="page">DA Affiliate <span data-ui="eco.current">You are here</span></span>
           <a href="https://t.me/jacksondz" data-link="telegramContact" target="_blank" rel="noopener noreferrer">Telegram <span data-cfg="telegram.handle">@jacksondz</span></a>
         </nav>
         <div class="footer-links" role="group" aria-labelledby="fLang">

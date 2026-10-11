@@ -13,7 +13,9 @@
     en: {
       skip: 'Skip to content', newTab: '(opens in a new tab)',
       'eco.tag': 'Part of the DA Network ecosystem', 'eco.link': 'Visit DA Network', 'eco.current': 'You are here',
-      'eco.learn': 'Learn', 'eco.trade': 'Trade', 'eco.save': 'Save', 'eco.earn': 'Earn',
+      // V3.1 ecosystem roles (EN only; other locales fall back to English)
+      'eco.network': 'Parent organization', 'eco.traders': 'Trader benefits', 'eco.cashback': 'Fee rebates',
+      'eco.signal': 'Public signal record', 'eco.affiliate': 'Affiliate programme',
       'footer.eco': 'Ecosystem', 'footer.lang': 'Languages',
       openMenu: 'Open menu', closeMenu: 'Close menu',
       'steps.swipe': 'Swipe or drag ← →'
@@ -21,7 +23,6 @@
     vi: {
       skip: 'Chuyển đến nội dung', newTab: '(mở trong tab mới)',
       'eco.tag': 'Thuộc hệ sinh thái DA Network', 'eco.link': 'Truy cập DA Network', 'eco.current': 'Bạn đang ở đây',
-      'eco.learn': 'Học', 'eco.trade': 'Giao dịch', 'eco.save': 'Tiết kiệm', 'eco.earn': 'Thu nhập',
       'footer.eco': 'Hệ sinh thái', 'footer.lang': 'Ngôn ngữ',
       openMenu: 'Mở menu', closeMenu: 'Đóng menu',
       'steps.swipe': 'Vuốt hoặc kéo ← →'
@@ -29,7 +30,6 @@
     th: {
       skip: 'ข้ามไปยังเนื้อหา', newTab: '(เปิดในแท็บใหม่)',
       'eco.tag': 'ส่วนหนึ่งของระบบนิเวศ DA Network', 'eco.link': 'ไปที่ DA Network', 'eco.current': 'คุณอยู่ที่นี่',
-      'eco.learn': 'เรียนรู้', 'eco.trade': 'เทรด', 'eco.save': 'ประหยัด', 'eco.earn': 'รายได้',
       'footer.eco': 'ระบบนิเวศ', 'footer.lang': 'ภาษา',
       openMenu: 'เปิดเมนู', closeMenu: 'ปิดเมนู',
       'steps.swipe': 'ปัดหรือลาก ← →'
@@ -37,7 +37,6 @@
     ko: {
       skip: '본문으로 건너뛰기', newTab: '(새 탭에서 열림)',
       'eco.tag': 'DA Network 에코시스템의 일부', 'eco.link': 'DA Network 방문하기', 'eco.current': '현재 위치',
-      'eco.learn': '학습', 'eco.trade': '거래', 'eco.save': '절감', 'eco.earn': '수익',
       'footer.eco': '에코시스템', 'footer.lang': '언어',
       openMenu: '메뉴 열기', closeMenu: '메뉴 닫기',
       'steps.swipe': '스와이프 또는 드래그 ← →'
@@ -45,7 +44,6 @@
     id: {
       skip: 'Langsung ke konten', newTab: '(terbuka di tab baru)',
       'eco.tag': 'Bagian dari ekosistem DA Network', 'eco.link': 'Kunjungi DA Network', 'eco.current': 'Anda di sini',
-      'eco.learn': 'Belajar', 'eco.trade': 'Trading', 'eco.save': 'Hemat', 'eco.earn': 'Hasilkan',
       'footer.eco': 'Ekosistem', 'footer.lang': 'Bahasa',
       openMenu: 'Buka menu', closeMenu: 'Tutup menu',
       'steps.swipe': 'Geser atau seret ← →'
