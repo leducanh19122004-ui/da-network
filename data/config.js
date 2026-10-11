@@ -1,8 +1,10 @@
 /* ═══════════════════════════════════════════════════════════════
    DA Affiliate — site configuration (single source of truth)
 
-   Mirrors DA-ECOSYSTEM-V3-SHARED-SPEC.md §1, §2, §3, §4, §6, §7, §10
-   — update the spec first, then this file.
+   Mirrors DA-ECOSYSTEM-V3.1-SHARED-SPEC.md §1, §2, §3 (ecosystem
+   architecture, exchange registry, money terms) and
+   DA-ECOSYSTEM-V3-SHARED-SPEC.md §1, §2, §3, §6, §7, §10
+   — update there first, then this file.
    Future: a build step copies shared/ecosystem.json from the hub repo.
 
    Rules
@@ -25,7 +27,8 @@
   var brand = {
     network:        { name: 'DA Network',         role: 'The parent organization connecting trading education, trader benefits, affiliate opportunities and public transparency.' },
     scalping:       { name: 'DA Scalping',        role: "DA's trading-signal and daily market-plan service, run on Telegram." },
-    cashback:       { name: 'DA Cashback',        role: 'The trader membership: volume-milestone fee rewards plus a daily plan, member community, learning and support.' },
+    cashback:       { name: 'DA Cashback',        role: "DA Network's independent fee-rebate platform." },
+    networkTraders: { name: 'DA Network for traders', role: 'Trader benefits on DA Network: daily market plans and trading signals, trader community, learning resources, direct team support and Volume Rewards.' },
     affiliate:      { name: 'DA Affiliate',       role: 'Fixed-commission arrangements for experienced, higher-volume traders, and partner development for people building trading communities.' },
     signalTracking: { name: 'DA Signal Tracking', role: "The public record of DA's published signals and the methodology used to measure them." }
   };
@@ -40,16 +43,30 @@
   };
   var urls = {
     network: 'https://danetwork.asia/en',   // locale paths: /en /vi /ko /th /id
+    // V3.1: trader benefits (plans, signals, community, learning, support,
+    // Volume Rewards) live on the hub Traders page, not on DA Cashback.
+    networkTraders: 'https://danetwork.asia/en/traders',
     cashback: 'https://www.dacashback.asia/',
     signalTracking: 'https://signal.danetwork.asia/',
     telegramContact: 'https://t.me/jacksondz',
     site: site.migrated ? site.planned : site.current
   };
 
-  // ─── §4 Exchanges ────────────────────────────────────────────────
-  // status: 'available' → "Available" · 'paused' → "Partnership paused".
-  // Only `available` exchanges get onboarding links.
-  // Referral links are byte-identical to the live V2 site — do not edit.
+  // ─── Exchange registry — mirrors V3.1 spec §2 (update there first) ──
+  // Two independent fields:
+  //   partnershipStatus:  'active' | 'new_deal_pending' | 'paused'
+  //   referralLinkStatus: 'available' | 'awaiting_update' | 'awaiting_link' | 'none'
+  //   referralUrl:        string | null
+  // A Register CTA renders ONLY when referralLinkStatus === 'available' AND
+  // referralUrl starts with https:// (see canRegister()).
+  // Bitunix / Ourbit links are byte-identical to the live site — do not edit.
+  // BingX: partnership unchanged; its old link was withdrawn. When the owner
+  // sends the new URL, set referralUrl and referralLinkStatus:'available' —
+  // that is the only change needed.
+  // OKX / PrimeXBT / Vantage: new deals being set up. No links, no rates and
+  // no Volume Rewards are published for them. Vantage having a deal does not
+  // activate Forex anywhere on this site.
+  // market: 'crypto' | 'forex' | null (null → "To be confirmed"; never guessed).
   //
   // commissionTerms: one object per confirmed arrangement. Nothing has been
   // confirmed yet, so every field is null and verificationStatus is
@@ -78,23 +95,41 @@
   function legacy(pct) {
     return { pct: pct, verificationStatus: 'OWNER_REPORTED', source: 'V2 site copy (deals.html)', publish: false };
   }
+  function ex(id, name, market, partnershipStatus, referralLinkStatus, referralUrl, legacyPct) {
+    return { id: id, name: name, market: market,
+             partnershipStatus: partnershipStatus, referralLinkStatus: referralLinkStatus, referralUrl: referralUrl,
+             commissionTerms: terms(id), legacyAdvertised: legacyPct === null ? null : legacy(legacyPct) };
+  }
   var exchanges = [
-    { id: 'bingx',   name: 'BingX',   market: 'crypto', status: 'available', referralUrl: 'https://bingxdao.com/invite/JXQSZO/',               commissionTerms: terms('bingx'),   legacyAdvertised: legacy(28) },
-    { id: 'bitunix', name: 'Bitunix', market: 'crypto', status: 'available', referralUrl: 'https://www.bitunix.com/register?vipCode=Gw77',     commissionTerms: terms('bitunix'), legacyAdvertised: legacy(33) },
-    { id: 'ourbit',  name: 'Ourbit',  market: 'crypto', status: 'available', referralUrl: 'https://www.ourbit.com/register?inviteCode=SY7QT9', commissionTerms: terms('ourbit'),  legacyAdvertised: legacy(43) },
-    { id: 'binance', name: 'Binance', market: 'crypto', status: 'paused', referralUrl: null, commissionTerms: terms('binance'), legacyAdvertised: legacy(31.5) },
-    { id: 'okx',     name: 'OKX',     market: 'crypto', status: 'paused', referralUrl: null, commissionTerms: terms('okx'),     legacyAdvertised: legacy(35) },
-    { id: 'bybit',   name: 'Bybit',   market: 'crypto', status: 'paused', referralUrl: null, commissionTerms: terms('bybit'),   legacyAdvertised: legacy(35) },
-    { id: 'mexc',    name: 'MEXC',    market: 'crypto', status: 'paused', referralUrl: null, commissionTerms: terms('mexc'),    legacyAdvertised: legacy(35) },
-    { id: 'bitget',  name: 'Bitget',  market: 'crypto', status: 'paused', referralUrl: null, commissionTerms: terms('bitget'),  legacyAdvertised: legacy(35) },
-    { id: 'gate',    name: 'Gate.io', market: 'crypto', status: 'paused', referralUrl: null, commissionTerms: terms('gate'),    legacyAdvertised: legacy(42) },
-    { id: 'kucoin',  name: 'KuCoin',  market: 'crypto', status: 'paused', referralUrl: null, commissionTerms: terms('kucoin'),  legacyAdvertised: legacy(42) },
-    { id: 'exness',  name: 'Exness',  market: 'forex',  status: 'paused', referralUrl: null, commissionTerms: terms('exness'),  legacyAdvertised: legacy(70) },
-    { id: 'vantage', name: 'Vantage', market: 'forex',  status: 'paused', referralUrl: null, commissionTerms: terms('vantage'), legacyAdvertised: legacy(70) },
-    { id: 'xm',      name: 'XM',      market: 'forex',  status: 'paused', referralUrl: null, commissionTerms: terms('xm'),      legacyAdvertised: legacy(70) }
+    ex('bingx',    'BingX',    'crypto', 'active',           'awaiting_update', null, 28),
+    ex('bitunix',  'Bitunix',  'crypto', 'active',           'available',       'https://www.bitunix.com/register?vipCode=Gw77', 33),
+    ex('ourbit',   'Ourbit',   'crypto', 'active',           'available',       'https://www.ourbit.com/register?inviteCode=SY7QT9', 43),
+    ex('binance',  'Binance',  'crypto', 'paused',           'none',            null, 31.5),
+    ex('okx',      'OKX',      'crypto', 'new_deal_pending', 'awaiting_link',   null, 35),
+    ex('bybit',    'Bybit',    'crypto', 'paused',           'none',            null, 35),
+    ex('mexc',     'MEXC',     'crypto', 'paused',           'none',            null, 35),
+    ex('bitget',   'Bitget',   'crypto', 'paused',           'none',            null, 35),
+    ex('gate',     'Gate.io',  'crypto', 'paused',           'none',            null, 42),
+    ex('kucoin',   'KuCoin',   'crypto', 'paused',           'none',            null, 42),
+    ex('primexbt', 'PrimeXBT', null,     'new_deal_pending', 'awaiting_link',   null, null), // market: owner to confirm
+    ex('exness',   'Exness',   'forex',  'paused',           'none',            null, 70),
+    ex('vantage',  'Vantage',  'forex',  'new_deal_pending', 'awaiting_link',   null, 70),
+    ex('xm',       'XM',       'forex',  'paused',           'none',            null, 70)
   ];
-  var exchangeStatusLabels = { available: 'Available', paused: 'Partnership paused' };
+  // Public labels (EN) — V3.1 spec §2. Never "Coming soon"; never a '#' href.
+  var partnershipStatusLabels = {
+    active: 'Partner',
+    new_deal_pending: 'New partner · setup in progress',
+    paused: 'Partnership paused'
+  };
+  var referralLinkStatusLabels = {
+    available: 'Register',                        // rendered as a button
+    awaiting_update: 'Registration link updating',
+    awaiting_link: 'Registration link coming',
+    none: null                                    // no CTA, no text
+  };
   var marketLabels = { crypto: 'Crypto', forex: 'Forex' };
+  var marketUnknownLabel = 'To be confirmed';
 
   // ─── §3 Partner metrics ──────────────────────────────────────────
   // Shape: { id, label, value, unit, verificationStatus, reportingPeriod,
@@ -109,14 +144,21 @@
       note: 'Needs a definition of "active" (e.g. ≥1 referred trade in the period).' },
     { id: 'partnersEarningCommission', label: 'Partners earning commission', value: null, unit: 'partners',
       verificationStatus: 'NOT_AVAILABLE', reportingPeriod: null, source: null, lastUpdated: null, publish: false },
-    { id: 'commissionReceived', label: 'Commission received from exchanges', value: null, unit: 'USD',
-      verificationStatus: 'NOT_AVAILABLE', reportingPeriod: null, source: null, lastUpdated: null, publish: false },
-    { id: 'commissionPaid', label: 'Commission paid to partners', value: 28540, unit: 'USD',
+    // Money terms (V3.1 spec §3): received / paid / retained are separate
+    // metrics, never summed into "revenue". paymentState: 'accrued' |
+    // 'approved' | 'paid' — states are never mixed in one figure.
+    { id: 'commissionReceived', label: 'Partner commission received from exchanges', value: null, unit: 'USD',
+      moneyTerm: 'Partner Commission', paymentState: null,
+      verificationStatus: 'NOT_AVAILABLE', reportingPeriod: null, source: null, lastUpdated: null, publish: false,
+      note: 'What DA earns from exchange partner programmes.' },
+    { id: 'commissionPaid', label: 'Affiliate commission paid to DA Affiliate partners', value: 28540, unit: 'USD',
+      moneyTerm: 'Affiliate Commission Paid', paymentState: null,
       verificationStatus: 'OWNER_REPORTED', reportingPeriod: null, source: 'V2 site copy ("paid to partners last month")', lastUpdated: null, publish: false,
       note: 'Month never stated; the V2 page never updated. Publish only with an as-of month and reconciliation evidence.' },
-    { id: 'retainedCommission', label: 'Retained commission', value: null, unit: 'USD',
+    { id: 'retainedCommission', label: 'Retained commission (after distributions)', value: null, unit: 'USD',
+      moneyTerm: 'Retained Commission', paymentState: null,
       verificationStatus: 'NOT_AVAILABLE', reportingPeriod: null, source: null, lastUpdated: null, publish: false,
-      note: 'Commission received from exchanges minus commission paid to partners, same period.' },
+      note: 'What DA keeps after all distributions (affiliate commission paid, Volume Rewards, cashback), per the approved reconciliation method — owner to define. Same period as the other money terms.' },
     { id: 'markets', label: 'Geographic markets', value: 'Vietnam, Indonesia, Philippines', unit: 'markets',
       verificationStatus: 'OWNER_REPORTED', reportingPeriod: null, source: 'V2 site copy', lastUpdated: null, publish: false,
       note: 'Conflicts with the hub "Partner network" list (VN/KR/TH/ID). Owner to choose one list.' },
@@ -203,19 +245,48 @@
     })[0];
     return t || null;
   }
+  function canRegister(e) {
+    return !!e && e.referralLinkStatus === 'available' &&
+      typeof e.referralUrl === 'string' && e.referralUrl.indexOf('https://') === 0;
+  }
+  function marketLabel(e) {
+    return (e && e.market && marketLabels[e.market]) || marketUnknownLabel;
+  }
+  function partnershipLabel(e) { return (e && partnershipStatusLabels[e.partnershipStatus]) || ''; }
+  // Text shown in place of a CTA; null when there is a Register button or
+  // nothing to say ('none', or 'available' with a malformed URL).
+  function linkStateLabel(e) {
+    if (!e || e.referralLinkStatus === 'available') return null;
+    return referralLinkStatusLabels[e.referralLinkStatus] || null;
+  }
+  function names(filterFn) {
+    return exchanges.filter(filterFn).map(function (e) { return e.name; });
+  }
+  // Derived counts — never hardcoded anywhere.
   function counts() {
-    var c = { total: exchanges.length, available: 0, paused: 0 };
-    exchanges.forEach(function (e) { c[e.status] = (c[e.status] || 0) + 1; });
+    var c = { total: exchanges.length, active: 0, newDealPending: 0, paused: 0,
+              registerOpen: 0, linkUpdating: 0, linkComing: 0 };
+    exchanges.forEach(function (e) {
+      if (e.partnershipStatus === 'active') c.active++;
+      else if (e.partnershipStatus === 'new_deal_pending') c.newDealPending++;
+      else if (e.partnershipStatus === 'paused') c.paused++;
+      if (canRegister(e)) c.registerOpen++;
+      else if (e.referralLinkStatus === 'awaiting_update') c.linkUpdating++;
+      else if (e.referralLinkStatus === 'awaiting_link') c.linkComing++;
+    });
     return c;
   }
 
   var config = {
     brand: brand, site: site, urls: urls,
-    exchanges: exchanges, exchangeStatusLabels: exchangeStatusLabels, marketLabels: marketLabels,
+    exchanges: exchanges, partnershipStatusLabels: partnershipStatusLabels,
+    referralLinkStatusLabels: referralLinkStatusLabels, marketLabels: marketLabels, marketUnknownLabel: marketUnknownLabel,
     partnerMetrics: partnerMetrics, contact: contact, perks: perks,
     partnerStories: partnerStories, proofImages: proofImages,
     calculator: calculator, disclaimers: disclaimers,
-    isPublishable: isPublishable, publishedRate: publishedRate, counts: counts
+    isPublishable: isPublishable, publishedRate: publishedRate, counts: counts,
+    canRegister: canRegister, marketLabel: marketLabel, partnershipLabel: partnershipLabel,
+    linkStateLabel: linkStateLabel, names: names
   };
 
   window.DA_CONFIG = config;

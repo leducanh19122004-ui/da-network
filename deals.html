@@ -4,19 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Supported exchanges — DA Affiliate</title>
-  <meta name="description" content="The exchanges you can join through DA Affiliate, the affiliate programme of DA Network: which are available now and which are partnership paused. Commission terms are confirmed per exchange." />
+  <meta name="description" content="The exchanges you can join through DA Affiliate, the affiliate programme of DA Network: which are open for registration, which new partners are being set up and which are partnership paused. Commission terms are confirmed per exchange." />
   <!-- SEO: canonical = current live domain (see data/config.js site.current; migration plan in docs/DOMAIN-MIGRATION.md) -->
   <link rel="canonical" href="https://crypto.danetwork.asia/deals.html" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="DA Affiliate" />
   <meta property="og:url" content="https://crypto.danetwork.asia/deals.html" />
   <meta property="og:title" content="Supported exchanges — DA Affiliate" />
-  <meta property="og:description" content="Which exchanges you can join through DA Affiliate: available now or partnership paused. Commission terms are confirmed per exchange." />
+  <meta property="og:description" content="Which exchanges you can join through DA Affiliate: open for registration, new partners being set up, or partnership paused. Commission terms are confirmed per exchange." />
   <meta property="og:image" content="https://crypto.danetwork.asia/icon-512x512.png" />
   <meta property="og:locale" content="en_US" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Supported exchanges — DA Affiliate" />
-  <meta name="twitter:description" content="Which exchanges you can join through DA Affiliate: available now or partnership paused. Commission terms are confirmed per exchange." />
+  <meta name="twitter:description" content="Which exchanges you can join through DA Affiliate: open for registration, new partners being set up, or partnership paused. Commission terms are confirmed per exchange." />
   <meta name="twitter:image" content="https://crypto.danetwork.asia/icon-512x512.png" />
   <style>html.i18n-pending body{visibility:hidden}</style>
   <script>document.documentElement.classList.add('i18n-pending');setTimeout(function(){document.documentElement.classList.remove('i18n-pending')},1500);</script>
@@ -61,12 +61,19 @@
 
     /* ── Stats ledger ── */
     .deals-stats {
-      display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 1.5rem;
       margin-top: 3rem; border-top: 1px solid var(--color-line);
     }
     .deals-stat { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 0.75rem; padding: 1.5rem 1.25rem 0 0; }
-    .deals-stat + .deals-stat { padding-left: 1.25rem; border-left: 1px solid var(--color-line); }
-    @media (min-width: 768px) { .deals-stat { padding-right: 2rem; } .deals-stat + .deals-stat { padding-left: 2rem; } }
+    .deals-stat:nth-child(even) { padding-left: 1.25rem; border-left: 1px solid var(--color-line); }
+    @media (min-width: 768px) {
+      .deals-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .deals-stat { padding-right: 2rem; }
+      .deals-stat + .deals-stat { padding-left: 2rem; border-left: 1px solid var(--color-line); }
+    }
+    .deals-count-line { margin-top: 1.5rem; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.06em; color: var(--color-faint); }
+    .deal-link-state { margin-top: auto; font-family: var(--font-mono); font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-faint); }
+    .status-pill.status-active { border-color: var(--color-gold-line); color: var(--color-gold); }
     .deals-stat-num {
       font-size: clamp(1.6rem, 4vw, 2.75rem); font-weight: 600; letter-spacing: -0.04em; line-height: 1;
       font-variant-numeric: tabular-nums; color: var(--color-fg);
@@ -253,22 +260,27 @@
   <div class="container deals-hero-content">
     <p class="eyebrow" id="txt-tag">Partner exchanges</p>
     <h1 class="h-section" id="txt-title">Supported exchanges</h1>
-    <p id="txt-sub">Where you can register through DA Affiliate today. Commission terms are confirmed per exchange.</p>
-    <!-- Counts derived from data/config.js -->
+    <p id="txt-sub">Where you can register through DA Affiliate today, which new partners are being set up, and which partnerships are paused. Commission terms are confirmed per exchange.</p>
+    <!-- Counts derived from data/config.js (static fallback written by the sync script) -->
     <div class="deals-stats">
       <div class="deals-stat">
-        <div class="deals-stat-num" id="stat-total">13</div>
+        <div class="deals-stat-num" id="stat-total">14</div>
         <div class="deals-stat-lbl" id="txt-stat1">Exchanges listed</div>
       </div>
       <div class="deals-stat">
-        <div class="deals-stat-num" id="stat-available">3</div>
-        <div class="deals-stat-lbl" id="txt-stat2">Available now</div>
+        <div class="deals-stat-num" id="stat-register">2</div>
+        <div class="deals-stat-lbl" id="txt-stat2">Open for registration</div>
       </div>
       <div class="deals-stat">
-        <div class="deals-stat-num" id="stat-paused">10</div>
-        <div class="deals-stat-lbl" id="txt-stat3">Partnership paused</div>
+        <div class="deals-stat-num" id="stat-new">3</div>
+        <div class="deals-stat-lbl" id="txt-stat3">New partners being set up</div>
+      </div>
+      <div class="deals-stat">
+        <div class="deals-stat-num" id="stat-paused">8</div>
+        <div class="deals-stat-lbl" id="txt-stat4">Partnership paused</div>
       </div>
     </div>
+    <p class="deals-count-line" id="txt-count-line">2 open for registration · 1 link updating · 3 new partners being set up · 8 partnership paused</p>
   </div>
 </div>
 
@@ -277,9 +289,11 @@
 
   <!-- Filter -->
   <div class="deals-filter">
-    <button class="filter-btn active" data-filter="all"       onclick="applyFilter('all')"       id="fb-all">All (13)</button>
-    <button class="filter-btn"        data-filter="available" onclick="applyFilter('available')" id="fb-available">Available</button>
-    <button class="filter-btn"        data-filter="paused"    onclick="applyFilter('paused')"    id="fb-paused">Partnership paused</button>
+    <button class="filter-btn active" data-filter="all"              onclick="applyFilter('all')"              id="fb-all">All (14)</button>
+    <button class="filter-btn"        data-filter="register"         onclick="applyFilter('register')"         id="fb-register">Open for registration</button>
+    <button class="filter-btn"        data-filter="active"           onclick="applyFilter('active')"           id="fb-active">Partner</button>
+    <button class="filter-btn"        data-filter="new_deal_pending" onclick="applyFilter('new_deal_pending')" id="fb-new">New partners</button>
+    <button class="filter-btn"        data-filter="paused"           onclick="applyFilter('paused')"           id="fb-paused">Partnership paused</button>
     <button class="filter-btn"        data-filter="crypto"    onclick="applyFilter('crypto')"    id="fb-crypto">Crypto</button>
     <button class="filter-btn"        data-filter="forex"     onclick="applyFilter('forex')"     id="fb-forex">Forex</button>
   </div>
@@ -296,26 +310,30 @@
             <th id="th-type">Market</th>
             <th id="th-status">Status</th>
             <th id="th-rate">Commission terms</th>
+            <th id="th-link">Registration</th>
           </tr>
         </thead>
         <!-- static fallback generated from data/config.js; JS re-renders -->
         <tbody id="summaryBody">
-          <tr><td class="idx-cell">01</td><td class="name-cell">BingX</td><td><span class="type-pill crypto">Crypto</span></td><td><span class="status-pill status-available">Available</span></td><td>Terms confirmed per exchange</td></tr>
-          <tr><td class="idx-cell">02</td><td class="name-cell">Bitunix</td><td><span class="type-pill crypto">Crypto</span></td><td><span class="status-pill status-available">Available</span></td><td>Terms confirmed per exchange</td></tr>
-          <tr><td class="idx-cell">03</td><td class="name-cell">Ourbit</td><td><span class="type-pill crypto">Crypto</span></td><td><span class="status-pill status-available">Available</span></td><td>Terms confirmed per exchange</td></tr>
-          <tr><td class="idx-cell">04</td><td class="name-cell">Binance</td><td><span class="type-pill crypto">Crypto</span></td><td><span class="status-pill status-paused">Partnership paused</span></td><td>Terms confirmed per exchange</td></tr>
-          <tr><td class="idx-cell">05</td><td class="name-cell">OKX</td><td><span class="type-pill crypto">Crypto</span></td><td><span class="status-pill status-paused">Partnership paused</span></td><td>Terms confirmed per exchange</td></tr>
-          <tr><td class="idx-cell">06</td><td class="name-cell">Bybit</td><td><span class="type-pill crypto">Crypto</span></td><td><span class="status-pill status-paused">Partnership paused</span></td><td>Terms confirmed per exchange</td></tr>
-          <tr><td class="idx-cell">07</td><td class="name-cell">MEXC</td><td><span class="type-pill crypto">Crypto</span></td><td><span class="status-pill status-paused">Partnership paused</span></td><td>Terms confirmed per exchange</td></tr>
-          <tr><td class="idx-cell">08</td><td class="name-cell">Bitget</td><td><span class="type-pill crypto">Crypto</span></td><td><span class="status-pill status-paused">Partnership paused</span></td><td>Terms confirmed per exchange</td></tr>
-          <tr><td class="idx-cell">09</td><td class="name-cell">Gate.io</td><td><span class="type-pill crypto">Crypto</span></td><td><span class="status-pill status-paused">Partnership paused</span></td><td>Terms confirmed per exchange</td></tr>
-          <tr><td class="idx-cell">10</td><td class="name-cell">KuCoin</td><td><span class="type-pill crypto">Crypto</span></td><td><span class="status-pill status-paused">Partnership paused</span></td><td>Terms confirmed per exchange</td></tr>
-          <tr><td class="idx-cell">11</td><td class="name-cell">Exness</td><td><span class="type-pill forex">Forex</span></td><td><span class="status-pill status-paused">Partnership paused</span></td><td>Terms confirmed per exchange</td></tr>
-          <tr><td class="idx-cell">12</td><td class="name-cell">Vantage</td><td><span class="type-pill forex">Forex</span></td><td><span class="status-pill status-paused">Partnership paused</span></td><td>Terms confirmed per exchange</td></tr>
-          <tr><td class="idx-cell">13</td><td class="name-cell">XM</td><td><span class="type-pill forex">Forex</span></td><td><span class="status-pill status-paused">Partnership paused</span></td><td>Terms confirmed per exchange</td></tr>
+          <tr><td class="idx-cell">01</td><td class="name-cell">BingX</td><td><span class="type-pill crypto">Crypto</span></td><td><span class="status-pill status-active">Partner</span></td><td>Terms confirmed per exchange</td><td>Registration link updating</td></tr>
+          <tr><td class="idx-cell">02</td><td class="name-cell">Bitunix</td><td><span class="type-pill crypto">Crypto</span></td><td><span class="status-pill status-active">Partner</span></td><td>Terms confirmed per exchange</td><td>Open</td></tr>
+          <tr><td class="idx-cell">03</td><td class="name-cell">Ourbit</td><td><span class="type-pill crypto">Crypto</span></td><td><span class="status-pill status-active">Partner</span></td><td>Terms confirmed per exchange</td><td>Open</td></tr>
+          <tr><td class="idx-cell">04</td><td class="name-cell">OKX</td><td><span class="type-pill crypto">Crypto</span></td><td><span class="status-pill status-new_deal_pending">New partner · setup in progress</span></td><td>Terms will be published once confirmed</td><td>Registration link coming</td></tr>
+          <tr><td class="idx-cell">05</td><td class="name-cell">PrimeXBT</td><td><span class="type-pill unconfirmed">To be confirmed</span></td><td><span class="status-pill status-new_deal_pending">New partner · setup in progress</span></td><td>Terms will be published once confirmed</td><td>Registration link coming</td></tr>
+          <tr><td class="idx-cell">06</td><td class="name-cell">Vantage</td><td><span class="type-pill forex">Forex</span></td><td><span class="status-pill status-new_deal_pending">New partner · setup in progress</span></td><td>Terms will be published once confirmed</td><td>Registration link coming</td></tr>
+          <tr><td class="idx-cell">07</td><td class="name-cell">Binance</td><td><span class="type-pill crypto">Crypto</span></td><td><span class="status-pill status-paused">Partnership paused</span></td><td>Terms confirmed per exchange</td><td>—</td></tr>
+          <tr><td class="idx-cell">08</td><td class="name-cell">Bybit</td><td><span class="type-pill crypto">Crypto</span></td><td><span class="status-pill status-paused">Partnership paused</span></td><td>Terms confirmed per exchange</td><td>—</td></tr>
+          <tr><td class="idx-cell">09</td><td class="name-cell">MEXC</td><td><span class="type-pill crypto">Crypto</span></td><td><span class="status-pill status-paused">Partnership paused</span></td><td>Terms confirmed per exchange</td><td>—</td></tr>
+          <tr><td class="idx-cell">10</td><td class="name-cell">Bitget</td><td><span class="type-pill crypto">Crypto</span></td><td><span class="status-pill status-paused">Partnership paused</span></td><td>Terms confirmed per exchange</td><td>—</td></tr>
+          <tr><td class="idx-cell">11</td><td class="name-cell">Gate.io</td><td><span class="type-pill crypto">Crypto</span></td><td><span class="status-pill status-paused">Partnership paused</span></td><td>Terms confirmed per exchange</td><td>—</td></tr>
+          <tr><td class="idx-cell">12</td><td class="name-cell">KuCoin</td><td><span class="type-pill crypto">Crypto</span></td><td><span class="status-pill status-paused">Partnership paused</span></td><td>Terms confirmed per exchange</td><td>—</td></tr>
+          <tr><td class="idx-cell">13</td><td class="name-cell">Exness</td><td><span class="type-pill forex">Forex</span></td><td><span class="status-pill status-paused">Partnership paused</span></td><td>Terms confirmed per exchange</td><td>—</td></tr>
+          <tr><td class="idx-cell">14</td><td class="name-cell">XM</td><td><span class="type-pill forex">Forex</span></td><td><span class="status-pill status-paused">Partnership paused</span></td><td>Terms confirmed per exchange</td><td>—</td></tr>
         </tbody>
       </table>
     </div>
+    <p class="note-small" id="txt-updating-note">The registration link for BingX is being updated; the partnership itself is unchanged.</p>
+    <p class="note-small" id="txt-new-note">New partners being set up: OKX, PrimeXBT and Vantage — registration links and terms will be published once confirmed.</p>
     <p class="note-small" id="txt-paused-note">“Partnership paused” means we are not registering new members on that exchange right now.</p>
     <p class="note-small" id="txt-rates">Rates and reward tiers may change according to each exchange's policy and partner program.</p>
   </div>
@@ -324,7 +342,7 @@
   <div class="section-divider">
     <h2 id="txt-cards-title">Exchange details</h2>
     <div class="section-divider-line"></div>
-    <span class="cards-count" id="txt-cards-count">13 exchanges</span>
+    <span class="cards-count" id="txt-cards-count">14 exchanges</span>
   </div>
 
   <!-- Cards -->
@@ -346,12 +364,13 @@
 <script>
 // ═══════════════════════════════════════════════════════════
 // DATA — everything comes from data/config.js (window.DA_CONFIG):
-// the 13 exchanges, their status, referral links and commission terms.
-// A rate is shown only if its terms are publishable; otherwise
-// "Terms confirmed per exchange". Only `available` exchanges get a
-// registration link.
+// the exchange registry (partnershipStatus + referralLinkStatus +
+// referralUrl), commission terms and disclaimers. A rate is shown only if
+// its terms are publishable; otherwise a neutral line. A Register link
+// renders only when CFG.canRegister(e) (link 'available' + https URL).
+// Counts are derived from CFG.counts(); nothing is hardcoded.
 // ═══════════════════════════════════════════════════════════
-var CFG = window.DA_CONFIG || { exchanges: [], exchangeStatusLabels: {}, marketLabels: {}, disclaimers: {} };
+var CFG = window.DA_CONFIG || { exchanges: [], disclaimers: {} };
 
 // ═══════════════════════════════════════════════════════════
 // STATE
@@ -379,15 +398,21 @@ var txt = {
     back: 'Back to DA Affiliate', back2: 'Back to DA Affiliate',
     tag: 'Partner exchanges',
     title: 'Supported exchanges',
-    sub: 'Where you can register through DA Affiliate today. Commission terms are confirmed per exchange.',
-    stat1: 'Exchanges listed', stat2: 'Available now', stat3: 'Partnership paused',
-    fbAll: 'All ({n})', fbAvailable: 'Available', fbPaused: 'Partnership paused', fbCrypto: 'Crypto', fbForex: 'Forex',
+    sub: 'Where you can register through DA Affiliate today, which new partners are being set up, and which partnerships are paused. Commission terms are confirmed per exchange.',
+    stat1: 'Exchanges listed', stat2: 'Open for registration', stat3: 'New partners being set up', stat4: 'Partnership paused',
+    countLine: '{registerOpen} open for registration · {linkUpdating} link updating · {newDealPending} new partners being set up · {paused} partnership paused',
+    fbAll: 'All ({n})', fbRegister: 'Open for registration', fbActive: 'Partner', fbNew: 'New partners', fbPaused: 'Partnership paused', fbCrypto: 'Crypto', fbForex: 'Forex',
     tableTitle: 'Summary',
-    thName: 'Exchange', thType: 'Market', thStatus: 'Status', thRate: 'Commission terms',
+    thName: 'Exchange', thType: 'Market', thStatus: 'Status', thRate: 'Commission terms', thLink: 'Registration',
     cardsTitle: 'Exchange details',
     count: '{n} exchanges',
     terms: 'Terms confirmed per exchange',
+    termsPending: 'Terms will be published once confirmed',
     rate: 'Confirmed rate',
+    linkOpen: 'Open',
+    linkNone: '—',
+    updatingNote: 'The registration link for {names} is being updated; the partnership itself is unchanged.',
+    newNote: 'New partners being set up: {names} — registration links and terms will be published once confirmed.',
     pausedNote: '“Partnership paused” means we are not registering new members on that exchange right now.',
     pausedCard: 'Not open for new registrations through DA Affiliate right now.',
     cta: 'Register on {name}',
@@ -440,22 +465,36 @@ function T(key, vars) {
 function esc(s) {
   return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
-function statusLabel(e) { return CFG.exchangeStatusLabels[e.status] || e.status; }
-function marketLabel(e) { return CFG.marketLabels[e.market] || e.market; }
+function canRegister(e) { return CFG.canRegister ? CFG.canRegister(e) : false; }
+function statusLabel(e) { return CFG.partnershipLabel ? CFG.partnershipLabel(e) : ''; }
+function marketLabel(e) { return CFG.marketLabel ? CFG.marketLabel(e) : (e.market || ''); }
+function linkStateLabel(e) { return CFG.linkStateLabel ? CFG.linkStateLabel(e) : null; }
 function termsHtml(e) {
   var r = CFG.publishedRate ? CFG.publishedRate(e) : null;
-  return r ? esc(r.ratePct) + '% · ' + esc(T('rate')) : esc(T('terms'));
+  if (r) return esc(r.ratePct) + '% · ' + esc(T('rate'));
+  return esc(T(e.partnershipStatus === 'new_deal_pending' ? 'termsPending' : 'terms'));
 }
-// Available first, then paused; order inside each group follows config.
+function namesWhere(fn) { return CFG.exchanges.filter(fn).map(function (e) { return e.name; }); }
+function joinNames(n) { return n.length <= 1 ? n.join('') : n.slice(0, -1).join(', ') + ' and ' + n[n.length - 1]; }
+// Active partners first, then new partners, then paused; config order inside each group.
+var STATUS_ORDER = ['active', 'new_deal_pending', 'paused'];
 function ordered() {
-  return CFG.exchanges.filter(function (e) { return e.status === 'available'; })
-    .concat(CFG.exchanges.filter(function (e) { return e.status !== 'available'; }));
+  var out = [];
+  STATUS_ORDER.forEach(function (s) {
+    out = out.concat(CFG.exchanges.filter(function (e) { return e.partnershipStatus === s; }));
+  });
+  return out.concat(CFG.exchanges.filter(function (e) { return STATUS_ORDER.indexOf(e.partnershipStatus) < 0; }));
 }
 function filtered() {
   var list = ordered();
   if (activeFilter === 'all') return list;
-  if (activeFilter === 'available' || activeFilter === 'paused') return list.filter(function (e) { return e.status === activeFilter; });
+  if (activeFilter === 'register') return list.filter(canRegister);
+  if (STATUS_ORDER.indexOf(activeFilter) >= 0) return list.filter(function (e) { return e.partnershipStatus === activeFilter; });
   return list.filter(function (e) { return e.market === activeFilter; });
+}
+function linkCell(e) {
+  if (canRegister(e)) return esc(T('linkOpen'));
+  return esc(linkStateLabel(e) || T('linkNone'));
 }
 
 function renderSummary() {
@@ -465,9 +504,10 @@ function renderSummary() {
     return '<tr>'
       + '<td class="idx-cell">' + String(i + 1).padStart(2, '0') + '</td>'
       + '<td class="name-cell">' + esc(e.name) + '</td>'
-      + '<td><span class="type-pill ' + esc(e.market) + '">' + esc(marketLabel(e)) + '</span></td>'
-      + '<td><span class="status-pill status-' + esc(e.status) + '">' + esc(statusLabel(e)) + '</span></td>'
+      + '<td><span class="type-pill ' + esc(e.market || 'unconfirmed') + '">' + esc(marketLabel(e)) + '</span></td>'
+      + '<td><span class="status-pill status-' + esc(e.partnershipStatus) + '">' + esc(statusLabel(e)) + '</span></td>'
       + '<td>' + termsHtml(e) + '</td>'
+      + '<td>' + linkCell(e) + '</td>'
       + '</tr>';
   }).join('');
 }
@@ -483,8 +523,14 @@ function renderCards() {
     return;
   }
   grid.innerHTML = list.map(function (e) {
-    var available = e.status === 'available' && e.referralUrl;
-    return '<div class="deal-card ' + esc(e.market) + (available ? ' featured' : '') + '">'
+    var available = canRegister(e);
+    var state = linkStateLabel(e);
+    var foot = available
+      ? '<a href="' + esc(e.referralUrl) + '" class="deal-cta-btn" target="_blank" rel="noopener noreferrer sponsored">' + esc(T('cta', { name: e.name })) + '</a>'
+      : state
+        ? '<p class="deal-link-state">' + esc(state) + '</p>'
+        : '<p class="deal-best-for">' + esc(T('pausedCard')) + '</p>';
+    return '<div class="deal-card ' + esc(e.market || 'unconfirmed') + (e.partnershipStatus === 'active' ? ' featured' : '') + '">'
       + '<div class="deal-card-header">'
       +   '<div>'
       +     '<div class="deal-name">' + esc(e.name) + '</div>'
@@ -493,9 +539,7 @@ function renderCards() {
       +   '<div class="deal-badge-pill">' + esc(statusLabel(e)) + '</div>'
       + '</div>'
       + '<div class="deal-best-for">' + termsHtml(e) + '</div>'
-      + (available
-        ? '<a href="' + esc(e.referralUrl) + '" class="deal-cta-btn" target="_blank" rel="noopener noreferrer sponsored">' + esc(T('cta', { name: e.name })) + '</a>'
-        : '<p class="deal-best-for">' + esc(T('pausedCard')) + '</p>')
+      + foot
       + '</div>';
   }).join('');
 }
@@ -503,7 +547,9 @@ function renderCards() {
 function setText(id, s) { var el = document.getElementById(id); if (el) el.textContent = s; }
 
 function renderAll() {
-  var c = CFG.counts ? CFG.counts() : { total: CFG.exchanges.length, available: 0, paused: 0 };
+  var c = CFG.counts ? CFG.counts() : { total: CFG.exchanges.length, active: 0, newDealPending: 0, paused: 0, registerOpen: 0, linkUpdating: 0, linkComing: 0 };
+  var updating = namesWhere(function (e) { return e.referralLinkStatus === 'awaiting_update'; });
+  var newOnes = namesWhere(function (e) { return e.partnershipStatus === 'new_deal_pending'; });
   document.documentElement.setAttribute('lang', lang);
   setText('txt-back', T('back'));
   setText('txt-back2', T('back2'));
@@ -513,11 +559,16 @@ function renderAll() {
   setText('txt-stat1', T('stat1'));
   setText('txt-stat2', T('stat2'));
   setText('txt-stat3', T('stat3'));
+  setText('txt-stat4', T('stat4'));
   setText('stat-total', c.total);
-  setText('stat-available', c.available);
+  setText('stat-register', c.registerOpen);
+  setText('stat-new', c.newDealPending);
   setText('stat-paused', c.paused);
+  setText('txt-count-line', T('countLine', c));
   setText('fb-all', T('fbAll', { n: c.total }));
-  setText('fb-available', T('fbAvailable'));
+  setText('fb-register', T('fbRegister'));
+  setText('fb-active', T('fbActive'));
+  setText('fb-new', T('fbNew'));
   setText('fb-paused', T('fbPaused'));
   setText('fb-crypto', T('fbCrypto'));
   setText('fb-forex', T('fbForex'));
@@ -526,8 +577,14 @@ function renderAll() {
   setText('th-type', T('thType'));
   setText('th-status', T('thStatus'));
   setText('th-rate', T('thRate'));
+  setText('th-link', T('thLink'));
   setText('txt-cards-title', T('cardsTitle'));
   setText('txt-paused-note', T('pausedNote'));
+  // Conditional notes: hidden when their list is empty (derived from config).
+  var upEl = document.getElementById('txt-updating-note');
+  if (upEl) { upEl.hidden = !updating.length; upEl.textContent = updating.length ? T('updatingNote', { names: joinNames(updating) }) : ''; }
+  var newEl = document.getElementById('txt-new-note');
+  if (newEl) { newEl.hidden = !newOnes.length; newEl.textContent = newOnes.length ? T('newNote', { names: joinNames(newOnes) }) : ''; }
   setText('txt-rates', CFG.disclaimers.RATES || '');
   setText('txt-market', CFG.disclaimers.MARKET || '');
   var labelMap = { vi: 'VI', en: 'EN', th: 'TH', ko: 'KO', id: 'ID' };
