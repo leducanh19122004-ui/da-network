@@ -268,11 +268,11 @@
         <div class="deals-stat-lbl" id="txt-stat1">Exchanges listed</div>
       </div>
       <div class="deals-stat">
-        <div class="deals-stat-num" id="stat-register">2</div>
+        <div class="deals-stat-num" id="stat-register">6</div>
         <div class="deals-stat-lbl" id="txt-stat2">Open for registration</div>
       </div>
       <div class="deals-stat">
-        <div class="deals-stat-num" id="stat-new">3</div>
+        <div class="deals-stat-num" id="stat-new">0</div>
         <div class="deals-stat-lbl" id="txt-stat3">New partners being set up</div>
       </div>
       <div class="deals-stat">
@@ -280,7 +280,7 @@
         <div class="deals-stat-lbl" id="txt-stat4">Partnership paused</div>
       </div>
     </div>
-    <p class="deals-count-line" id="txt-count-line">2 open for registration · 1 link updating · 3 new partners being set up · 8 partnership paused</p>
+    <p class="deals-count-line" id="txt-count-line">6 open for registration · 8 partnership paused</p>
   </div>
 </div>
 
@@ -315,12 +315,12 @@
         </thead>
         <!-- static fallback generated from data/config.js; JS re-renders -->
         <tbody id="summaryBody">
-          <tr><td class="idx-cell">01</td><td class="name-cell">BingX</td><td><span class="type-pill crypto">Crypto</span></td><td><span class="status-pill status-active">Partner</span></td><td>Terms confirmed per exchange</td><td>Registration link updating</td></tr>
+          <tr><td class="idx-cell">01</td><td class="name-cell">BingX</td><td><span class="type-pill crypto">Crypto</span></td><td><span class="status-pill status-active">Partner</span></td><td>Terms confirmed per exchange</td><td>Open</td></tr>
           <tr><td class="idx-cell">02</td><td class="name-cell">Bitunix</td><td><span class="type-pill crypto">Crypto</span></td><td><span class="status-pill status-active">Partner</span></td><td>Terms confirmed per exchange</td><td>Open</td></tr>
           <tr><td class="idx-cell">03</td><td class="name-cell">Ourbit</td><td><span class="type-pill crypto">Crypto</span></td><td><span class="status-pill status-active">Partner</span></td><td>Terms confirmed per exchange</td><td>Open</td></tr>
-          <tr><td class="idx-cell">04</td><td class="name-cell">OKX</td><td><span class="type-pill crypto">Crypto</span></td><td><span class="status-pill status-new_deal_pending">New partner · setup in progress</span></td><td>Terms will be published once confirmed</td><td>Registration link coming</td></tr>
-          <tr><td class="idx-cell">05</td><td class="name-cell">PrimeXBT</td><td><span class="type-pill unconfirmed">To be confirmed</span></td><td><span class="status-pill status-new_deal_pending">New partner · setup in progress</span></td><td>Terms will be published once confirmed</td><td>Registration link coming</td></tr>
-          <tr><td class="idx-cell">06</td><td class="name-cell">Vantage</td><td><span class="type-pill forex">Forex</span></td><td><span class="status-pill status-new_deal_pending">New partner · setup in progress</span></td><td>Terms will be published once confirmed</td><td>Registration link coming</td></tr>
+          <tr><td class="idx-cell">04</td><td class="name-cell">OKX</td><td><span class="type-pill crypto">Crypto</span></td><td><span class="status-pill status-active">Partner</span></td><td>Terms confirmed per exchange</td><td>Open</td></tr>
+          <tr><td class="idx-cell">05</td><td class="name-cell">PrimeXBT</td><td><span class="type-pill unconfirmed">To be confirmed</span></td><td><span class="status-pill status-active">Partner</span></td><td>Terms confirmed per exchange</td><td>Open</td></tr>
+          <tr><td class="idx-cell">06</td><td class="name-cell">Vantage</td><td><span class="type-pill forex">Forex</span></td><td><span class="status-pill status-active">Partner</span></td><td>Terms confirmed per exchange</td><td>Open</td></tr>
           <tr><td class="idx-cell">07</td><td class="name-cell">Binance</td><td><span class="type-pill crypto">Crypto</span></td><td><span class="status-pill status-paused">Partnership paused</span></td><td>Terms confirmed per exchange</td><td>—</td></tr>
           <tr><td class="idx-cell">08</td><td class="name-cell">Bybit</td><td><span class="type-pill crypto">Crypto</span></td><td><span class="status-pill status-paused">Partnership paused</span></td><td>Terms confirmed per exchange</td><td>—</td></tr>
           <tr><td class="idx-cell">09</td><td class="name-cell">MEXC</td><td><span class="type-pill crypto">Crypto</span></td><td><span class="status-pill status-paused">Partnership paused</span></td><td>Terms confirmed per exchange</td><td>—</td></tr>
@@ -332,8 +332,8 @@
         </tbody>
       </table>
     </div>
-    <p class="note-small" id="txt-updating-note">The registration link for BingX is being updated; the partnership itself is unchanged.</p>
-    <p class="note-small" id="txt-new-note">New partners being set up: OKX, PrimeXBT and Vantage — registration links and terms will be published once confirmed.</p>
+    <p class="note-small" id="txt-updating-note"></p>
+    <p class="note-small" id="txt-new-note"></p>
     <p class="note-small" id="txt-paused-note">“Partnership paused” means we are not registering new members on that exchange right now.</p>
     <p class="note-small" id="txt-rates">Rates and reward tiers may change according to each exchange's policy and partner program.</p>
   </div>
@@ -456,7 +456,11 @@ function T(key, vars) {
   var d = txt[lang] || {};
   var s = d[key] !== undefined ? d[key] : txt.en[key];
   if (s === undefined) return '';
-  return s.replace(/\{(\w+)\}/g, function (m, k) { return vars && vars[k] !== undefined ? vars[k] : m; });
+  s = s.replace(/\{(\w+)\}/g, function (m, k) { return vars && vars[k] !== undefined ? vars[k] : m; });
+  // Count lines like "6 open · 0 link updating · 8 paused": drop the "0 …" parts.
+  if (s.indexOf(' · ') === -1) return s;
+  var parts = s.split(' · ').filter(function (p) { return !/^0 /.test(p); });
+  return parts.length ? parts.join(' · ') : s;
 }
 
 // ═══════════════════════════════════════════════════════════

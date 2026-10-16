@@ -106,10 +106,16 @@ function cfgVars() {
 function fillTokens(str, extra) {
   if (typeof str !== 'string') return str;
   var vars = cfgVars();
-  return str.replace(/\{(\w+)\}/g, function (m, k) {
+  return dropZeroSegments(str.replace(/\{(\w+)\}/g, function (m, k) {
     if (extra && extra[k] !== undefined) return extra[k];
     return vars[k] !== undefined ? vars[k] : m;
-  });
+  }));
+}
+// Count lines like "6 open · 0 link updating · 8 paused": drop the "0 …" parts.
+function dropZeroSegments(s) {
+  if (s.indexOf(' · ') === -1) return s;
+  var parts = s.split(' · ').filter(function (p) { return !/^0 /.test(p); });
+  return parts.length ? parts.join(' · ') : s;
 }
 window.fillTokens = fillTokens;
 

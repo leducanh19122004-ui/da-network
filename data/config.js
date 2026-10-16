@@ -101,19 +101,19 @@
              commissionTerms: terms(id), legacyAdvertised: legacyPct === null ? null : legacy(legacyPct) };
   }
   var exchanges = [
-    ex('bingx',    'BingX',    'crypto', 'active',           'awaiting_update', null, 28),
+    ex('bingx',    'BingX',    'crypto', 'active',           'available',       'https://bingxdao.com/invite/QQ4KIN/', 28),
     ex('bitunix',  'Bitunix',  'crypto', 'active',           'available',       'https://www.bitunix.com/register?vipCode=Gw77', 33),
     ex('ourbit',   'Ourbit',   'crypto', 'active',           'available',       'https://www.ourbit.com/register?inviteCode=SY7QT9', 43),
     ex('binance',  'Binance',  'crypto', 'paused',           'none',            null, 31.5),
-    ex('okx',      'OKX',      'crypto', 'new_deal_pending', 'awaiting_link',   null, 35),
+    ex('okx',      'OKX',      'crypto', 'active',           'available',       'https://okx.com/join/HE63PH2H', 35),
     ex('bybit',    'Bybit',    'crypto', 'paused',           'none',            null, 35),
     ex('mexc',     'MEXC',     'crypto', 'paused',           'none',            null, 35),
     ex('bitget',   'Bitget',   'crypto', 'paused',           'none',            null, 35),
     ex('gate',     'Gate.io',  'crypto', 'paused',           'none',            null, 42),
     ex('kucoin',   'KuCoin',   'crypto', 'paused',           'none',            null, 42),
-    ex('primexbt', 'PrimeXBT', null,     'new_deal_pending', 'awaiting_link',   null, null), // market: owner to confirm
+    ex('primexbt', 'PrimeXBT', null,     'active',           'available',       'https://go.primexbt.direct/visit/?bta=56672&brand=primexbt', null), // market: owner to confirm
     ex('exness',   'Exness',   'forex',  'paused',           'none',            null, 70),
-    ex('vantage',  'Vantage',  'forex',  'new_deal_pending', 'awaiting_link',   null, 70),
+    ex('vantage',  'Vantage',  'forex',  'active',           'available',       'https://vigco.co/la-com-inv/vi/sDT0SDFC', 70),
     ex('xm',       'XM',       'forex',  'paused',           'none',            null, 70)
   ];
   // Public labels (EN) — V3.1 spec §2. Never "Coming soon"; never a '#' href.
